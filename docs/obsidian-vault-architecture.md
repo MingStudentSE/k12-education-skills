@@ -14,7 +14,6 @@ Obsidian 仓库应被视为一个持续运行的学习系统：
 100-Raw     = 原始学习证据
 200-Wiki    = 编译后的学习资产
 300-Output  = 可查看、可复盘、可交付的成果
-999-Assets  = 附件、图片、导出、备份
 AGENTS.md   = 项目级本地宪法与 skill 调用规则
 ```
 
@@ -32,49 +31,29 @@ AGENTS.md   = 项目级本地宪法与 skill 调用规则
 Obsidian-Learning-Vault/
 ├── AGENTS.md
 ├── 100-Raw/
-│   ├── 110-Learning-Campaign/
-│   │   ├── 111-Daily-Learning/
-│   │   ├── 112-Weekly-Seasons/
-│   │   └── 113-Exam-Arcs/
-│   ├── 120-Traces/
-│   │   ├── 121-IM-Reminders/
-│   │   ├── 122-Class-Notes/
-│   │   └── 123-Question-Captures/
-│   └── 130-Materials/
-│       ├── 131-Books/
-│       ├── 132-Articles/
-│       ├── 133-Papers/
-│       └── 134-Problem-Sets/
+│   ├── 每日学习记录/
+│   ├── 课堂笔记原文/
+│   ├── 错题原始材料/
+│   ├── 学习资料/
+│   └── 提醒与回执/
 ├── 200-Wiki/
 │   ├── 学习总控台.md
-│   ├── 210-Learning-Memory/
-│   ├── 220-Subject-Codex/
-│   │   ├── Chinese/
-│   │   ├── Math/
-│   │   ├── English/
-│   │   └── Physics/
-│   ├── 230-Error-Codex/
-│   │   ├── Wrong-Answer-Cards/
-│   │   ├── Error-Patterns/
-│   │   └── Breakthrough-Logs/
-│   ├── 240-Methods-Forge/
-│   │   ├── Templates/
-│   │   ├── Rules/
-│   │   ├── Bases/
-│   │   └── Scripts/
-│   └── 250-Atlas/
-│       ├── Indexes/
-│       └── Networks/
+│   ├── 学习画像/
+│   ├── 学科知识/
+│   │   ├── 语文/
+│   │   ├── 数学/
+│   │   ├── 英语/
+│   │   └── 物理/
+│   ├── 错题整理/
+│   ├── 学习方法/
+│   ├── 模板与规则/
+│   └── 索引/
 ├── 300-Output/
-│   ├── 310-Student-Dashboard/
-│   ├── 320-Plans/
-│   ├── 330-Reports/
-│   ├── 340-Review-Packs/
-│   └── 399-Generated/
-└── 999-Assets/
-    ├── attachments/
-    ├── exports/
-    └── backups/
+│   ├── 学习计划/
+│   ├── 周报月报/
+│   ├── 复习资料包/
+│   ├── 阶段报告/
+│   └── 临时生成/
 ```
 
 ---
@@ -111,11 +90,11 @@ Obsidian-Learning-Vault/
 
 对应 SKILL：
 
-- `learning-dna` 的字段定义、画像生成规则和指标解释写入 `210-Learning-Memory/` 或 `240-Methods-Forge/`
-- `math-error-dna`、`physics-error-dna` 写入 `230-Error-Codex/`
-- `science-solving-four-steps` 可沉淀方法到 `220-Subject-Codex/` 或 `230-Error-Codex/`
-- `cornell-notes` 写入 `220-Subject-Codex/`
-- `skill-coordinator` 维护 `学习总控台.md` 和 `250-Atlas/`
+- `learning-dna` 的字段定义、画像生成规则和指标解释写入 `学习画像/` 或 `模板与规则/`
+- `math-error-dna`、`physics-error-dna` 写入 `错题整理/`
+- `science-solving-four-steps` 可沉淀方法到 `学科知识/`、`学习方法/` 或 `错题整理/`
+- `cornell-notes` 写入 `学科知识/`
+- `skill-coordinator` 维护 `学习总控台.md` 和 `索引/`
 
 ### 300-Output：可使用成果
 
@@ -131,11 +110,11 @@ Obsidian-Learning-Vault/
 
 对应 SKILL：
 
-- `learning-dna` 写入 `310-Student-Dashboard/`
-- `learning-plan` 写入 `320-Plans/`
-- `weekly-review` 写入 `330-Reports/`
+- `learning-dna` 写入 `学习画像/` 或 `阶段报告/`
+- `learning-plan` 写入 `学习计划/`
+- `weekly-review` 写入 `周报月报/`
 - `skill-coordinator` 写入月报或系统健康检查
-- 学科专项 SKILL 可生成 `340-Review-Packs/`
+- 学科专项 SKILL 可生成 `复习资料包/`
 
 ---
 
@@ -165,15 +144,15 @@ Obsidian 的目录结构、读写路径和项目级路由规则只放在 vault �
 
 ## 默认调用关系
 
-| 用户请求 | 主 SKILL | 默认读写位置 |
-|----------|----------|--------------|
-| 处理一道错题 | `correction-notebook` | 读 `100-Raw/120-Traces/123-Question-Captures/`，写 `230-Error-Codex/` |
-| 学透一道理科题 | `science-solving-four-steps` | 读原始题面，写题目拆解和变式验证 |
-| 我懂了但讲不清 | `feynman-learning` | 写理解验证记录到 `220-Subject-Codex/` |
-| 整理课堂笔记 | `cornell-notes` | 读 `122-Class-Notes/`，写 `220-Subject-Codex/` |
-| 制定计划 | `learning-plan` | 写 `300-Output/320-Plans/` |
-| 周复盘 | `weekly-review` | 写 `300-Output/330-Reports/` |
-| 系统联动/月报 | `skill-coordinator` | 读必要摘要，写 `学习总控台.md` 或 `330-Reports/` |
+| 用户请求    | 主 SKILL                      | 默认读写位置                                       |
+| ------- | ---------------------------- | -------------------------------------------- |
+| 处理一道错题  | `correction-notebook`        | 读 `100-Raw/错题原始材料/`，写 `200-Wiki/错题整理/`       |
+| 学透一道理科题 | `science-solving-four-steps` | 读原始题面，写题目拆解和变式验证                             |
+| 我懂了但讲不清 | `feynman-learning`           | 写理解验证记录到 `200-Wiki/学科知识/` 或 `200-Wiki/学习方法/` |
+| 整理课堂笔记  | `cornell-notes`              | 读 `100-Raw/课堂笔记原文/`，写 `200-Wiki/学科知识/`       |
+| 制定计划    | `learning-plan`              | 写 `300-Output/学习计划/`                         |
+| 周复盘     | `weekly-review`              | 写 `300-Output/周报月报/`                         |
+| 系统联动/月报 | `skill-coordinator`          | 读必要摘要，写 `学习总控台.md` 或 `300-Output/周报月报/`      |
 
 ---
 

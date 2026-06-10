@@ -10,6 +10,17 @@
 
 如果在 Obsidian 中作为项目级 SKILL 使用，建议先在 vault 根目录放置 `AGENTS.md`，并采用 `100-Raw / 200-Wiki / 300-Output` 三层结构。模板见 [AGENTS.k12-learning-vault.template.md](AGENTS.k12-learning-vault.template.md)，分层说明见 [Obsidian 学习仓库架构](obsidian-vault-architecture.md)。
 
+### Obsidian 仓库接入前置判断
+
+不要默认把完整模板覆盖到目标仓库。让 AI 先阅读 [AI 用 Obsidian 仓库接入手册](AI-obsidian-integration-manual.md)，再判断目标仓库是否已有结构：
+
+| 目标仓库状态 | 动作 |
+|------|------|
+| 没有结构 | 创建中文直白命名的推荐三层目录，复制完整 AGENTS 模板 |
+| 已有结构 | 保留本地规则，整理现有目录用途，只追加 K12 路由和写入映射 |
+
+这一步由 AI 执行即可，不需要用户手动跑脚本。
+
 ### 第一阶段：核心起步（必装）
 
 ```text
@@ -105,7 +116,7 @@
 | 包含 | #1-5 |
 | 分类 | 教育 > 通用学习工具 |
 | 主要价值 | 建立长期档案、错题系统、提醒、理解验证和复盘闭环 |
-| 版本 | v1.1.x |
+| 版本 | v1.2.x |
 
 ### 包②：学习方法论包
 

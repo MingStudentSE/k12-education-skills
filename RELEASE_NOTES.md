@@ -4,7 +4,29 @@
 
 ---
 
-## v1.1 当前版本
+## v1.2 当前版本
+
+本版本重点完善 Obsidian 笔记仓库落地方式：让用户可以把仓库链接交给本地 AI，由 AI 判断目标仓库是空仓库还是已有笔记仓库，再选择建立结构或适配现有结构。
+
+### 新增内容
+
+- 新增 `docs/AI-obsidian-integration-manual.md`：专门给本地 AI 阅读的 Obsidian 接入手册。
+- 明确两种接入路径：
+  - 空仓库：建立中文直白命名的三层结构，并创建 `AGENTS.md`。
+  - 已有仓库：保留原有结构，整理现有目录用途，只追加 K12 Skill 调用逻辑。
+- README 增加可直接发给 Claude Code / Codex / Work Buddy 等 Agent 的核心 Skill 安装提示词。
+- 明确项目级 Skill 安装原则：以单个 Skill 目录为单位安装，保留 `SKILL.md`、`references/`、`schemas/` 等配套文件。
+
+### 文档调整
+
+- `docs/AGENTS.k12-learning-vault.template.md` 明确为参考模板，不要求目标仓库原样复制。
+- `docs/obsidian-vault-architecture.md` 和 AGENTS 模板改用中文直白目录名，不再使用英文结构名或额外 `999-Assets` 层。
+- 明确已有学习证据时才生成学习画像；没有证据时不凭空创建 `学习画像/student.md`。
+- 明确模板路由表只是参考，只有目标项目已安装或用户允许调用的 Skill 才能被使用。
+
+---
+
+## v1.1
 
 本版本在已获授权的原版基础上，进一步收敛为学生端学习系统，并强化“真正掌握”和“学习区”两条主线。
 
