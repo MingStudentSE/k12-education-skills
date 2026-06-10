@@ -11,6 +11,7 @@
 ### 新增内容
 
 - 新增 `docs/AI-obsidian-integration-manual.md`：专门给本地 AI 阅读的 Obsidian 接入手册。
+- 新增 `skills/general/learning-360-review/`：可选高级复盘 Skill，用于阶段学习体检、证据化 360 复盘和系统修复判断。
 - 明确两种接入路径：
   - 空仓库：建立中文直白命名的三层结构，并创建 `AGENTS.md`。
   - 已有仓库：保留原有结构，整理现有目录用途，只追加 K12 Skill 调用逻辑。
@@ -21,6 +22,8 @@
 
 - 项目公开名称统一为 **K12 教育 AI 辅导系统**。
 - 仓库内 Skill 目录从 `student/` 改为 `skills/`，README、架构说明、安装指南和接入手册同步更新。
+- `理科解题四步法` 升级为 v1.1.0，补充题型判断、阶段路由、提示阶梯和教练模式。
+- `每周学习复盘` 保持轻量，明确不承担阶段评级或 360 体检。
 - `docs/AGENTS.k12-learning-vault.template.md` 明确为参考模板，不要求目标仓库原样复制。
 - `docs/obsidian-vault-architecture.md` 和 AGENTS 模板改用中文直白目录名，不再使用英文结构名或额外 `999-Assets` 层。
 - 明确已有学习证据时才生成学习画像；没有证据时不凭空创建 `学习画像/学习者画像.md`。

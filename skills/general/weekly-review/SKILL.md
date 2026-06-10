@@ -10,6 +10,7 @@ description: >
   “总结一下这周”“下周重点是什么”时可激活此SKILL。仅在当前复盘任务需要、
   且用户允许使用相关数据时，按最小必要字段汇总，不默认跨SKILL全量同步。
   周报需要检查本周任务是否处在学习区，而不是只统计完成率。
+  如果用户明确要求“阶段学习体检 / 360 复盘 / A-B-C 评级 / 系统审计”，应建议改用可选高级 Skill `learning-360-review`。
 compatibility: OpenClaw / ClawHub
 references:
   - references/learning-zone-principles.md
@@ -56,6 +57,7 @@ depends_on: learning-dna
 ⚠️ **【架构定位声明】：本SKILL专职负责“每周（Weekly）”维度的报告生成与自我复盘。**
 - 本SKILL不涉及任何跨SKILL的触发与调度逻辑（由“联动协调器”负责）。
 - 本SKILL不生成月报（月度报告统一由“联动协调器”生成全景月报）。
+- 本SKILL不做阶段评级或 360 体检；用户明确要求这类重度复盘时，交给“阶段学习体检”。
 
 ---
 
