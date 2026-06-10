@@ -51,6 +51,29 @@
 
 ---
 
+## Skill 质量优化记录
+
+### 2026-06-10 全量优化
+
+本轮使用 `darwin-skill` 的 8 维 rubric 做 dry-run 评估与结构增强。
+
+| 项目 | 优化前 | 优化后 |
+|------|--------|--------|
+| 学生端 SKILL 数量 | 33 | 33 |
+| 平均 dry-run 评分 | 72.1 | 85.2 |
+| 最低 dry-run 评分 | 58.8 | 80.0 |
+| 测试 prompts | 无统一测试集 | 每个 SKILL 新增 `test-prompts.json` |
+| references 声明 | 多数未在 frontmatter 显式声明 | 随包 `references/` 已显式声明 |
+
+维护原则：
+
+- SKILL 本体保持宿主无关，不写入 Obsidian 路径、vault 目录或项目级路由规则。
+- Obsidian 适配只放在外层 `AGENTS.md` 模板和相关文档中。
+- 每个 SKILL 增加“最小执行闭环”和“通用边界与降级策略”，但不改变核心功能。
+- 测试 prompts 用于后续回归评估，避免只凭主观感觉判断 skill 是否变好。
+
+---
+
 ## 参考材料索引
 
 运行时参考材料必须随单个 SKILL 安装包携带，不能依赖仓库根目录的共享 `references/`。

@@ -154,6 +154,13 @@ Obsidian-Learning-Vault/
 
 具体可直接使用 [AGENTS.k12-learning-vault.template.md](AGENTS.k12-learning-vault.template.md) 作为模板。
 
+### 与 SKILL 本体解耦
+
+SKILL 本体应保持宿主无关，只描述“何时调用、如何处理、产出什么、如何授权”。  
+Obsidian 的目录结构、读写路径和项目级路由规则只放在 vault 根目录的 `AGENTS.md` 中。
+
+这样同一个 SKILL 可以安装到不同环境：在普通对话中只输出结果，在 Obsidian vault 中由 `AGENTS.md` 决定结果写到哪里。
+
 ---
 
 ## 默认调用关系
