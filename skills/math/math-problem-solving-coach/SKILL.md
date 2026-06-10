@@ -2,7 +2,7 @@
 name: math-problem-solving-coach
 display_name: 📐 数学解题教练
 version: 1.0.0
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 数学专项
 tags: [数学, 解题, 错题分析, 四步拍照法, CLAW模板, 苏格拉底, 必装]
 description: >

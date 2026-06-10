@@ -2,7 +2,7 @@
 name: chinese-material-library
 display_name: 📚 语文素材库2.0
 version: 1.0.0
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 语文专项
 tags: [素材积累, 写作素材, 名言, 典故, 主动推送, 积累, 语文]
 description: >

@@ -2,7 +2,7 @@
 name: chinese-classical-revival
 display_name: 🏛️ 文言文复活计划
 version: 1.0.0
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 语文专项
 tags: [文言文, 古诗词, 古人扮演, 背诵, 诗词鉴赏, 语文, 经典]
 description: >

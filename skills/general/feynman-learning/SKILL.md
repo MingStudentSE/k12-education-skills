@@ -2,7 +2,7 @@
 name: feynman-learning
 display_name: 🎓 费曼学习法
 version: 1.1.0
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 通用核心
 tags: [费曼学习法, 深度理解, 自我检验, 苏格拉底追问, 批判性验证, 全科通用, 必装]
 description: >

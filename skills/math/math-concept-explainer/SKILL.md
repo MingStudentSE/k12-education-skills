@@ -2,7 +2,7 @@
 name: math-concept-explainer
 display_name: 💡 数学概念解释器
 version: 1.0.0
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 数学专项
 tags: [数学, 概念理解, 几何空间, 类比, 直觉建立, 数学]
 description: >

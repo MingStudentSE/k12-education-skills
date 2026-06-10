@@ -2,7 +2,7 @@
 name: correction-notebook
 display_name: ❌ 智能错题本
 version: 1.2.0
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 通用核心
 tags: [错题, 错因分析, 弱项预警, 学期报告, 全科通用, 必装]
 description: >

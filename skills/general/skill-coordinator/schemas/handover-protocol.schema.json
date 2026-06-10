@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "SkillHandoverProtocol",
-  "description": "K12 教育 Skill 包多智能体协作与数据流转强Schema协议 (v2.0)",
+  "description": "K12 教育 AI 辅导系统多智能体协作与数据流转强Schema协议 (v2.0)",
   "type": "object",
   "properties": {
     "sessionId": {

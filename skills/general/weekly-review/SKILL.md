@@ -2,7 +2,7 @@
 name: weekly-review
 display_name: 📊 每周学习复盘
 version: 1.1.2
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 通用核心
 tags: [周复盘, 学习报告, 学习区, 85%规则, 成长记录, 苏格拉底复盘, 成长曲线, 必装]
 description: >

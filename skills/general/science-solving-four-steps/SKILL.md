@@ -2,7 +2,7 @@
 name: science-solving-four-steps
 display_name: 🧩 理科解题四步法
 version: 1.0.0
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 通用核心
 tags: [理科解题, 波利亚, 真正掌握, 四步解题, 学习区, 费曼验证, 变式迁移]
 description: >

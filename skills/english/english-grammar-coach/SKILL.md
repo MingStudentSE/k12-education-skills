@@ -2,7 +2,7 @@
 name: english-grammar-coach
 display_name: 📝 英语语法突破教练
 version: 1.0.1
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 英语专项
 tags: [英语, 语法, 苏格拉底, 时态, 定语从句, 语法DNA, 追问, 授权可控]
 description: >

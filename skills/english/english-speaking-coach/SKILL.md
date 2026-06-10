@@ -2,7 +2,7 @@
 name: english-speaking-coach
 display_name: 🎙️ 英语口语陪练
 version: 1.0.0
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 英语专项
 tags: [英语, 口语, 发音, 晨间热身, 角色扮演, 口语DNA, 授权可控]
 description: >

@@ -2,7 +2,7 @@
 name: skill-coordinator
 display_name: 🔗 SKILL联动协调器
 version: 1.1.3
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 通用核心
 tags: [联动, 协调, 错题本, 费曼测试, 康奈尔笔记, 理科题目掌握, 学习计划, 学习区, 85%规则, 时间专注, 月报, 系统级]
 description: >

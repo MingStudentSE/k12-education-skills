@@ -2,7 +2,7 @@
 name: english-vocabulary-dna
 display_name: 📖 智能词汇DNA系统
 version: 1.0.0
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 英语专项
 tags: [英语, 词汇, 单词记忆, 艾宾浩斯, 五轮提醒, 词汇DNA, 预热雷达, 授权可控]
 description: >

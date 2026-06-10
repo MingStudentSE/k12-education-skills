@@ -2,7 +2,7 @@
 name: cornell-notes
 display_name: 📝 康奈尔笔记
 version: 1.0.0
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 通用核心
 tags: [笔记, 康奈尔, 知识联动, 按需推送, 笔记DNA, 跨学科, 授权可控]
 description: >

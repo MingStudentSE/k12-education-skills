@@ -2,7 +2,7 @@
 name: skill-creator
 display_name: 🛠️ SKILL创建教练
 version: 1.0.1
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 通用核心
 tags: [SKILL创建, 四层结构, 资料投喂, 元SKILL, 自定义, 必装]
 description: >

@@ -1,6 +1,6 @@
 # Release Notes
 
-本文档记录“K12 教育 Skill 包”的公开版本说明。
+本文档记录“K12 教育 AI 辅导系统”的公开版本说明。
 
 ---
 
@@ -19,7 +19,7 @@
 
 ### 文档调整
 
-- 项目公开名称统一为 **K12 教育 Skill 包**。
+- 项目公开名称统一为 **K12 教育 AI 辅导系统**。
 - 仓库内 Skill 目录从 `student/` 改为 `skills/`，README、架构说明、安装指南和接入手册同步更新。
 - `docs/AGENTS.k12-learning-vault.template.md` 明确为参考模板，不要求目标仓库原样复制。
 - `docs/obsidian-vault-architecture.md` 和 AGENTS 模板改用中文直白目录名，不再使用英文结构名或额外 `999-Assets` 层。

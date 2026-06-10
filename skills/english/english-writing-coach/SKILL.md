@@ -2,7 +2,7 @@
 name: english-writing-coach
 display_name: ✍️ 英语写作进化教练
 version: 1.0.1
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 英语专项
 tags: [英语, 写作, 作文批改, 写作进化, 句式升级, 三维批改, 场景脚本]
 description: >

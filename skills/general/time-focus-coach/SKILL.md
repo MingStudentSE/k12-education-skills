@@ -2,7 +2,7 @@
 name: time-focus-coach
 display_name: ⏱️ 时间与专注力教练
 version: 1.0.1
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 通用核心
 tags: [时间管理, 专注力, 时间销行账, 黄金时段, 番茄钟, 分心档案, 自我管理]
 description: >

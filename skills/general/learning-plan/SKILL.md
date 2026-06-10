@@ -2,7 +2,7 @@
 name: learning-plan
 display_name: 🗓️ 30天学习计划制定师
 version: 1.0.2
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 通用核心
 tags: [学习计划, DNA驱动, 个性化方案, 学习区, 85%规则, 家庭看板, 执行监控, 自我管理]
 description: >

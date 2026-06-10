@@ -2,7 +2,7 @@
 name: im-reminder
 display_name: ⏰ IM智能提醒
 version: 1.1.1
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 通用核心
 tags: [提醒, 复习计划, 艾宾浩斯, 计划提醒, 探索提醒, 授权可控]
 description: >

@@ -2,7 +2,7 @@
 name: physics-modeling-coach
 display_name: 📐 物理建模教练
 version: 1.0.0
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 物理专项
 tags: [物理, 建模, 物理模型, 现象识别, 数学表达, 模型迁移]
 description: >

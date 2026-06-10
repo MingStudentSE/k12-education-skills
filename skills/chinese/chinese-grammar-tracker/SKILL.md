@@ -2,7 +2,7 @@
 name: chinese-grammar-tracker
 display_name: 🔍 语病追踪档案
 version: 1.0.1
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 语文专项
 tags: [语病, 病句, 语法, 写作改错, 追踪档案, 语文]
 description: >

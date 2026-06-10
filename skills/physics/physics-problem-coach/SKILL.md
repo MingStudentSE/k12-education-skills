@@ -2,7 +2,7 @@
 name: physics-problem-coach
 display_name: 🧲 物理解题教练
 version: 1.0.0
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 物理专项
 tags: [物理, 解题, 图景建立, 四步法, 苏格拉底, 受力分析, 电路分析, 必装]
 description: >

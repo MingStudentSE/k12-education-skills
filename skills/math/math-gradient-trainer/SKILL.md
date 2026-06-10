@@ -2,7 +2,7 @@
 name: math-gradient-trainer
 display_name: 🎯 思维梯度训练师
 version: 1.0.0
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 数学专项
 tags: [数学, 进阶, 梯度题, 思维训练, 成长日记, 天花板测定]
 description: >

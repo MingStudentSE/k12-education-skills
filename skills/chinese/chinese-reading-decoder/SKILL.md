@@ -2,7 +2,7 @@
 name: chinese-reading-decoder
 display_name: 📖 阅读理解拆解师
 version: 1.0.0
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 语文专项
 tags: [阅读理解, 现代文, 出题人视角, 答题规范, 语文, 阅读]
 description: >

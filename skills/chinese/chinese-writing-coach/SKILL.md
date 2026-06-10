@@ -2,7 +2,7 @@
 name: chinese-writing-coach
 display_name: 🖊️ 语文写作教练
 version: 1.0.1
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 语文专项
 tags: [写作, 作文, 议论文, 记叙文, 说明文, 风格DNA, 苏格拉底, 语文]
 description: >

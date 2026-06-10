@@ -2,7 +2,7 @@
 name: math-error-dna
 display_name: 🧬 数学错误DNA
 version: 1.1.0
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 数学专项
 tags: [数学, 错题, 错误追踪, 弱项分析, 数学焦虑, 月报, 授权可控]
 description: >

@@ -2,7 +2,7 @@
 name: physics-error-dna
 display_name: 🧬 物理错误DNA
 version: 1.0.0
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 物理专项
 tags: [物理, 错题, 错误追踪, 弱项分析, 图景诊断, 物理焦虑, 月报, 授权可控]
 description: >

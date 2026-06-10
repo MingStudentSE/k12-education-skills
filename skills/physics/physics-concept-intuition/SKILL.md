@@ -2,7 +2,7 @@
 name: physics-concept-intuition
 display_name: 💡 物理概念直觉器
 version: 1.0.0
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 物理专项
 tags: [物理, 概念理解, 生活类比, 直觉建立, 实验, 公式意义]
 description: >

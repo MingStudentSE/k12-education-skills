@@ -2,7 +2,7 @@
 name: physics-lab-coach
 display_name: 🔬 物理实验思维教练
 version: 1.0.0
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 物理专项
 tags: [物理, 实验, 控制变量, 数据分析, 误差, 实验设计, 实验评价]
 description: >

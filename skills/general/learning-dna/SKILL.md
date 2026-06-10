@@ -2,7 +2,7 @@
 name: learning-dna
 display_name: 🧬 学习DNA
 version: 1.2.0
-author: K12 教育 Skill 包
+author: K12 教育 AI 辅导系统
 category: 通用核心
 tags: [学习档案, 长期记忆, 个性化, 成长图谱, 通用, 隐私可控]
 description: >
