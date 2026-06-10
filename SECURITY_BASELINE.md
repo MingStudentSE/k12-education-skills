@@ -2,7 +2,7 @@
 
 ## 适用范围
 
-本基线适用于 `xiaozhi-skills` 仓库中的所有 `SKILL.md`。
+本基线适用于 `k12-education-skills` 仓库中的所有 `SKILL.md`。
 
 目标：
 - 降低 ClawHub / ReviewClawScan 对默认激活、长期记忆、跨 SKILL 共享、定时提醒、自动化触发的安全告警概率
@@ -95,7 +95,7 @@
 
 ## 五、字段级 Schema 防护（写入约束）
 
-凡是通过 JSON Schema 写入长期工作空间、共享档案或可导出结构（如 `solo-teacher-workspace.schema.json` 等）的字段，Schema 本身必须承担第一道防线，而不能只依赖大模型层守门：
+凡是通过 JSON Schema 写入长期工作空间、共享档案或可导出结构（如 `dna-profile.schema.json` 等）的字段，Schema 本身必须承担第一道防线，而不能只依赖大模型层守门：
 
 - **长度硬约束**：所有可能承载人话摘要的 `string` 字段（特别是 `parentSummary`、`factSummary`、`description`、`notes`、`usageNotes` 等），必须设置合理的 `maxLength`，推荐不超过 500 字符。超长输入一律在生成阶段收敛，不允许在存储阶段截断。
 - **枚举/格式约束**：业务可枚举的状态、星期、等级、类型等字段必须使用 `enum` / `format`，避免自由文本写入。
