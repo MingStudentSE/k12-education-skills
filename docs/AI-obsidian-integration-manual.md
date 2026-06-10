@@ -2,7 +2,7 @@
 
 本手册专门给 AI 看。用户会把 `k12-education-skills` 仓库克隆到本地，然后让 AI 帮他把这套 Skill 体系接入自己的 Obsidian 笔记仓库。
 
-注意：Skill 本体和 Obsidian 目录是解耦的。不要修改 `student/` 下的 Skill 来适配某个 vault；只在目标 vault 的本地规则、目录和入口中做接入。
+注意：Skill 本体和 Obsidian 目录是解耦的。不要修改 `skills/` 下的 Skill 来适配某个 vault；只在目标 vault 的本地规则、目录和入口中做接入。
 
 Skill 应安装到目标项目的项目级 Skill 位置。具体位置由用户使用的 AI 平台决定，例如 `.codex/skills/`、`.claude/skills/` 或平台自带的 Skill 管理器。安装时以单个 Skill 目录为单位复制或导入，保留目录内的 `SKILL.md`、`references/`、`schemas/` 等配套文件，不要只复制 `SKILL.md`。
 
@@ -81,7 +81,7 @@ docs/AGENTS.k12-learning-vault.template.md -> AGENTS.md
 - 写入位置是否符合用户的 Obsidian 使用习惯
 - 是否需要保留用户已有少量旧笔记的原路径
 - 如果用户偏好英文目录，可在用户确认后再改；默认使用中文直白目录。
-- 如果目标仓库没有任何学习证据，不要生成 `学习画像/student.md`；可以先创建 `200-Wiki/学习画像/README.md` 说明画像需要授权和证据。
+- 如果目标仓库没有任何学习证据，不要生成 `学习画像/学习者画像.md`；可以先创建 `200-Wiki/学习画像/README.md` 说明画像需要授权和证据。
 
 推荐先启用核心闭环：
 

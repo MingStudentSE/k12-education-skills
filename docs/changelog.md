@@ -1,6 +1,6 @@
 # 版本历史与维护追踪
 
-> 当前仓库聚焦 **学生端 33 个 SKILL**。  
+> 当前仓库聚焦 **K12 学习场景 33 个 SKILL**。
 > 本文档面向维护者，记录内部版本矩阵、模块状态和后续维护方向。公开发布说明见 [Release Notes](../RELEASE_NOTES.md)。
 
 ---
@@ -53,9 +53,19 @@
 
 ## Skill 质量优化记录
 
+### 2026-06-10 v1.2 命名与目录收口
+
+本轮统一仓库公开命名与安装路径：
+
+- 项目名统一为 **K12 教育 Skill 包**，不再使用旧品牌名。
+- 物理目录从 `student/` 改为 `skills/`，安装提示、架构文档、接入手册和链接同步改为 `skills/...`。
+- Skill frontmatter 作者字段统一为 `K12 教育 Skill 包`。
+- Skill 正文中旧助手称呼改为中性的 `AI` 或 `学习助手提示`。
+- 本轮只调整命名、路径和展示口径，不改变 33 个 Skill 的核心能力逻辑。
+
 ### 2026-06-10 v1.2 Obsidian 落地文档升级
 
-本轮不修改 `student/` 下的 Skill 本体，只升级仓库级 Obsidian 接入指导。
+本轮不修改 `skills/` 下的 Skill 本体，只升级仓库级 Obsidian 接入指导。
 
 | 项目 | v1.1 | v1.2 |
 |------|------|------|
@@ -63,11 +73,11 @@
 | 推荐目录 | 带英文目录和额外资产层 | 改为中文直白三层目录，不额外定义 `999-Assets` |
 | AGENTS 模板定位 | 易被理解为可直接照抄 | 明确为参考模板，由本地 AI 适配、裁剪或局部追加 |
 | Skill 安装说明 | 主要说明目录可独立安装 | README 增加可复制给 Agent 的核心 Skill 安装提示词 |
-| 学习画像 | 模板中直接出现 `学习画像/student.md` | 改为有授权且有证据时才读取或生成 |
+| 学习画像 | 模板中直接出现英文命名的个人画像文件 | 改为中文命名的 `学习画像/学习者画像.md`，且有授权、有证据时才读取或生成 |
 
 维护原则：
 
-- Skill 本体继续保持宿主无关，不把 Obsidian 目录写入 `student/` 下的 Skill。
+- Skill 本体继续保持宿主无关，不把 Obsidian 目录写入 `skills/` 下的 Skill。
 - Obsidian 落地规则只放在 README、架构说明、AGENTS 模板和 AI 接入手册中。
 - 面向已有笔记仓库时，不覆盖本地 `AGENTS.md`，不移动大量旧笔记，不创建第二套平行结构。
 
@@ -98,12 +108,12 @@
 
 | 参考材料 | 用途 |
 |----------|------|
-| `student/general/learning-plan/references/learning-zone-principles.md` | 学习计划制定时的学习区、85%规则和任务难度校准 |
-| `student/general/weekly-review/references/learning-zone-principles.md` | 周复盘时的学习区命中检查 |
-| `student/general/skill-coordinator/references/learning-zone-principles.md` | 联动协调时的学习区偏离判断与调参动作 |
-| `student/general/science-solving-four-steps/references/learning-zone-principles.md` | 单题变式与复测时的学习区难度控制 |
-| `student/general/science-solving-four-steps/references/polya-four-step-guide.md` | 波利亚四步解题法的 skill 化问题框架 |
-| `student/general/science-solving-four-steps/references/science-solving-four-steps-checklist.md` | 单题真正掌握的等级与验证标准 |
+| `skills/general/learning-plan/references/learning-zone-principles.md` | 学习计划制定时的学习区、85%规则和任务难度校准 |
+| `skills/general/weekly-review/references/learning-zone-principles.md` | 周复盘时的学习区命中检查 |
+| `skills/general/skill-coordinator/references/learning-zone-principles.md` | 联动协调时的学习区偏离判断与调参动作 |
+| `skills/general/science-solving-four-steps/references/learning-zone-principles.md` | 单题变式与复测时的学习区难度控制 |
+| `skills/general/science-solving-four-steps/references/polya-four-step-guide.md` | 波利亚四步解题法的 skill 化问题框架 |
+| `skills/general/science-solving-four-steps/references/science-solving-four-steps-checklist.md` | 单题真正掌握的等级与验证标准 |
 
 ---
 
