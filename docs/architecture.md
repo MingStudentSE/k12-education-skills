@@ -53,6 +53,7 @@ skill-folder/
 - 不允许运行时依赖 `../../../references/...` 这类仓库根目录路径
 - 可复用方法论如果被多个 SKILL 使用，应复制为各自目录下的精简版本，而不是放成根目录共享依赖
 - 根目录 `references/` 只可作为原始资料或项目级研究材料存放，不作为单个 SKILL 安装时的运行依赖
+- 所有跨 SKILL 使用的学习理论必须先在根目录 `references/` 登记，再按需复制精简版到单个 SKILL 的 `references/`
 
 ---
 
@@ -63,15 +64,15 @@ skill-folder/
 | # | SKILL 名称 | 文件夹 | 版本 | 核心功能 |
 |---|-----------|-------|------|---------|
 | 1 | 🧬 学习DNA | `skills/general/learning-dna/` | v1.1+ | 长期档案、成长图谱、学习风格、兴趣接口 |
-| 2 | ❌ 智能错题本 | `skills/general/correction-notebook/` | v1.1+ | 错因分析、弱项预警、同类验证、学期报告 |
+| 2 | ❌ 智能错题本 | `skills/general/correction-notebook/` | v1.2.1 | 错因分析、弱项预警、同类验证、学期报告 |
 | 3 | ⏰ IM智能提醒 | `skills/general/im-reminder/` | v1.1+ | 复习提醒、计划提醒、探索提醒、每日确认 |
-| 4 | 🎓 费曼学习法 | `skills/general/feynman-learning/` | v1.1+ | 五跳追问、理解验证、挑战者模式 |
-| 5 | 📊 每周学习复盘 | `skills/general/weekly-review/` | v1.1+ | 六模块周报、学习区检查、成长曲线、复盘追问 |
-| 6 | 🛠️ SKILL创建教练 | `skills/general/skill-creator/` | v1.0 | 帮学生把个人需求抽象成可复用工具 |
-| 7 | 📝 康奈尔笔记 | `skills/general/cornell-notes/` | v1.0 | 笔记提炼、自测问题、知识沉淀 |
+| 4 | 🎓 费曼学习法 | `skills/general/feynman-learning/` | v1.1.1 | 五跳追问、理解验证、挑战者模式 |
+| 5 | 📊 每周学习复盘 | `skills/general/weekly-review/` | v1.1.3 | 六模块周报、学习区检查、成长曲线、复盘追问 |
+| 6 | 🛠️ 教育版SKILL创建教练 | `skills/general/educational-skill-creator/` | v1.1.0 | 帮学生把学习痛点抽象成可复用工具 |
+| 7 | 📝 康奈尔笔记 | `skills/general/cornell-notes/` | v1.0.1 | 笔记提炼、自测问题、知识沉淀 |
 | 8 | 🔗 五SKILL联动协调器 | `skills/general/skill-coordinator/` | v1.1+ | 联动判断、学习区校准、全景月报、系统健康检查 |
-| 9 | 📅 30天学习计划制定师 | `skills/general/learning-plan/` | v1.0+ | DNA 驱动计划、学习区校准、执行拆解、家庭看板 |
-| 10 | ⏱️ 时间与专注力教练 | `skills/general/time-focus-coach/` | v1.0 | 时间销行账、黄金时段、智能番茄钟 |
+| 9 | 📅 30天学习计划制定师 | `skills/general/learning-plan/` | v1.0.3 | DNA 驱动计划、学习区校准、执行拆解、家庭看板 |
+| 10 | ⏱️ 时间与专注力教练 | `skills/general/time-focus-coach/` | v1.0.2 | 时间销行账、黄金时段、智能番茄钟 |
 | 11 | 🔭 跨学科侦探周 | `skills/general/cross-subject-detective/` | v1.0 | 项目式探索、跨科联结、侦探周流程 |
 | 12 | ☕ 兴趣成长探索计划 | `skills/general/interest-explorer/` | v1.0 | 52 杯咖啡、兴趣验证、兴趣DNA |
 | 13 | 🧩 理科解题四步法 | `skills/general/science-solving-four-steps/` | v1.1 | 教练式提示阶梯、题型判断、波利亚四步解题、变式迁移 |
@@ -197,6 +198,15 @@ skill-folder/
 
 ## 🧠 方法论依据
 
+仓库级理论资料统一登记在：
+
+- `references/理论资料索引.md`
+- `references/K12教育SKILL理论基础总表.md`
+- `references/大脑记忆与表达12个认知原理.md`
+- `references/学习区.md`、`references/85-15意外挑战.md`
+
+单个 SKILL 运行时所需的精简理论资料仍放在各自目录下的 `references/`。
+
 ### 1. 学习区与85%规则
 
 训练任务应尽量保持大约 85% 熟悉内容和 15% 意外挑战。太熟会停留在重复区，太难会进入挫败区，刚好有少量意外才更容易发生有效学习。
@@ -208,7 +218,11 @@ skill-folder/
 3. 经常测验，确认是否真的掌握
 4. 把新知识和旧知识建立连接
 
-### 2. 记忆飞轮
+### 2. 12 个认知原理
+
+本体系把 12 个认知原理作为所有教育 SKILL 的底层设计约束：减少文本与讲解冲突，优先图表和结构化表达，保持固定版式，记录情境状态，反多任务，加入交错练习，重视错误反馈，优先主动回忆，用预热问题和故事激活理解，保持适度压力，并通过分散练习抵抗遗忘。
+
+### 3. 记忆飞轮
 
 1. 记录首次错误
 2. 在合适时间复习
@@ -216,21 +230,21 @@ skill-folder/
 4. 找到固定错误模式
 5. 在周报 / 月报里看见趋势
 
-### 3. 费曼学习法
+### 4. 费曼学习法
 
 核心不是“听懂 AI 的解释”，而是“你能不能不用原话讲出来，并迁移到新场景”。
 
-### 4. 波利亚解题法
+### 5. 波利亚解题法
 
 理科题目掌握不是直接套答案，而是经历四个阶段：理解题目、拟定方案、执行方案、回顾迁移。`理科解题四步法` 把这四步落成可对话流程，并加入独立重做、口头解释、变式迁移和间隔复测。
 
-### 5. AI 学习铁律
+### 6. AI 学习铁律
 
 所有学生端 SKILL 都遵循同一个原则：
 
 > 用 AI 辅助思考，不用 AI 替代思考。
 
-### 6. 学科能力链
+### 7. 学科能力链
 
 #### 语文能力链
 
@@ -273,7 +287,7 @@ skills/
 │   ├── im-reminder/
 │   ├── feynman-learning/
 │   ├── weekly-review/
-│   ├── skill-creator/
+│   ├── educational-skill-creator/
 │   ├── cornell-notes/
 │   ├── skill-coordinator/
 │   ├── learning-plan/
