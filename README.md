@@ -8,6 +8,14 @@
 
 ---
 
+## ✨ v1.3 重点变化
+
+- 建立根目录 `references/` 理论库，采用“一个理论一个笔记”的维护方式。
+- 将 12 个认知原理、学习区、85/15 意外挑战、主动回忆、错误反馈、交错练习、分散练习等理论写入核心 SKILL 设计约束。
+- 恢复并重命名 `skill-creator` 为 `educational-skill-creator`，专门用于创建教育类 SKILL。
+
+---
+
 ## 📦 包含模块
 
 当前仓库按学生使用场景分为两大层：
@@ -15,10 +23,10 @@
 ### 通用与成长层（`skills/general/`）· 14 个 SKILL
 
 - **核心五件套**：学习DNA、智能错题本、IM智能提醒、费曼学习法、每周学习复盘
-- **学习方法论包**：SKILL创建教练、康奈尔笔记、五SKILL联动协调器、理科解题四步法
+- **学习方法论包**：教育版SKILL创建教练、康奈尔笔记、SKILL联动协调器、理科解题四步法
 - **自我管理与探索包**：30天学习计划制定师、时间与专注力教练、跨学科侦探周、兴趣成长探索计划
 - **可选高级复盘**：阶段学习体检，用于证据化 360 复盘和阶段系统修复
-- **学习区原则**：用约85%熟悉内容 + 15%意外挑战校准任务难度，配合间隔、多场景、测验和知识连接
+- **学习科学底座**：用 12 个认知原理、学习区、约85%熟悉内容 + 15%意外挑战、间隔复习、主动回忆、错误反馈和交错练习校准所有教育 SKILL
 
 ### 学科专项层（`skills/{subject}/`）· 20 个 SKILL
 
@@ -33,14 +41,16 @@
 
 | 类别     | 数量     | 状态               |
 | ------ | ------ | ---------------- |
-| 通用与成长层 | 14     | ✅ v1.2 可用 |
-| 学科专项层  | 20     | ✅ v1.2 可用 |
+| 通用与成长层 | 14     | ✅ v1.3 可用 |
+| 学科专项层  | 20     | ✅ v1.3 可用 |
 | **总计** | **34** | **100% 可用**      |
 
 ### 安装包边界
 
 每个 SKILL 都按“单个目录可独立安装”的方式维护。  
 如果某个 SKILL 需要参考材料、schema 或模板，这些文件必须放在该 SKILL 自己的 `references/` 或 `schemas/` 目录下，不能依赖仓库根目录的共享文件。
+
+根目录 `references/` 用于保存仓库级理论依据和原始资料，例如 12 个认知原理、学习区定义、85/15 意外挑战、费曼、康奈尔、波利亚、艾宾浩斯等理论索引；这些文件按“一个理论一个笔记”维护，是设计和迭代依据，不作为单个 SKILL 的运行时依赖。
 
 ---
 
@@ -60,10 +70,11 @@ https://github.com/MingStudentSE/k12-education-skills
 
 1. skills/general/learning-dna/
 2. skills/general/correction-notebook/
-3. skills/general/feynman-learning/
-4. skills/general/weekly-review/
+3. skills/general/im-reminder/
+4. skills/general/feynman-learning/
+5. skills/general/weekly-review/
 
-每个 SKILL 都以单个目录为安装单位。请保留每个目录内的 SKILL.md、references/、schemas/ 等配套文件。不要安装全部 34 个 SKILL；后续等我明确需要某个学科专项或高级复盘时再加装。
+每个 SKILL 都以单个目录为安装单位。请保留每个目录内的 SKILL.md、references/、schemas/ 等配套文件。不要安装全部 34 个 SKILL；后续等我明确需要某个学科专项、高级复盘或方法论工具时再加装。
 
 请把这些 Skill 安装到当前项目的项目级 Skill 位置，例如 .codex/skills/、.claude/skills/ 或你支持的项目级 Skill 管理器中。安装方式以你的平台为准，但不要拆散 Skill 目录。
 ```
@@ -72,11 +83,11 @@ https://github.com/MingStudentSE/k12-education-skills
 
 1. [🧬 学习DNA](skills/general/learning-dna/)：建立长期学习档案的授权底座
 2. [❌ 智能错题本](skills/general/correction-notebook/)：从“保存题目”升级为“定位错因”
-3. [🎓 费曼学习法](skills/general/feynman-learning/)：验证到底是真懂还是假懂
-4. [📊 每周学习复盘](skills/general/weekly-review/)：把过程沉淀成周报和成长线索
-5. 按需加装 [⏰ IM智能提醒](skills/general/im-reminder/) 或具体学科专项
+3. [⏰ IM智能提醒](skills/general/im-reminder/)：把复习、计划和回访放进真实节奏
+4. [🎓 费曼学习法](skills/general/feynman-learning/)：验证到底是真懂还是假懂
+5. [📊 每周学习复盘](skills/general/weekly-review/)：把过程沉淀成周报和成长线索
 
-### 先让 AI 判断仓库结构
+### 3. 先让 AI 判断仓库结构
 
 如果你打算把这套 SKILL 接入自己的 Obsidian 笔记库，不要直接复制一堆目录，也不要覆盖已有笔记。
 
@@ -125,7 +136,7 @@ docs/AI-obsidian-integration-manual.md
                     └──────────────────┘
 ```
 
-五SKILL联动协调器会在明确任务下，把错题、费曼、笔记、理科题目掌握、学习计划、时间专注汇总为月报或系统健康检查。
+SKILL联动协调器会在明确任务下，把错题、费曼、笔记、理科题目掌握、学习计划、时间专注汇总为月报或系统健康检查。它负责局部联动和报告汇总，不替代各学科 SKILL 的专业判断。
 
 ---
 
@@ -140,9 +151,14 @@ docs/AI-obsidian-integration-manual.md
 | [IM智能提醒](skills/general/im-reminder/)                 | 复习提醒、计划提醒、探索提醒、每日确认回访      |
 | [费曼学习法](skills/general/feynman-learning/)             | 五跳追问、理解验证、挑战者模式、深度档案       |
 | [每周学习复盘](skills/general/weekly-review/)               | 六模块周报、学习存折、学习区检查、成长曲线、复盘追问 |
+| [教育版SKILL创建教练](skills/general/educational-skill-creator/) | 用教育理论约束新 SKILL 的目标、流程、反馈和安全边界 |
 | [康奈尔笔记](skills/general/cornell-notes/)                | 拍照提炼、线索区、自测问题、跨科网络         |
-| [五SKILL联动协调器](skills/general/skill-coordinator/)      | 联动判断、学习区校准、全景月报、系统健康检查     |
+| [SKILL联动协调器](skills/general/skill-coordinator/)      | 联动判断、学习区校准、全景月报、系统健康检查     |
 | [理科解题四步法](skills/general/science-solving-four-steps/) | 教练式提示阶梯、题型判断、波利亚四步解题、变式迁移 |
+| [30天学习计划制定师](skills/general/learning-plan/)          | 目标拆解、节奏安排、学习区校准、阶段检查       |
+| [时间与专注力教练](skills/general/time-focus-coach/)         | 反多任务、时间块、番茄节奏、专注复盘         |
+| [跨学科侦探周](skills/general/cross-subject-detective/)      | 跨学科连接、项目式探索、证据化输出          |
+| [兴趣成长探索计划](skills/general/interest-explorer/)         | 兴趣线索收集、成长任务设计、长期动机维护       |
 | [阶段学习体检](skills/general/learning-360-review/)          | 证据化阶段复盘、A/B/C 判断、系统修复动作      |
 
 ### 学科专项
@@ -164,6 +180,12 @@ docs/AI-obsidian-integration-manual.md
   - K12 学习场景 34 个 SKILL 全清单
   - 协作飞轮与方法论依据
   - 目录结构与学科分层
+- [学习科学原则接入规范](docs/learning-science-principles.md)
+  - 12 个认知原理如何转成 SKILL 设计约束
+  - 主动回忆、错误反馈、交错练习、分散复习等最低要求
+- [理论资料索引](references/理论资料索引.md)
+  - 仓库级理论文件入口
+  - 学习区、85/15 意外挑战、记忆复习、理解追问、错因、专注、跨学科等一理论一笔记入口
 - [安装指南与发布信息](docs/installation-guide.md)
   - 分阶段安装顺序
   - 包级上架建议
@@ -179,10 +201,10 @@ docs/AI-obsidian-integration-manual.md
   - 可复制到 Obsidian vault 根目录作为本地宪法
 - [版本历史与升级追踪](docs/changelog.md)
   - 各 SKILL 当前版本
-  - v1.0 → v1.2 的整合升级记录
+  - v1.0 → v1.3 的整合升级记录
 - [Release Notes](RELEASE_NOTES.md)
   - v1.0 授权原版说明
-  - v1.2 当前版本新增内容
+  - v1.3 当前版本新增内容
 
 ---
 

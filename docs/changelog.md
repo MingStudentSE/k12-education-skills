@@ -12,15 +12,15 @@
 | # | SKILL | 当前版本 | 维护状态 |
 |---|-------|---------|----------|
 | 1 | 学习DNA | v1.1+ | 已完成成长图谱、学习风格、兴趣接口整合 |
-| 2 | 智能错题本 | v1.1+ | 已完成弱项预警、同类验证、学期报告整合 |
+| 2 | 智能错题本 | v1.2.1 | 已完成弱项预警、同类验证、学期报告整合，并接入错误反馈闭环 |
 | 3 | IM智能提醒 | v1.1+ | 已扩展复习、计划、探索和每日确认提醒 |
-| 4 | 费曼学习法 | v1.1+ | 已完成挑战者模式、第五跳、理解深度档案 |
-| 5 | 每周学习复盘 | v1.1+ | 已升级为六模块周报，并接入学习区检查 |
-| 6 | SKILL创建教练 | v1.0 | 稳定 |
-| 7 | 康奈尔笔记 | v1.0 | 稳定 |
+| 4 | 费曼学习法 | v1.1.1 | 已完成挑战者模式、第五跳、理解深度档案，并接入主动回忆与故事化地标 |
+| 5 | 每周学习复盘 | v1.1.3 | 已升级为六模块周报，并接入学习区与学习科学命中检查 |
+| 6 | 教育版SKILL创建教练 | v1.1.0 | 已改名避免与本机通用 skill-creator 混淆，并加入学习科学创建检查 |
+| 7 | 康奈尔笔记 | v1.0.1 | 已接入固定版式、线索回忆和分散复测字段 |
 | 8 | SKILL联动协调器 | v1.1.3 | 已接入单题掌握、学习区校准和多维月报 |
-| 9 | 30天学习计划制定师 | v1.0+ | 已接入学习区、85%规则和任务难度校准 |
-| 10 | 时间与专注力教练 | v1.0 | 稳定 |
+| 9 | 30天学习计划制定师 | v1.0.3 | 已接入学习区、85%规则、分散练习和交错练习 |
+| 10 | 时间与专注力教练 | v1.0.2 | 已接入反多任务、情境记录和切换成本字段 |
 | 11 | 跨学科侦探周 | v1.0 | 稳定 |
 | 12 | 兴趣成长探索计划 | v1.0 | 稳定 |
 | 13 | 理科解题四步法 | v1.1 | 已增强教练式提示阶梯、题型判断和阶段路由 |
@@ -54,6 +54,25 @@
 ---
 
 ## Skill 质量优化记录
+
+### 2026-06-12 v1.3 学习科学理论库与核心闭环接入
+
+本轮把体系从“可用 skill 集合”升级为“有理论底座的学习系统”：
+
+- 将教育场景里的元 skill 恢复为 `skills/general/educational-skill-creator/`。
+- frontmatter `name` 改为 `educational-skill-creator`，避免与本机通用 Codex `skill-creator` 混淆。
+- 当前仓库保持 34 个 Skill，其中 `skills/general/` 保持 14 个。
+- 新增 `references/理论资料索引.md`，作为仓库级理论资料入口。
+- 新增 `references/K12教育SKILL理论基础总表.md`，登记当前体系使用的费曼、康奈尔、波利亚、艾宾浩斯、苏格拉底、支架渐退、元认知、项目式学习等理论基础。
+- 新增 `references/学习区.md`、`references/85-15意外挑战.md`，记录学习区定义、85%熟悉内容、15%意外挑战和调参动作。
+- 新增 `references/大脑记忆与表达12个认知原理.md` 与 `docs/learning-science-principles.md`，把 12 个认知原理转成教育 SKILL 设计约束。
+- 新增 `references/主动回忆.md`、`references/间隔重复.md`、`references/交错练习.md`、`references/费曼学习法.md`、`references/康奈尔笔记法.md`、`references/波利亚四步解题法.md`、`references/苏格拉底追问.md`、`references/元认知复盘.md`、`references/支架渐退.md`、`references/最近发展区.md`、`references/自我调节学习.md`、`references/错误驱动学习.md`、`references/错因分类与错因DNA.md`、`references/反多任务.md`、`references/时间块学习.md`、`references/番茄工作法.md`、`references/情境依赖学习.md`、`references/项目式学习.md`、`references/跨学科连接.md`、`references/兴趣探索.md`、`references/概念图谱与新旧连接.md`，把已使用的记忆、理解、复盘、错因、专注和跨学科理论拆成一理论一笔记。
+- `educational-skill-creator`、`correction-notebook`、`feynman-learning`、`cornell-notes`、`learning-plan`、`time-focus-coach`、`weekly-review` 已接入第一批学习科学规则。
+
+维护原则：
+
+- 根目录 `references/` 采用“一理论一笔记”，索引只负责组织关系。
+- 单个 SKILL 运行时仍不能依赖根目录 `references/`，需要的理论精简版必须随对应 SKILL 打包。
 
 ### 2026-06-10 v1.2 教练增强与阶段体检
 
@@ -126,6 +145,32 @@
 | `skills/general/science-solving-four-steps/references/polya-four-step-guide.md` | 波利亚四步解题法的 skill 化问题框架 |
 | `skills/general/science-solving-four-steps/references/science-solving-four-steps-checklist.md` | 单题真正掌握的等级与验证标准 |
 | `skills/general/learning-360-review/references/learning-360-rubric.md` | 阶段学习体检的证据门槛、五维评分和评级映射 |
+| `references/理论资料索引.md` | 仓库级理论资料索引，记录所有跨 SKILL 理论入口 |
+| `references/K12教育SKILL理论基础总表.md` | K12 教育 SKILL 体系使用的学习理论总表 |
+| `references/大脑记忆与表达12个认知原理.md` | 12 个认知原理及教育 SKILL 落地映射 |
+| `references/学习区.md` | 学习区定义和任务难度判断 |
+| `references/85-15意外挑战.md` | 85% 熟悉内容与 15% 意外挑战 |
+| `references/主动回忆.md` | 主动回忆与检索练习 |
+| `references/间隔重复.md` | 间隔重复与复习节奏 |
+| `references/交错练习.md` | 交错练习与迁移训练 |
+| `references/费曼学习法.md` | 费曼学习法 |
+| `references/康奈尔笔记法.md` | 康奈尔笔记法 |
+| `references/波利亚四步解题法.md` | 波利亚四步解题法 |
+| `references/苏格拉底追问.md` | 苏格拉底追问 |
+| `references/元认知复盘.md` | 元认知复盘 |
+| `references/支架渐退.md` | 支架渐退 |
+| `references/最近发展区.md` | 最近发展区 |
+| `references/自我调节学习.md` | 自我调节学习 |
+| `references/错误驱动学习.md` | 错误驱动学习 |
+| `references/错因分类与错因DNA.md` | 错因分类与错因 DNA |
+| `references/反多任务.md` | 反多任务 |
+| `references/时间块学习.md` | 时间块学习 |
+| `references/番茄工作法.md` | 番茄工作法 |
+| `references/情境依赖学习.md` | 情境依赖学习 |
+| `references/项目式学习.md` | 项目式学习 |
+| `references/跨学科连接.md` | 跨学科连接 |
+| `references/兴趣探索.md` | 兴趣探索 |
+| `references/概念图谱与新旧连接.md` | 概念图谱与新旧连接 |
 
 ---
 
