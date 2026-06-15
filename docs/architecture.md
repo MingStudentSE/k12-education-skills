@@ -1,6 +1,6 @@
 # 🏛️ 系统架构与方法论
 
-本文档描述当前仓库保留的 **K12 学习场景 50 个 SKILL**：它们如何分层、如何协作，以及背后的方法论依据。
+本文档描述当前仓库保留的 **K12 学习场景 60 个 SKILL**：它们如何分层、如何协作，以及背后的方法论依据。
 
 ---
 
@@ -15,7 +15,9 @@ skills/
 ├── physics/   # 物理学科专项
 ├── history/   # 历史学科专项
 ├── geography/ # 地理学科专项
-└── politics/  # 政治学科专项
+├── politics/  # 政治学科专项
+├── chemistry/ # 化学学科专项
+└── biology/   # 生物学科专项
 ```
 
 如果这些 SKILL 作为 Obsidian 项目级 SKILL 使用，笔记仓库建议采用 LLM Wiki 风格三层架构：
@@ -40,7 +42,9 @@ skills/
 | `skills/history/` | 5 |
 | `skills/geography/` | 5 |
 | `skills/politics/` | 5 |
-| **总计** | **50** |
+| `skills/chemistry/` | 5 |
+| `skills/biology/` | 5 |
+| **总计** | **60** |
 
 ### 单个 SKILL 可安装边界
 
@@ -155,6 +159,26 @@ skill-folder/
 | 48 | 政治理论联系实际教练 | `skills/politics/politics-application-coach/` | 先定位理论模块铁律、四步法 |
 | 49 | 政治价值推理教练 | `skills/politics/politics-value-reasoning/` | 价值推理三步链、只练论证不评立场 |
 | 50 | 政治错误DNA | `skills/politics/politics-error-dna/` | Po1-Po5 五维错因、纯净版审题测试 |
+
+### 九、化学学科专项（5 个）
+
+| # | SKILL 名称 | 文件夹 | 核心功能 |
+|---|-----------|-------|---------|
+| 51 | 化学微粒观建模教练 | `skills/chemistry/chemistry-particle-modeler/` | 宏观现象、微观粒子、符号表达贯通 |
+| 52 | 化学概念理解器 | `skills/chemistry/chemistry-concept-explainer/` | 物质分类、溶液、酸碱盐、氧化还原和有机基础辨析 |
+| 53 | 化学变化与方程式教练 | `skills/chemistry/chemistry-reaction-coach/` | 反应分析、方程式书写配平、守恒和基础计算 |
+| 54 | 化学实验探究教练 | `skills/chemistry/chemistry-lab-inquiry/` | 实验安全、变量控制、证据记录和干扰排除 |
+| 55 | 化学错误DNA | `skills/chemistry/chemistry-error-dna/` | Ch1-Ch5 五维错因、宏微符和守恒修复 |
+
+### 十、生物学科专项（5 个）
+
+| # | SKILL 名称 | 文件夹 | 核心功能 |
+|---|-----------|-------|---------|
+| 56 | 生物结构与功能教练 | `skills/biology/biology-structure-function-coach/` | 生命层级、结构特征、功能适应解释 |
+| 57 | 生物概念图谱教练 | `skills/biology/biology-concept-map-builder/` | 概念节点、关系词、层级/因果/并列图 |
+| 58 | 生命过程机制解释器 | `skills/biology/biology-process-explainer/` | 光合、呼吸、循环、免疫、遗传、生态机制链 |
+| 59 | 生物实验探究教练 | `skills/biology/biology-experiment-inquiry/` | 变量、对照、重复、数据图表和误差评价 |
+| 60 | 生物错误DNA | `skills/biology/biology-error-dna/` | B1-B5 五维错因、结构功能和机制链修复 |
 
 ---
 
@@ -300,6 +324,14 @@ skill-folder/
 
 图景建立与解题 → 错误根因追踪 → 概念直觉重建 → 建模迁移 → 实验思维
 
+#### 化学能力链
+
+宏微符建模 → 概念边界辨析 → 反应与守恒 → 实验证据 → 化学错因修复
+
+#### 生物能力链
+
+结构层级定位 → 结构功能解释 → 生命过程机制链 → 实验数据探究 → 生物错因修复
+
 ---
 
 ## 🛡️ 权限与共享边界
@@ -352,12 +384,42 @@ skills/
 │   ├── english-grammar-coach/
 │   ├── english-listening-trainer/
 │   └── english-writing-coach/
-└── physics/
-    ├── physics-problem-coach/
-    ├── physics-error-dna/
-    ├── physics-concept-intuition/
-    ├── physics-modeling-coach/
-    └── physics-lab-coach/
+├── physics/
+│   ├── physics-problem-coach/
+│   ├── physics-error-dna/
+│   ├── physics-concept-intuition/
+│   ├── physics-modeling-coach/
+│   └── physics-lab-coach/
+├── history/
+│   ├── history-timeline-coach/
+│   ├── history-causation-explainer/
+│   ├── history-evidence-analysis/
+│   ├── history-problem-coach/
+│   └── history-error-dna/
+├── geography/
+│   ├── geography-map-coach/
+│   ├── geography-region-analyzer/
+│   ├── geography-process-explainer/
+│   ├── geography-problem-coach/
+│   └── geography-error-dna/
+├── politics/
+│   ├── politics-framework-coach/
+│   ├── politics-concept-explainer/
+│   ├── politics-application-coach/
+│   ├── politics-value-reasoning/
+│   └── politics-error-dna/
+├── chemistry/
+│   ├── chemistry-particle-modeler/
+│   ├── chemistry-concept-explainer/
+│   ├── chemistry-reaction-coach/
+│   ├── chemistry-lab-inquiry/
+│   └── chemistry-error-dna/
+└── biology/
+    ├── biology-structure-function-coach/
+    ├── biology-concept-map-builder/
+    ├── biology-process-explainer/
+    ├── biology-experiment-inquiry/
+    └── biology-error-dna/
 ```
 
 每个叶子目录都是独立安装单元；其 `references/` 和 `schemas/` 会随该 SKILL 一起打包。
@@ -366,4 +428,4 @@ skills/
 
 ## 📌 一句话总结
 
-这 35 个 SKILL 不是 35 个孤立工具，而是一套围绕“记录错误、验证理解、形成沉淀、推动执行、看见成长”的学生学习系统。
+这 60 个 SKILL 不是 60 个孤立工具，而是一套围绕“记录错误、验证理解、形成沉淀、推动执行、看见成长”的学生学习系统。

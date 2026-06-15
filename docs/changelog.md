@@ -1,6 +1,6 @@
 # 版本历史与维护追踪
 
-> 当前仓库聚焦 **K12 学习场景 50 个 SKILL**（v1.5 新增政史地三学科专项 15 个）。
+> 当前仓库聚焦 **K12 学习场景 60 个 SKILL**（v1.6 新增化学生物两学科专项 10 个）。
 > 本文档面向维护者，记录内部版本矩阵、模块状态和后续维护方向。公开发布说明见 [Release Notes](../RELEASE_NOTES.md)。
 
 ---
@@ -27,7 +27,7 @@
 | 14 | 理科解题四步法 | v1.1 | 已增强教练式提示阶梯、题型判断和阶段路由 |
 | 15 | 阶段学习体检 | v1.0 | 新增，可选高级阶段复盘与证据化 360 体检 |
 
-### 学科专项（20 个）
+### 学科专项（45 个）
 
 | 学科 | 数量 | 当前版本 | 维护状态 |
 |------|------|----------|----------|
@@ -35,6 +35,11 @@
 | 数学 | 5 | v1.0 | 稳定 |
 | 英语 | 5 | v1.0 | 稳定 |
 | 物理 | 5 | v1.0 | 稳定 |
+| 历史 | 5 | v1.0 | v1.5 新增，稳定 |
+| 地理 | 5 | v1.0 | v1.5 新增，稳定 |
+| 政治 | 5 | v1.0 | v1.5 新增，稳定 |
+| 化学 | 5 | v1.0 | v1.6 新增，稳定 |
+| 生物 | 5 | v1.0 | v1.6 新增，稳定 |
 
 ---
 
@@ -57,11 +62,26 @@
 
 ## Skill 质量优化记录
 
+### 2026-06-15 v1.6 化学与生物学科专项
+
+本轮新增两门科学学科专项，把现有理科支持从物理扩展到化学与生物：
+
+- 新增 `skills/chemistry/` 5 个 Skill：`chemistry-particle-modeler`、`chemistry-concept-explainer`、`chemistry-reaction-coach`、`chemistry-lab-inquiry`、`chemistry-error-dna`。
+- 新增 `skills/biology/` 5 个 Skill：`biology-structure-function-coach`、`biology-concept-map-builder`、`biology-process-explainer`、`biology-experiment-inquiry`、`biology-error-dna`。
+- 化学专项统一第一步铁律：“宏观现象 → 微观粒子 → 符号表达”；生物专项统一第一步铁律：“结构层级 → 功能过程 → 调节关系”。
+- 每个新增 Skill 均包含 `SKILL.md`、本地 `references/` 和 `test-prompts.json`，保持独立安装边界。
+
+维护原则：
+
+- 化学错因由 Ch1-Ch5 归因，不重复通用错题本记录。
+- 生物错因由 B1-B5 归因，不重复通用错题本记录。
+- 新增学科不依赖根目录 `references/` 作为运行时材料。
+
 ### 2026-06-14 v1.4 教育 LLM Wiki Skill
 
 本轮把 Obsidian/Markdown 学习仓库接入从“文档告诉 AI 怎么做”升级为“由专门 Skill 负责搭建、适配和维护”：
 
-- 新增 `skills/general/educational-llm-wiki/`，当前仓库从 34 个 Skill 扩展为 35 个 Skill，其中 `skills/general/` 从 14 个扩展为 15 个。
+- 新增 `skills/general/educational-llm-wiki/`，当时仓库从 34 项 Skill 扩展到 35 项，其中 `skills/general/` 从 14 个扩展为 15 个。
 - `educational-llm-wiki` 内置 `references/education-layer-rules.md` 和 `references/compile-workflow.md`，用于三层分区、已有仓库映射、资料编译、索引日志和健康检查。
 - 新增 `assets/vault-template/`，提供教育版 `100-Raw / 200-Wiki / 300-Output` 可复制模板、`AGENTS` 模板、学习总控台、index、log 和 source map。
 - README、架构说明、安装指南、Obsidian 接入手册和 AGENTS 模板已同步指向 `educational-llm-wiki`，避免用户只依赖静态文档适配。
@@ -198,9 +218,9 @@
 
 | 维度 | 状态 |
 |------|------|
-| 学生端总数 | 35 个 SKILL |
+| 学生端总数 | 60 个 SKILL |
 | 通用学习系统 | 15 个 SKILL |
-| 学科专项 | 20 个 SKILL |
+| 学科专项 | 45 个 SKILL |
 | 教师端 | 已从当前发布范围移除 |
 | Obsidian 项目级使用 | 已新增 `educational-llm-wiki`、AI 接入手册、中文三层结构与参考 AGENTS 模板 |
 | 当前定位 | 学生端学习系统技能库 |

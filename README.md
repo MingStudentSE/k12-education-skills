@@ -1,20 +1,19 @@
 # 🎓 K12 教育 AI 辅导系统
 
 > 适用平台：OpenClaw / ClawHub / SkillHub
-> 当前仓库聚焦 **K12 学习场景 50 个 SKILL**，覆盖通用学习系统与语数英物政史地七大学科专项。
+> 当前仓库聚焦 **K12 学习场景 60 个 SKILL**，覆盖通用学习系统与语文、数学、英语、物理、历史、地理、政治、化学、生物九大学科专项。
 
 传统的 AI 往往被当成“给答案的计算器”。
 这套 K12 教育 AI 辅导系统希望把 AI 变成“追问思路、陪你复盘、帮你形成长期学习系统的教练”。
 
 ---
 
-## ✨ v1.4 重点变化
+## ✨ v1.6 重点变化
 
-- 新增 `educational-llm-wiki`，把 Obsidian/Markdown 学习仓库接入从“文档指导”升级为可安装 Skill。
-- 内置教育版 `100-Raw / 200-Wiki / 300-Output` 三层 vault 模板，支持空仓库搭建、已有仓库映射、资料编译、检查安装官方 Obsidian skills、索引日志维护和健康检查。
-- 建立根目录 `references/` 理论库，采用“一个理论一个笔记”的维护方式。
-- 将 12 个认知原理、学习区、85/15 意外挑战、主动回忆、错误反馈、交错练习、分散练习等理论写入核心 SKILL 设计约束。
-- 恢复并重命名 `skill-creator` 为 `educational-skill-creator`，专门用于创建教育类 SKILL。
+- 新增 **化学、生物** 两门理科/生命科学学科专项，各 5 个 SKILL（共 10 个），仓库 SKILL 总数 50 → 60。
+- 化学专项建立“宏观现象 → 微观粒子 → 符号表达”第一步铁律，覆盖微粒观、概念理解、反应方程式、实验探究和化学错误DNA。
+- 生物专项建立“结构层级 → 功能过程 → 调节关系”第一步铁律，覆盖结构功能、概念图谱、生命过程、实验探究和生物错误DNA。
+- 两门新增学科均保持单个 SKILL 独立安装边界：运行时参考材料全部放在各自 `references/` 目录中。
 
 ## ✨ v1.5 重点变化
 
@@ -24,6 +23,14 @@
 - 架构层扩展：`handover-protocol.schema.json` 与通用错题本向后兼容支持政史地（H/G/Po 五维错因 + §9.4/9.5/9.6 协作协议）。
 - **价值观合规红线**：政史地价值维度一律用能力描述（"价值论证缺失"），只训练论证构建，绝不评判学生立场；写入每个 SKILL 禁止行为表与 `SECURITY_BASELINE.md`。
 - 全程 codex(gpt-5.5/xhigh/fast) 生成 + 教育部课标网络核实 + darwin-skill 8 维度评分优化（三学科平均 87.7）。
+
+## ✨ v1.4 重点变化
+
+- 新增 `educational-llm-wiki`，把 Obsidian/Markdown 学习仓库接入从“文档指导”升级为可安装 Skill。
+- 内置教育版 `100-Raw / 200-Wiki / 300-Output` 三层 vault 模板，支持空仓库搭建、已有仓库映射、资料编译、检查安装官方 Obsidian skills、索引日志维护和健康检查。
+- 建立根目录 `references/` 理论库，采用“一个理论一个笔记”的维护方式。
+- 将 12 个认知原理、学习区、85/15 意外挑战、主动回忆、错误反馈、交错练习、分散练习等理论写入核心 SKILL 设计约束。
+- 恢复并重命名 `skill-creator` 为 `educational-skill-creator`，专门用于创建教育类 SKILL。
 
 ---
 
@@ -39,7 +46,7 @@
 - **可选高级复盘**：阶段学习体检，用于证据化 360 复盘和阶段系统修复
 - **学习科学底座**：用 12 个认知原理、学习区、约85%熟悉内容 + 15%意外挑战、间隔复习、主动回忆、错误反馈和交错练习校准所有教育 SKILL
 
-### 学科专项层（`skills/{subject}/`）· 35 个 SKILL
+### 学科专项层（`skills/{subject}/`）· 45 个 SKILL
 
 - **语文**（5 个）：写作、阅读、文言文、素材积累、语病纠偏
 - **数学**（5 个）：解题、错误DNA、概念解释、应用题建模、思维梯度训练
@@ -48,6 +55,8 @@
 - **历史**（5 个）：时空观教练、因果解释器、史料实证分析、解题教练、错误DNA
 - **地理**（5 个）：读图定位教练、区域分析教练、过程机制解释器、解题教练、错误DNA
 - **政治**（5 个）：知识体系教练、概念理解器、理论联系实际教练、价值推理教练、错误DNA
+- **化学**（5 个）：微粒观建模、概念理解、反应方程式、实验探究、错误DNA
+- **生物**（5 个）：结构功能、概念图谱、生命过程、实验探究、错误DNA
 
 ---
 
@@ -56,8 +65,8 @@
 | 类别     | 数量     | 状态               |
 | ------ | ------ | ---------------- |
 | 通用与成长层 | 15     | ✅ v1.4 可用 |
-| 学科专项层  | 35     | ✅ v1.5 可用 |
-| **总计** | **50** | **100% 可用**      |
+| 学科专项层  | 45     | ✅ v1.6 可用 |
+| **总计** | **60** | **100% 可用**      |
 
 ### 安装包边界
 
@@ -70,7 +79,7 @@
 
 ## 🚀 快速开始
 
-> ⚠️ 建议先安装核心 SKILL，再按实际学科痛点加装专项 SKILL；不要一开始把 35 个全装上。
+> ⚠️ 建议先安装核心 SKILL，再按实际学科痛点加装专项 SKILL；不要一开始把全部 60 个都装上。
 
 ### 1. 让 Agent 安装核心 SKILL
 
@@ -92,7 +101,7 @@ https://github.com/MingStudentSE/k12-education-skills
 
 6. skills/general/educational-llm-wiki/
 
-每个 SKILL 都以单个目录为安装单位。请保留每个目录内的 SKILL.md、references/、schemas/、assets/ 等配套文件。不要安装全部 35 个 SKILL；后续等我明确需要某个学科专项、高级复盘或方法论工具时再加装。
+每个 SKILL 都以单个目录为安装单位。请保留每个目录内的 SKILL.md、references/、schemas/、assets/ 等配套文件。不要安装全部 60 个 SKILL；后续等我明确需要某个学科专项、高级复盘或方法论工具时再加装。
 
 请把这些 Skill 安装到当前项目的项目级 Skill 位置，例如 .codex/skills/、.claude/skills/ 或你支持的项目级 Skill 管理器中。安装方式以你的平台为准，但不要拆散 Skill 目录。
 ```
@@ -188,15 +197,20 @@ SKILL联动协调器会在明确任务下，把错题、费曼、笔记、理科
 | 数学  | [数学解题教练](skills/math/math-problem-solving-coach/) | 四步拍照法、CLAW5 模板、思路追问 |
 | 英语  | [英语口语陪练](skills/english/english-speaking-coach/)  | 晨间热身、角色扮演、口语成长轨迹    |
 | 物理  | [物理解题教练](skills/physics/physics-problem-coach/)   | 图景建立、四步解题、物理三层追问    |
+| 历史  | [历史时空观教练](skills/history/history-timeline-coach/) | 先定位时空、因果解释、史料实证      |
+| 地理  | [地理读图定位教练](skills/geography/geography-map-coach/) | 无图不题先读图、区域综合、过程机制   |
+| 政治  | [政治知识体系教练](skills/politics/politics-framework-coach/) | 先定位理论模块、概念辨析、价值论证 |
+| 化学  | [化学微粒观建模教练](skills/chemistry/chemistry-particle-modeler/) | 宏观现象、微观粒子、符号表达贯通 |
+| 生物  | [生物结构与功能教练](skills/biology/biology-structure-function-coach/) | 结构层级、功能过程、调节关系贯通 |
 
-完整 35 个 SKILL 清单见 [系统架构与方法论](docs/architecture.md)。
+完整 60 个 SKILL 清单见 [系统架构与方法论](docs/architecture.md)。
 
 ---
 
 ## 📚 文档导航
 
 - [系统架构与方法论](docs/architecture.md)
-  - K12 学习场景 35 个 SKILL 全清单
+  - K12 学习场景 60 个 SKILL 全清单
   - 协作飞轮与方法论依据
   - 目录结构与学科分层
 - [学习科学原则接入规范](docs/learning-science-principles.md)
@@ -220,10 +234,10 @@ SKILL联动协调器会在明确任务下，把错题、费曼、笔记、理科
   - 可复制到 Obsidian vault 根目录作为本地宪法
 - [版本历史与升级追踪](docs/changelog.md)
   - 各 SKILL 当前版本
-  - v1.0 → v1.4 的整合升级记录
+  - v1.0 → v1.6 的整合升级记录
 - [Release Notes](RELEASE_NOTES.md)
   - v1.0 授权原版说明
-  - v1.4 当前版本新增内容
+  - v1.6 当前版本新增内容
 
 ---
 

@@ -4,7 +4,21 @@
 
 ---
 
-## v1.5 最新版本
+## v1.6 最新版本
+
+本版本新增 **化学、生物** 两门学科专项（各 5 个 SKILL，共 10 个），仓库 SKILL 总数 50 → 60，学科专项总数 35 → 45。
+
+### 新增内容
+
+- 新增 `skills/chemistry/` 5 个化学专项 SKILL：微粒观建模、概念理解、反应方程式、实验探究和化学错误DNA。
+- 新增 `skills/biology/` 5 个生物专项 SKILL：结构功能、概念图谱、生命过程、实验探究和生物错误DNA。
+- 化学专项统一第一步铁律：“宏观现象 → 微观粒子 → 符号表达”，避免先背结论或先套方程。
+- 生物专项统一第一步铁律：“结构层级 → 功能过程 → 调节关系”，避免先背零散结论。
+- 所有新增 SKILL 均包含本地 `references/` 与 `test-prompts.json`，保持单个目录可独立安装。
+
+---
+
+## v1.5
 
 本版本新增 **政治、历史、地理** 三门文综学科专项（各 5 个 SKILL，共 15 个），补齐 K12 文综版图，仓库 SKILL 总数 35 → 50。
 
@@ -18,13 +32,13 @@
 
 ---
 
-## v1.4 当前版本
+## v1.4
 
 本版本新增 `educational-llm-wiki`，把 Obsidian/Markdown 学习仓库接入从“阅读文档后手动适配”升级为“由专门 Skill 搭建、适配、编译和维护”。
 
 ### 新增内容
 
-- 新增 `skills/general/educational-llm-wiki/`，当前体系扩展为 35 个 Skill，其中通用学习系统为 15 个。
+- 新增 `skills/general/educational-llm-wiki/`，当时体系由 34 扩展到 35 项 Skill，其中通用学习系统为 15 个。
 - 内置教育版 `100-Raw / 200-Wiki / 300-Output` vault 模板，包含 `AGENTS` 模板、学习总控台、index、log、source map 和各层 README。
 - 新增 `references/education-layer-rules.md`、`references/compile-workflow.md` 与 `references/obsidian-skill-install.md`，定义教育资料的分层、编译、索引、日志、健康检查，以及 `kepano/obsidian-skills` 检查安装规则。
 
@@ -140,7 +154,7 @@
 ### 版本定位
 
 - 保留原版的核心学习系统构想和学生端 skill 基础结构。
-- 覆盖通用学习系统与语文、数学、英语、物理四大学科专项。
+- 覆盖通用学习系统与语文、数学、英语、物理学科专项。
 - 形成“错题记录 → 理解验证 → 知识沉淀 → 提醒复习 → 每周复盘”的基础学习闭环。
 
 ### 基础能力
