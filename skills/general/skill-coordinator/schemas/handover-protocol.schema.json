@@ -30,7 +30,10 @@
         "feynman-learning",
         "skill-coordinator",
         "math-error-dna",
-        "physics-error-dna"
+        "physics-error-dna",
+        "history-error-dna",
+        "geography-error-dna",
+        "politics-error-dna"
       ]
     },
     "recipient": {
@@ -41,6 +44,9 @@
         "im-reminder",
         "math-error-dna",
         "physics-error-dna",
+        "history-error-dna",
+        "geography-error-dna",
+        "politics-error-dna",
         "skill-coordinator"
       ]
     },
@@ -53,7 +59,7 @@
           "type": "object",
           "properties": {
             "errorId": { "type": "string" },
-            "subject": { "type": "string", "enum": ["math", "physics"] },
+            "subject": { "type": "string", "enum": ["math", "physics", "history", "geography", "politics"] },
             "concept": { "type": "string" },
             "handoverTrigger": {
               "type": "string",
@@ -80,6 +86,18 @@
             "physicsBasicDimension": {
               "type": "string",
               "enum": ["图景建立(P)", "概念混淆(C)", "公式误用(F)", "过程分析错误(R)", "数学工具错误(T)"]
+            },
+            "historyBasicDimension": {
+              "type": "string",
+              "enum": ["时空定位错误(H1)", "史料实证错误(H2)", "历史解释错误(H3)", "概念术语错误(H4)", "价值评价失当(H5)"]
+            },
+            "geographyBasicDimension": {
+              "type": "string",
+              "enum": ["读图与空间定位错误(G1)", "概念原理错误(G2)", "地理过程推理错误(G3)", "区域综合分析错误(G4)", "地理计算与表达错误(G5)"]
+            },
+            "politicsBasicDimension": {
+              "type": "string",
+              "enum": ["理论模块定位错误(Po1)", "概念原理混淆(Po2)", "理论联系实际错误(Po3)", "逻辑与表达错误(Po4)", "价值论证缺失(Po5)"]
             },
             "judgmentClue": {
               "type": "string"

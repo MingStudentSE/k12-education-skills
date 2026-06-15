@@ -1,0 +1,17 @@
+[
+  {
+    "id": "happy-path",
+    "prompt": "请用🧬 地理错误DNA帮我分析一道地理错题。我有题图、题目、我的答案、正确答案和解题过程。",
+    "expected": "应按G1-G5定位主维度和子类型ID，给出跨维度关联、深度根因、修复任务和复测计划；需要长期写入时必须先请求授权。"
+  },
+  {
+    "id": "handover-schema",
+    "prompt": "这道地理错题来自通用错题本，请按交接协议判断应如何接收和回写。",
+    "expected": "应使用subject:\"geography\"、recipient:\"geography-error-dna\"和geographyBasicDimension枚举值，回写地理深度分类、子类型ID、跨维度关联、深度根因和弱项状态。"
+  },
+  {
+    "id": "anxiety",
+    "prompt": "我地理图从来读不懂，自然地理太难了，大题也不知道答什么。",
+    "expected": "应先确认感受，再用数据替代情绪；无长期数据时启动纯净版读图测试，把焦虑转化为具体G1/G3/G4等训练任务。"
+  }
+]

@@ -1,6 +1,6 @@
 # 🏛️ 系统架构与方法论
 
-本文档描述当前仓库保留的 **K12 学习场景 35 个 SKILL**：它们如何分层、如何协作，以及背后的方法论依据。
+本文档描述当前仓库保留的 **K12 学习场景 50 个 SKILL**：它们如何分层、如何协作，以及背后的方法论依据。
 
 ---
 
@@ -12,7 +12,10 @@ skills/
 ├── chinese/   # 语文学科专项
 ├── math/      # 数学学科专项
 ├── english/   # 英语学科专项
-└── physics/   # 物理学科专项
+├── physics/   # 物理学科专项
+├── history/   # 历史学科专项
+├── geography/ # 地理学科专项
+└── politics/  # 政治学科专项
 ```
 
 如果这些 SKILL 作为 Obsidian 项目级 SKILL 使用，笔记仓库建议采用 LLM Wiki 风格三层架构：
@@ -34,7 +37,10 @@ skills/
 | `skills/math/` | 5 |
 | `skills/english/` | 5 |
 | `skills/physics/` | 5 |
-| **总计** | **35** |
+| `skills/history/` | 5 |
+| `skills/geography/` | 5 |
+| `skills/politics/` | 5 |
+| **总计** | **50** |
 
 ### 单个 SKILL 可安装边界
 
@@ -119,6 +125,36 @@ skill-folder/
 | 33 | 物理概念直觉器 | `skills/physics/physics-concept-intuition/` | 类比、实验想象、公式意义还原 |
 | 34 | 物理建模教练 | `skills/physics/physics-modeling-coach/` | 建模三步法、核心模型迁移 |
 | 35 | 物理实验思维教练 | `skills/physics/physics-lab-coach/` | 实验方法、数据分析、实验评价 |
+
+### 六、历史学科专项（5 个）
+
+| # | SKILL 名称 | 文件夹 | 核心功能 |
+|---|-----------|-------|---------|
+| 36 | 历史时空观教练 | `skills/history/history-timeline-coach/` | 时空定位铁律、时间轴、中外双轨 |
+| 37 | 历史因果解释器 | `skills/history/history-causation-explainer/` | 因果四框架、因果链、多元解释 |
+| 38 | 史料实证分析教练 | `skills/history/history-evidence-analysis/` | 史料分析状态机、孤证不立 |
+| 39 | 历史解题教练 | `skills/history/history-problem-coach/` | 四步解题、题型判别、三层次追问 |
+| 40 | 历史错误DNA | `skills/history/history-error-dna/` | H1-H5 五维错因、纯净版时空测试 |
+
+### 七、地理学科专项（5 个）
+
+| # | SKILL 名称 | 文件夹 | 核心功能 |
+|---|-----------|-------|---------|
+| 41 | 地理读图定位教练 | `skills/geography/geography-map-coach/` | 无图不题铁律、读图四步、等值线 |
+| 42 | 区域综合分析教练 | `skills/geography/geography-region-analyzer/` | 区域五步框架、要素关联 |
+| 43 | 地理过程机制解释器 | `skills/geography/geography-process-explainer/` | 过程推理四步、因子机制表 |
+| 44 | 地理解题教练 | `skills/geography/geography-problem-coach/` | 四步解题、自然地理计算 |
+| 45 | 地理错误DNA | `skills/geography/geography-error-dna/` | G1-G5 五维错因、纯净版读图测试 |
+
+### 八、政治学科专项（5 个）
+
+| # | SKILL 名称 | 文件夹 | 核心功能 |
+|---|-----------|-------|---------|
+| 46 | 政治知识体系教练 | `skills/politics/politics-framework-coach/` | 模块地图、思维导图、学期级体系 |
+| 47 | 政治概念理解器 | `skills/politics/politics-concept-explainer/` | 生活类比、易混概念辨析 |
+| 48 | 政治理论联系实际教练 | `skills/politics/politics-application-coach/` | 先定位理论模块铁律、四步法 |
+| 49 | 政治价值推理教练 | `skills/politics/politics-value-reasoning/` | 价值推理三步链、只练论证不评立场 |
+| 50 | 政治错误DNA | `skills/politics/politics-error-dna/` | Po1-Po5 五维错因、纯净版审题测试 |
 
 ---
 
