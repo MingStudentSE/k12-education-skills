@@ -8,7 +8,7 @@ tags: [生物, 错题, 错因分析, 结构功能, 机制链, 实验探究, 授�
 description: >
   生物学科错因根因分析教练。聚焦层级定位、结构功能、过程机制、
   实验探究、图表信息与术语表达五类错因；与通用错题本协作，不重复建错题本。
-compatibility: OpenClaw / ClawHub
+compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/biology-error-dimension-table.md
   - references/biology-concept-confusion-map.md

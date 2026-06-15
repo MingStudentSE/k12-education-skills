@@ -62,6 +62,24 @@
 
 ## Skill 质量优化记录
 
+### 2026-06-15 完整体系优化
+
+本轮完成工程化体系优化，不降低当前 60 个 Skill 范围：
+
+- 同步并瘦身通用、语文、数学、英语、物理 34 个 Skill。
+- 将新增的 `educational-llm-wiki`、历史、地理、政治 16 个长 Skill 做搬家型瘦身：主文件保留触发边界、核心流程、红线和 references 索引，完整原文移入本 Skill 自己的 `references/full-spec.md`。
+- 新增 `engine/night-run.mjs`，支持按学生 inbox 批处理错题，产出错因诊断、错题档案、变式训练题、答案讲解和晨报。
+- 新增 `engine/build-dashboard.mjs` 和 `engine/server.mjs`，分别提供静态看板和仅绑定 `127.0.0.1` 的交互式控制台。
+- 新增 `students/_template/`，只保留模板；真实学生数据、日志、配置和 dashboard 产物已加入 `.gitignore`。
+- 新增 `pipeline/` 质量门资料，并把 `pipeline/review.sh` 改成当前仓库相对路径；无旧基线时运行基础门，有 `backup-pre-fix/` 或 `K12_BASELINE` 时再做关键词覆盖。
+- 夜间产线技能映射已扩展到语文、数学、英语、物理、历史、地理、政治、化学、生物和综合。
+
+维护原则：
+
+- 60 个 Skill 均须保持单目录可安装，不依赖仓库根 `references/` 或其他 Skill 目录。
+- 主 `SKILL.md` 保持 ≤150 行；长流程、模板、示例和评分细则必须在本技能 `references/` 内。
+- 运行层 `engine/` 可读全仓 `skills/`，但不得写入 Skill 内容或自进化。
+
 ### 2026-06-15 v1.6 化学与生物学科专项
 
 本轮新增两门科学学科专项，把现有理科支持从物理扩展到化学与生物：

@@ -1,0 +1,6 @@
+{
+  "apibase": "https://your-openai-compatible-endpoint/v1",
+  "key": "sk-REPLACE-WITH-YOUR-OWN-KEY",
+  "model": "gpt-5.5",
+  "skillsDir": ""
+}

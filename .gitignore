@@ -11,3 +11,11 @@ package-lock.json
 **/schemas/package.json
 
 .qoder/
+
+# K12 nightline local runtime
+engine/config.json
+dashboard.html
+logs/
+students/*
+!students/_template/
+!students/_template/**

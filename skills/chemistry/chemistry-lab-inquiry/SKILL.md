@@ -8,7 +8,7 @@ tags: [化学, 实验探究, 实验安全, 变量控制, 证据推理, 数据记
 description: >
   化学实验设计、观察、证据记录和结论解释教练。强调安全边界、变量控制、
   对照实验、证据表和干扰排除，让学生用证据支持化学结论。
-compatibility: OpenClaw / ClawHub
+compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/chemistry-lab-safety-guide.md
   - references/chemistry-experiment-inquiry-methods.md

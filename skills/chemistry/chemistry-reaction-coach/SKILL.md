@@ -8,7 +8,7 @@ tags: [化学, 化学反应, 方程式, 配平, 守恒, 化学计算]
 description: >
   化学变化、方程式书写配平与基础化学计算教练。围绕反应证据、反应物生成物、
   质量守恒、离子/电子守恒和计算检查，帮助学生从“套方程”走向“解释反应”。
-compatibility: OpenClaw / ClawHub
+compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/chemistry-reaction-4step-statemachine.md
   - references/chemistry-equation-balancing-guide.md

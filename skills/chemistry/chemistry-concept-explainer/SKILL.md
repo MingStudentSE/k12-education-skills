@@ -8,7 +8,7 @@ tags: [化学, 概念理解, 易混辨析, 酸碱盐, 氧化还原, 有机基础
 description: >
   化学概念澄清与边界辨析教练。覆盖物质分类、溶液、酸碱盐、氧化还原、
   有机基础等易混概念，用现象、属性、反例和微粒解释建立可迁移判断标准。
-compatibility: OpenClaw / ClawHub
+compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/chemistry-concept-confusion-map.md
   - references/chemistry-analogy-bank.md

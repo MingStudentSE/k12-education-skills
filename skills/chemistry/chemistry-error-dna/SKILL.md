@@ -9,7 +9,7 @@ description: >
   化学学科错因根因分析与修复教练。聚焦宏微符断裂、概念分类混淆、
   反应守恒错误、实验证据错误和计算/化学用语错误；与通用错题本协作，
   不重复建立第二套错题本。
-compatibility: OpenClaw / ClawHub
+compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/chemistry-error-dimension-table.md
   - references/chemistry-concept-confusion-map.md

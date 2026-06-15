@@ -8,7 +8,7 @@ tags: [生物, 实验探究, 变量控制, 对照实验, 数据分析, 图表解
 description: >
   生物实验设计、变量控制、重复与对照、图表数据解读和误差评价教练。
   帮学生从“看结果”走向“用实验设计和数据支持结论”。
-compatibility: OpenClaw / ClawHub
+compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/biology-experiment-design-guide.md
   - references/biology-data-analysis-guide.md

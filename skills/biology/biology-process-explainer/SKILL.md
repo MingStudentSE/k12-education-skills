@@ -8,7 +8,7 @@ tags: [生物, 生命过程, 机制链, 光合作用, 呼吸作用, 遗传, 生�
 description: >
   生命过程机制链解释教练。用于光合作用、呼吸作用、循环、免疫、遗传、
   生态等过程，把阶段、物质流、能量流和信息流连成可预测的机制链。
-compatibility: OpenClaw / ClawHub
+compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/biology-process-chain-guide.md
   - references/biology-life-process-bank.md

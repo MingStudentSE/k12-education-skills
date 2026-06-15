@@ -8,7 +8,7 @@ tags: [生物, 结构功能, 生命层级, 细胞, 器官系统, 适应]
 description: >
   生物结构与功能地基教练。围绕细胞、组织、器官、系统和个体，
   帮学生从形态特征推到功能、适应和限制，建立“结构决定功能”的生物学解释习惯。
-compatibility: OpenClaw / ClawHub
+compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/biology-structure-function-map.md
   - references/biology-levels-of-organization.md

@@ -8,7 +8,7 @@ tags: [化学, 微粒观, 宏微符, 模型建构, 化学符号, 主动回忆]
 description: >
   化学微粒观地基教练。把宏观现象翻译成原子、分子、离子和符号表达，
   帮学生从“看到现象”走向“能画粒子、能写符号、能解释变化”。
-compatibility: OpenClaw / ClawHub
+compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/chemistry-particle-model-guide.md
   - references/chemistry-symbol-representation.md

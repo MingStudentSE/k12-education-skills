@@ -8,7 +8,7 @@ tags: [生物, 概念图, 易混概念, 知识结构, 主动回忆, 关系词]
 description: >
   生物概念组织与易混术语辨析教练。通过核心概念、关系词、层级/因果/并列图，
   把零散结论整理成可回测、可迁移的概念网络。
-compatibility: OpenClaw / ClawHub
+compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/biology-concept-confusion-map.md
   - references/biology-concept-map-guide.md

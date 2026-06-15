@@ -15,6 +15,12 @@
 - 生物专项建立“结构层级 → 功能过程 → 调节关系”第一步铁律，覆盖结构功能、概念图谱、生命过程、实验探究和生物错误DNA。
 - 两门新增学科均保持单个 SKILL 独立安装边界：运行时参考材料全部放在各自 `references/` 目录中。
 
+## ✨ 完整体系优化重点
+
+- 完成工程化运行层：新增夜间错题分析、静态看板、交互式控制台、学生档案模板和质量门。
+- 全仓 60 个 Skill 均采用“短 `SKILL.md` + 本地 `references/` 细则”的可安装结构，主文件控制在 150 行以内。
+- 夜间产线按学生 `inbox/` 批处理错题，产出错因诊断、错题档案、变式训练题、答案讲解和晨报。
+
 ## ✨ v1.5 重点变化
 
 - 新增 **政治、历史、地理** 三门文综学科专项，各 5 个 SKILL（共 15 个），补齐 K12 文综版图，仓库 SKILL 总数 35 → 50。
@@ -137,6 +143,19 @@ skills/general/educational-llm-wiki/
 
 完整安装顺序见 [安装指南](docs/installation-guide.md)。
 
+### 4. 可选：跑夜间错题产线
+
+如果你要把本仓库当作“睡前交错题、早上出诊断和变式题”的本地系统使用：
+
+```bash
+cp engine/config.sample.json engine/config.json
+cp -r students/_template students/stu-001
+node engine/night-run.mjs --student stu-001
+node engine/build-dashboard.mjs
+```
+
+配置、真实学生数据、日志和生成的 `dashboard.html` 都已加入 `.gitignore`。完整说明见 [K12 错题分析产线运行手册](docs/k12-nightline-handover.md)。
+
 ---
 
 ## 🧬 学习系统核心飞轮
@@ -224,6 +243,11 @@ SKILL联动协调器会在明确任务下，把错题、费曼、笔记、理科
   - 包级上架建议
   - 单个 SKILL 打包校验
   - 轻度/中度/重度用户组合
+- [K12 错题分析产线运行手册](docs/k12-nightline-handover.md)
+  - 夜间产线、看板、控制台和学生档案目录
+  - 运行边界、隐私边界和质量门
+- [K12 夜间错题分析使用文档](docs/k12-nightline-guide.md)
+  - 给学生、家长和运营者的交错题使用说明
 - [Obsidian 学习仓库架构](docs/obsidian-vault-architecture.md)
   - `100-Raw / 200-Wiki / 300-Output` 三层笔记分层
   - `AGENTS.md` 项目级调用规则

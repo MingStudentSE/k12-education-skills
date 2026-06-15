@@ -99,6 +99,26 @@
 
 ---
 
+## 🌙 可选部署：夜间错题产线
+
+`engine/` 是当前仓库的运行层，不是 Skill 安装包。它适合把当前 60 个 Skill 作为本地错题分析引擎使用：
+
+```bash
+cp engine/config.sample.json engine/config.json
+cp -r students/_template students/stu-001
+node engine/night-run.mjs --student stu-001
+node engine/build-dashboard.mjs
+```
+
+运行边界：
+
+- `engine/config.json`、`students/stu-*`、`logs/`、`dashboard.html` 不入库。
+- 服务端控制台只绑定 `127.0.0.1`：`node engine/server.mjs`。
+- 支持学科：语文、数学、英语、物理、历史、地理、政治、化学、生物和综合。
+- 详细说明见 [K12 错题分析产线运行手册](k12-nightline-handover.md)。
+
+---
+
 ## 📅 分阶段成长路径
 
 ### 第 1-2 周：先把基础飞轮跑起来
