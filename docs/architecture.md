@@ -1,6 +1,6 @@
 # 🏛️ 系统架构与方法论
 
-本文档描述当前仓库保留的 **K12 学习场景 34 个 SKILL**：它们如何分层、如何协作，以及背后的方法论依据。
+本文档描述当前仓库保留的 **K12 学习场景 35 个 SKILL**：它们如何分层、如何协作，以及背后的方法论依据。
 
 ---
 
@@ -23,18 +23,18 @@ skills/
 300-Output  # 可查看、可复盘、可交付的成果
 ```
 
-详细说明见 [Obsidian 学习仓库架构](obsidian-vault-architecture.md)，项目级入口模板见 [AGENTS.k12-learning-vault.template.md](AGENTS.k12-learning-vault.template.md)。
+从 0 搭建或适配已有学习仓库时，优先使用 `skills/general/educational-llm-wiki/`；详细说明见 [Obsidian 学习仓库架构](obsidian-vault-architecture.md)，项目级入口模板见 [AGENTS.k12-learning-vault.template.md](AGENTS.k12-learning-vault.template.md)。
 
 ### 数量总览
 
 | 类别 | 数量 |
 |------|------|
-| `skills/general/` | 14 |
+| `skills/general/` | 15 |
 | `skills/chinese/` | 5 |
 | `skills/math/` | 5 |
 | `skills/english/` | 5 |
 | `skills/physics/` | 5 |
-| **总计** | **34** |
+| **总计** | **35** |
 
 ### 单个 SKILL 可安装边界
 
@@ -44,7 +44,8 @@ skills/
 skill-folder/
 ├── SKILL.md
 ├── references/   # 本 SKILL 运行所需参考材料
-└── schemas/      # 本 SKILL 运行所需数据结构
+├── schemas/      # 本 SKILL 运行所需数据结构
+└── assets/       # 本 SKILL 运行时需要复制或复用的模板素材
 ```
 
 维护规则：
@@ -59,7 +60,7 @@ skill-folder/
 
 ## 📚 完整 SKILL 清单
 
-### 一、通用学习系统（14 个）
+### 一、通用学习系统（15 个）
 
 | # | SKILL 名称 | 文件夹 | 版本 | 核心功能 |
 |---|-----------|-------|------|---------|
@@ -68,55 +69,56 @@ skill-folder/
 | 3 | ⏰ IM智能提醒 | `skills/general/im-reminder/` | v1.1+ | 复习提醒、计划提醒、探索提醒、每日确认 |
 | 4 | 🎓 费曼学习法 | `skills/general/feynman-learning/` | v1.1.1 | 五跳追问、理解验证、挑战者模式 |
 | 5 | 📊 每周学习复盘 | `skills/general/weekly-review/` | v1.1.3 | 六模块周报、学习区检查、成长曲线、复盘追问 |
-| 6 | 🛠️ 教育版SKILL创建教练 | `skills/general/educational-skill-creator/` | v1.1.0 | 帮学生把学习痛点抽象成可复用工具 |
-| 7 | 📝 康奈尔笔记 | `skills/general/cornell-notes/` | v1.0.1 | 笔记提炼、自测问题、知识沉淀 |
-| 8 | 🔗 五SKILL联动协调器 | `skills/general/skill-coordinator/` | v1.1+ | 联动判断、学习区校准、全景月报、系统健康检查 |
-| 9 | 📅 30天学习计划制定师 | `skills/general/learning-plan/` | v1.0.3 | DNA 驱动计划、学习区校准、执行拆解、家庭看板 |
-| 10 | ⏱️ 时间与专注力教练 | `skills/general/time-focus-coach/` | v1.0.2 | 时间销行账、黄金时段、智能番茄钟 |
-| 11 | 🔭 跨学科侦探周 | `skills/general/cross-subject-detective/` | v1.0 | 项目式探索、跨科联结、侦探周流程 |
-| 12 | ☕ 兴趣成长探索计划 | `skills/general/interest-explorer/` | v1.0 | 52 杯咖啡、兴趣验证、兴趣DNA |
-| 13 | 🧩 理科解题四步法 | `skills/general/science-solving-four-steps/` | v1.1 | 教练式提示阶梯、题型判断、波利亚四步解题、变式迁移 |
-| 14 | 🧭 阶段学习体检 | `skills/general/learning-360-review/` | v1.0 | 证据化阶段复盘、A/B/C 判断、系统修复动作 |
+| 6 | 🧭 教育LLM知识库 | `skills/general/educational-llm-wiki/` | v1.0.0 | 教育版三层 vault、资料编译、索引日志、健康检查 |
+| 7 | 🛠️ 教育版SKILL创建教练 | `skills/general/educational-skill-creator/` | v1.1.0 | 帮学生把学习痛点抽象成可复用工具 |
+| 8 | 📝 康奈尔笔记 | `skills/general/cornell-notes/` | v1.0.1 | 笔记提炼、自测问题、知识沉淀 |
+| 9 | 🔗 五SKILL联动协调器 | `skills/general/skill-coordinator/` | v1.1+ | 联动判断、学习区校准、全景月报、系统健康检查 |
+| 10 | 📅 30天学习计划制定师 | `skills/general/learning-plan/` | v1.0.3 | DNA 驱动计划、学习区校准、执行拆解、家庭看板 |
+| 11 | ⏱️ 时间与专注力教练 | `skills/general/time-focus-coach/` | v1.0.2 | 时间销行账、黄金时段、智能番茄钟 |
+| 12 | 🔭 跨学科侦探周 | `skills/general/cross-subject-detective/` | v1.0 | 项目式探索、跨科联结、侦探周流程 |
+| 13 | ☕ 兴趣成长探索计划 | `skills/general/interest-explorer/` | v1.0 | 52 杯咖啡、兴趣验证、兴趣DNA |
+| 14 | 🧩 理科解题四步法 | `skills/general/science-solving-four-steps/` | v1.1 | 教练式提示阶梯、题型判断、波利亚四步解题、变式迁移 |
+| 15 | 🧭 阶段学习体检 | `skills/general/learning-360-review/` | v1.0 | 证据化阶段复盘、A/B/C 判断、系统修复动作 |
 
 ### 二、语文学科专项（5 个）
 
 | # | SKILL 名称 | 文件夹 | 核心功能 |
 |---|-----------|-------|---------|
-| 15 | 语文写作教练 | `skills/chinese/chinese-writing-coach/` | 5步流程、风格DNA、写作追问 |
-| 16 | 阅读理解拆解师 | `skills/chinese/chinese-reading-decoder/` | 错因识别、出题人视角、答题结构 |
-| 17 | 文言文复活计划 | `skills/chinese/chinese-classical-revival/` | 角色扮演、三级跳、背诵与理解 |
-| 18 | 语文素材库2.0 | `skills/chinese/chinese-material-library/` | 素材积累、自动标签、写作前调用 |
-| 19 | 语病追踪档案 | `skills/chinese/chinese-grammar-tracker/` | 六类语病识别、顽固档案、预警 |
+| 16 | 语文写作教练 | `skills/chinese/chinese-writing-coach/` | 5步流程、风格DNA、写作追问 |
+| 17 | 阅读理解拆解师 | `skills/chinese/chinese-reading-decoder/` | 错因识别、出题人视角、答题结构 |
+| 18 | 文言文复活计划 | `skills/chinese/chinese-classical-revival/` | 角色扮演、三级跳、背诵与理解 |
+| 19 | 语文素材库2.0 | `skills/chinese/chinese-material-library/` | 素材积累、自动标签、写作前调用 |
+| 20 | 语病追踪档案 | `skills/chinese/chinese-grammar-tracker/` | 六类语病识别、顽固档案、预警 |
 
 ### 三、数学学科专项（5 个）
 
 | # | SKILL 名称 | 文件夹 | 核心功能 |
 |---|-----------|-------|---------|
-| 20 | 数学解题教练 | `skills/math/math-problem-solving-coach/` | 四步拍照法、CLAW5 模板、五问链 |
-| 21 | 数学错误DNA | `skills/math/math-error-dna/` | 错误分类、顽固追踪、月度图谱 |
-| 22 | 数学概念解释器 | `skills/math/math-concept-explainer/` | 生活类比、几何直觉、概念重建 |
-| 23 | 应用题建模教练 | `skills/math/math-word-problem-coach/` | 数量关系提取、五大题型建模 |
-| 24 | 思维梯度训练师 | `skills/math/math-gradient-trainer/` | 天花板测定、进阶序列、成长日记 |
+| 21 | 数学解题教练 | `skills/math/math-problem-solving-coach/` | 四步拍照法、CLAW5 模板、五问链 |
+| 22 | 数学错误DNA | `skills/math/math-error-dna/` | 错误分类、顽固追踪、月度图谱 |
+| 23 | 数学概念解释器 | `skills/math/math-concept-explainer/` | 生活类比、几何直觉、概念重建 |
+| 24 | 应用题建模教练 | `skills/math/math-word-problem-coach/` | 数量关系提取、五大题型建模 |
+| 25 | 思维梯度训练师 | `skills/math/math-gradient-trainer/` | 天花板测定、进阶序列、成长日记 |
 
 ### 四、英语学科专项（5 个）
 
 | # | SKILL 名称 | 文件夹 | 核心功能 |
 |---|-----------|-------|---------|
-| 25 | 英语口语陪练 | `skills/english/english-speaking-coach/` | 热身、角色扮演、口语成长轨迹 |
-| 26 | 智能词汇DNA系统 | `skills/english/english-vocabulary-dna/` | 词汇入库、遗忘追踪、主题雷达 |
-| 27 | 英语语法突破教练 | `skills/english/english-grammar-coach/` | 语法图谱、追问、错误模式分析 |
-| 28 | 个性化英语听力训练师 | `skills/english/english-listening-trainer/` | DNA 驱动听力、四步训练、卡壳追问 |
-| 29 | 英语写作进化教练 | `skills/english/english-writing-coach/` | 三维批改、句式升级、写作档案 |
+| 26 | 英语口语陪练 | `skills/english/english-speaking-coach/` | 热身、角色扮演、口语成长轨迹 |
+| 27 | 智能词汇DNA系统 | `skills/english/english-vocabulary-dna/` | 词汇入库、遗忘追踪、主题雷达 |
+| 28 | 英语语法突破教练 | `skills/english/english-grammar-coach/` | 语法图谱、追问、错误模式分析 |
+| 29 | 个性化英语听力训练师 | `skills/english/english-listening-trainer/` | DNA 驱动听力、四步训练、卡壳追问 |
+| 30 | 英语写作进化教练 | `skills/english/english-writing-coach/` | 三维批改、句式升级、写作档案 |
 
 ### 五、物理学科专项（5 个）
 
 | # | SKILL 名称 | 文件夹 | 核心功能 |
 |---|-----------|-------|---------|
-| 30 | 物理解题教练 | `skills/physics/physics-problem-coach/` | 四步法、图景建立、物理追问 |
-| 31 | 物理错误DNA | `skills/physics/physics-error-dna/` | 五维错误分类、弱项追踪、焦虑处理 |
-| 32 | 物理概念直觉器 | `skills/physics/physics-concept-intuition/` | 类比、实验想象、公式意义还原 |
-| 33 | 物理建模教练 | `skills/physics/physics-modeling-coach/` | 建模三步法、核心模型迁移 |
-| 34 | 物理实验思维教练 | `skills/physics/physics-lab-coach/` | 实验方法、数据分析、实验评价 |
+| 31 | 物理解题教练 | `skills/physics/physics-problem-coach/` | 四步法、图景建立、物理追问 |
+| 32 | 物理错误DNA | `skills/physics/physics-error-dna/` | 五维错误分类、弱项追踪、焦虑处理 |
+| 33 | 物理概念直觉器 | `skills/physics/physics-concept-intuition/` | 类比、实验想象、公式意义还原 |
+| 34 | 物理建模教练 | `skills/physics/physics-modeling-coach/` | 建模三步法、核心模型迁移 |
+| 35 | 物理实验思维教练 | `skills/physics/physics-lab-coach/` | 实验方法、数据分析、实验评价 |
 
 ---
 
@@ -328,4 +330,4 @@ skills/
 
 ## 📌 一句话总结
 
-这 34 个 SKILL 不是 34 个孤立工具，而是一套围绕“记录错误、验证理解、形成沉淀、推动执行、看见成长”的学生学习系统。
+这 35 个 SKILL 不是 35 个孤立工具，而是一套围绕“记录错误、验证理解、形成沉淀、推动执行、看见成长”的学生学习系统。

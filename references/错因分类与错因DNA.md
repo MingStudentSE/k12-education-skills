@@ -31,3 +31,13 @@
 - `math-error-dna`
 - `physics-error-dna`
 - 语文和英语错因维度资料
+
+## 参考文献
+
+- VanLehn, K. (2006). The behavior of tutoring systems. International Journal of Artificial Intelligence in Education.
+- Pane, J. F., Griffin, B. A., McCaffrey, D. F., & Karam, R. (2014). Effectiveness of Cognitive Tutor Algebra I at Scale. Educational Evaluation and Policy Analysis.
+
+## 实践案例与效果
+
+- MATHia 把数学能力拆成 knowledge components 并跟踪掌握状态；ASSISTments 把作业错误汇总给教师做针对性干预。
+- 错因 DNA 适合把错误分成概念、程序、审题、表达、迁移、习惯等维度，并追踪长期高频错因。

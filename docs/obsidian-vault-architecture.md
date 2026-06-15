@@ -1,13 +1,13 @@
 # Obsidian 学习仓库架构
 
-本文档定义这些 SKILL 在 Obsidian 笔记仓库中的推荐分层。  
-默认参考 LLM Wiki 的三层架构：`100-Raw / 200-Wiki / 300-Output`。
+本文档定义这些 SKILL 在 Obsidian 或本地 Markdown 学习仓库中的推荐分层。
+默认参考 LLM Wiki 的三层架构：`100-Raw / 200-Wiki / 300-Output`，具体搭建与维护由 `skills/general/educational-llm-wiki/` 承担。
 
 ---
 
 ## 核心原则
 
-不要把学习仓库做成普通文件夹分类，也不要让 34 个 SKILL 随机写入笔记。
+不要把学习仓库做成普通文件夹分类，也不要让 35 个 SKILL 随机写入笔记。
 Obsidian 仓库应被视为一个持续运行的学习系统：
 
 ```text
@@ -31,29 +31,40 @@ AGENTS.md   = 项目级本地宪法与 skill 调用规则
 Obsidian-Learning-Vault/
 ├── AGENTS.md
 ├── 100-Raw/
-│   ├── 每日学习记录/
-│   ├── 课堂笔记原文/
-│   ├── 错题原始材料/
-│   ├── 学习资料/
-│   └── 提醒与回执/
+│   ├── 00-收集箱/
+│   ├── 10-每日学习记录/
+│   ├── 20-课堂笔记原文/
+│   ├── 30-作业考试原文/
+│   ├── 40-错题原始材料/
+│   ├── 50-学习资料/
+│   ├── 60-反馈与沟通/
+│   └── 70-附件与图片/
 ├── 200-Wiki/
 │   ├── 学习总控台.md
-│   ├── 学习画像/
-│   ├── 学科知识/
+│   ├── 00-索引与日志/
+│   │   ├── index.md
+│   │   ├── log.md
+│   │   └── source-map.md
+│   ├── 10-学习画像/
+│   ├── 20-学科知识/
 │   │   ├── 语文/
 │   │   ├── 数学/
 │   │   ├── 英语/
 │   │   └── 物理/
-│   ├── 错题整理/
-│   ├── 学习方法/
-│   ├── 模板与规则/
-│   └── 索引/
+│   ├── 30-错因模式/
+│   ├── 40-学习方法/
+│   ├── 50-概念与模型/
+│   ├── 60-项目与兴趣/
+│   ├── 70-模板与规则/
+│   └── 80-健康检查/
 ├── 300-Output/
-│   ├── 学习计划/
-│   ├── 周报月报/
-│   ├── 复习资料包/
-│   ├── 阶段报告/
-│   └── 临时生成/
+│   ├── 10-学习计划/
+│   ├── 20-周报月报/
+│   ├── 30-复习资料包/
+│   ├── 40-阶段报告/
+│   ├── 50-家校沟通/
+│   ├── 60-展示作品/
+│   └── 90-临时生成/
 ```
 
 ---
@@ -90,11 +101,12 @@ Obsidian-Learning-Vault/
 
 对应 SKILL：
 
-- `learning-dna` 的字段定义、画像生成规则和指标解释写入 `学习画像/` 或 `模板与规则/`
-- `math-error-dna`、`physics-error-dna` 写入 `错题整理/`
-- `science-solving-four-steps` 可沉淀方法到 `学科知识/`、`学习方法/` 或 `错题整理/`
-- `cornell-notes` 写入 `学科知识/`
-- `skill-coordinator` 维护 `学习总控台.md` 和 `索引/`
+- `educational-llm-wiki` 维护三层结构、索引、日志、source map 和健康检查
+- `learning-dna` 的字段定义、画像生成规则和指标解释写入 `10-学习画像/` 或 `70-模板与规则/`
+- `math-error-dna`、`physics-error-dna` 写入 `30-错因模式/`
+- `science-solving-four-steps` 可沉淀方法到 `20-学科知识/`、`40-学习方法/` 或 `30-错因模式/`
+- `cornell-notes` 写入 `20-学科知识/`
+- `skill-coordinator` 维护 `学习总控台.md` 和 `00-索引与日志/`
 
 ### 300-Output：可使用成果
 
@@ -110,17 +122,18 @@ Obsidian-Learning-Vault/
 
 对应 SKILL：
 
-- `learning-dna` 写入 `学习画像/` 或 `阶段报告/`
-- `learning-plan` 写入 `学习计划/`
-- `weekly-review` 写入 `周报月报/`
+- `learning-dna` 写入 `10-学习画像/` 或 `40-阶段报告/`
+- `learning-plan` 写入 `10-学习计划/`
+- `weekly-review` 写入 `20-周报月报/`
 - `skill-coordinator` 写入月报或系统健康检查
-- 学科专项 SKILL 可生成 `复习资料包/`
+- 学科专项 SKILL 可生成 `30-复习资料包/`
 
 ---
 
 ## AGENTS.md 的职责
 
 `AGENTS.md` 是 Obsidian 仓库的项目级总入口，不是一个新 SKILL。
+`educational-llm-wiki` 是帮助 AI 创建、适配和维护这套入口规则的 Skill；`AGENTS.md` 是目标 vault 里的本地宪法。
 
 它负责：
 
@@ -133,10 +146,10 @@ Obsidian-Learning-Vault/
 
 具体可直接使用 [AGENTS.k12-learning-vault.template.md](AGENTS.k12-learning-vault.template.md) 作为模板。
 
-### 与 SKILL 本体解耦
+### 与普通 SKILL 本体解耦
 
-SKILL 本体应保持宿主无关，只描述“何时调用、如何处理、产出什么、如何授权”。  
-Obsidian 的目录结构、读写路径和项目级路由规则只放在 vault 根目录的 `AGENTS.md` 中。
+除 `educational-llm-wiki` 这种专门负责学习 vault 的 Skill 外，学科答疑、错题、笔记、计划和复盘类 SKILL 应保持宿主无关，只描述“何时调用、如何处理、产出什么、如何授权”。
+具体 Obsidian 写入位置由目标 vault 的 `AGENTS.md` 和 `educational-llm-wiki` 的本地适配结果决定。
 
 这样同一个 SKILL 可以安装到不同环境：在普通对话中只输出结果，在 Obsidian vault 中由 `AGENTS.md` 决定结果写到哪里。
 
@@ -146,13 +159,14 @@ Obsidian 的目录结构、读写路径和项目级路由规则只放在 vault �
 
 | 用户请求    | 主 SKILL                      | 默认读写位置                                       |
 | ------- | ---------------------------- | -------------------------------------------- |
-| 处理一道错题  | `correction-notebook`        | 读 `100-Raw/错题原始材料/`，写 `200-Wiki/错题整理/`       |
+| 搭建/适配/维护学习 wiki | `educational-llm-wiki` | 维护 `100-Raw/`、`200-Wiki/00-索引与日志/`、`300-Output/` |
+| 处理一道错题  | `correction-notebook`        | 读 `100-Raw/40-错题原始材料/`，写 `200-Wiki/30-错因模式/`       |
 | 学透一道理科题 | `science-solving-four-steps` | 读原始题面，写题目拆解和变式验证                             |
-| 我懂了但讲不清 | `feynman-learning`           | 写理解验证记录到 `200-Wiki/学科知识/` 或 `200-Wiki/学习方法/` |
-| 整理课堂笔记  | `cornell-notes`              | 读 `100-Raw/课堂笔记原文/`，写 `200-Wiki/学科知识/`       |
-| 制定计划    | `learning-plan`              | 写 `300-Output/学习计划/`                         |
-| 周复盘     | `weekly-review`              | 写 `300-Output/周报月报/`                         |
-| 系统联动/月报 | `skill-coordinator`          | 读必要摘要，写 `学习总控台.md` 或 `300-Output/周报月报/`      |
+| 我懂了但讲不清 | `feynman-learning`           | 写理解验证记录到 `200-Wiki/20-学科知识/` 或 `200-Wiki/40-学习方法/` |
+| 整理课堂笔记  | `cornell-notes`              | 读 `100-Raw/20-课堂笔记原文/`，写 `200-Wiki/20-学科知识/`       |
+| 制定计划    | `learning-plan`              | 写 `300-Output/10-学习计划/`                         |
+| 周复盘     | `weekly-review`              | 写 `300-Output/20-周报月报/`                         |
+| 系统联动/月报 | `skill-coordinator`          | 读必要摘要，写 `学习总控台.md` 或 `300-Output/20-周报月报/`      |
 
 ---
 

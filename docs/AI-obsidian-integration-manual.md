@@ -2,9 +2,9 @@
 
 本手册专门给 AI 看。用户会把 `k12-education-skills` 仓库克隆到本地，然后让 AI 帮他把这套 Skill 体系接入自己的 Obsidian 笔记仓库。
 
-注意：Skill 本体和 Obsidian 目录是解耦的。不要修改 `skills/` 下的 Skill 来适配某个 vault；只在目标 vault 的本地规则、目录和入口中做接入。
+注意：一般学科与学习 Skill 本体和 Obsidian 目录是解耦的。不要修改错题、笔记、计划、复盘等 Skill 来适配某个 vault；应优先使用 `skills/general/educational-llm-wiki/` 在目标 vault 的本地规则、目录和入口中做接入。
 
-Skill 应安装到目标项目的项目级 Skill 位置。具体位置由用户使用的 AI 平台决定，例如 `.codex/skills/`、`.claude/skills/` 或平台自带的 Skill 管理器。安装时以单个 Skill 目录为单位复制或导入，保留目录内的 `SKILL.md`、`references/`、`schemas/` 等配套文件，不要只复制 `SKILL.md`。
+Skill 应安装到目标项目的项目级 Skill 位置。具体位置由用户使用的 AI 平台决定，例如 `.codex/skills/`、`.claude/skills/` 或平台自带的 Skill 管理器。安装时以单个 Skill 目录为单位复制或导入，保留目录内的 `SKILL.md`、`references/`、`schemas/`、`assets/` 等配套文件，不要只复制 `SKILL.md`。
 
 ## 总原则
 
@@ -13,7 +13,7 @@ Skill 应安装到目标项目的项目级 Skill 位置。具体位置由用户�
 3. 已有结构时，不覆盖、不重建、不搬空；先理解现有结构，再给出整理建议。
 4. 不把完整模板硬套到已有仓库。
 5. 不自动开启长期档案、提醒或跨 Skill 共享；这些必须由用户明确授权。
-6. 不一次性接入 34 个 Skill；先接最小闭环，再按痛点增加学科专项或高级复盘。
+6. 不一次性接入 35 个 Skill；先接 `educational-llm-wiki` 和核心闭环，再按痛点增加学科专项或高级复盘。
 
 ## 第一步：判断目标仓库状态
 
@@ -41,37 +41,48 @@ Skill 应安装到目标项目的项目级 Skill 位置。具体位置由用户�
 
 ```text
 100-Raw/
-  每日学习记录/
-  课堂笔记原文/
-  错题原始材料/
-  学习资料/
-  提醒与回执/
+  00-收集箱/
+  10-每日学习记录/
+  20-课堂笔记原文/
+  30-作业考试原文/
+  40-错题原始材料/
+  50-学习资料/
+  60-反馈与沟通/
+  70-附件与图片/
 
 200-Wiki/
   学习总控台.md
-  学习画像/
-  学科知识/
+  00-索引与日志/
+    index.md
+    log.md
+    source-map.md
+  10-学习画像/
+  20-学科知识/
     语文/
     数学/
     英语/
     物理/
-  错题整理/
-  学习方法/
-  模板与规则/
-  索引/
+  30-错因模式/
+  40-学习方法/
+  50-概念与模型/
+  60-项目与兴趣/
+  70-模板与规则/
+  80-健康检查/
 
 300-Output/
-  学习计划/
-  周报月报/
-  复习资料包/
-  阶段报告/
-  临时生成/
+  10-学习计划/
+  20-周报月报/
+  30-复习资料包/
+  40-阶段报告/
+  50-家校沟通/
+  60-展示作品/
+  90-临时生成/
 ```
 
-然后把本仓库的模板复制到目标 vault 根目录：
+然后把 `educational-llm-wiki` 的模板复制或本地化到目标 vault 根目录：
 
 ```text
-docs/AGENTS.k12-learning-vault.template.md -> AGENTS.md
+skills/general/educational-llm-wiki/assets/vault-template/AGENTS.educational-llm-wiki.template.md -> AGENTS.md
 ```
 
 复制后要替用户做一次本地化检查：
@@ -81,16 +92,17 @@ docs/AGENTS.k12-learning-vault.template.md -> AGENTS.md
 - 写入位置是否符合用户的 Obsidian 使用习惯
 - 是否需要保留用户已有少量旧笔记的原路径
 - 如果用户偏好英文目录，可在用户确认后再改；默认使用中文直白目录。
-- 如果目标仓库没有任何学习证据，不要生成 `学习画像/学习者画像.md`；可以先创建 `200-Wiki/学习画像/README.md` 说明画像需要授权和证据。
+- 如果目标仓库没有任何学习证据，不要生成 `学习画像/学习者画像.md`；可以先创建 `200-Wiki/10-学习画像/README.md` 说明画像需要授权和证据。
 
 推荐先启用核心闭环：
 
+- `educational-llm-wiki`
 - `learning-dna`
 - `correction-notebook`
 - `feynman-learning`
 - `weekly-review`
 
-不要一开始就启用全部 34 个 Skill。
+不要一开始就启用全部 35 个 Skill。
 
 ## 情况 B：已有笔记或已有结构
 
@@ -150,6 +162,7 @@ AI 应该先输出一份简短判断：
 
 本仓库已接入 k12-education-skills。Skill 本体保持独立，Obsidian 写入位置以本仓库现有目录为准。
 
+- 学习 vault 搭建、分层、编译、索引和健康检查：优先使用 `educational-llm-wiki`
 - 错题记录、错因分析：优先使用 `correction-notebook`
 - 理科题拆解与迁移：优先使用 `science-solving-four-steps`
 - 看懂但讲不清：优先使用 `feynman-learning`
@@ -170,6 +183,7 @@ AI 应该先输出一份简短判断：
 
 已有仓库通常先接这几个：
 
+- `educational-llm-wiki`
 - `correction-notebook`
 - `feynman-learning`
 - `science-solving-four-steps`

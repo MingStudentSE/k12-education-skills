@@ -1,13 +1,13 @@
 # 版本历史与维护追踪
 
-> 当前仓库聚焦 **K12 学习场景 34 个 SKILL**。
+> 当前仓库聚焦 **K12 学习场景 35 个 SKILL**。
 > 本文档面向维护者，记录内部版本矩阵、模块状态和后续维护方向。公开发布说明见 [Release Notes](../RELEASE_NOTES.md)。
 
 ---
 
 ## 版本状态总览
 
-### 通用学习系统（14 个）
+### 通用学习系统（15 个）
 
 | # | SKILL | 当前版本 | 维护状态 |
 |---|-------|---------|----------|
@@ -16,15 +16,16 @@
 | 3 | IM智能提醒 | v1.1+ | 已扩展复习、计划、探索和每日确认提醒 |
 | 4 | 费曼学习法 | v1.1.1 | 已完成挑战者模式、第五跳、理解深度档案，并接入主动回忆与故事化地标 |
 | 5 | 每周学习复盘 | v1.1.3 | 已升级为六模块周报，并接入学习区与学习科学命中检查 |
-| 6 | 教育版SKILL创建教练 | v1.1.0 | 已改名避免与本机通用 skill-creator 混淆，并加入学习科学创建检查 |
-| 7 | 康奈尔笔记 | v1.0.1 | 已接入固定版式、线索回忆和分散复测字段 |
-| 8 | SKILL联动协调器 | v1.1.3 | 已接入单题掌握、学习区校准和多维月报 |
-| 9 | 30天学习计划制定师 | v1.0.3 | 已接入学习区、85%规则、分散练习和交错练习 |
-| 10 | 时间与专注力教练 | v1.0.2 | 已接入反多任务、情境记录和切换成本字段 |
-| 11 | 跨学科侦探周 | v1.0 | 稳定 |
-| 12 | 兴趣成长探索计划 | v1.0 | 稳定 |
-| 13 | 理科解题四步法 | v1.1 | 已增强教练式提示阶梯、题型判断和阶段路由 |
-| 14 | 阶段学习体检 | v1.0 | 新增，可选高级阶段复盘与证据化 360 体检 |
+| 6 | 教育LLM知识库 | v1.0.0 | 新增，负责教育版 LLM Wiki 三层结构、资料编译、索引日志和健康检查 |
+| 7 | 教育版SKILL创建教练 | v1.1.0 | 已改名避免与本机通用 skill-creator 混淆，并加入学习科学创建检查 |
+| 8 | 康奈尔笔记 | v1.0.1 | 已接入固定版式、线索回忆和分散复测字段 |
+| 9 | SKILL联动协调器 | v1.1.3 | 已接入单题掌握、学习区校准和多维月报 |
+| 10 | 30天学习计划制定师 | v1.0.3 | 已接入学习区、85%规则、分散练习和交错练习 |
+| 11 | 时间与专注力教练 | v1.0.2 | 已接入反多任务、情境记录和切换成本字段 |
+| 12 | 跨学科侦探周 | v1.0 | 稳定 |
+| 13 | 兴趣成长探索计划 | v1.0 | 稳定 |
+| 14 | 理科解题四步法 | v1.1 | 已增强教练式提示阶梯、题型判断和阶段路由 |
+| 15 | 阶段学习体检 | v1.0 | 新增，可选高级阶段复盘与证据化 360 体检 |
 
 ### 学科专项（20 个）
 
@@ -45,6 +46,7 @@
 | 智能错题本 | v1.0 → v1.1+ | 加入拍题三信息法、四类弱项预警、学期全景报告 |
 | 费曼学习法 | v1.0 → v1.1+ | 加入挑战者模式、第五跳和理解深度档案 |
 | 每周学习复盘 | v1.0 → v1.1+ | 从感性总结升级为六模块、量化、数据驱动周报 |
+| 教育LLM知识库 | 新增 v1.0.0 | 把 Obsidian/Markdown 学习仓库接入从文档升级为可安装 Skill |
 | SKILL联动协调器 | v1.0 → v1.1.3 | 从三 SKILL 联动扩展为学习系统协调中枢 |
 | IM智能提醒 | v1.0 → v1.1+ | 从复习提醒扩展到计划提醒、探索提醒和每日确认 |
 | 30天学习计划制定师 | v1.0 → v1.0+ | 接入学习区定义、85%规则和任务难度校准字段 |
@@ -54,6 +56,21 @@
 ---
 
 ## Skill 质量优化记录
+
+### 2026-06-14 v1.4 教育 LLM Wiki Skill
+
+本轮把 Obsidian/Markdown 学习仓库接入从“文档告诉 AI 怎么做”升级为“由专门 Skill 负责搭建、适配和维护”：
+
+- 新增 `skills/general/educational-llm-wiki/`，当前仓库从 34 个 Skill 扩展为 35 个 Skill，其中 `skills/general/` 从 14 个扩展为 15 个。
+- `educational-llm-wiki` 内置 `references/education-layer-rules.md` 和 `references/compile-workflow.md`，用于三层分区、已有仓库映射、资料编译、索引日志和健康检查。
+- 新增 `assets/vault-template/`，提供教育版 `100-Raw / 200-Wiki / 300-Output` 可复制模板、`AGENTS` 模板、学习总控台、index、log 和 source map。
+- README、架构说明、安装指南、Obsidian 接入手册和 AGENTS 模板已同步指向 `educational-llm-wiki`，避免用户只依赖静态文档适配。
+
+维护原则：
+
+- 普通学科和学习 Skill 仍保持宿主无关，不写具体 vault 路径。
+- `educational-llm-wiki` 是例外：它专门负责目标学习 vault 的结构、写入映射、索引日志和维护纪律。
+- 已有 Obsidian 仓库仍不得被完整模板覆盖；先映射现有目录，再最小追加。
 
 ### 2026-06-12 v1.3 学习科学理论库与核心闭环接入
 
@@ -138,6 +155,9 @@
 
 | 参考材料 | 用途 |
 |----------|------|
+| `skills/general/educational-llm-wiki/references/education-layer-rules.md` | 教育 LLM Wiki 三层目录、放置规则、frontmatter 和已有仓库映射 |
+| `skills/general/educational-llm-wiki/references/compile-workflow.md` | 原始学习资料编译为摘要、概念、错因、方法、输出和索引日志的流程 |
+| `skills/general/educational-llm-wiki/references/obsidian-skill-install.md` | 检查并安装 `kepano/obsidian-skills` 官方 Obsidian skills 的流程 |
 | `skills/general/learning-plan/references/learning-zone-principles.md` | 学习计划制定时的学习区、85%规则和任务难度校准 |
 | `skills/general/weekly-review/references/learning-zone-principles.md` | 周复盘时的学习区命中检查 |
 | `skills/general/skill-coordinator/references/learning-zone-principles.md` | 联动协调时的学习区偏离判断与调参动作 |
@@ -178,11 +198,11 @@
 
 | 维度 | 状态 |
 |------|------|
-| 学生端总数 | 34 个 SKILL |
-| 通用学习系统 | 14 个 SKILL |
+| 学生端总数 | 35 个 SKILL |
+| 通用学习系统 | 15 个 SKILL |
 | 学科专项 | 20 个 SKILL |
 | 教师端 | 已从当前发布范围移除 |
-| Obsidian 项目级使用 | 已补充 AI 接入手册、中文三层结构与参考 AGENTS 模板 |
+| Obsidian 项目级使用 | 已新增 `educational-llm-wiki`、AI 接入手册、中文三层结构与参考 AGENTS 模板 |
 | 当前定位 | 学生端学习系统技能库 |
 
 ---

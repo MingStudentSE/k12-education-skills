@@ -4,7 +4,24 @@
 
 ---
 
-## v1.3 当前版本
+## v1.4 当前版本
+
+本版本新增 `educational-llm-wiki`，把 Obsidian/Markdown 学习仓库接入从“阅读文档后手动适配”升级为“由专门 Skill 搭建、适配、编译和维护”。
+
+### 新增内容
+
+- 新增 `skills/general/educational-llm-wiki/`，当前体系扩展为 35 个 Skill，其中通用学习系统为 15 个。
+- 内置教育版 `100-Raw / 200-Wiki / 300-Output` vault 模板，包含 `AGENTS` 模板、学习总控台、index、log、source map 和各层 README。
+- 新增 `references/education-layer-rules.md`、`references/compile-workflow.md` 与 `references/obsidian-skill-install.md`，定义教育资料的分层、编译、索引、日志、健康检查，以及 `kepano/obsidian-skills` 检查安装规则。
+
+### 文档调整
+
+- README、系统架构、安装指南、Obsidian 接入手册和 AGENTS 模板均改为优先使用 `educational-llm-wiki`。
+- 普通学科与学习 Skill 仍保持宿主无关；`educational-llm-wiki` 专门负责学习 vault 的结构与维护流程。
+
+---
+
+## v1.3
 
 本版本重点把 K12 教育 SKILL 体系从“功能集合”升级为“有理论底座的学习系统”：建立仓库级学习理论库，按“一个理论一个笔记”记录所有已使用的方法论，并把 12 个认知原理、学习区、85/15 意外挑战、主动回忆、错误反馈、分散练习、交错练习等规则接入核心学习闭环。
 
