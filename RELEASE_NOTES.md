@@ -4,7 +4,50 @@
 
 ---
 
-## v1.6 最新版本
+## v2.0 最新版本
+
+本版本把仓库从“内容集合”升级为“可安装、可运行、可验证”的完整教育系统：在保持 60 个 Skill 范围不变的前提下，统一全仓可安装结构、新增本地夜间错题产线运行层、新增质量门与回归考场，并补齐运行手册。这也是把仓库当作独立项目使用的起点版本。
+
+### 新增内容
+
+**运行层 `engine/`（让系统真的跑起来）**
+
+- 新增 `engine/night-run.mjs`：夜间错题产线引擎。按学生 `inbox/` 批处理错题，产出错因诊断、错题档案、变式训练题、答案讲解和晨报四件套；同根因错误累计 ≥3 次触发“顽固弱项专项”，把历史错因定制成变式题。
+- 新增 `engine/build-dashboard.mjs`：零依赖静态看板。扫描全部学生生成单文件 `dashboard.html`，🔴 高亮已触发专项的顽固弱项，浏览器或 Obsidian 直接打开。
+- 新增 `engine/server.mjs`：仅绑定 `127.0.0.1` 的交互式控制台，浏览器里新建学生、交错题、一键跑分析、在线看产出，并支持拍照 OCR 转写（提交前必须人工核对手写步骤）。
+- 新增 `engine/config.sample.json`：配置模板，自填 OpenAI 兼容端点和 API key（**包内不含任何密钥**）。
+
+**质量门 `pipeline/`（让改动可验证、不越改越差）**
+
+- 新增 `pipeline/CLAUDE_GUIDE_K12_v2.md`：规则单一来源（鲁班五动作 + 班规）。
+- 新增 `pipeline/review.sh`：瘦身质量门，检查主文件行数、悬空引用、JSON 合法性、关键词覆盖与锚点反查。
+- 新增 `pipeline/EXAM_CLOSED_BOOK.md` 与 `REVIEW_K12_002/003/004.md`：闭卷考场与三轮终审判卷记录，用于教学性能回归，改产线前后各跑一次防退化。
+
+**学生运行模板 `students/_template/`**
+
+- 新增空学生档案模板（`profile.md` + `inbox/` 错题样例），复制即可建学生；真实学生数据、配置和日志全部 `.gitignore`，不进版本控制。
+
+**文档**
+
+- 新增 `docs/k12-nightline-handover.md`（产线运行手册）和 `docs/k12-nightline-guide.md`（给学生 / 家长 / 运营者的使用说明）。
+- 更新 README、安装指南、changelog，给出 Claude Code / Codex 等平台的项目级安装路径与夜间产线快速开始。
+
+### 结构统一：60 个 Skill 短主文件 + 本地 references
+
+- 全仓 60 个 Skill 统一为“短 `SKILL.md`（主文件 ≤150 行）+ 本地 `references/` 细则”的可独立安装结构。
+- 通用层、语文、数学、英语、物理、历史、地理、政治等长 Skill 做搬家型瘦身：主文件只保留触发边界、核心流程、红线和 references 索引，完整原文移入各自 `references/`（`full-spec.md` / `*-full-playbook.md` / `*-operating-manual.md`）。
+- 错题本（`correction-notebook`）扩展多智能体协作协议：新增 `schemas/handover-protocol.schema.json`（v2.0 协议）与 `references/handover-protocols.md`、`references/physics-dimension-mapping.md`。
+- 化学、生物（v1.6 新增）本身已是短文件，仅同步 frontmatter。
+
+### 工程约束与验证
+
+- 约束：保持现有 60-skill 范围不变；运行时配置、生成的 `dashboard.html`、日志和真实学生数据全部 `.gitignore`，不带入版本控制；运行回路保持确定性脚本，绝不交给模型自进化。
+- 已验证：`bash pipeline/review.sh all`、`node --check engine/*.mjs`、`find skills -name SKILL.md | wc -l`（=60）、`git check-ignore` 敏感文件、Codex 盲审与 Claude 证据盲审。
+- 未验证：对真实付费模型的夜跑端到端（需使用者自配 API key 后实测）。
+
+---
+
+## v1.6
 
 本版本新增 **化学、生物** 两门学科专项（各 5 个 SKILL，共 10 个），仓库 SKILL 总数 50 → 60，学科专项总数 35 → 45。
 

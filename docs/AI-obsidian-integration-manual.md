@@ -4,7 +4,7 @@
 
 注意：一般学科与学习 Skill 本体和 Obsidian 目录是解耦的。不要修改错题、笔记、计划、复盘等 Skill 来适配某个 vault；应优先使用 `skills/general/educational-llm-wiki/` 在目标 vault 的本地规则、目录和入口中做接入。
 
-Skill 应安装到目标项目的项目级 Skill 位置。具体位置由用户使用的 AI 平台决定，例如 `.codex/skills/`、`.claude/skills/` 或平台自带的 Skill 管理器。安装时以单个 Skill 目录为单位复制或导入，保留目录内的 `SKILL.md`、`references/`、`schemas/`、`assets/` 等配套文件，不要只复制 `SKILL.md`。
+Skill 应安装到目标项目的项目级 Skill 位置。具体位置由用户使用的 AI 平台决定，例如 `.agents/skills/`（Codex CLI，旧的 `.codex/prompts/` 已弃用）、`.claude/skills/`（Claude Code）或平台自带的 Skill 管理器。安装时以单个 Skill 目录为单位复制或导入，保留目录内的 `SKILL.md`、`references/`、`schemas/`、`assets/` 等配套文件，不要只复制 `SKILL.md`。
 
 ## 总原则
 
@@ -13,7 +13,7 @@ Skill 应安装到目标项目的项目级 Skill 位置。具体位置由用户�
 3. 已有结构时，不覆盖、不重建、不搬空；先理解现有结构，再给出整理建议。
 4. 不把完整模板硬套到已有仓库。
 5. 不自动开启长期档案、提醒或跨 Skill 共享；这些必须由用户明确授权。
-6. 不一次性接入 35 个 Skill；先接 `educational-llm-wiki` 和核心闭环，再按痛点增加学科专项或高级复盘。
+6. 不一次性接入 60 个 Skill；先接 `educational-llm-wiki` 和核心闭环，再按痛点增加学科专项或高级复盘。
 
 ## 第一步：判断目标仓库状态
 
@@ -102,7 +102,7 @@ skills/general/educational-llm-wiki/assets/vault-template/AGENTS.educational-llm
 - `feynman-learning`
 - `weekly-review`
 
-不要一开始就启用全部 35 个 Skill。
+不要一开始就启用全部 60 个 Skill。
 
 ## 情况 B：已有笔记或已有结构
 

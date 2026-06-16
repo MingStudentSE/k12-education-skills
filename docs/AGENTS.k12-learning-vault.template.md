@@ -113,7 +113,7 @@
 ## 3. Skill 路由
 
 优先使用本 vault 的项目级 SKILL。
-不要让 35 个 SKILL 同时抢答；先根据当前笔记类型、用户意图和 frontmatter 判断主 SKILL。
+不要让 60 个 SKILL 同时抢答；先根据当前笔记类型、用户意图和 frontmatter 判断主 SKILL。
 下表是参考路由，不代表这些 Skill 都已经安装。只有目标项目中已经安装或用户明确允许调用的 Skill，才可以作为主 Skill。
 
 | 场景 | 主 SKILL | 可联动 |

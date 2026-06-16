@@ -32,9 +32,9 @@
 按目标环境查找，优先项目级，再看用户级：
 
 ```text
-./.codex/skills/
+./.agents/skills/
 ./.claude/skills/
-~/.codex/skills/
+~/.agents/skills/
 ~/.claude/skills/
 ~/.opencode/skills/obsidian-skills/skills/
 ```
@@ -82,15 +82,15 @@ Codex 场景可先克隆到临时目录，再把官方 `skills/` 下需要的子
 
 ```bash
 git clone https://github.com/kepano/obsidian-skills.git /tmp/obsidian-skills
-mkdir -p ~/.codex/skills
-cp -R /tmp/obsidian-skills/skills/obsidian-markdown ~/.codex/skills/
-cp -R /tmp/obsidian-skills/skills/obsidian-bases ~/.codex/skills/
-cp -R /tmp/obsidian-skills/skills/obsidian-cli ~/.codex/skills/
-cp -R /tmp/obsidian-skills/skills/json-canvas ~/.codex/skills/
-cp -R /tmp/obsidian-skills/skills/defuddle ~/.codex/skills/
+mkdir -p ~/.agents/skills
+cp -R /tmp/obsidian-skills/skills/obsidian-markdown ~/.agents/skills/
+cp -R /tmp/obsidian-skills/skills/obsidian-bases ~/.agents/skills/
+cp -R /tmp/obsidian-skills/skills/obsidian-cli ~/.agents/skills/
+cp -R /tmp/obsidian-skills/skills/json-canvas ~/.agents/skills/
+cp -R /tmp/obsidian-skills/skills/defuddle ~/.agents/skills/
 ```
 
-如果目标是项目级安装，把 `~/.codex/skills` 替换为 `./.codex/skills`。
+如果目标是项目级安装，把 `~/.agents/skills` 替换为 `./.agents/skills`。
 
 ### 手动安装到 Claude Code
 

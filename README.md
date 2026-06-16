@@ -8,18 +8,18 @@
 
 ---
 
+## ✨ v2.0 重点变化
+
+- 完成工程化运行层：新增夜间错题分析、静态看板、交互式控制台、学生档案模板和质量门。
+- 全仓 60 个 Skill 均采用“短 `SKILL.md` + 本地 `references/` 细则”的可安装结构，主文件控制在 150 行以内。
+- 夜间产线按学生 `inbox/` 批处理错题，产出错因诊断、错题档案、变式训练题、答案讲解和晨报。
+
 ## ✨ v1.6 重点变化
 
 - 新增 **化学、生物** 两门理科/生命科学学科专项，各 5 个 SKILL（共 10 个），仓库 SKILL 总数 50 → 60。
 - 化学专项建立“宏观现象 → 微观粒子 → 符号表达”第一步铁律，覆盖微粒观、概念理解、反应方程式、实验探究和化学错误DNA。
 - 生物专项建立“结构层级 → 功能过程 → 调节关系”第一步铁律，覆盖结构功能、概念图谱、生命过程、实验探究和生物错误DNA。
 - 两门新增学科均保持单个 SKILL 独立安装边界：运行时参考材料全部放在各自 `references/` 目录中。
-
-## ✨ 完整体系优化重点
-
-- 完成工程化运行层：新增夜间错题分析、静态看板、交互式控制台、学生档案模板和质量门。
-- 全仓 60 个 Skill 均采用“短 `SKILL.md` + 本地 `references/` 细则”的可安装结构，主文件控制在 150 行以内。
-- 夜间产线按学生 `inbox/` 批处理错题，产出错因诊断、错题档案、变式训练题、答案讲解和晨报。
 
 ## ✨ v1.5 重点变化
 
@@ -70,8 +70,8 @@
 
 | 类别     | 数量     | 状态               |
 | ------ | ------ | ---------------- |
-| 通用与成长层 | 15     | ✅ v1.4 可用 |
-| 学科专项层  | 45     | ✅ v1.6 可用 |
+| 通用与成长层 | 15     | ✅ v2.0 可用 |
+| 学科专项层  | 45     | ✅ v2.0 可用 |
 | **总计** | **60** | **100% 可用**      |
 
 ### 安装包边界
@@ -87,7 +87,9 @@
 
 > ⚠️ 建议先安装核心 SKILL，再按实际学科痛点加装专项 SKILL；不要一开始把全部 60 个都装上。
 
-### 1. 让 Agent 安装核心 SKILL
+### 1. 让 Agent 安装核心联动套件
+
+> 别只装"五件套"。核心五件套（学习DNA / 错题本 / IM提醒 / 费曼 / 周复盘，5 个）单独跑是 5 个孤岛——要让它们真正联动成"错题→沉淀→验证→复习→复盘"的闭环，建议直接装**核心联动套件（7 个）**：五件套 + 康奈尔笔记（知识沉淀）+ skill-coordinator（联动胶水）。理科生再加理科解题四步法。完整说明见 [快速上手与使用指南](docs/getting-started.md)。
 
 把下面这段话发给你的 Claude Code / Codex / Work Buddy 等 Agent：
 
@@ -95,30 +97,35 @@
 请从这个仓库获取 Skill：
 https://github.com/MingStudentSE/k12-education-skills
 
-只安装核心学习闭环需要的 SKILL：
+安装核心联动套件（7 个，构成完整学习闭环）：
 
 1. skills/general/learning-dna/
 2. skills/general/correction-notebook/
 3. skills/general/im-reminder/
 4. skills/general/feynman-learning/
 5. skills/general/weekly-review/
+6. skills/general/cornell-notes/
+7. skills/general/skill-coordinator/
+（理科生再加：skills/general/science-solving-four-steps/）
 
 如果我要接入 Obsidian 或本地 Markdown 学习仓库，请额外安装：
 
-6. skills/general/educational-llm-wiki/
+8. skills/general/educational-llm-wiki/
 
 每个 SKILL 都以单个目录为安装单位。请保留每个目录内的 SKILL.md、references/、schemas/、assets/ 等配套文件。不要安装全部 60 个 SKILL；后续等我明确需要某个学科专项、高级复盘或方法论工具时再加装。
 
-请把这些 Skill 安装到当前项目的项目级 Skill 位置，例如 .codex/skills/、.claude/skills/ 或你支持的项目级 Skill 管理器中。安装方式以你的平台为准，但不要拆散 Skill 目录。
+请把这些 Skill 安装到当前项目的项目级 Skill 位置：Claude Code 用 .claude/skills/、Codex CLI 用 .agents/skills/（注：Codex 旧的 .codex/prompts/ 已弃用，当前 skills 在 .agents/skills/ 发现），或你支持的项目级 Skill 管理器。安装方式以你的平台为准，但不要拆散 Skill 目录。
 ```
 
-### 2. 核心 SKILL 顺序
+### 2. 核心联动套件顺序
 
 1. [🧬 学习DNA](skills/general/learning-dna/)：建立长期学习档案的授权底座
 2. [❌ 智能错题本](skills/general/correction-notebook/)：从“保存题目”升级为“定位错因”
 3. [⏰ IM智能提醒](skills/general/im-reminder/)：把复习、计划和回访放进真实节奏
 4. [🎓 费曼学习法](skills/general/feynman-learning/)：验证到底是真懂还是假懂
 5. [📊 每周学习复盘](skills/general/weekly-review/)：把过程沉淀成周报和成长线索
+6. [📝 康奈尔笔记](skills/general/cornell-notes/)：把错题和概念沉淀成可复用知识
+7. [🔗 SKILL联动协调器](skills/general/skill-coordinator/)：跨 SKILL 学习区校准、全景月报、系统健康检查
 
 ### 3. 先让 AI 用教育 LLM Wiki 判断仓库结构
 
@@ -228,6 +235,9 @@ SKILL联动协调器会在明确任务下，把错题、费曼、笔记、理科
 
 ## 📚 文档导航
 
+- [🚀 快速上手与使用指南](docs/getting-started.md)
+  - 三路径决策树：只用 Skill / 接入 Obsidian / 跑夜间产线
+  - Claude Code（`.claude/skills/`）与 Codex CLI（`.agents/skills/`）正确安装
 - [系统架构与方法论](docs/architecture.md)
   - K12 学习场景 60 个 SKILL 全清单
   - 协作飞轮与方法论依据
@@ -258,10 +268,10 @@ SKILL联动协调器会在明确任务下，把错题、费曼、笔记、理科
   - 可复制到 Obsidian vault 根目录作为本地宪法
 - [版本历史与升级追踪](docs/changelog.md)
   - 各 SKILL 当前版本
-  - v1.0 → v1.6 的整合升级记录
+  - v1.0 → v2.0 的整合升级记录
 - [Release Notes](RELEASE_NOTES.md)
   - v1.0 授权原版说明
-  - v1.6 当前版本新增内容
+  - v2.0 当前版本新增内容
 
 ---
 
