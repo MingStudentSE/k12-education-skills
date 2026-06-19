@@ -27,7 +27,7 @@ rg "old-name-or-path" README.md docs references skills
 
 ## 测试指南
 
-每个 Skill 应包含 `test-prompts.json`，用于保存真实可回归的测试提示。修改 Skill 时，检查 frontmatter、`references:` 声明和被链接文件。涉及数量、目录或范围变化时，确认当前仍为 35 个 Skill、15 个通用 Skill，除非本次变更明确调整范围。
+每个 Skill 应包含 `test-prompts.json`，用于保存真实可回归的测试提示。修改 Skill 时，检查 frontmatter、`references:` 声明和被链接文件。涉及数量、目录或范围变化时，确认当前仍为 62 个 Skill、17 个通用 Skill，除非本次变更明确调整范围。
 
 ## 提交与 PR 规范
 

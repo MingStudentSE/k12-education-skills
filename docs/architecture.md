@@ -1,6 +1,6 @@
 # 🏛️ 系统架构与方法论
 
-本文档描述当前仓库保留的 **K12 学习场景 60 个 SKILL**：它们如何分层、如何协作，以及背后的方法论依据。
+本文档描述当前仓库保留的 **K12 学习场景 62 个 SKILL**：它们如何分层、如何协作，以及背后的方法论依据。
 
 ---
 
@@ -34,7 +34,7 @@ skills/
 
 | 类别 | 数量 |
 |------|------|
-| `skills/general/` | 15 |
+| `skills/general/` | 17 |
 | `skills/chinese/` | 5 |
 | `skills/math/` | 5 |
 | `skills/english/` | 5 |
@@ -44,7 +44,7 @@ skills/
 | `skills/politics/` | 5 |
 | `skills/chemistry/` | 5 |
 | `skills/biology/` | 5 |
-| **总计** | **60** |
+| **总计** | **62** |
 
 ### 单个 SKILL 可安装边界
 
@@ -70,7 +70,7 @@ skill-folder/
 
 ## 📚 完整 SKILL 清单
 
-### 一、通用学习系统（15 个）
+### 一、通用学习系统（17 个）
 
 | # | SKILL 名称 | 文件夹 | 版本 | 核心功能 |
 |---|-----------|-------|------|---------|
@@ -89,100 +89,115 @@ skill-folder/
 | 13 | ☕ 兴趣成长探索计划 | `skills/general/interest-explorer/` | v1.0 | 52 杯咖啡、兴趣验证、兴趣DNA |
 | 14 | 🧩 理科解题四步法 | `skills/general/science-solving-four-steps/` | v1.1 | 教练式提示阶梯、题型判断、波利亚四步解题、变式迁移 |
 | 15 | 🧭 阶段学习体检 | `skills/general/learning-360-review/` | v1.0 | 证据化阶段复盘、A/B/C 判断、系统修复动作 |
+| 16 | 🪪 学生快速定位画像师 | `skills/general/student-intake-profiler/` | v1.0.0 | 前置定位、七字段画像、证据库存、授权后的 DNA 种子 |
+| 17 | 🏅 技能体系质量打分校验器 | `skills/general/system-quality-scoring/` | v1.0.0 | 8 维行为打分、双盲评测、回归基准、红线封顶 |
 
 ### 二、语文学科专项（5 个）
 
 | # | SKILL 名称 | 文件夹 | 核心功能 |
 |---|-----------|-------|---------|
-| 16 | 语文写作教练 | `skills/chinese/chinese-writing-coach/` | 5步流程、风格DNA、写作追问 |
-| 17 | 阅读理解拆解师 | `skills/chinese/chinese-reading-decoder/` | 错因识别、出题人视角、答题结构 |
-| 18 | 文言文复活计划 | `skills/chinese/chinese-classical-revival/` | 角色扮演、三级跳、背诵与理解 |
-| 19 | 语文素材库2.0 | `skills/chinese/chinese-material-library/` | 素材积累、自动标签、写作前调用 |
-| 20 | 语病追踪档案 | `skills/chinese/chinese-grammar-tracker/` | 六类语病识别、顽固档案、预警 |
+| 18 | 语文写作教练 | `skills/chinese/chinese-writing-coach/` | 5步流程、风格DNA、写作追问 |
+| 19 | 阅读理解拆解师 | `skills/chinese/chinese-reading-decoder/` | 错因识别、出题人视角、答题结构 |
+| 20 | 文言文复活计划 | `skills/chinese/chinese-classical-revival/` | 角色扮演、三级跳、背诵与理解 |
+| 21 | 语文素材库2.0 | `skills/chinese/chinese-material-library/` | 素材积累、自动标签、写作前调用 |
+| 22 | 语病追踪档案 | `skills/chinese/chinese-grammar-tracker/` | 六类语病识别、顽固档案、预警 |
 
 ### 三、数学学科专项（5 个）
 
 | # | SKILL 名称 | 文件夹 | 核心功能 |
 |---|-----------|-------|---------|
-| 21 | 数学解题教练 | `skills/math/math-problem-solving-coach/` | 四步拍照法、CLAW5 模板、五问链 |
-| 22 | 数学错误DNA | `skills/math/math-error-dna/` | 错误分类、顽固追踪、月度图谱 |
-| 23 | 数学概念解释器 | `skills/math/math-concept-explainer/` | 生活类比、几何直觉、概念重建 |
-| 24 | 应用题建模教练 | `skills/math/math-word-problem-coach/` | 数量关系提取、五大题型建模 |
-| 25 | 思维梯度训练师 | `skills/math/math-gradient-trainer/` | 天花板测定、进阶序列、成长日记 |
+| 23 | 数学解题教练 | `skills/math/math-problem-solving-coach/` | 四步拍照法、CLAW5 模板、五问链 |
+| 24 | 数学错误DNA | `skills/math/math-error-dna/` | 错误分类、顽固追踪、月度图谱 |
+| 25 | 数学概念解释器 | `skills/math/math-concept-explainer/` | 生活类比、几何直觉、概念重建 |
+| 26 | 应用题建模教练 | `skills/math/math-word-problem-coach/` | 数量关系提取、五大题型建模 |
+| 27 | 思维梯度训练师 | `skills/math/math-gradient-trainer/` | 天花板测定、进阶序列、成长日记 |
 
 ### 四、英语学科专项（5 个）
 
 | # | SKILL 名称 | 文件夹 | 核心功能 |
 |---|-----------|-------|---------|
-| 26 | 英语口语陪练 | `skills/english/english-speaking-coach/` | 热身、角色扮演、口语成长轨迹 |
-| 27 | 智能词汇DNA系统 | `skills/english/english-vocabulary-dna/` | 词汇入库、遗忘追踪、主题雷达 |
-| 28 | 英语语法突破教练 | `skills/english/english-grammar-coach/` | 语法图谱、追问、错误模式分析 |
-| 29 | 个性化英语听力训练师 | `skills/english/english-listening-trainer/` | DNA 驱动听力、四步训练、卡壳追问 |
-| 30 | 英语写作进化教练 | `skills/english/english-writing-coach/` | 三维批改、句式升级、写作档案 |
+| 28 | 英语口语陪练 | `skills/english/english-speaking-coach/` | 热身、角色扮演、口语成长轨迹 |
+| 29 | 智能词汇DNA系统 | `skills/english/english-vocabulary-dna/` | 词汇入库、遗忘追踪、主题雷达 |
+| 30 | 英语语法突破教练 | `skills/english/english-grammar-coach/` | 语法图谱、追问、错误模式分析 |
+| 31 | 个性化英语听力训练师 | `skills/english/english-listening-trainer/` | DNA 驱动听力、四步训练、卡壳追问 |
+| 32 | 英语写作进化教练 | `skills/english/english-writing-coach/` | 三维批改、句式升级、写作档案 |
 
 ### 五、物理学科专项（5 个）
 
 | # | SKILL 名称 | 文件夹 | 核心功能 |
 |---|-----------|-------|---------|
-| 31 | 物理解题教练 | `skills/physics/physics-problem-coach/` | 四步法、图景建立、物理追问 |
-| 32 | 物理错误DNA | `skills/physics/physics-error-dna/` | 五维错误分类、弱项追踪、焦虑处理 |
-| 33 | 物理概念直觉器 | `skills/physics/physics-concept-intuition/` | 类比、实验想象、公式意义还原 |
-| 34 | 物理建模教练 | `skills/physics/physics-modeling-coach/` | 建模三步法、核心模型迁移 |
-| 35 | 物理实验思维教练 | `skills/physics/physics-lab-coach/` | 实验方法、数据分析、实验评价 |
+| 33 | 物理解题教练 | `skills/physics/physics-problem-coach/` | 四步法、图景建立、物理追问 |
+| 34 | 物理错误DNA | `skills/physics/physics-error-dna/` | 五维错误分类、弱项追踪、焦虑处理 |
+| 35 | 物理概念直觉器 | `skills/physics/physics-concept-intuition/` | 类比、实验想象、公式意义还原 |
+| 36 | 物理建模教练 | `skills/physics/physics-modeling-coach/` | 建模三步法、核心模型迁移 |
+| 37 | 物理实验思维教练 | `skills/physics/physics-lab-coach/` | 实验方法、数据分析、实验评价 |
 
 ### 六、历史学科专项（5 个）
 
 | # | SKILL 名称 | 文件夹 | 核心功能 |
 |---|-----------|-------|---------|
-| 36 | 历史时空观教练 | `skills/history/history-timeline-coach/` | 时空定位铁律、时间轴、中外双轨 |
-| 37 | 历史因果解释器 | `skills/history/history-causation-explainer/` | 因果四框架、因果链、多元解释 |
-| 38 | 史料实证分析教练 | `skills/history/history-evidence-analysis/` | 史料分析状态机、孤证不立 |
-| 39 | 历史解题教练 | `skills/history/history-problem-coach/` | 四步解题、题型判别、三层次追问 |
-| 40 | 历史错误DNA | `skills/history/history-error-dna/` | H1-H5 五维错因、纯净版时空测试 |
+| 38 | 历史时空观教练 | `skills/history/history-timeline-coach/` | 时空定位铁律、时间轴、中外双轨 |
+| 39 | 历史因果解释器 | `skills/history/history-causation-explainer/` | 因果四框架、因果链、多元解释 |
+| 40 | 史料实证分析教练 | `skills/history/history-evidence-analysis/` | 史料分析状态机、孤证不立 |
+| 41 | 历史解题教练 | `skills/history/history-problem-coach/` | 四步解题、题型判别、三层次追问 |
+| 42 | 历史错误DNA | `skills/history/history-error-dna/` | H1-H5 五维错因、纯净版时空测试 |
 
 ### 七、地理学科专项（5 个）
 
 | # | SKILL 名称 | 文件夹 | 核心功能 |
 |---|-----------|-------|---------|
-| 41 | 地理读图定位教练 | `skills/geography/geography-map-coach/` | 无图不题铁律、读图四步、等值线 |
-| 42 | 区域综合分析教练 | `skills/geography/geography-region-analyzer/` | 区域五步框架、要素关联 |
-| 43 | 地理过程机制解释器 | `skills/geography/geography-process-explainer/` | 过程推理四步、因子机制表 |
-| 44 | 地理解题教练 | `skills/geography/geography-problem-coach/` | 四步解题、自然地理计算 |
-| 45 | 地理错误DNA | `skills/geography/geography-error-dna/` | G1-G5 五维错因、纯净版读图测试 |
+| 43 | 地理读图定位教练 | `skills/geography/geography-map-coach/` | 无图不题铁律、读图四步、等值线 |
+| 44 | 区域综合分析教练 | `skills/geography/geography-region-analyzer/` | 区域五步框架、要素关联 |
+| 45 | 地理过程机制解释器 | `skills/geography/geography-process-explainer/` | 过程推理四步、因子机制表 |
+| 46 | 地理解题教练 | `skills/geography/geography-problem-coach/` | 四步解题、自然地理计算 |
+| 47 | 地理错误DNA | `skills/geography/geography-error-dna/` | G1-G5 五维错因、纯净版读图测试 |
 
 ### 八、政治学科专项（5 个）
 
 | # | SKILL 名称 | 文件夹 | 核心功能 |
 |---|-----------|-------|---------|
-| 46 | 政治知识体系教练 | `skills/politics/politics-framework-coach/` | 模块地图、思维导图、学期级体系 |
-| 47 | 政治概念理解器 | `skills/politics/politics-concept-explainer/` | 生活类比、易混概念辨析 |
-| 48 | 政治理论联系实际教练 | `skills/politics/politics-application-coach/` | 先定位理论模块铁律、四步法 |
-| 49 | 政治价值推理教练 | `skills/politics/politics-value-reasoning/` | 价值推理三步链、只练论证不评立场 |
-| 50 | 政治错误DNA | `skills/politics/politics-error-dna/` | Po1-Po5 五维错因、纯净版审题测试 |
+| 48 | 政治知识体系教练 | `skills/politics/politics-framework-coach/` | 模块地图、思维导图、学期级体系 |
+| 49 | 政治概念理解器 | `skills/politics/politics-concept-explainer/` | 生活类比、易混概念辨析 |
+| 50 | 政治理论联系实际教练 | `skills/politics/politics-application-coach/` | 先定位理论模块铁律、四步法 |
+| 51 | 政治价值推理教练 | `skills/politics/politics-value-reasoning/` | 价值推理三步链、只练论证不评立场 |
+| 52 | 政治错误DNA | `skills/politics/politics-error-dna/` | Po1-Po5 五维错因、纯净版审题测试 |
 
 ### 九、化学学科专项（5 个）
 
 | # | SKILL 名称 | 文件夹 | 核心功能 |
 |---|-----------|-------|---------|
-| 51 | 化学微粒观建模教练 | `skills/chemistry/chemistry-particle-modeler/` | 宏观现象、微观粒子、符号表达贯通 |
-| 52 | 化学概念理解器 | `skills/chemistry/chemistry-concept-explainer/` | 物质分类、溶液、酸碱盐、氧化还原和有机基础辨析 |
-| 53 | 化学变化与方程式教练 | `skills/chemistry/chemistry-reaction-coach/` | 反应分析、方程式书写配平、守恒和基础计算 |
-| 54 | 化学实验探究教练 | `skills/chemistry/chemistry-lab-inquiry/` | 实验安全、变量控制、证据记录和干扰排除 |
-| 55 | 化学错误DNA | `skills/chemistry/chemistry-error-dna/` | Ch1-Ch5 五维错因、宏微符和守恒修复 |
+| 53 | 化学微粒观建模教练 | `skills/chemistry/chemistry-particle-modeler/` | 宏观现象、微观粒子、符号表达贯通 |
+| 54 | 化学概念理解器 | `skills/chemistry/chemistry-concept-explainer/` | 物质分类、溶液、酸碱盐、氧化还原和有机基础辨析 |
+| 55 | 化学变化与方程式教练 | `skills/chemistry/chemistry-reaction-coach/` | 反应分析、方程式书写配平、守恒和基础计算 |
+| 56 | 化学实验探究教练 | `skills/chemistry/chemistry-lab-inquiry/` | 实验安全、变量控制、证据记录和干扰排除 |
+| 57 | 化学错误DNA | `skills/chemistry/chemistry-error-dna/` | Ch1-Ch5 五维错因、宏微符和守恒修复 |
 
 ### 十、生物学科专项（5 个）
 
 | # | SKILL 名称 | 文件夹 | 核心功能 |
 |---|-----------|-------|---------|
-| 56 | 生物结构与功能教练 | `skills/biology/biology-structure-function-coach/` | 生命层级、结构特征、功能适应解释 |
-| 57 | 生物概念图谱教练 | `skills/biology/biology-concept-map-builder/` | 概念节点、关系词、层级/因果/并列图 |
-| 58 | 生命过程机制解释器 | `skills/biology/biology-process-explainer/` | 光合、呼吸、循环、免疫、遗传、生态机制链 |
-| 59 | 生物实验探究教练 | `skills/biology/biology-experiment-inquiry/` | 变量、对照、重复、数据图表和误差评价 |
-| 60 | 生物错误DNA | `skills/biology/biology-error-dna/` | B1-B5 五维错因、结构功能和机制链修复 |
+| 58 | 生物结构与功能教练 | `skills/biology/biology-structure-function-coach/` | 生命层级、结构特征、功能适应解释 |
+| 59 | 生物概念图谱教练 | `skills/biology/biology-concept-map-builder/` | 概念节点、关系词、层级/因果/并列图 |
+| 60 | 生命过程机制解释器 | `skills/biology/biology-process-explainer/` | 光合、呼吸、循环、免疫、遗传、生态机制链 |
+| 61 | 生物实验探究教练 | `skills/biology/biology-experiment-inquiry/` | 变量、对照、重复、数据图表和误差评价 |
+| 62 | 生物错误DNA | `skills/biology/biology-error-dna/` | B1-B5 五维错因、结构功能和机制链修复 |
 
 ---
 
 ## 🔄 系统协作架构
+
+### 0. 前置入口层
+
+```text
+学生首次接触 / 不知道从哪开始 / 需要建档前
+   ↓
+student-intake-profiler
+   ↓ 输出会话内画像、证据库存、路由提示
+   ├── 未授权：只在本次会话使用
+   └── 已授权：交付最小种子给 learning-dna
+```
+
+`学生快速定位画像师` 负责在系统启动前做低敏定位：学段年级、科目集合、文理/选科方向、近期作业试卷错题、授权状态。它不替代 `learning-dna` 的长期档案，也不直接调用所有学科 SKILL；只给 `skill-coordinator` 或下一步学科 SKILL 提供路由提示。
 
 ### 1. 核心学习飞轮
 
@@ -357,6 +372,7 @@ skills/
 │   ├── im-reminder/
 │   ├── feynman-learning/
 │   ├── weekly-review/
+│   ├── educational-llm-wiki/
 │   ├── educational-skill-creator/
 │   ├── cornell-notes/
 │   ├── skill-coordinator/
@@ -365,7 +381,9 @@ skills/
 │   ├── cross-subject-detective/
 │   ├── interest-explorer/
 │   ├── science-solving-four-steps/
-│   └── learning-360-review/
+│   ├── learning-360-review/
+│   ├── student-intake-profiler/
+│   └── system-quality-scoring/
 ├── chinese/
 │   ├── chinese-writing-coach/
 │   ├── chinese-reading-decoder/
@@ -428,4 +446,4 @@ skills/
 
 ## 📌 一句话总结
 
-这 60 个 SKILL 不是 60 个孤立工具，而是一套围绕“记录错误、验证理解、形成沉淀、推动执行、看见成长”的学生学习系统。
+这 62 个 SKILL 不是 62 个孤立工具，而是一套围绕“定位入口、记录错误、验证理解、形成沉淀、推动执行、看见成长、回归校验”的学生学习系统。

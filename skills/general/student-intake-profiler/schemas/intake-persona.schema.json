@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://skills.openclaw.dev/schemas/intake-persona.schema.json",
+  "title": "IntakePersona",
+  "description": "学生快速定位画像师的轻量种子画像。仅用于会话内定位或在明确授权后交给 learning-dna；禁止写入真实姓名、学校全称、身份证件、联系方式、住址、完整成绩单原件等高敏信息。",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profileId": {
+          "type": "string",
+          "description": "本次画像或授权档案的低敏标识，由平台生成；不得含真实姓名、学校全称或联系方式。",
+          "pattern": "^[a-zA-Z0-9_-]+$",
+          "maxLength": 80
+        },
+        "schemaVersion": {
+          "type": "string",
+          "enum": ["1.0.0"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "consentStatus": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "profileEnabled": { "type": "boolean", "default": false },
+            "memoryPaused": { "type": "boolean", "default": false },
+            "crossSkillSharing": { "type": "boolean", "default": false },
+            "reminderConsent": { "type": "boolean", "default": false }
+          },
+          "required": ["profileEnabled", "memoryPaused", "crossSkillSharing", "reminderConsent"]
+        }
+      },
+      "required": ["profileId", "schemaVersion", "createdAt", "consentStatus"]
+    },
+    "routingHints": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "gradeLevel": { "$ref": "#/$defs/confidentText" },
+        "textbookVersion": { "$ref": "#/$defs/confidentText" },
+        "subjectSet": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/confidentText" },
+          "maxItems": 12
+        },
+        "track": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "stage": { "type": "string", "enum": ["初中", "高中"] },
+            "type": { "type": "string", "enum": ["全科", "文理分科", "新高考3+1+2"] },
+            "combination": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/confidentText" },
+              "maxItems": 6
+            },
+            "confidenceLevel": { "$ref": "#/$defs/confidenceLevel" }
+          }
+        }
+      },
+      "required": ["gradeLevel"]
+    },
+    "evidenceInventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "hasHomework": { "$ref": "#/$defs/confidentBoolean" },
+        "hasExams": { "$ref": "#/$defs/confidentBoolean" },
+        "hasErrorBook": { "$ref": "#/$defs/confidentBoolean" },
+        "format": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["拍照", "文字", "文件"] },
+          "uniqueItems": true,
+          "maxItems": 3
+        }
+      }
+    },
+    "seedForDNA": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "basicInfo": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "shortTermGoal": { "$ref": "#/$defs/confidentText" },
+            "upcomingExams": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "examName": { "type": "string", "maxLength": 100 },
+                  "subject": { "type": "string", "maxLength": 40 },
+                  "estimatedDate": { "type": "string", "format": "date" },
+                  "confidenceLevel": { "$ref": "#/$defs/confidenceLevel" }
+                }
+              },
+              "maxItems": 5
+            },
+            "availableStudyTime": { "$ref": "#/$defs/confidentText" }
+          }
+        },
+        "subjectMap": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "strengths": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/subjectEntry" },
+              "maxItems": 12
+            },
+            "weaknesses": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/subjectEntry" },
+              "maxItems": 12
+            }
+          }
+        },
+        "learningStyle": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "preferredExplanationMode": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/confidentText" },
+              "maxItems": 6
+            },
+            "conversationPace": { "$ref": "#/$defs/confidentText" }
+          }
+        }
+      }
+    },
+    "personaSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "selfRatedWeak": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/confidentText" },
+          "maxItems": 12
+        },
+        "selfRatedStrong": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/confidentText" },
+          "maxItems": 12
+        },
+        "motivationHint": { "$ref": "#/$defs/confidentText" }
+      }
+    },
+    "confidenceLevel": { "$ref": "#/$defs/confidenceLevel" }
+  },
+  "required": ["meta", "routingHints"],
+  "$defs": {
+    "confidenceLevel": {
+      "description": "与 learning-dna 的 dna-profile.schema.json 完全一致：data_sufficient=数据充分；preliminary_trend=初步趋势；insufficient_sample=样本不足。",
+      "type": "string",
+      "enum": ["data_sufficient", "preliminary_trend", "insufficient_sample"]
+    },
+    "confidentText": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "低敏学习信息；不得包含真实姓名、学校全称、身份证件、联系方式、住址或完整成绩单原件。",
+          "maxLength": 200
+        },
+        "confidenceLevel": { "$ref": "#/$defs/confidenceLevel" }
+      },
+      "required": ["value", "confidenceLevel"]
+    },
+    "confidentBoolean": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": { "type": "boolean" },
+        "confidenceLevel": { "$ref": "#/$defs/confidenceLevel" }
+      },
+      "required": ["value", "confidenceLevel"]
+    },
+    "subjectEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "subject": { "type": "string", "maxLength": 40 },
+        "chapters": {
+          "type": "array",
+          "items": { "type": "string", "maxLength": 100 },
+          "maxItems": 8
+        },
+        "rootCause": {
+          "type": "string",
+          "description": "仅写低敏学习原因假设，禁止写心理诊断或人格标签。",
+          "maxLength": 200
+        },
+        "confidenceLevel": { "$ref": "#/$defs/confidenceLevel" }
+      },
+      "required": ["subject", "confidenceLevel"]
+    }
+  }
+}

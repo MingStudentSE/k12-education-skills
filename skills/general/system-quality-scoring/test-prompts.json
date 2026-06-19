@@ -1,0 +1,17 @@
+[
+  {
+    "id": "run-s1-scorecard",
+    "prompt": "请用打分校验器对这套体系跑一遍 S1 场景。",
+    "expected": "应按 S1 场景产出符合 scorecard.schema.json 的 scorecard；D1-D8 每维给 1-10 分和 trace 证据，并标明 evalMode 是 live 还是 dry_run。"
+  },
+  {
+    "id": "blind-two-traces-compare",
+    "prompt": "盲测：两份匿名 trace，帮我打分并揭盲对比。",
+    "expected": "应先确认 trace 已脱盲，按固定 judge-prompt 交叉裁判；scorecard 锁定后再揭盲，对比维度差异和证据。"
+  },
+  {
+    "id": "regression-before-after",
+    "prompt": "系统刚升级，跑回归基准看分数变化。",
+    "expected": "应要求 before/after 使用相同 rubricVersion 与 scenarioSetVersion；输出分数变化、维度变化、证据片段和是否触发红线封顶。"
+  }
+]

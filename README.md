@@ -1,12 +1,18 @@
 # 🎓 K12 教育 AI 辅导系统
 
 > 适用平台：OpenClaw / ClawHub / SkillHub
-> 当前仓库聚焦 **K12 学习场景 60 个 SKILL**，覆盖通用学习系统与语文、数学、英语、物理、历史、地理、政治、化学、生物九大学科专项。
+> 当前仓库聚焦 **K12 学习场景 62 个 SKILL**，覆盖通用学习系统与语文、数学、英语、物理、历史、地理、政治、化学、生物九大学科专项。
 
 传统的 AI 往往被当成“给答案的计算器”。
 这套 K12 教育 AI 辅导系统希望把 AI 变成“追问思路、陪你复盘、帮你形成长期学习系统的教练”。
 
 ---
+
+## ✨ v2.1 重点变化
+
+- 新增 `student-intake-profiler`：整套体系的前置入口，先快速定位学生学段、科目、文理/选科方向、证据库存和授权状态。
+- 新增 `system-quality-scoring`：给整套体系提供 8 维行为 rubric、5 个标准场景、双盲协议和可回归 scorecard。
+- 二者分工明确：画像师只产出会话内画像、路由提示和授权后的 DNA 种子；打分器只评系统端到端行为质量，不替代 `darwin-skill` 的单 SKILL 结构评分。
 
 ## ✨ v2.0 重点变化
 
@@ -44,8 +50,9 @@
 
 当前仓库按学生使用场景分为两大层：
 
-### 通用与成长层（`skills/general/`）· 15 个 SKILL
+### 通用与成长层（`skills/general/`）· 17 个 SKILL
 
+- **前置与校验**：学生快速定位画像师、技能体系质量打分校验器
 - **核心五件套**：学习DNA、智能错题本、IM智能提醒、费曼学习法、每周学习复盘
 - **知识库与方法论包**：教育LLM知识库、教育版SKILL创建教练、康奈尔笔记、SKILL联动协调器、理科解题四步法
 - **自我管理与探索包**：30天学习计划制定师、时间与专注力教练、跨学科侦探周、兴趣成长探索计划
@@ -70,9 +77,9 @@
 
 | 类别     | 数量     | 状态               |
 | ------ | ------ | ---------------- |
-| 通用与成长层 | 15     | ✅ v2.0 可用 |
+| 通用与成长层 | 17     | ✅ v2.1 可用 |
 | 学科专项层  | 45     | ✅ v2.0 可用 |
-| **总计** | **60** | **100% 可用**      |
+| **总计** | **62** | **100% 可用**      |
 
 ### 安装包边界
 
@@ -85,7 +92,9 @@
 
 ## 🚀 快速开始
 
-> ⚠️ 建议先安装核心 SKILL，再按实际学科痛点加装专项 SKILL；不要一开始把全部 60 个都装上。
+> ⚠️ 建议先安装核心 SKILL，再按实际学科痛点加装专项 SKILL；不要一开始把全部 62 个都装上。
+
+首次接触学生、学生不知道从哪开始或需要建档前，建议先跑 `skills/general/student-intake-profiler/` 做定位，再决定是否启用 `learning-dna` 和学科专项。
 
 ### 1. 让 Agent 安装核心联动套件
 
@@ -112,7 +121,7 @@ https://github.com/MingStudentSE/k12-education-skills
 
 8. skills/general/educational-llm-wiki/
 
-每个 SKILL 都以单个目录为安装单位。请保留每个目录内的 SKILL.md、references/、schemas/、assets/ 等配套文件。不要安装全部 60 个 SKILL；后续等我明确需要某个学科专项、高级复盘或方法论工具时再加装。
+每个 SKILL 都以单个目录为安装单位。请保留每个目录内的 SKILL.md、references/、schemas/、assets/ 等配套文件。不要安装全部 62 个 SKILL；后续等我明确需要某个学科专项、高级复盘或方法论工具时再加装。
 
 请把这些 Skill 安装到当前项目的项目级 Skill 位置：Claude Code 用 .claude/skills/、Codex CLI 用 .agents/skills/（注：Codex 旧的 .codex/prompts/ 已弃用，当前 skills 在 .agents/skills/ 发现），或你支持的项目级 Skill 管理器。安装方式以你的平台为准，但不要拆散 Skill 目录。
 ```
@@ -170,6 +179,13 @@ node engine/build-dashboard.mjs
 在这个生态中，SKILL 不是孤立的；当任务需要且用户授权时，摘要数据会在底层产生有限协同。
 
 ```text
+学生首次接触 / 不知道从哪开始
+          ↓
+┌────────────────────────────┐
+│ 🪪 学生快速定位画像师       │
+│ 会话内画像 + 路由提示 + 授权门 │
+└────────────┬───────────────┘
+             ↓ 授权后交付种子
                     ┌──────────────────┐
                     │  🧬 学习DNA      │
                     │  长期档案底座     │
@@ -199,6 +215,7 @@ SKILL联动协调器会在明确任务下，把错题、费曼、笔记、理科
 
 | 工具                                                     | 关键能力                       |
 | ------------------------------------------------------ | -------------------------- |
+| [学生快速定位画像师](skills/general/student-intake-profiler/) | 前置定位、七字段画像、证据库存、授权后的 DNA 种子 |
 | [学习DNA](skills/general/learning-dna/)                 | 长期档案、成长图谱、学习风格偏好、兴趣与跨科接口   |
 | [智能错题本](skills/general/correction-notebook/)          | 四维错因分析、弱项预警、同类题验证、学期错题报告   |
 | [IM智能提醒](skills/general/im-reminder/)                 | 复习提醒、计划提醒、探索提醒、每日确认回访      |
@@ -214,6 +231,7 @@ SKILL联动协调器会在明确任务下，把错题、费曼、笔记、理科
 | [跨学科侦探周](skills/general/cross-subject-detective/)      | 跨学科连接、项目式探索、证据化输出          |
 | [兴趣成长探索计划](skills/general/interest-explorer/)         | 兴趣线索收集、成长任务设计、长期动机维护       |
 | [阶段学习体检](skills/general/learning-360-review/)          | 证据化阶段复盘、A/B/C 判断、系统修复动作      |
+| [技能体系质量打分校验器](skills/general/system-quality-scoring/) | 8维行为打分、双盲评测、回归基准、红线封顶 |
 
 ### 学科专项
 
@@ -229,7 +247,7 @@ SKILL联动协调器会在明确任务下，把错题、费曼、笔记、理科
 | 化学  | [化学微粒观建模教练](skills/chemistry/chemistry-particle-modeler/) | 宏观现象、微观粒子、符号表达贯通 |
 | 生物  | [生物结构与功能教练](skills/biology/biology-structure-function-coach/) | 结构层级、功能过程、调节关系贯通 |
 
-完整 60 个 SKILL 清单见 [系统架构与方法论](docs/architecture.md)。
+完整 62 个 SKILL 清单见 [系统架构与方法论](docs/architecture.md)。
 
 ---
 
@@ -239,7 +257,7 @@ SKILL联动协调器会在明确任务下，把错题、费曼、笔记、理科
   - 三路径决策树：只用 Skill / 接入 Obsidian / 跑夜间产线
   - Claude Code（`.claude/skills/`）与 Codex CLI（`.agents/skills/`）正确安装
 - [系统架构与方法论](docs/architecture.md)
-  - K12 学习场景 60 个 SKILL 全清单
+  - K12 学习场景 62 个 SKILL 全清单
   - 协作飞轮与方法论依据
   - 目录结构与学科分层
 - [学习科学原则接入规范](docs/learning-science-principles.md)

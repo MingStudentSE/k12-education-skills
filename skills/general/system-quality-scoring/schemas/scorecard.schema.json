@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://skills.openclaw.dev/schemas/scorecard.schema.json",
+  "title": "SystemQualityScorecard",
+  "description": "K12 SKILL 体系质量打分校验器的可比 scorecard。裁判不得写入被测引擎身份线索，dry_run 必须显式标注。",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "runId": { "type": "string", "maxLength": 120 },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "rubricVersion": { "type": "string", "enum": ["1.0.0"] },
+        "scenarioSetVersion": { "type": "string", "enum": ["1.0.0"] },
+        "systemVersion": { "type": "string", "maxLength": 80 },
+        "evaluatorEngine": {
+          "type": "string",
+          "description": "裁判引擎；不得用于推断被测 blindId 身份。",
+          "maxLength": 80
+        },
+        "evaluatorModel": { "type": "string", "maxLength": 120 },
+        "evalMode": { "type": "string", "enum": ["live", "dry_run"] }
+      },
+      "required": ["runId", "timestamp", "rubricVersion", "scenarioSetVersion", "systemVersion", "evaluatorEngine", "evaluatorModel", "evalMode"]
+    },
+    "perScenario": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "scenarioId": { "type": "string", "maxLength": 120 },
+          "blindId": { "type": "string", "pattern": "^blind-[A-Z]$", "maxLength": 20 },
+          "dimensions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "D1": { "$ref": "#/$defs/dimensionScore" },
+              "D2": { "$ref": "#/$defs/dimensionScore" },
+              "D3": { "$ref": "#/$defs/dimensionScore" },
+              "D4": { "$ref": "#/$defs/dimensionScore" },
+              "D5": { "$ref": "#/$defs/dimensionScore" },
+              "D6": { "$ref": "#/$defs/dimensionScore" },
+              "D7": { "$ref": "#/$defs/dimensionScore" },
+              "D8": { "$ref": "#/$defs/dimensionScore" }
+            },
+            "required": ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8"]
+          },
+          "scenarioTotal": { "type": "integer", "minimum": 0, "maximum": 100 },
+          "redLineViolations": {
+            "type": "array",
+            "items": { "type": "string", "maxLength": 300 },
+            "maxItems": 10
+          }
+        },
+        "required": ["scenarioId", "blindId", "dimensions", "scenarioTotal", "redLineViolations"]
+      }
+    },
+    "aggregate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "dimensionAverages": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "D1": { "type": "number", "minimum": 1, "maximum": 10 },
+            "D2": { "type": "number", "minimum": 1, "maximum": 10 },
+            "D3": { "type": "number", "minimum": 1, "maximum": 10 },
+            "D4": { "type": "number", "minimum": 1, "maximum": 10 },
+            "D5": { "type": "number", "minimum": 1, "maximum": 10 },
+            "D6": { "type": "number", "minimum": 1, "maximum": 10 },
+            "D7": { "type": "number", "minimum": 1, "maximum": 10 },
+            "D8": { "type": "number", "minimum": 1, "maximum": 10 }
+          },
+          "required": ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8"]
+        },
+        "weightedTotal": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "gradeBand": { "type": "string", "enum": ["A", "B", "C", "D", "F"] },
+        "redLineCapped": { "type": "boolean" }
+      },
+      "required": ["dimensionAverages", "weightedTotal", "gradeBand", "redLineCapped"]
+    },
+    "notes": { "type": "string", "maxLength": 2000 }
+  },
+  "required": ["meta", "perScenario", "aggregate"],
+  "$defs": {
+    "dimensionScore": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "score": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "evidence": {
+          "type": "string",
+          "description": "必须引用 trace 片段；无证据写 N/A，不得臆造。",
+          "maxLength": 1000
+        }
+      },
+      "required": ["score", "evidence"]
+    }
+  }
+}
