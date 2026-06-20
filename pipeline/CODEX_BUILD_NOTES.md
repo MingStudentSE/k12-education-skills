@@ -4,7 +4,7 @@
 
 ## 构建文件
 
-新增 `skills/general/student-intake-profiler/`：
+新增 `skills/general/student-quick-assessment/`：
 
 - `SKILL.md`
 - `references/intake-question-bank.md`
@@ -52,22 +52,22 @@ $ find skills -name SKILL.md | wc -l
 $ find skills/general -mindepth 1 -maxdepth 1 -type d | wc -l
       17
 
-$ test -d skills/general/student-intake-profiler && echo OK1
+$ test -d skills/general/student-quick-assessment && echo OK1
 OK1
 
 $ test -d skills/general/system-quality-scoring && echo OK2
 OK2
 
-$ for f in skills/general/student-intake-profiler/SKILL.md skills/general/system-quality-scoring/SKILL.md; do echo "$f: $(wc -l < $f) lines"; done
-skills/general/student-intake-profiler/SKILL.md:       77 lines
+$ for f in skills/general/student-quick-assessment/SKILL.md skills/general/system-quality-scoring/SKILL.md; do echo "$f: $(wc -l < $f) lines"; done
+skills/general/student-quick-assessment/SKILL.md:       77 lines
 skills/general/system-quality-scoring/SKILL.md:       82 lines
 ```
 
 附加 JSON 合法性检查：
 
 ```bash
-JSON OK skills/general/student-intake-profiler/schemas/intake-persona.schema.json
+JSON OK skills/general/student-quick-assessment/schemas/intake-persona.schema.json
 JSON OK skills/general/system-quality-scoring/schemas/scorecard.schema.json
-JSON OK skills/general/student-intake-profiler/test-prompts.json
+JSON OK skills/general/student-quick-assessment/test-prompts.json
 JSON OK skills/general/system-quality-scoring/test-prompts.json
 ```

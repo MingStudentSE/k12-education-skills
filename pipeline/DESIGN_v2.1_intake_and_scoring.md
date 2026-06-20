@@ -28,7 +28,7 @@
 
 ### 1.1 两个 SKILL 的边界与重叠
 
-**Q：`student-intake-profiler` 与 `learning-dna` 职责会不会撞车？**
+**Q：`student-quick-assessment` 与 `learning-dna` 职责会不会撞车？**
 探代码库结论：`learning-dna`（v1.2.0）是**长期记忆引擎**，仅在"记住我/建档案"明确授权时激活，深度维护六大维度 + 成长图谱 + 兴趣DNA + 学习情绪；`students/_template/profile.md` 是其种子档案。
 **决议**：画像师是**前置轻量入口**，在 `learning-dna` 之前跑。它做"够用即可"的快速定位，产出**会话内画像**；只有当学生在 intake 中**同意建档**时，才把种子交付 `learning-dna` 落地为长期档案。画像师不替代 DNA 的深度维护，只做"种子 + 路由提示"。`depends_on: learning-dna`（软依赖：种子交付握手），与 `learning-plan depends_on learning-dna` 一致。
 
@@ -139,18 +139,18 @@
 
 ### 1.12 命名、版本、落位
 
-- SKILL1：`skills/general/student-intake-profiler/` · display `🪪 学生快速定位画像师` · v1.0.0 · category 通用核心 · `depends_on: learning-dna`。
-- SKILL2：`skills/general/system-quality-scoring/` · display `🏅 技能体系质量打分校验器` · v1.0.0 · category 通用核心/元评测 · `depends_on: student-intake-profiler, skill-coordinator` + 场景触达的学科 SKILL。
+- SKILL1：`skills/general/student-quick-assessment/` · display `🪪 学生快速评测` · v1.0.0 · category 通用核心 · `depends_on: learning-dna`。
+- SKILL2：`skills/general/system-quality-scoring/` · display `🏅 技能体系质量打分校验器` · v1.0.0 · category 通用核心/元评测 · `depends_on: student-quick-assessment, skill-coordinator` + 场景触达的学科 SKILL。
 - 两者入 `skills/general/`；通用层 15→17，全仓 60→62。需同步 README + architecture.md 计数。
 
 ---
 
-## 2. SKILL 1 构建规格 — `student-intake-profiler`
+## 2. SKILL 1 构建规格 — `student-quick-assessment`
 
 ### 2.1 目录结构
 
 ```
-skills/general/student-intake-profiler/
+skills/general/student-quick-assessment/
 ├── SKILL.md                          # ≤150 行
 ├── references/
 │   ├── intake-question-bank.md       # 七字段问题 + 推断规则 + 快/全双通道
@@ -164,8 +164,8 @@ skills/general/student-intake-profiler/
 ### 2.2 SKILL.md frontmatter（必须含）
 
 ```yaml
-name: student-intake-profiler
-display_name: 🪪 学生快速定位画像师
+name: student-quick-assessment
+display_name: 🪪 学生快速评测
 version: 1.0.0
 author: K12 教育 AI 辅导系统
 category: 通用核心
@@ -254,7 +254,7 @@ references:
   - references/scoring-rubric.md
   - references/blind-test-protocol.md
   - references/judge-prompt.md
-depends_on: student-intake-profiler, skill-coordinator
+depends_on: student-quick-assessment, skill-coordinator
 ```
 
 ### 3.3 SKILL.md 正文章节骨架（≤150 行）
@@ -299,7 +299,7 @@ notes
 
 ## 4. 跨切面文档更新（Codex 一并完成）
 
-- `README.md`：v2.0→v2.1 重点变化段（新增 2 个系统级 SKILL）；"通用与成长层 15→17"；状态总览 60→62；核心飞轮图前置入口箭头（学生→画像师→DNA）；快速开始可补一句"首次接触先跑 student-intake-profiler"。
+- `README.md`：v2.0→v2.1 重点变化段（新增 2 个系统级 SKILL）；"通用与成长层 15→17"；状态总览 60→62；核心飞轮图前置入口箭头（学生→画像师→DNA）；快速开始可补一句"首次接触先跑 student-quick-assessment"。
 - `docs/architecture.md`：通用层表 15→17（加 #16 画像师、#17 打分校验器）；总计 60→62；协作架构补"前置入口"层；目录树补两目录。
 - `RELEASE_NOTES.md`：加 v2.1 条目。
 - `docs/changelog.md`：加两 SKILL v1.0.0 行。

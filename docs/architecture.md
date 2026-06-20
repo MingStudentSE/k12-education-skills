@@ -89,7 +89,7 @@ skill-folder/
 | 13 | ☕ 兴趣成长探索计划 | `skills/general/interest-explorer/` | v1.0 | 52 杯咖啡、兴趣验证、兴趣DNA |
 | 14 | 🧩 理科解题四步法 | `skills/general/science-solving-four-steps/` | v1.1 | 教练式提示阶梯、题型判断、波利亚四步解题、变式迁移 |
 | 15 | 🧭 阶段学习体检 | `skills/general/learning-360-review/` | v1.0 | 证据化阶段复盘、A/B/C 判断、系统修复动作 |
-| 16 | 🪪 学生快速定位画像师 | `skills/general/student-intake-profiler/` | v1.0.0 | 前置定位、七字段画像、证据库存、授权后的 DNA 种子 |
+| 16 | 🪪 学生快速评测 | `skills/general/student-quick-assessment/` | v1.0.0 | 前置定位、七字段画像、证据库存、授权后的 DNA 种子 |
 | 17 | 🏅 技能体系质量打分校验器 | `skills/general/system-quality-scoring/` | v1.0.0 | 8 维行为打分、双盲评测、回归基准、红线封顶 |
 
 ### 二、语文学科专项（5 个）
@@ -191,13 +191,13 @@ skill-folder/
 ```text
 学生首次接触 / 不知道从哪开始 / 需要建档前
    ↓
-student-intake-profiler
+student-quick-assessment
    ↓ 输出会话内画像、证据库存、路由提示
    ├── 未授权：只在本次会话使用
    └── 已授权：交付最小种子给 learning-dna
 ```
 
-`学生快速定位画像师` 负责在系统启动前做低敏定位：学段年级、科目集合、文理/选科方向、近期作业试卷错题、授权状态。它不替代 `learning-dna` 的长期档案，也不直接调用所有学科 SKILL；只给 `skill-coordinator` 或下一步学科 SKILL 提供路由提示。
+`学生快速评测` 负责在系统启动前做低敏定位：学段年级、科目集合、文理/选科方向、近期作业试卷错题、授权状态。它不替代 `learning-dna` 的长期档案，也不直接调用所有学科 SKILL；只给 `skill-coordinator` 或下一步学科 SKILL 提供路由提示。
 
 ### 1. 核心学习飞轮
 
@@ -382,7 +382,7 @@ skills/
 │   ├── interest-explorer/
 │   ├── science-solving-four-steps/
 │   ├── learning-360-review/
-│   ├── student-intake-profiler/
+│   ├── student-quick-assessment/
 │   └── system-quality-scoring/
 ├── chinese/
 │   ├── chinese-writing-coach/

@@ -11,7 +11,7 @@
 
 在现有 60 个 K12 SKILL 体系（见 `README.md` / `docs/architecture.md` / `AGENTS.md`）中新增 **2 个系统级 SKILL**，并同步文档计数（60→62，通用层 15→17）：
 
-1. `skills/general/student-intake-profiler/` — 🪪 学生快速定位画像师（前置入口）
+1. `skills/general/student-quick-assessment/` — 🪪 学生快速评测（前置入口）
 2. `skills/general/system-quality-scoring/` — 🏅 技能体系质量打分校验器（校验标准）
 
 两者都必须遵循仓库既有 SKILL 约定：
@@ -31,12 +31,12 @@ find skills/general -mindepth 1 -maxdepth 1 -type d | wc -l   # 期望 17
 
 ---
 
-## 1. 构建 SKILL 1：`student-intake-profiler`
+## 1. 构建 SKILL 1：`student-quick-assessment`
 
 ### 1.1 目录（全部新建）
 
 ```
-skills/general/student-intake-profiler/
+skills/general/student-quick-assessment/
 ├── SKILL.md
 ├── references/intake-question-bank.md
 ├── references/grade-subject-matrix.md
@@ -49,8 +49,8 @@ skills/general/student-intake-profiler/
 
 ```yaml
 ---
-name: student-intake-profiler
-display_name: 🪪 学生快速定位画像师
+name: student-quick-assessment
+display_name: 🪪 学生快速评测
 version: 1.0.0
 author: K12 教育 AI 辅导系统
 category: 通用核心
@@ -164,7 +164,7 @@ references:
   - references/scoring-rubric.md
   - references/blind-test-protocol.md
   - references/judge-prompt.md
-depends_on: student-intake-profiler, skill-coordinator
+depends_on: student-quick-assessment, skill-coordinator
 ---
 ```
 
@@ -236,7 +236,7 @@ required: [meta, perScenario, aggregate]；`additionalProperties:false` 风格�
 
 ## 3. 文档同步更新（必须做）
 
-- **README.md**：①加 `## ✨ v2.1 重点变化` 段（前置画像师 + 质量打分校验器，定位/价值/分工）；②"通用与成长层 15→17"；③状态总览 60→62、通用层 15→17；④核心飞轮图加前置入口（学生→student-intake-profiler→learning-dna）；⑤快速开始补一句"首次接触建议先跑 student-intake-profiler 做定位"。
+- **README.md**：①加 `## ✨ v2.1 重点变化` 段（前置画像师 + 质量打分校验器，定位/价值/分工）；②"通用与成长层 15→17"；③状态总览 60→62、通用层 15→17；④核心飞轮图加前置入口（学生→student-quick-assessment→learning-dna）；⑤快速开始补一句"首次接触建议先跑 student-quick-assessment 做定位"。
 - **docs/architecture.md**：通用层表加 #16 画像师、#17 打分校验器；总计 60→62；协作架构补"前置入口"层；目录树补两目录。
 - **RELEASE_NOTES.md**：加 v2.1 条目。
 - **docs/changelog.md**：加两 SKILL v1.0.0 行。
@@ -249,9 +249,9 @@ required: [meta, perScenario, aggregate]；`additionalProperties:false` 风格�
 ```bash
 find skills -name SKILL.md | wc -l                                   # 期望 62
 find skills/general -mindepth 1 -maxdepth 1 -type d | wc -l          # 期望 17
-test -d skills/general/student-intake-profiler && echo OK1
+test -d skills/general/student-quick-assessment && echo OK1
 test -d skills/general/system-quality-scoring && echo OK2
-for f in skills/general/student-intake-profiler/SKILL.md skills/general/system-quality-scoring/SKILL.md; do echo "$f: $(wc -l < $f) lines"; done   # 均 ≤150
+for f in skills/general/student-quick-assessment/SKILL.md skills/general/system-quality-scoring/SKILL.md; do echo "$f: $(wc -l < $f) lines"; done   # 均 ≤150
 ```
 
 并在 `pipeline/CODEX_BUILD_NOTES.md` 记录：构建了哪些文件、做了哪些文档改动、有无对设计的保守偏离及理由、校验命令输出。

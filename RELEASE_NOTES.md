@@ -6,11 +6,11 @@
 
 ## v2.1 最新版本
 
-本版本在 v2.0 工程化底座上新增两个系统级 SKILL：前置入口 `student-intake-profiler` 与质量基准 `system-quality-scoring`。仓库 SKILL 总数 60 → 62，通用层 15 → 17。
+本版本在 v2.0 工程化底座上新增两个系统级 SKILL：前置入口 `student-quick-assessment` 与质量基准 `system-quality-scoring`。仓库 SKILL 总数 60 → 62，通用层 15 → 17。
 
 ### 新增内容
 
-- 新增 `skills/general/student-intake-profiler/`：通过七字段 intake 快速定位学生学段、科目、文理/选科方向、证据库存和授权状态；未授权只输出会话内画像，授权后才交付 `learning-dna` 种子。
+- 新增 `skills/general/student-quick-assessment/`：通过七字段 intake 快速定位学生学段、科目、文理/选科方向、证据库存和授权状态；未授权只输出会话内画像，授权后才交付 `learning-dna` 种子。
 - 新增 `skills/general/system-quality-scoring/`：提供 8 维行为 rubric、5 个标准测试场景、双盲交叉裁判协议和 `scorecard.schema.json`，用于跨模型横比与系统回归基准。
 - 同步 README、架构文档、维护 changelog 与 AGENTS 计数；保持既有 60 个 SKILL 内容不变。
 

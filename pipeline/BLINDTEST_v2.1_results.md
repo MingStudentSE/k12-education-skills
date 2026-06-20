@@ -1,7 +1,7 @@
 # 双盲打分结果 · v2.1 首次基准
 
 > 日期：2026-06-20 · rubric v1.0.0 · scenarioSet v1.0.0 · systemVersion v2.1
-> 被测体系：K12 SKILL 体系 v2.1（62 个 SKILL，含本次新增 student-intake-profiler + system-quality-scoring）
+> 被测体系：K12 SKILL 体系 v2.1（62 个 SKILL，含本次新增 student-quick-assessment + system-quality-scoring）
 > 原始 trace 与 scorecard：本地 `logs/scoring/`（gitignore，含模拟学生数据）
 
 ## 一句话结论

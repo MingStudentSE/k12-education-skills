@@ -26,7 +26,7 @@
 | 13 | 兴趣成长探索计划 | v1.0 | 稳定 |
 | 14 | 理科解题四步法 | v1.1 | 已增强教练式提示阶梯、题型判断和阶段路由 |
 | 15 | 阶段学习体检 | v1.0 | 新增，可选高级阶段复盘与证据化 360 体检 |
-| 16 | 学生快速定位画像师 | v1.0.0 | 新增，作为前置入口输出会话内画像、路由提示和授权后的 DNA 种子 |
+| 16 | 学生快速评测 | v1.0.0 | 新增，作为前置入口输出会话内画像、路由提示和授权后的 DNA 种子 |
 | 17 | 技能体系质量打分校验器 | v1.0.0 | 新增，提供 8 维行为 rubric、双盲评测协议、标准场景和回归 scorecard |
 
 ### 学科专项（45 个）
@@ -59,7 +59,7 @@
 | 30天学习计划制定师 | v1.0 → v1.0+ | 接入学习区定义、85%规则和任务难度校准字段 |
 | 理科解题四步法 | 新增 v1.0 → v1.1 | 基于波利亚四步法，承担单题掌握验证；v1.1 增强教练式提示阶梯 |
 | 阶段学习体检 | 新增 v1.0 | 从阶段证据判断突破、稳定推进、需要修复或暂不评级 |
-| 学生快速定位画像师 | 新增 v1.0.0 | 在 `learning-dna` 前做七字段 intake，未授权只保留会话内画像 |
+| 学生快速评测 | 新增 v1.0.0 | 在 `learning-dna` 前做七字段 intake，未授权只保留会话内画像 |
 | 技能体系质量打分校验器 | 新增 v1.0.0 | 评整套系统端到端行为质量，与 darwin-skill 单 SKILL 结构评分互补 |
 
 ---
@@ -70,7 +70,7 @@
 
 本轮新增两个系统级 SKILL，把现有体系从“有运行层和质量门”推进到“有前置入口和可回归行为基准”：
 
-- 新增 `skills/general/student-intake-profiler/`：七字段 intake、快/全双通道、证据库存、授权门和 `intake-persona.schema.json`。
+- 新增 `skills/general/student-quick-assessment/`：七字段 intake、快/全双通道、证据库存、授权门和 `intake-persona.schema.json`。
 - 新增 `skills/general/system-quality-scoring/`：8 维 rubric、5 个标准场景、双盲协议、裁判提示词和 `scorecard.schema.json`。
 - README、architecture、Release Notes、AGENTS 计数同步为全仓 62 个 Skill、通用层 17 个 Skill。
 

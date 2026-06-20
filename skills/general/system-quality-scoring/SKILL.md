@@ -15,7 +15,7 @@ references:
   - references/scoring-rubric.md
   - references/blind-test-protocol.md
   - references/judge-prompt.md
-depends_on: student-intake-profiler, skill-coordinator
+depends_on: student-quick-assessment, skill-coordinator
 ---
 
 # 🏅 技能体系质量打分校验器

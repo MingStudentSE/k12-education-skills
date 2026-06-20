@@ -51,7 +51,7 @@
 | 高中生物方向 | `biology-structure-function-coach`、`biology-process-explainer`、`biology-error-dna` |
 | 高中数学弱项 | `math-error-dna`、`math-problem-solving-coach`、`math-gradient-trainer` |
 | 高中文综/史政地 | `history-timeline-coach`、`politics-value-reasoning`、`geography-region-analyzer`；坚持只练论证不评立场 |
-| 选科犹豫 | `student-intake-profiler` 保持事实整理；必要时转 `interest-explorer` 和 `learning-plan`，不替学生下决定 |
+| 选科犹豫 | `student-quick-assessment` 保持事实整理；必要时转 `interest-explorer` 和 `learning-plan`，不替学生下决定 |
 
 ## 教材版本追问
 

@@ -1,6 +1,6 @@
 ---
-name: student-intake-profiler
-display_name: 🪪 学生快速定位画像师
+name: student-quick-assessment
+display_name: 🪪 学生快速评测
 version: 1.0.0
 author: K12 教育 AI 辅导系统
 category: 通用核心
@@ -18,7 +18,7 @@ references:
 depends_on: learning-dna
 ---
 
-# 🪪 学生快速定位画像师
+# 🪪 学生快速评测
 
 > 前置轻量入口：先用少量信息定位学段、科目、方向和证据库存，产出会话内画像与路由种子；`learning-dna` 是授权后的深度长期档案，不由本 SKILL 默认建立。
 
