@@ -1,7 +1,7 @@
 ---
 name: biology-error-dna
 display_name: 🧬 生物错误DNA
-version: 1.0.0
+version: 1.1.0
 author: K12 教育 AI 辅导系统
 category: 生物专项
 tags: [生物, 错题, 错因分析, 结构功能, 机制链, 实验探究, 授权可控]
@@ -13,7 +13,7 @@ references:
   - references/biology-error-dimension-table.md
   - references/biology-concept-confusion-map.md
   - references/biology-data-analysis-guide.md
-depends_on: learning-dna, correction-notebook
+depends_on: learning-dna, correction-notebook, feynman-learning
 ---
 
 # 🧬 生物错误DNA SKILL
@@ -40,16 +40,17 @@ depends_on: learning-dna, correction-notebook
 - **学生只要答案**：可给必要答案，但不把会背答案当成错因修复完成。
 - **长期记录**：未经明确同意，不写入长期档案、不提醒、不跨 SKILL 共享。
 - **生命科学边界**：不提供医疗诊断、治疗、用药、人体实验或动物伤害建议。
+- **不得分析完就结束**：错因诊断后必须产出飞轮闭环出口四要素；只给修复任务而无掌握验证/沉淀/复测/复盘推进，等同"分析完就结束"。
 
 ---
 
-## 学习科学约束
+## 学习科学约束与飞轮闭环（单目标：一次只定位一个主错因）
 
-- **单目标**：一次只定位一个主错因，复杂题可记录次错因但不同时修复全部。
-- **主动回忆**：先让学生复述自己当时如何读图、定位层级或解释过程。
-- **错误反馈闭环**：每个错因必须有“根因 → 修正动作 → 再犯预警 → 变式验证”。
-- **交错迁移**：修复后换结构、换过程、换图表或换实验条件复测。
-- **分散复习**：顽固 B2/B3/B5 建议次日和 3 天后复测；提醒需授权。
+### 飞轮闭环出口（本轮错因必须推进）
+- ① 掌握验证：B1层级/B2结构功能/B3过程机制→`feynman-learning`（画层级树/机制链+口述结构如何支持功能）；B4实验/B5图表→1道变式（对应生物教练，独立做到第一步）。判定：能独立说清结构层级→功能过程→调节算掌握。
+- ② 沉淀入口：通用错题本记表面+本DNA记根因（同一事件去重一条）；概念混淆→同时写康奈尔线索栏。给字段摘要+授权状态（未授权只给建议字段，不实写）。
+- ③ 复测安排：T+1→T+3→T+7→T+14 间隔序列，复测用变式题（非原题），载体 `im-reminder`（授权后）。
+- ④ 复盘入口：本题+本周同类纳入 `weekly-review`，给触发信号（同类累计≥3 或 复测未过）。
 
 ---
 

@@ -19,7 +19,8 @@
       "enum": [
         "wrong_answer_handover",
         "profile_writeback",
-        "reminder_sync"
+        "reminder_sync",
+        "flywheel_handoff"
       ]
     },
     "sender": {
@@ -41,7 +42,11 @@
         "im-reminder",
         "math-error-dna",
         "physics-error-dna",
-        "skill-coordinator"
+        "skill-coordinator",
+        "cornell-notes",
+        "feynman-learning",
+        "science-solving-four-steps",
+        "weekly-review"
       ]
     },
     "payload": {
@@ -174,6 +179,49 @@
             "targetKnowledgePoint": { "type": "string" }
           },
           "required": ["reminderId", "type", "scheduledTime", "content"]
+        },
+        "flywheelData": {
+          "description": "飞轮闭环出口专属结构。在 handoverType='flywheel_handoff' 时必填",
+          "type": "object",
+          "properties": {
+            "masteryCheck": {
+              "type": "object",
+              "properties": {
+                "target": { "type": "string", "enum": ["feynman-learning", "science-solving-four-steps"] },
+                "form": { "type": "string" },
+                "passCriteria": { "type": "string" }
+              },
+              "required": ["target", "form", "passCriteria"]
+            },
+            "sinkEntry": {
+              "type": "object",
+              "properties": {
+                "targets": { "type": "array", "items": { "type": "string", "enum": ["correction-notebook", "cornell-notes"] } },
+                "fields": { "type": "string" },
+                "authStatus": { "type": "string", "enum": ["未授权", "已授权", "仅本轮分析"] }
+              },
+              "required": ["targets", "fields", "authStatus"]
+            },
+            "retestSchedule": {
+              "type": "object",
+              "properties": {
+                "firstAt": { "type": "string" },
+                "intervals": { "type": "array", "items": { "type": "integer" } },
+                "form": { "type": "string" },
+                "carrier": { "type": "string", "enum": ["im-reminder"] }
+              },
+              "required": ["firstAt", "intervals", "form"]
+            },
+            "reviewEntry": {
+              "type": "object",
+              "properties": {
+                "weeklyInclusion": { "type": "string" },
+                "triggerSignal": { "type": "string" }
+              },
+              "required": ["weeklyInclusion", "triggerSignal"]
+            }
+          },
+          "required": ["masteryCheck", "sinkEntry", "retestSchedule", "reviewEntry"]
         }
       }
     },

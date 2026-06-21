@@ -17,6 +17,15 @@
     <-> 物理错误DNA（物理错题交接与深度分析回写）
 ```
 
+纵向飞轮链（错因诊断后强制推进，见各上游 SKILL「飞轮闭环出口」块）
+```text
+错题诊断(correction-notebook / *-error-dna)
+    ──①掌握验证──> feynman-learning / science-solving-four-steps
+    ──②沉淀────> cornell-notes（线索栏）
+    ──③复测────> im-reminder（T+1/T+3/T+7/T+14 间隔）
+    ──④复盘────> weekly-review（本周纳入 + 触发信号）
+```
+
 ### 9.2 与数学错误DNA的协作协议
 
 本SKILL与"数学错误DNA"构成**通用层→专属层**的纵向协作关系，协议如下：
@@ -257,6 +266,23 @@
 
 
 ---
+
+### 9.4 纵向飞轮交接协议（flywheel_handoff）
+
+错因诊断完成后，上游 SKILL（correction-notebook / 各 *-error-dna）向飞轮下游接力时使用 `handoverType: "flywheel_handoff"`，payload 携带四要素。
+
+交接触发：错因分类完成 + 修复任务产出后，本轮强制产出（授权与否都产出；未授权只给建议字段）。
+
+四要素与目标 SKILL：
+
+| 要素 | 目标 SKILL | 必给内容 |
+|---|---|---|
+| ① 掌握验证 | feynman-learning（概念/图景类）/ science-solving-four-steps（方法/过程类变式） | 验证形式 + 通过判定标准 |
+| ② 沉淀入口 | correction-notebook（表面，去重）+ cornell-notes（概念混淆线索栏） | 字段摘要 + 授权状态 |
+| ③ 复测安排 | im-reminder | T+1→T+3→T+7→T+14 + 变式题形式 |
+| ④ 复盘入口 | weekly-review | 本周纳入项 + 触发信号 |
+
+去重：同一错题事件只产一条 flywheel_handoff；通用错题本与学科 DNA 的沉淀按 §9.2/§9.3 纵向去重规则，不重复存。
 
 ## 十、行为准则
 

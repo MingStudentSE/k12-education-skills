@@ -1,7 +1,7 @@
 ---
 name: correction-notebook
 display_name: ❌ 智能错题本
-version: 1.2.1
+version: 1.3.0
 author: K12 教育 AI 辅导系统
 category: 通用核心
 tags: [错题, 错因分析, 弱项预警, 学期报告, 错误反馈, 变式验证, 全科通用, 必装]
@@ -17,7 +17,7 @@ references:
   - references/handover-protocols.md
   - references/physics-dimension-mapping.md
   - schemas/handover-protocol.schema.json
-depends_on: learning-dna, math-error-dna, physics-error-dna
+depends_on: learning-dna, math-error-dna, physics-error-dna, feynman-learning, cornell-notes
 ---
 # ❌ 智能错题本 SKILL
 
@@ -45,7 +45,14 @@ depends_on: learning-dna, math-error-dna, physics-error-dna
 4. **四维归因**：在概念理解、计算/操作、审题习惯、策略选择中标注至少一类；各科细分见 `references/error-analysis-framework.md`。
 5. **订正与验证**：讲清一句话根因，安排同类、易混或跨场景变式题验证，形成再犯预警。
 6. **档案与预警**：按错题档案结构写入；同类错误 3 次、章节失分集中、费曼未掌握或 14 天未复习时触发预警。
-7. **跨技能交接**：数学/物理深度分析、IM 复测提醒、费曼验证、周报/月报按 `references/handover-protocols.md` 执行。
+7. **飞轮闭环出口（强制）**：错因分析+档案预警完成后，本轮必须按四要素产出飞轮推进链（掌握验证/沉淀入口/复测安排/复盘入口），格式见下方「飞轮闭环出口」块。跨 skill 交接按 `references/handover-protocols.md`（含新增 `flywheel_handoff` 纵向飞轮协议）执行。
+
+## 飞轮闭环出口（本轮错因必须推进）
+
+- ① 掌握验证：概念类错因→触发 `feynman-learning`（让生自己复述+画图景）；方法/过程/计算类→出1道变式（`science-solving-four-steps`，独立做到第一步）。给通过判定：学生能说出/画出__算掌握。
+- ② 沉淀入口：通用错题本记表面+对应学科DNA记根因（同一事件去重一条）；概念/模型混淆→同时写 `cornell-notes` 线索栏。给字段摘要+授权状态（未授权只给建议字段，不实写）。
+- ③ 复测安排：T+1→T+3→T+7→T+14 间隔序列，复测用变式题（非原题），载体 `im-reminder`（授权后）。
+- ④ 复盘入口：本题+本周同类纳入 `weekly-review`，给触发信号（同类累计≥3 或 复测未过）。
 
 ## 失败模式与红线
 
@@ -56,6 +63,7 @@ depends_on: learning-dna, math-error-dna, physics-error-dna
 - **不得未授权写入**：长期档案、提醒、画像和跨 SKILL 共享都要先说明路径并获得授权。
 - **不得重复触发专属技能**：数学顽固弱项由数学错误 DNA 处理；物理顽固弱项、五维子类型和焦虑处理由物理错误 DNA 处理。
 - **不得伪造指针**：本技能 schema 只引用 `schemas/handover-protocol.schema.json`，禁止再指向其他技能目录。
+- **不得分析完就结束**：错因分析后必须产出飞轮闭环出口四要素；只归档/预警而无掌握验证、复测时间点、复盘入口，等同本 SKILL `references/handover-protocols.md` 行为准则明令禁止的"分析完就结束"。
 
 ## 物理映射与 schema 要点
 

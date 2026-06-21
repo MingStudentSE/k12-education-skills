@@ -1,7 +1,7 @@
 ---
 name: history-error-dna
 display_name: 🧬 历史错误DNA
-version: 1.0.0
+version: 1.1.0
 author: K12 教育 AI 辅导系统
 category: 历史专项
 tags: [历史, 错题, 错误追踪, 弱项分析, 时空诊断, 历史焦虑, 月报, 授权可控]
@@ -13,7 +13,7 @@ references:
   - references/history-error-dimension-table.md
   - references/history-concept-confusion-map.md
   - references/history-anxiety-handling.md
-depends_on: learning-dna, history-problem-coach, correction-notebook
+depends_on: learning-dna, history-problem-coach, correction-notebook, feynman-learning
 ---
 
 # history-error-dna
@@ -40,6 +40,13 @@ depends_on: learning-dna, history-problem-coach, correction-notebook
 4. **生成训练**：围绕同一根因给 2-5 个由近到远的变式或复测任务，并标明每题训练目标。
 5. **沉淀记录**：需要写档案、周报、提醒或跨 Skill 汇总时，遵守授权、最小记录和可删除原则。
 
+## 飞轮闭环出口（本轮错因必须推进）
+
+- ① 掌握验证：时空错乱/史料误读类→触发 `feynman-learning`（让生自己复述时空框架+史料证据链）；因果/评价类→出1道变式（`history-problem-coach`，独立做到第一步）。给通过判定：学生能独立说清时空与证据__算掌握。
+- ② 沉淀入口：通用错题本记表面+本DNA记根因（同一事件去重一条）；概念混淆→同时写康奈尔线索栏。给字段摘要+授权状态（未授权只给建议字段，不实写）。
+- ③ 复测安排：T+1→T+3→T+7→T+14 间隔序列，复测用变式题（非原题），载体 `im-reminder`（授权后）。
+- ④ 复盘入口：本题+本周同类纳入 `weekly-review`，给触发信号（同类累计≥3 或 复测未过）。
+
 ## 失败模式与红线
 
 - 禁止把错误归因为“粗心、不认真、笨”等无教学信息量标签。
@@ -47,6 +54,7 @@ depends_on: learning-dna, history-problem-coach, correction-notebook
 - 禁止代写作文、作业、考试答案；可以示范结构、提示下一步和解释评价标准。
 - 禁止引用不存在的 references、schemas 或外部文件；复杂细节必须回读 `references/full-spec.md`。
 - 禁止把本技能运行时依赖仓库根目录 `references/` 或其他 Skill 目录。
+- 禁止分析完就结束：错因诊断后必须产出飞轮闭环出口四要素；只给训练而无掌握验证/沉淀/复测/复盘推进，等同"分析完就结束"。
 
 ## references 索引
 

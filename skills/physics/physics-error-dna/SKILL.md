@@ -1,7 +1,7 @@
 ---
 name: physics-error-dna
 display_name: 🧬 物理错误DNA
-version: 1.0.0
+version: 1.1.0
 author: K12 教育 AI 辅导系统
 category: 物理专项
 tags: [物理, 错题, 错误追踪, 弱项分析, 图景诊断, 物理焦虑, 月报, 授权可控]
@@ -14,7 +14,7 @@ references:
   - references/physics-concept-confusion-map.md
   - references/physics-math-tools-checklist.md
   - references/physics-diagram-guide.md
-depends_on: learning-dna, physics-problem-coach, correction-notebook
+depends_on: learning-dna, physics-problem-coach, correction-notebook, feynman-learning
 ---
 
 # 🧬 物理错误DNA SKILL
@@ -30,6 +30,7 @@ depends_on: learning-dna, physics-problem-coach, correction-notebook
 3. **给出证据**：引用学生原步骤、图、口述或历史重复点说明为什么这样判。
 4. **产出修复任务**：给一个本周可执行的小任务和下一次检查方式。
 5. **授权写入**：只有用户同意后才写档案、同步 learning-dna、创建提醒或月报。
+6. **飞轮闭环出口（强制）**：诊断+修复任务完成后，本轮对话结束前必须按四要素产出飞轮推进链（见 §7 出口格式）。漏任一要素 = D4 直接降分，等同失败红线。
 
 ## 2. 与 `general/correction-notebook` 的边界
 
@@ -104,6 +105,12 @@ depends_on: learning-dna, physics-problem-coach, correction-notebook
 1. 先做：
 2. 自检：
 3. 下次复查：
+
+## 飞轮闭环出口（本轮错因必须推进）
+- ① 掌握验证：主错因∈{P图景/C概念}→触发 `feynman-learning`（让生自己复述+画图景）；∈{F/R/T}→出1道变式（`science-solving-four-steps`，独立做到第一步）。给通过判定：学生能说出/画出__算掌握。
+- ② 沉淀入口：通用错题本记表面+本DNA记根因（同一事件去重一条）；概念/模型混淆→同时写康奈尔线索栏。给字段摘要+授权状态（未授权只给建议字段，不实写）。
+- ③ 复测安排：T+1→T+3→T+7→T+14 间隔序列，复测用变式题（非原题），载体 `im-reminder`（授权后）。
+- ④ 复盘入口：本题+本周同类纳入 `weekly-review`，给触发信号（同类累计≥3 或 复测未过）。
 ```
 
 ## 参考资源
@@ -119,3 +126,4 @@ depends_on: learning-dna, physics-problem-coach, correction-notebook
 - 只要答案：可给快速答案，但说明不会自动写入 DNA。
 - 边界不清：先交给通用错题本记录表面事实，再由本 SKILL 做物理根因扩展。
 - 高风险联动：未获授权不得更新长期画像、月报、提醒或跨 SKILL 共享。
+- 分析完就结束：错因诊断后必须产出飞轮闭环出口四要素；只给修复任务而无掌握验证/沉淀/复测/复盘推进，等同 `correction-notebook` 行为准则明令禁止的"分析完就结束"。

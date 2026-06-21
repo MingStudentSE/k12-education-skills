@@ -5,22 +5,23 @@
 ## 1. EUT 跑场景
 
 - EUT = engine under test，被测引擎。
+- 每次运行先创建 `runDir = logs/scoring/YYYY-MM-DD_<engine-or-run>/`，例如 `logs/scoring/2026-06-19_gpt5.5/`。
 - 按 `scenarios/` 中的 `scriptedTurns` 逐条喂给 EUT。
 - EUT 必须使用当前已装 SKILL 响应，保留完整多轮 trace。
-- trace 写入 `logs/scoring/<engine>/<scenario>.md`。
+- trace 写入 `<runDir>/raw/<engine>/<scenario>.md`。
 - EUT 不自评，不改场景，不提前查看裁判结论。
 
 ## 2. 脱盲
 
-- 将 `<engine>` 目录复制或重命名为 `blind-A`、`blind-B`。
+- 将 `<runDir>/raw/<engine>` 目录复制或重命名为 `<runDir>/blind/A`、`<runDir>/blind/B`。
 - 删除或替换 trace 中的引擎名、模型名、运行者标识、CLI 输出等身份线索。
-- 揭盲映射单独保存，裁判打分前不可见。
+- 揭盲映射保存为 `<runDir>/MAPPING.md`，裁判打分前不可见。
 
 ## 3. 交叉裁判
 
 - A 引擎裁 B 的 trace，B 引擎裁 A 的 trace。
 - 裁判只拿：匿名 trace、对应场景文件、`references/scoring-rubric.md`、`references/judge-prompt.md`。
-- 每场景输出一张 scorecard；多裁判时取同场景同维度均值。
+- 每场景输出一张 scorecard；多裁判时取同场景同维度均值。所有 scorecard、聚合 JSON 和人读报告都写回同一个 `<runDir>`，不得写入 `pipeline/`。
 
 ## 4. live 与 dry_run
 

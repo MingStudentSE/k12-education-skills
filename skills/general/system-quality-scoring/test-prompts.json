@@ -2,16 +2,21 @@
   {
     "id": "run-s1-scorecard",
     "prompt": "请用打分校验器对这套体系跑一遍 S1 场景。",
-    "expected": "应按 S1 场景产出符合 scorecard.schema.json 的 scorecard；D1-D8 每维给 1-10 分和 trace 证据，并标明 evalMode 是 live 还是 dry_run。"
+    "expected": "应先创建 logs/scoring/YYYY-MM-DD_<engine-or-run>/ 运行目录；按 S1 场景产出符合 scorecard.schema.json 的 scorecard，并同时按 references/report-template.md 写入该目录下的 REPORT.md；D1-D8 每维给 1-10 分和 trace 证据，报告中标明 evalMode 是 live 还是 dry_run。"
   },
   {
     "id": "blind-two-traces-compare",
     "prompt": "盲测：两份匿名 trace，帮我打分并揭盲对比。",
-    "expected": "应先确认 trace 已脱盲，按固定 judge-prompt 交叉裁判；scorecard 锁定后再揭盲，对比维度差异和证据。"
+    "expected": "应先确认 trace 已脱盲，并确认所有产物属于同一个 logs/scoring/YYYY-MM-DD_<engine-or-run>/ 运行目录；按固定 judge-prompt 交叉裁判；scorecard 锁定后再揭盲，对比维度差异和证据，并按固定报告模板写入该目录下包含评估概况、场景得分、8维雷达、总分、核心发现、免责声明和产物路径的 REPORT.md。"
   },
   {
     "id": "regression-before-after",
     "prompt": "系统刚升级，跑回归基准看分数变化。",
-    "expected": "应要求 before/after 使用相同 rubricVersion 与 scenarioSetVersion；输出分数变化、维度变化、证据片段和是否触发红线封顶。"
+    "expected": "应要求 before/after 使用相同 rubricVersion 与 scenarioSetVersion；输出分数变化、维度变化、证据片段和是否触发红线封顶，同时把 scorecard、trace 和固定格式回归报告写入同一个 logs/scoring/YYYY-MM-DD_<engine-or-run>/ 运行目录。"
+  },
+  {
+    "id": "dry-run-self-eval-report-format",
+    "prompt": "用 dry_run 同模型自评方式测 DeepSeek V4 Pro，覆盖 S1/S3/S4。",
+    "expected": "必须在 meta.evalMode 标注 dry_run，报告评估概况写明同模型自评、场景覆盖 3/5、Rubric 和系统版本；必须包含场景得分表、8维雷达、加权总分、红线状态、三大优势、两大短板、重要免责声明和同一个 runDir 下的 scorecard/trace/report 产物路径，不得只输出口头摘要。"
   }
 ]

@@ -1,7 +1,7 @@
 ---
 name: chemistry-error-dna
 display_name: 🧬 化学错误DNA
-version: 1.0.0
+version: 1.1.0
 author: K12 教育 AI 辅导系统
 category: 化学专项
 tags: [化学, 错题, 错因分析, 宏微符, 守恒, 实验证据, 授权可控]
@@ -14,7 +14,7 @@ references:
   - references/chemistry-error-dimension-table.md
   - references/chemistry-concept-confusion-map.md
   - references/chemistry-calculation-checklist.md
-depends_on: learning-dna, correction-notebook
+depends_on: learning-dna, correction-notebook, feynman-learning
 ---
 
 # 🧬 化学错误DNA SKILL
@@ -41,16 +41,17 @@ depends_on: learning-dna, correction-notebook
 - **学生只要答案**：可给必要答案，但不把“答案会了”当成错因修复完成。
 - **长期记录**：未经明确同意，不写入长期档案、不发提醒、不跨 SKILL 共享。
 - **安全边界**：实验类错因只分析安全课堂证据，不指导危险操作。
+- **不得分析完就结束**：错因诊断后必须产出飞轮闭环出口四要素；只给修复任务而无掌握验证/沉淀/复测/复盘推进，等同"分析完就结束"。
 
 ---
 
-## 学习科学约束
+## 学习科学约束与飞轮闭环（单目标：一次只定位一个主错因）
 
-- **单目标**：一次只定位一个主错因，复杂题可记录次错因但不同时修复全部问题。
-- **主动回忆**：先让学生复述当时怎么想、哪一步开始不确定。
-- **错误反馈闭环**：每个错因必须有“根因 → 修正动作 → 再犯预警 → 变式验证”。
-- **交错迁移**：修复后换概念、换反应、换实验或换数据复测。
-- **分散复习**：顽固 Ch1/Ch3/Ch5 错因建议次日和 3 天后复测；提醒需授权。
+### 飞轮闭环出口（本轮错因必须推进）
+- ① 掌握验证：Ch1宏微符/Ch2概念→`feynman-learning`（画微粒图/三列表+口述意义）；Ch3守恒/Ch4实验/Ch5计算→1道变式（对应化学教练，独立做到第一步）。判定：能独立说清宏观→微观→符号算掌握。
+- ② 沉淀入口：通用错题本记表面+本DNA记根因（同一事件去重一条）；概念混淆→同时写康奈尔线索栏。给字段摘要+授权状态（未授权只给建议字段，不实写）。
+- ③ 复测安排：T+1→T+3→T+7→T+14 间隔序列，复测用变式题（非原题），载体 `im-reminder`（授权后）。
+- ④ 复盘入口：本题+本周同类纳入 `weekly-review`，给触发信号（同类累计≥3 或 复测未过）。
 
 ---
 

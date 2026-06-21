@@ -1,7 +1,7 @@
 ---
 name: math-error-dna
 display_name: 🧬 数学错误DNA
-version: 1.1.0
+version: 1.2.0
 author: K12 教育 AI 辅导系统
 category: 数学专项
 tags: [数学, 错题, 错误追踪, 弱项分析, 数学焦虑, 月报, 授权可控]
@@ -15,7 +15,7 @@ references:
   - references/math-error-dimension-table.md
   - references/reading-habits.md
   - references/math-error-dna-operations.md
-depends_on: learning-dna, math-problem-solving-coach, correction-notebook
+depends_on: learning-dna, math-problem-solving-coach, correction-notebook, feynman-learning
 ---
 
 # 🧬 数学错误DNA
@@ -63,6 +63,13 @@ depends_on: learning-dna, math-problem-solving-coach, correction-notebook
 - **档案动作**：写明“未授权不写入”或“已获授权，写入/回写字段如下”。
 - **复测计划**：次日/3天后/下月月报等安排必须说明是否由 `correction-notebook` 统一调度。
 
+## 飞轮闭环出口（本轮错因必须推进）
+
+- ① 掌握验证：概念模糊类（C）→触发 `feynman-learning`（让生自己复述概念+举一反例）；计算/方法/读题类（B/M/R）→出1道变式（`math-problem-solving-coach`，独立做到第一步）。给通过判定：学生能独立说清__算掌握。
+- ② 沉淀入口：通用错题本记表面+本DNA记根因（同一事件去重一条）；概念混淆→同时写康奈尔线索栏。给字段摘要+授权状态（未授权只给建议字段，不实写）。
+- ③ 复测安排：T+1→T+3→T+7→T+14 间隔序列，复测用变式题（非原题），载体 `im-reminder`（授权后）。
+- ④ 复盘入口：本题+本周同类纳入 `weekly-review`，给触发信号（同类累计≥3 或 复测未过）。
+
 ## 失败模式与红线
 
 - 不把“粗心”当终点；必须继续定位到符号、分数、概念、方法或读题等可训练根因。
@@ -71,6 +78,7 @@ depends_on: learning-dna, math-problem-solving-coach, correction-notebook
 - 不在未授权情况下建立长期档案、设置提醒、写入学习DNA或向周复盘外发完整记录。
 - 不重复触发预警：数学同类错误3次由本 Skill 执行突破，通用错题本只做统一入口与调度。
 - 不用“你数学不行”这类标签；用具体数据把焦虑落到可解决任务。
+- 不分析完就结束：错因诊断后必须产出飞轮闭环出口四要素；只给纠偏策略而无掌握验证/沉淀/复测/复盘推进，等同"分析完就结束"。
 
 ## references 索引
 

@@ -12,8 +12,8 @@
       "properties": {
         "runId": { "type": "string", "maxLength": 120 },
         "timestamp": { "type": "string", "format": "date-time" },
-        "rubricVersion": { "type": "string", "enum": ["1.0.0"] },
-        "scenarioSetVersion": { "type": "string", "enum": ["1.0.0"] },
+        "rubricVersion": { "type": "string", "enum": ["1.0.0", "1.1.0"] },
+        "scenarioSetVersion": { "type": "string", "enum": ["1.0.0", "1.1.0"] },
         "systemVersion": { "type": "string", "maxLength": 80 },
         "evaluatorEngine": {
           "type": "string",
