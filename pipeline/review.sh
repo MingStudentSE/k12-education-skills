@@ -9,7 +9,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 BASELINE="${K12_BASELINE:-$ROOT/backup-pre-fix}"
 SUBJECTS="${1:-all}"
 if [ "$SUBJECTS" = "all" ]; then
-  SUBJECTS="$(find "$ROOT/skills" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort)"
+  SUBJECTS="$(find "$ROOT/skills" -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | sort)"
 fi
 
 PASSCNT=0
@@ -64,7 +64,7 @@ for sub in $SUBJECTS; do
     fi
 
     if [ "$BASELINE_AVAILABLE" -eq 0 ] || [ ! -f "$old/SKILL.md" ]; then
-      echo "  [4]KEYWORDS skip（无旧基线：$BASELINE）"
+      echo "  [4]KEYWORDS skip（无旧基线：${BASELINE}）"
       echo "  [5]ANCHOR skip（无旧基线）"
       [ "$bad" -eq 0 ] && [ "$lines" -le 150 ] && PASSCNT=$((PASSCNT+1))
       continue
@@ -72,7 +72,7 @@ for sub in $SUBJECTS; do
 
     tmp="$(mktemp)"
     miss="$(mktemp)"
-    grep -oP '[\x{4e00}-\x{9fa5}]{4,}' "$old/SKILL.md" | sort -u > "$tmp"
+    python3 -c 'import re,sys;print("\n".join(sorted(set(re.findall(r"[一-龥]{4,}",open(sys.argv[1],encoding="utf-8").read())))))' "$old/SKILL.md" > "$tmp"
     total="$(wc -l < "$tmp")"
     while IFS= read -r kw; do
       grep -rqF --exclude=test-prompts.json "$kw" "$new" || echo "$kw" >> "$miss"
@@ -91,7 +91,7 @@ for sub in $SUBJECTS; do
         if grep -rqF --exclude=test-prompts.json "$t" "$new"; then
           :
         else
-          k="$(echo "$t" | grep -oP '[\x{4e00}-\x{9fa5}]{4,}' | head -1)"
+          k="$(python3 -c 'import re,sys;print((re.findall(r"[一-龥]{4,}",sys.argv[1]) or [""])[0])' "$t")"
           if [ -n "$k" ] && grep -rqF --exclude=test-prompts.json "$k" "$new"; then
             echo "    PART $t"
           else
