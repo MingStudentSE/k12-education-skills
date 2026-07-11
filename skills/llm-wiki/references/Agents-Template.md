@@ -18,14 +18,13 @@ Use this template when initializing a new LLM Wiki.
 ```
 
 ## Conventions
-- 编译页和输出页使用小写 kebab-case 文件名，例如 `transformer-architecture.md`。
+- 文件名和子页面使用首字母大写，无空格；多词用连字符，例如 `Transformer-Architecture.md`。
 - 每个 wiki 页面必须有 YAML frontmatter。
 - 每个新 wiki 页面至少有 2 个有意义的出站 `[[wikilinks]]`。
 - 更新页面时必须更新 `updated` 日期。
 - 新页面必须加入 `index.md`。
 - 每个维护动作必须追加到 `log.md`。
 - 多来源综合页面应使用 provenance markers 标明关键 claims 的来源。
-- `200-Wiki/SCHEMA.md` 是 frontmatter、tag taxonomy、页面阈值和更新政策的单一来源；本文件不复制第二套 taxonomy。
 
 ## Frontmatter
 ```yaml
@@ -53,8 +52,8 @@ sha256: <body-hash>
 
 `sha256` 只对 frontmatter 之后的正文计算，用于重入库时判断来源是否漂移。
 
-## Schema
-领域、Tag Taxonomy、页面阈值与更新政策见 `200-Wiki/SCHEMA.md`。使用新 tag 前先更新 SCHEMA。
+## Tag Taxonomy
+[定义 10-20 个顶层标签。使用新 tag 前必须先加入这里。]
 
 ## Page Thresholds
 - 实体/概念出现在 2+ 来源，或是单一来源的核心对象，才创建页面。

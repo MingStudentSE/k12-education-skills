@@ -1,6 +1,6 @@
 # index.md Template
 
-`index.md` 是 wiki 的导航骨架。每个 active 编译页和保存的 Output 必须出现一次；`SCHEMA.md`、`index.md`、`log.md` 与 Raw 来源不列作知识条目。
+`index.md` 是 wiki 的导航骨架。每个 wiki 页面都必须出现一次。
 
 ```markdown
 # Wiki Index

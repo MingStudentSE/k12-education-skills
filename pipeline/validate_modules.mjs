@@ -32,7 +32,8 @@ for (const name of expected) {
   const dir = join(SKILLS, name);
   const text = readFileSync(join(dir, 'SKILL.md'), 'utf8');
   const lines = text.split(/\r?\n/).length;
-  assert(lines <= 150, `${name}/SKILL.md is shallow/noisy at ${lines} lines; keep interface <=150`);
+  const maxLines = name === 'llm-wiki' ? 300 : 150;
+  assert(lines <= maxLines, `${name}/SKILL.md is shallow/noisy at ${lines} lines; keep interface <=${maxLines}`);
   const header = text.match(/^---\n([\s\S]*?)\n---/);
   assert(header, `${name}: missing YAML frontmatter`);
   assert(new RegExp(`^name:\\s*${name}$`, 'm').test(header[1]), `${name}: frontmatter name mismatch`);
@@ -99,6 +100,9 @@ for (const file of ['night-run.mjs', 'server.mjs', 'build-dashboard.mjs', 'autho
 const wikiMain = readFileSync(join(SKILLS, 'llm-wiki/SKILL.md'), 'utf8');
 for (const layer of ['100-Raw', '200-Wiki', '300-Output', '999-Assets']) assert(wikiMain.includes(layer), `llm-wiki missing ${layer}`);
 assert(!wikiMain.includes('.codex/skills'), 'llm-wiki must not hardcode deprecated Codex path');
+for (const canonicalSection of ['Resume an Existing Wiki', '200-Wiki/SCHEMA.md', 'Core Operations', 'Bulk ingest', 'Obsidian link-integrity loop', 'V3 Module Boundary']) {
+  assert(wikiMain.includes(canonicalSection), `llm-wiki lost canonical Hermes workflow section: ${canonicalSection}`);
+}
 
 const installPromptPath = join(ROOT, 'docs/ai-install-prompt.md');
 assert(existsSync(installPromptPath), 'AI-first install prompt is missing');

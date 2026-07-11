@@ -8,7 +8,7 @@ Use this when the user asks to lint, audit, or health-check an LLM Wiki.
 2. **Orphan pages** — pages with no inbound wikilinks.
 3. **Index completeness** — every `200-Wiki/` page appears in `index.md`.
 4. **Frontmatter** — required fields are present.
-5. **Tag taxonomy** — tags are defined in `200-Wiki/SCHEMA.md`.
+5. **Tag taxonomy** — tags are defined in `AGENTS.md`.
 6. **Stale content** — pages are clearly outdated.
 7. **Contradictions** — `contested: true` or `contradictions:` pages.
 8. **Quality signals** — `confidence: low`, or single-source pages with no confidence field.
