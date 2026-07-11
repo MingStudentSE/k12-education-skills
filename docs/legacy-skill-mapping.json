@@ -1,0 +1,385 @@
+{
+  "version": "V3.0",
+  "legacySkillCount": 63,
+  "productModuleCount": 4,
+  "mappings": [
+    {
+      "legacy_skill": "biology-concept-map-builder",
+      "legacy_path": "skills/biology/biology-concept-map-builder",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/biology/biology-concept-map-builder/playbook.md"
+    },
+    {
+      "legacy_skill": "biology-error-dna",
+      "legacy_path": "skills/biology/biology-error-dna",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/biology/biology-error-dna/playbook.md"
+    },
+    {
+      "legacy_skill": "biology-experiment-inquiry",
+      "legacy_path": "skills/biology/biology-experiment-inquiry",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/biology/biology-experiment-inquiry/playbook.md"
+    },
+    {
+      "legacy_skill": "biology-process-explainer",
+      "legacy_path": "skills/biology/biology-process-explainer",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/biology/biology-process-explainer/playbook.md"
+    },
+    {
+      "legacy_skill": "biology-structure-function-coach",
+      "legacy_path": "skills/biology/biology-structure-function-coach",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/biology/biology-structure-function-coach/playbook.md"
+    },
+    {
+      "legacy_skill": "chemistry-concept-explainer",
+      "legacy_path": "skills/chemistry/chemistry-concept-explainer",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/chemistry/chemistry-concept-explainer/playbook.md"
+    },
+    {
+      "legacy_skill": "chemistry-error-dna",
+      "legacy_path": "skills/chemistry/chemistry-error-dna",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/chemistry/chemistry-error-dna/playbook.md"
+    },
+    {
+      "legacy_skill": "chemistry-lab-inquiry",
+      "legacy_path": "skills/chemistry/chemistry-lab-inquiry",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/chemistry/chemistry-lab-inquiry/playbook.md"
+    },
+    {
+      "legacy_skill": "chemistry-particle-modeler",
+      "legacy_path": "skills/chemistry/chemistry-particle-modeler",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/chemistry/chemistry-particle-modeler/playbook.md"
+    },
+    {
+      "legacy_skill": "chemistry-reaction-coach",
+      "legacy_path": "skills/chemistry/chemistry-reaction-coach",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/chemistry/chemistry-reaction-coach/playbook.md"
+    },
+    {
+      "legacy_skill": "chinese-classical-revival",
+      "legacy_path": "skills/chinese/chinese-classical-revival",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/chinese/chinese-classical-revival/playbook.md"
+    },
+    {
+      "legacy_skill": "chinese-grammar-tracker",
+      "legacy_path": "skills/chinese/chinese-grammar-tracker",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/chinese/chinese-grammar-tracker/playbook.md"
+    },
+    {
+      "legacy_skill": "chinese-material-library",
+      "legacy_path": "skills/chinese/chinese-material-library",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/chinese/chinese-material-library/playbook.md"
+    },
+    {
+      "legacy_skill": "chinese-reading-decoder",
+      "legacy_path": "skills/chinese/chinese-reading-decoder",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/chinese/chinese-reading-decoder/playbook.md"
+    },
+    {
+      "legacy_skill": "chinese-writing-coach",
+      "legacy_path": "skills/chinese/chinese-writing-coach",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/chinese/chinese-writing-coach/playbook.md"
+    },
+    {
+      "legacy_skill": "english-grammar-coach",
+      "legacy_path": "skills/english/english-grammar-coach",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/english/english-grammar-coach/playbook.md"
+    },
+    {
+      "legacy_skill": "english-listening-trainer",
+      "legacy_path": "skills/english/english-listening-trainer",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/english/english-listening-trainer/playbook.md"
+    },
+    {
+      "legacy_skill": "english-speaking-coach",
+      "legacy_path": "skills/english/english-speaking-coach",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/english/english-speaking-coach/playbook.md"
+    },
+    {
+      "legacy_skill": "english-vocabulary-dna",
+      "legacy_path": "skills/english/english-vocabulary-dna",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/english/english-vocabulary-dna/playbook.md"
+    },
+    {
+      "legacy_skill": "english-writing-coach",
+      "legacy_path": "skills/english/english-writing-coach",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/english/english-writing-coach/playbook.md"
+    },
+    {
+      "legacy_skill": "cornell-notes",
+      "legacy_path": "skills/general/cornell-notes",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/general/cornell-notes/playbook.md"
+    },
+    {
+      "legacy_skill": "correction-notebook",
+      "legacy_path": "skills/general/correction-notebook",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/general/correction-notebook/playbook.md"
+    },
+    {
+      "legacy_skill": "cross-subject-detective",
+      "legacy_path": "skills/general/cross-subject-detective",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/general/cross-subject-detective/playbook.md"
+    },
+    {
+      "legacy_skill": "educational-llm-wiki",
+      "legacy_path": "skills/general/educational-llm-wiki",
+      "owner": "llm-wiki",
+      "new_path": "skills/llm-wiki"
+    },
+    {
+      "legacy_skill": "educational-skill-creator",
+      "legacy_path": "skills/general/educational-skill-creator",
+      "owner": "k12-skill-studio",
+      "new_path": "skills/k12-skill-studio/references/playbooks/studio/educational-skill-creator/playbook.md"
+    },
+    {
+      "legacy_skill": "feynman-learning",
+      "legacy_path": "skills/general/feynman-learning",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/general/feynman-learning/playbook.md"
+    },
+    {
+      "legacy_skill": "im-reminder",
+      "legacy_path": "skills/general/im-reminder",
+      "owner": "k12-automation",
+      "new_path": "skills/k12-automation/references/playbooks/automation/im-reminder/playbook.md"
+    },
+    {
+      "legacy_skill": "interest-explorer",
+      "legacy_path": "skills/general/interest-explorer",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/general/interest-explorer/playbook.md"
+    },
+    {
+      "legacy_skill": "k12-learning-router",
+      "legacy_path": "skills/general/k12-learning-router",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/SKILL.md"
+    },
+    {
+      "legacy_skill": "learning-360-review",
+      "legacy_path": "skills/general/learning-360-review",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/general/learning-360-review/playbook.md"
+    },
+    {
+      "legacy_skill": "learning-dna",
+      "legacy_path": "skills/general/learning-dna",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/general/learning-dna/playbook.md"
+    },
+    {
+      "legacy_skill": "learning-plan",
+      "legacy_path": "skills/general/learning-plan",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/general/learning-plan/playbook.md"
+    },
+    {
+      "legacy_skill": "science-solving-four-steps",
+      "legacy_path": "skills/general/science-solving-four-steps",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/general/science-solving-four-steps/playbook.md"
+    },
+    {
+      "legacy_skill": "skill-coordinator",
+      "legacy_path": "skills/general/skill-coordinator",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/general/skill-coordinator/playbook.md"
+    },
+    {
+      "legacy_skill": "student-quick-assessment",
+      "legacy_path": "skills/general/student-quick-assessment",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/general/student-quick-assessment/playbook.md"
+    },
+    {
+      "legacy_skill": "system-quality-scoring",
+      "legacy_path": "skills/general/system-quality-scoring",
+      "owner": "k12-skill-studio",
+      "new_path": "skills/k12-skill-studio/references/playbooks/studio/system-quality-scoring/playbook.md"
+    },
+    {
+      "legacy_skill": "time-focus-coach",
+      "legacy_path": "skills/general/time-focus-coach",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/general/time-focus-coach/playbook.md"
+    },
+    {
+      "legacy_skill": "weekly-review",
+      "legacy_path": "skills/general/weekly-review",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/general/weekly-review/playbook.md"
+    },
+    {
+      "legacy_skill": "geography-error-dna",
+      "legacy_path": "skills/geography/geography-error-dna",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/geography/geography-error-dna/playbook.md"
+    },
+    {
+      "legacy_skill": "geography-map-coach",
+      "legacy_path": "skills/geography/geography-map-coach",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/geography/geography-map-coach/playbook.md"
+    },
+    {
+      "legacy_skill": "geography-problem-coach",
+      "legacy_path": "skills/geography/geography-problem-coach",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/geography/geography-problem-coach/playbook.md"
+    },
+    {
+      "legacy_skill": "geography-process-explainer",
+      "legacy_path": "skills/geography/geography-process-explainer",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/geography/geography-process-explainer/playbook.md"
+    },
+    {
+      "legacy_skill": "geography-region-analyzer",
+      "legacy_path": "skills/geography/geography-region-analyzer",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/geography/geography-region-analyzer/playbook.md"
+    },
+    {
+      "legacy_skill": "history-causation-explainer",
+      "legacy_path": "skills/history/history-causation-explainer",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/history/history-causation-explainer/playbook.md"
+    },
+    {
+      "legacy_skill": "history-error-dna",
+      "legacy_path": "skills/history/history-error-dna",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/history/history-error-dna/playbook.md"
+    },
+    {
+      "legacy_skill": "history-evidence-analysis",
+      "legacy_path": "skills/history/history-evidence-analysis",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/history/history-evidence-analysis/playbook.md"
+    },
+    {
+      "legacy_skill": "history-problem-coach",
+      "legacy_path": "skills/history/history-problem-coach",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/history/history-problem-coach/playbook.md"
+    },
+    {
+      "legacy_skill": "history-timeline-coach",
+      "legacy_path": "skills/history/history-timeline-coach",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/history/history-timeline-coach/playbook.md"
+    },
+    {
+      "legacy_skill": "math-concept-explainer",
+      "legacy_path": "skills/math/math-concept-explainer",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/math/math-concept-explainer/playbook.md"
+    },
+    {
+      "legacy_skill": "math-error-dna",
+      "legacy_path": "skills/math/math-error-dna",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/math/math-error-dna/playbook.md"
+    },
+    {
+      "legacy_skill": "math-gradient-trainer",
+      "legacy_path": "skills/math/math-gradient-trainer",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/math/math-gradient-trainer/playbook.md"
+    },
+    {
+      "legacy_skill": "math-problem-solving-coach",
+      "legacy_path": "skills/math/math-problem-solving-coach",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/math/math-problem-solving-coach/playbook.md"
+    },
+    {
+      "legacy_skill": "math-word-problem-coach",
+      "legacy_path": "skills/math/math-word-problem-coach",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/math/math-word-problem-coach/playbook.md"
+    },
+    {
+      "legacy_skill": "physics-concept-intuition",
+      "legacy_path": "skills/physics/physics-concept-intuition",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/physics/physics-concept-intuition/playbook.md"
+    },
+    {
+      "legacy_skill": "physics-error-dna",
+      "legacy_path": "skills/physics/physics-error-dna",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/physics/physics-error-dna/playbook.md"
+    },
+    {
+      "legacy_skill": "physics-lab-coach",
+      "legacy_path": "skills/physics/physics-lab-coach",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/physics/physics-lab-coach/playbook.md"
+    },
+    {
+      "legacy_skill": "physics-modeling-coach",
+      "legacy_path": "skills/physics/physics-modeling-coach",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/physics/physics-modeling-coach/playbook.md"
+    },
+    {
+      "legacy_skill": "physics-problem-coach",
+      "legacy_path": "skills/physics/physics-problem-coach",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/physics/physics-problem-coach/playbook.md"
+    },
+    {
+      "legacy_skill": "politics-application-coach",
+      "legacy_path": "skills/politics/politics-application-coach",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/politics/politics-application-coach/playbook.md"
+    },
+    {
+      "legacy_skill": "politics-concept-explainer",
+      "legacy_path": "skills/politics/politics-concept-explainer",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/politics/politics-concept-explainer/playbook.md"
+    },
+    {
+      "legacy_skill": "politics-error-dna",
+      "legacy_path": "skills/politics/politics-error-dna",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/politics/politics-error-dna/playbook.md"
+    },
+    {
+      "legacy_skill": "politics-framework-coach",
+      "legacy_path": "skills/politics/politics-framework-coach",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/politics/politics-framework-coach/playbook.md"
+    },
+    {
+      "legacy_skill": "politics-value-reasoning",
+      "legacy_path": "skills/politics/politics-value-reasoning",
+      "owner": "k12-learning",
+      "new_path": "skills/k12-learning/references/playbooks/politics/politics-value-reasoning/playbook.md"
+    }
+  ]
+}

@@ -1,0 +1,1689 @@
+[
+  {
+    "source_skill": "biology-concept-map-builder",
+    "source_case": 1,
+    "id": "concept-map",
+    "prompt": "请用🌿 生物概念图谱教练帮我把光合作用这一章画成概念图，我总是只背原料和产物。",
+    "expected": "应先让学生列核心概念，再标关系词，组织原料、场所、条件、产物、能量转化和影响因素，并用题目或现象回测。"
+  },
+  {
+    "source_skill": "biology-concept-map-builder",
+    "source_case": 2,
+    "id": "confusing-terms",
+    "prompt": "我分不清种群、群落、生态系统，请用图谱和反例讲清楚。",
+    "expected": "应按层级关系区分同种生物、全部生物、生物加非生物环境，给正反例和迁移判断题。"
+  },
+  {
+    "source_skill": "biology-error-dna",
+    "source_case": 1,
+    "id": "structure-function-error",
+    "prompt": "请用🧬 生物错误DNA分析：我总是会背肺泡适合气体交换，但题目换成小肠绒毛就不会解释了。",
+    "expected": "应定位B2结构功能断裂，找结构特征到功能过程的断点，给结构-功能表、反例验证和迁移训练；不应只让学生背答案。"
+  },
+  {
+    "source_skill": "biology-error-dna",
+    "source_case": 2,
+    "id": "graph-error",
+    "prompt": "我生物图表题老是只写'有影响'，忘记看坐标和单位。请分析错因，但不要写入长期档案。",
+    "expected": "应归入B5图表信息与术语表达错误，给图表读取顺序和趋势句式，并明确未授权不写入档案或提醒。"
+  },
+  {
+    "source_skill": "biology-error-dna",
+    "source_case": 3,
+    "id": "correction-notebook-handoff",
+    "prompt": "这道生物错题已经进通用错题本了，请你只补充生物深度错因和修复任务，不要重复建错题。",
+    "expected": "应说明通用错题本记录题面和基础错因，本SKILL只回写B1-B5、根因、修复任务和复测建议，不重复记录。"
+  },
+  {
+    "source_skill": "biology-experiment-inquiry",
+    "source_case": 1,
+    "id": "variable-control",
+    "prompt": "请用🔬 生物实验探究教练帮我设计探究光照强度对金鱼藻光合作用影响的实验，要写变量、对照和数据记录。",
+    "expected": "应明确探究问题，自变量为光照强度，因变量可为气泡数等，控制温度、水量、材料等，设计对照/重复和数据记录表。"
+  },
+  {
+    "source_skill": "biology-experiment-inquiry",
+    "source_case": 2,
+    "id": "graph-analysis",
+    "prompt": "我有一张酶活性随温度变化的曲线，只会写'温度影响酶活性'，你帮我读图得结论。",
+    "expected": "应先读坐标和单位，描述先升后降或最适温度等趋势，引用数据范围，并说明结论不能无限外推。"
+  },
+  {
+    "source_skill": "biology-process-explainer",
+    "source_case": 1,
+    "id": "photosynthesis-chain",
+    "prompt": "请用🔁 生命过程机制解释器讲清楚光照减弱为什么会影响植物有机物积累，不要只背光合作用公式。",
+    "expected": "应定位光合作用起点终点，拆光照、叶绿体、物质和能量转化链，说明光照减弱影响哪个阶段并预测结果。"
+  },
+  {
+    "source_skill": "biology-process-explainer",
+    "source_case": 2,
+    "id": "circulation-process",
+    "prompt": "我知道肺泡适合气体交换，但不懂氧气怎么从肺到肌肉细胞，请用机制链解释。",
+    "expected": "应连接肺泡结构、毛细血管、血液循环、红细胞运输和组织细胞利用，形成从起点到终点的物质流。"
+  },
+  {
+    "source_skill": "biology-structure-function-coach",
+    "source_case": 1,
+    "id": "lung-alveoli",
+    "prompt": "请用🧫 生物结构与功能教练解释为什么肺泡适合气体交换。我不想只背'壁薄面积大'。",
+    "expected": "应先定位结构层级，再列肺泡壁薄、数量多、毛细血管丰富等结构特征，连接扩散距离和交换面积，并用反例验证。"
+  },
+  {
+    "source_skill": "biology-structure-function-coach",
+    "source_case": 2,
+    "id": "levels-confusion",
+    "prompt": "我分不清细胞、组织、器官、系统，能用人体消化系统举例讲清楚吗？",
+    "expected": "应按生命层级逐级说明，区分小肠上皮细胞、上皮组织、小肠器官和消化系统，并给迁移判断题。"
+  },
+  {
+    "source_skill": "chemistry-concept-explainer",
+    "source_case": 1,
+    "id": "substance-classification",
+    "prompt": "请用⚗️ 化学概念理解器讲清楚纯净物、混合物、单质、化合物。我选择题总是把空气和氧气混在一起。",
+    "expected": "应从生活/实验现象或物质样例出发，抽取分类标准，给出易混对比和反例，并用粒子种类验证空气、氧气、水等例子。"
+  },
+  {
+    "source_skill": "chemistry-concept-explainer",
+    "source_case": 2,
+    "id": "acid-base-salt",
+    "prompt": "我分不清酸性、酸、碱性、碱和盐，能不能别只给定义，用例子和微粒解释？",
+    "expected": "应区分性质和物质类别，使用H+、OH-、金属离子/酸根离子解释边界，给出正反例和迁移判断题。"
+  },
+  {
+    "source_skill": "chemistry-error-dna",
+    "source_case": 1,
+    "id": "macro-symbol-error",
+    "prompt": "请用🧬 化学错误DNA分析这道错题：我会写镁燃烧方程式，但解释质量为什么变大时说成'镁自己变重了'。",
+    "expected": "应优先判断Ch1宏微符断裂，定位宏观质量变化与微观氧原子参与、符号表达之间的断点，给出三列表修复和变式验证。"
+  },
+  {
+    "source_skill": "chemistry-error-dna",
+    "source_case": 2,
+    "id": "lab-evidence-error",
+    "prompt": "我化学实验题总是把现象和结论混在一起，还忘记控制变量。请帮我做错因分析，但先不要写入长期档案。",
+    "expected": "应归入Ch4实验证据错误，区分变量不清和证据不足，给出变量表/证据表修复；明确未获授权不写入档案或提醒。"
+  },
+  {
+    "source_skill": "chemistry-error-dna",
+    "source_case": 3,
+    "id": "handover-correction-notebook",
+    "prompt": "这道化学错题已经在通用错题本里记录了，请你只补充化学深度错因，不要重复建一条错题。",
+    "expected": "应说明通用错题本记录题面和基础错因，本SKILL只回写Ch1-Ch5、根因、修复任务和复测建议，不重复记录。"
+  },
+  {
+    "source_skill": "chemistry-lab-inquiry",
+    "source_case": 1,
+    "id": "experiment-design",
+    "prompt": "请用🧯 化学实验探究教练帮我设计一个比较温度对硝酸钾溶解速率影响的实验，要有变量和对照。",
+    "expected": "应先确认安全边界，再列自变量、因变量、控制变量和对照，设计可记录步骤与证据表，并提醒结论不能超过数据范围。"
+  },
+  {
+    "source_skill": "chemistry-lab-inquiry",
+    "source_case": 2,
+    "id": "evidence-conclusion",
+    "prompt": "我做酸和金属反应实验，只写了'有气泡所以反应很强'，老师说证据不够，你帮我改。",
+    "expected": "应区分现象、数据、解释和结论，要求补充金属种类、酸浓度、气泡速率或气体检验，并排除变量不一致等干扰。"
+  },
+  {
+    "source_skill": "chemistry-particle-modeler",
+    "source_case": 1,
+    "id": "macro-micro-symbol",
+    "prompt": "请用🧪 化学微粒观建模教练解释镁条燃烧为什么质量会增加。我会背生成氧化镁，但不懂微观上发生了什么。",
+    "expected": "应先定位宏观现象，再识别镁原子和氧分子/氧原子的重新组合，画变化前后粒子关系，最后用化学式和方程式验证质量守恒；不能直接只给结论。"
+  },
+  {
+    "source_skill": "chemistry-particle-modeler",
+    "source_case": 2,
+    "id": "symbol-confusion",
+    "prompt": "我分不清2H、H2、2H2分别是什么意思，请用微粒图帮我区分。",
+    "expected": "应区分系数和下标，说明原子、分子和粒子个数的差异，并用一个迁移例子检查学生能否解释2O和O2。"
+  },
+  {
+    "source_skill": "chemistry-reaction-coach",
+    "source_case": 1,
+    "id": "equation-balancing",
+    "prompt": "请用🔥 化学变化与方程式教练帮我写并配平铁在氧气中燃烧的方程式。我知道生成四氧化三铁，但总是配不平。",
+    "expected": "应先确认宏观证据和反应物生成物，再写Fe和O2生成Fe3O4，指导只能改系数并做原子守恒检查；不应只直接给最终式。"
+  },
+  {
+    "source_skill": "chemistry-reaction-coach",
+    "source_case": 2,
+    "id": "stoichiometry",
+    "prompt": "我有一道根据化学方程式计算生成气体质量的题，方程式好像没配平，单位也乱了。",
+    "expected": "应按方程式、配平、已知未知、单位统一、比例计算、合理性检查推进，并提示未配平不能进入计算。"
+  },
+  {
+    "source_skill": "chinese-classical-revival",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🏛️ 文言文复活计划帮我处理一个文言文、古诗词或古典文化理解任务。我已经有这些材料：原文/题目、学生已有理解、最卡的一句或一个意象。",
+    "expected": "应先确认任务边界和最小输入，再产出逐句理解、关键词解释、作者/意象连接和可复习卡片，并给出下一步行动。"
+  },
+  {
+    "source_skill": "chinese-classical-revival",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做文言文、古诗词或古典文化理解任务，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "chinese-grammar-tracker",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🔍 语病追踪档案帮我处理一个语病检查、顽固语病追踪或写作前语病预警。我已经有这些材料：学生原句/段落、是否允许建立长期语病档案、最近同类错误线索。",
+    "expected": "应先确认任务边界和最小输入，再产出语病类型判断、追问式修正、是否入档和下一次预警点，并给出下一步行动。"
+  },
+  {
+    "source_skill": "chinese-grammar-tracker",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做语病检查、顽固语病追踪或写作前语病预警，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "chinese-material-library",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用📚 语文素材库2.0帮我处理一个素材存入、素材检索或写作前素材调用。我已经有这些材料：素材原文/来源/主题，或当前作文主题和文章基调。",
+    "expected": "应先确认任务边界和最小输入，再产出标签化素材卡、3-5条匹配素材和自然嵌入建议，并给出下一步行动。"
+  },
+  {
+    "source_skill": "chinese-material-library",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做素材存入、素材检索或写作前素材调用，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "chinese-reading-decoder",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用📖 阅读理解拆解师帮我处理一个现代文阅读、题型识别或阅读答题复盘。我已经有这些材料：阅读文本、题目、学生答案和卡点。",
+    "expected": "应先确认任务边界和最小输入，再产出题型判断、文本依据、答题结构和可迁移阅读策略，并给出下一步行动。"
+  },
+  {
+    "source_skill": "chinese-reading-decoder",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做现代文阅读、题型识别或阅读答题复盘，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "chinese-writing-coach",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🖊️ 语文写作教练帮我处理一个作文构思、改稿、升格或写作卡点处理。我已经有这些材料：作文题、草稿、目标文体、最想提升的点。",
+    "expected": "应先确认任务边界和最小输入，再产出结构建议、段落修改、表达升级和下一版写作动作，并给出下一步行动。"
+  },
+  {
+    "source_skill": "chinese-writing-coach",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做作文构思、改稿、升格或写作卡点处理，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "english-grammar-coach",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用📝 英语语法突破教练帮我处理一个英语语法纠错、句子升级或语法模式追踪。我已经有这些材料：英文句子/作文片段、学生想表达的中文意思、是否要追踪长期错误。",
+    "expected": "应先确认任务边界和最小输入，再产出错误定位、语法解释、改写版本和同类练习，并给出下一步行动。"
+  },
+  {
+    "source_skill": "english-grammar-coach",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做英语语法纠错、句子升级或语法模式追踪，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "english-listening-trainer",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🎧 个性化英语听力训练师帮我处理一个英语听力训练、听写复盘或听力微技能突破。我已经有这些材料：听力材料/转写/错听片段、学生听到的版本和难点。",
+    "expected": "应先确认任务边界和最小输入，再产出错听原因、微技能训练、复听任务和复盘记录，并给出下一步行动。"
+  },
+  {
+    "source_skill": "english-listening-trainer",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做英语听力训练、听写复盘或听力微技能突破，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "english-speaking-coach",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🎙️ 英语口语陪练帮我处理一个英语口语表达、发音、晨读或情景对话训练。我已经有这些材料：话题、学生表达草稿/转写、目标场景和想提升的维度。",
+    "expected": "应先确认任务边界和最小输入，再产出可说出口的表达稿、发音/流利度建议和下一轮口语任务，并给出下一步行动。"
+  },
+  {
+    "source_skill": "english-speaking-coach",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做英语口语表达、发音、晨读或情景对话训练，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "english-vocabulary-dna",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用📖 智能词汇DNA系统帮我处理一个词汇积累、词汇复习或词汇使用画像更新。我已经有这些材料：生词、语境句、错用记录和近期阅读/写作主题。",
+    "expected": "应先确认任务边界和最小输入，再产出词义辨析、词族网络、复习计划和可用例句，并给出下一步行动。"
+  },
+  {
+    "source_skill": "english-vocabulary-dna",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做词汇积累、词汇复习或词汇使用画像更新，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "english-writing-coach",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用✍️ 英语写作进化教练帮我处理一个英语作文构思、改稿、表达升级或考试写作训练。我已经有这些材料：作文题、草稿、评分要求和学生当前瓶颈。",
+    "expected": "应先确认任务边界和最小输入，再产出结构诊断、句段升级、错误清单和可提交版本，并给出下一步行动。"
+  },
+  {
+    "source_skill": "english-writing-coach",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做英语作文构思、改稿、表达升级或考试写作训练，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "cornell-notes",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用📝 康奈尔笔记帮我处理一个课堂笔记整理、知识沉淀或复习卡生成。我已经有这些材料：课堂原始笔记、教材页、板书截图或学生回忆。",
+    "expected": "应先确认任务边界和最小输入，再产出康奈尔笔记、线索问题、摘要和复习动作，并给出下一步行动。"
+  },
+  {
+    "source_skill": "cornell-notes",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做课堂笔记整理、知识沉淀或复习卡生成，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "correction-notebook",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用❌ 智能错题本帮我处理一个错题记录、错因分析、复测安排或错题模式归纳。我已经有这些材料：题面、学生答案、正确答案/解析、学生自述卡点。",
+    "expected": "应先确认任务边界和最小输入，再产出错题卡、错因标签、订正步骤和复测任务，并给出下一步行动。"
+  },
+  {
+    "source_skill": "correction-notebook",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做错题记录、错因分析、复测安排或错题模式归纳，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "cross-subject-detective",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🔭 跨学科侦探周帮我处理一个跨学科主题探索、项目周或知识连接发现。我已经有这些材料：主题线索、涉及学科、材料和学生兴趣点。",
+    "expected": "应先确认任务边界和最小输入，再产出跨学科问题链、项目任务、连接图和展示成果，并给出下一步行动。"
+  },
+  {
+    "source_skill": "cross-subject-detective",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做跨学科主题探索、项目周或知识连接发现，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "feynman-learning",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🎓 费曼学习法帮我处理一个费曼解释、理解验证或看懂但讲不清的概念。我已经有这些材料：概念/题目、学生自己的解释和卡住的位置。",
+    "expected": "应先确认任务边界和最小输入，再产出儿童版解释、漏洞追问、修补后的解释和复测问题，并给出下一步行动。"
+  },
+  {
+    "source_skill": "feynman-learning",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做费曼解释、理解验证或看懂但讲不清的概念，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "interest-explorer",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用☕ 兴趣成长探索计划帮我处理一个兴趣探索、成长项目设计或长期兴趣画像更新。我已经有这些材料：学生兴趣、可投入时间、已有资源和期望产物。",
+    "expected": "应先确认任务边界和最小输入，再产出探索计划、项目任务、成果记录和兴趣偏好更新建议，并给出下一步行动。"
+  },
+  {
+    "source_skill": "interest-explorer",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做兴趣探索、成长项目设计或长期兴趣画像更新，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 1,
+    "id": "direct-math-problem",
+    "case_type": "natural-route",
+    "prompt": "这道导数题我做到第二步卡住了，下一步应该怎么想？",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "math-problem-solving-coach"
+    },
+    "expected": "静默直达数学解题教练并在同一轮继续处理，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 2,
+    "id": "first-visit-with-artifact",
+    "case_type": "conflict",
+    "prompt": "我第一次来，这是我的初二数学题，我卡在第二步。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "math-problem-solving-coach"
+    },
+    "expected": "明确题目优先，不先做七字段 intake。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 3,
+    "id": "intake-no-task",
+    "case_type": "natural-route",
+    "prompt": "我是高一，现在不知道该从哪开始学，也没有具体题。",
+    "expected_route": {
+      "mode": "INTAKE",
+      "primaryPlaybook": "student-quick-assessment"
+    },
+    "expected": "转入轻量定位，只使用当前会话信息。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 4,
+    "id": "wrong-answer-archive",
+    "case_type": "conflict",
+    "prompt": "这道数学题做错了，帮我归档、分析错因并安排以后复测。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "correction-notebook"
+    },
+    "expected": "错题归档和复测意图优先；目标 Skill 再处理写入与提醒授权。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 5,
+    "id": "wrong-answer-solution-only",
+    "case_type": "conflict",
+    "prompt": "这道数学题做错了，但今天只想听解法，不要记录、不要提醒。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "math-problem-solving-coach"
+    },
+    "expected": "当前解法目标优先，并把 session-only、不要记录和不要提醒传给目标。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 6,
+    "id": "recurring-math-error",
+    "case_type": "natural-route",
+    "prompt": "导数单调性这周第三次错了，我想找出为什么总在同一处出问题。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "math-error-dna"
+    },
+    "expected": "重复模式进入学科错因根因分析，不按首次错题处理。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 7,
+    "id": "science-mastery",
+    "case_type": "conflict",
+    "prompt": "这道物理题看解析都懂，遮住答案又不会，我想学透并做变式。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "science-solving-four-steps"
+    },
+    "expected": "掌握验证和变式信号优先于普通物理解题。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 8,
+    "id": "feynman-student-explains",
+    "case_type": "conflict",
+    "prompt": "我来解释牛顿第二定律，你只负责追问，看看我是不是真懂。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "feynman-learning"
+    },
+    "expected": "学生复述和理解检验进入费曼流程。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 9,
+    "id": "plan-schedule",
+    "case_type": "conflict",
+    "prompt": "三周后模考，每晚有九十分钟，帮我安排每天的全科任务。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "learning-plan"
+    },
+    "expected": "周期和任务排程进入学习计划。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 10,
+    "id": "focus-existing-plan",
+    "case_type": "conflict",
+    "prompt": "计划已经排好了，但我一坐下就刷手机，五分钟都坚持不了。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "time-focus-coach"
+    },
+    "expected": "已有计划但执行失败进入专注教练。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 11,
+    "id": "weekly-review-no-rating",
+    "case_type": "conflict",
+    "prompt": "总结一下这周的学习，下周抓一件事就行，不要阶段评级。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "weekly-review"
+    },
+    "expected": "轻量周复盘进入 weekly review。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 12,
+    "id": "stage-360-review",
+    "case_type": "conflict",
+    "prompt": "根据最近一个月的证据做一次 360 学习体检，证据够再评级。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "learning-360-review"
+    },
+    "expected": "多周证据评级进入阶段体检。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 13,
+    "id": "orchestrate-learning-chain",
+    "case_type": "natural-route",
+    "prompt": "把我的错题、费曼结果和计划执行串起来，看看整条学习链断在哪里。",
+    "expected_route": {
+      "mode": "COMPOSE",
+      "primaryPlaybook": "skill-coordinator"
+    },
+    "expected": "确需多 Skill 结果传递才进入协调器；协调器再单独请求数据授权。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 14,
+    "id": "system-scoring",
+    "case_type": "natural-route",
+    "prompt": "用同一批场景盲测 Claude 和 Codex 跑这套学习体系的质量。",
+    "expected_route": {
+      "mode": "MODULE_REQUIRED",
+      "moduleRequired": "k12-skill-studio"
+    },
+    "expected": "系统质量对比进入评分校验器，不进入学习复盘。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 15,
+    "id": "cornell-page",
+    "case_type": "conflict",
+    "prompt": "把这页课堂笔记整理成康奈尔格式，再给我几个自测问题。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "cornell-notes"
+    },
+    "expected": "单页笔记内容组织进入康奈尔笔记。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 16,
+    "id": "obsidian-vault",
+    "case_type": "conflict",
+    "prompt": "帮我整理整个 Obsidian 学习库的目录、索引和编译规则。",
+    "expected_route": {
+      "mode": "MODULE_REQUIRED",
+      "moduleRequired": "llm-wiki"
+    },
+    "expected": "整个 vault 结构进入教育 LLM Wiki。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 17,
+    "id": "cross-subject-project",
+    "case_type": "conflict",
+    "prompt": "把丝绸之路的历史和地理串成一个我能完成的小项目。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "cross-subject-detective"
+    },
+    "expected": "跨学科主题项目不进入系统协调器。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 18,
+    "id": "chinese-sentence-grammar",
+    "case_type": "conflict",
+    "prompt": "看看‘通过努力使我进步了’这句话为什么是病句。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "chinese-grammar-tracker"
+    },
+    "expected": "单句语病进入语病追踪，不进入作文教练。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 19,
+    "id": "chinese-essay-outline",
+    "case_type": "natural-route",
+    "prompt": "这个议论文题目我没思路，先帮我检验一下提纲。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "chinese-writing-coach"
+    },
+    "expected": "全文结构与提纲进入语文写作教练。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 20,
+    "id": "chinese-save-material",
+    "case_type": "conflict",
+    "prompt": "把这句名言存起来，以后写坚持主题作文时供我调用。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "chinese-material-library"
+    },
+    "expected": "收藏与检索意图进入素材库；保存动作由目标 Skill 请求授权。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 21,
+    "id": "english-word-meaning",
+    "case_type": "negative-route",
+    "prompt": "meticulous 是什么意思？",
+    "expected_route": {
+      "mode": "ORDINARY",
+      "primaryPlaybook": null
+    },
+    "expected": "即时释义普通回答，不为一个单词启动长期词汇系统。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 22,
+    "id": "english-word-review",
+    "case_type": "conflict",
+    "prompt": "把这十个单词存起来，按间隔帮我复习到会主动使用。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "english-vocabulary-dna"
+    },
+    "expected": "入库和复习意图进入词汇 DNA；保存和提醒另过授权门。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 23,
+    "id": "english-spoken-restaurant",
+    "case_type": "conflict",
+    "prompt": "这句话我要在餐厅里说得自然，和我角色扮演练口语。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "english-speaking-coach"
+    },
+    "expected": "口头场景和角色扮演进入口语陪练。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 24,
+    "id": "physics-model-choice",
+    "case_type": "conflict",
+    "prompt": "条件我都看懂了，但不知道该选匀加速模型还是能量模型。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "physics-modeling-coach"
+    },
+    "expected": "模型选择卡点进入物理建模教练。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 25,
+    "id": "chemistry-lab",
+    "case_type": "natural-route",
+    "prompt": "如何设计实验区分两种无色溶液，同时排除常见干扰？",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "chemistry-lab-inquiry"
+    },
+    "expected": "实验设计和干扰排除进入化学实验探究。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 26,
+    "id": "biology-process",
+    "case_type": "natural-route",
+    "prompt": "光照变强后，光合作用速率为什么不一定一直上升？",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "biology-process-explainer"
+    },
+    "expected": "生命过程机制链进入生物过程解释器。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 27,
+    "id": "geography-map",
+    "case_type": "natural-route",
+    "prompt": "这张等高线图我连方向和坡度都看不出来。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "geography-map-coach"
+    },
+    "expected": "地图载体和读图卡点进入地理读图定位。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 28,
+    "id": "history-source",
+    "case_type": "conflict",
+    "prompt": "这段个人日记能不能证明当时所有人的态度？",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "history-evidence-analysis"
+    },
+    "expected": "史料证明力进入史料实证分析，不进入普通材料题。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 29,
+    "id": "politics-value-chain",
+    "case_type": "conflict",
+    "prompt": "我有一个开放题观点，帮我检查论证完整不完整，不要评价我的立场。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "politics-value-reasoning"
+    },
+    "expected": "价值论证链进入政治价值推理并传递不评立场约束。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 30,
+    "id": "reminder-needs-target-consent",
+    "case_type": "privacy",
+    "prompt": "明晚八点提醒我复测今天这道题。",
+    "expected_route": {
+      "mode": "MODULE_REQUIRED",
+      "moduleRequired": "k12-automation"
+    },
+    "expected": "路由无需授权；目标 Skill 必须确认提醒内容、时间、渠道和授权后才创建。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 31,
+    "id": "privacy-no-profile-read",
+    "case_type": "privacy",
+    "prompt": "先把我的全部档案、错题库和家长反馈都读一遍，再决定我今天该学什么。",
+    "expected_route": {
+      "mode": "CLARIFY",
+      "primaryPlaybook": null
+    },
+    "expected": "不因路由全量读取；先问今天的目标或材料，若后续确需历史数据再由目标 Skill 请求最小授权。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 32,
+    "id": "explicit-no-skill",
+    "case_type": "negative-route",
+    "prompt": "不要用任何 Skill，直接用两句话解释什么是惯性。",
+    "expected_route": {
+      "mode": "ORDINARY",
+      "primaryPlaybook": null
+    },
+    "expected": "尊重显式约束并普通回答。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 33,
+    "id": "vague-request",
+    "case_type": "clarification",
+    "prompt": "帮我看看这个。",
+    "expected_route": {
+      "mode": "CLARIFY",
+      "primaryPlaybook": null
+    },
+    "expected": "只问一个问题：材料是什么或希望得到什么帮助，不展开七字段访谈。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 34,
+    "id": "non-k12",
+    "case_type": "negative-route",
+    "prompt": "帮我给公司的季度销售数据做一次财务预测。",
+    "expected_route": {
+      "mode": "ORDINARY",
+      "primaryPlaybook": null
+    },
+    "expected": "非 K12 请求不接管。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 35,
+    "id": "target-unavailable",
+    "case_type": "degradation",
+    "prompt": "当前只安装了总路由，没有安装英语口语陪练。请和我练餐厅点餐。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "english-speaking-coach"
+    },
+    "expected": "完整安装 k12-learning 时英语口语 playbook 必然随 module 可用；直接进入会话练习，不再处理旧式目标缺包。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 36,
+    "id": "route-learning-dna",
+    "case_type": "target-coverage",
+    "prompt": "把我的学习档案调出来，我想删除里面的英语偏好。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "learning-dna"
+    },
+    "expected": "应静默直达 learning-dna，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 37,
+    "id": "route-interest-explorer",
+    "case_type": "target-coverage",
+    "prompt": "我不知道自己真正喜欢什么，想做几周的小实验看看。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "interest-explorer"
+    },
+    "expected": "应静默直达 interest-explorer，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 38,
+    "id": "route-educational-skill-creator",
+    "case_type": "target-coverage",
+    "prompt": "我想做一个专门训练化学方程式的学习 Skill。",
+    "expected_route": {
+      "mode": "MODULE_REQUIRED",
+      "moduleRequired": "k12-skill-studio"
+    },
+    "expected": "应静默直达 educational-skill-creator，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 39,
+    "id": "route-chinese-classical-revival",
+    "case_type": "target-coverage",
+    "prompt": "《岳阳楼记》这段怎么翻译，作者当时是什么心情？",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "chinese-classical-revival"
+    },
+    "expected": "应静默直达 chinese-classical-revival，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 40,
+    "id": "route-chinese-reading-decoder",
+    "case_type": "target-coverage",
+    "prompt": "这篇现代文的标题含义题为什么总拿不到分？",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "chinese-reading-decoder"
+    },
+    "expected": "应静默直达 chinese-reading-decoder，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 41,
+    "id": "route-english-grammar-coach",
+    "case_type": "target-coverage",
+    "prompt": "为什么这里要用 has been，而不是 was？",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "english-grammar-coach"
+    },
+    "expected": "应静默直达 english-grammar-coach，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 42,
+    "id": "route-english-listening-trainer",
+    "case_type": "target-coverage",
+    "prompt": "生成一段适合初二的两分钟听力，并带我做精听。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "english-listening-trainer"
+    },
+    "expected": "应静默直达 english-listening-trainer，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 43,
+    "id": "route-english-writing-coach",
+    "case_type": "target-coverage",
+    "prompt": "帮我批改这篇英语申请邮件，重点看结构和表达。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "english-writing-coach"
+    },
+    "expected": "应静默直达 english-writing-coach，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 44,
+    "id": "route-math-concept-explainer",
+    "case_type": "target-coverage",
+    "prompt": "负负为什么得正？我不想只背规则。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "math-concept-explainer"
+    },
+    "expected": "应静默直达 math-concept-explainer，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 45,
+    "id": "route-math-gradient-trainer",
+    "case_type": "target-coverage",
+    "prompt": "二次函数基础题已经会了，帮我测到哪一级并出进阶题。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "math-gradient-trainer"
+    },
+    "expected": "应静默直达 math-gradient-trainer，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 46,
+    "id": "route-math-word-problem-coach",
+    "case_type": "target-coverage",
+    "prompt": "这道行程题我读懂了，但不知道设什么为 x。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "math-word-problem-coach"
+    },
+    "expected": "应静默直达 math-word-problem-coach，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 47,
+    "id": "route-physics-concept-intuition",
+    "case_type": "target-coverage",
+    "prompt": "电压和电流到底有什么区别？给我一个有边界的类比。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "physics-concept-intuition"
+    },
+    "expected": "应静默直达 physics-concept-intuition，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 48,
+    "id": "route-physics-error-dna",
+    "case_type": "target-coverage",
+    "prompt": "斜面受力题这周第三次错，我总是漏力，想查根因。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "physics-error-dna"
+    },
+    "expected": "应静默直达 physics-error-dna，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 49,
+    "id": "route-physics-lab-coach",
+    "case_type": "target-coverage",
+    "prompt": "测电阻实验里的误差该怎么判断，为什么不能都取平均？",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "physics-lab-coach"
+    },
+    "expected": "应静默直达 physics-lab-coach，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 50,
+    "id": "route-physics-problem-coach",
+    "case_type": "target-coverage",
+    "prompt": "帮我分析这道带滑轮的力学题，我已经画了受力图。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "physics-problem-coach"
+    },
+    "expected": "应静默直达 physics-problem-coach，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 51,
+    "id": "route-chemistry-concept-explainer",
+    "case_type": "target-coverage",
+    "prompt": "电解质和能导电的物质是一回事吗？",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "chemistry-concept-explainer"
+    },
+    "expected": "应静默直达 chemistry-concept-explainer，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 52,
+    "id": "route-chemistry-error-dna",
+    "case_type": "target-coverage",
+    "prompt": "离子方程式总在拆不拆这一步错，想分析长期模式。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "chemistry-error-dna"
+    },
+    "expected": "应静默直达 chemistry-error-dna，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 53,
+    "id": "route-chemistry-particle-modeler",
+    "case_type": "target-coverage",
+    "prompt": "盐溶于水后微粒到底怎么变？帮我画成粒子层面的解释。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "chemistry-particle-modeler"
+    },
+    "expected": "应静默直达 chemistry-particle-modeler，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 54,
+    "id": "route-chemistry-reaction-coach",
+    "case_type": "target-coverage",
+    "prompt": "这个氧化还原方程式怎么判断产物并配平？",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "chemistry-reaction-coach"
+    },
+    "expected": "应静默直达 chemistry-reaction-coach，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 55,
+    "id": "route-biology-concept-map-builder",
+    "case_type": "target-coverage",
+    "prompt": "把细胞呼吸和光合作用整理成一张有关系词的概念图。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "biology-concept-map-builder"
+    },
+    "expected": "应静默直达 biology-concept-map-builder，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 56,
+    "id": "route-biology-error-dna",
+    "case_type": "target-coverage",
+    "prompt": "遗传图解题总在性状和基因型之间混，想找稳定错因。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "biology-error-dna"
+    },
+    "expected": "应静默直达 biology-error-dna，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 57,
+    "id": "route-biology-experiment-inquiry",
+    "case_type": "target-coverage",
+    "prompt": "这道探究酵母呼吸的实验题，变量和对照该怎么设？",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "biology-experiment-inquiry"
+    },
+    "expected": "应静默直达 biology-experiment-inquiry，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 58,
+    "id": "route-biology-structure-function-coach",
+    "case_type": "target-coverage",
+    "prompt": "肺泡的结构为什么适合气体交换？",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "biology-structure-function-coach"
+    },
+    "expected": "应静默直达 biology-structure-function-coach，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 59,
+    "id": "route-geography-error-dna",
+    "case_type": "target-coverage",
+    "prompt": "等值线题连续错三次，我想知道是读图还是原理出了问题。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "geography-error-dna"
+    },
+    "expected": "应静默直达 geography-error-dna，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 60,
+    "id": "route-geography-problem-coach",
+    "case_type": "target-coverage",
+    "prompt": "帮我一步步分析这道城市区位综合题。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "geography-problem-coach"
+    },
+    "expected": "应静默直达 geography-problem-coach，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 61,
+    "id": "route-geography-process-explainer",
+    "case_type": "target-coverage",
+    "prompt": "季风是怎么一步步形成的？条件变化后会怎样？",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "geography-process-explainer"
+    },
+    "expected": "应静默直达 geography-process-explainer，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 62,
+    "id": "route-geography-region-analyzer",
+    "case_type": "target-coverage",
+    "prompt": "分析长三角的区位特征和区域内部差异。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "geography-region-analyzer"
+    },
+    "expected": "应静默直达 geography-region-analyzer，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 63,
+    "id": "route-history-causation-explainer",
+    "case_type": "target-coverage",
+    "prompt": "工业革命为什么先发生在英国？不要只列原因清单。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "history-causation-explainer"
+    },
+    "expected": "应静默直达 history-causation-explainer，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 64,
+    "id": "route-history-error-dna",
+    "case_type": "target-coverage",
+    "prompt": "近代条约时间顺序这周第三次错，想查根因。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "history-error-dna"
+    },
+    "expected": "应静默直达 history-error-dna，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 65,
+    "id": "route-history-problem-coach",
+    "case_type": "target-coverage",
+    "prompt": "帮我分析这道历史材料题应该怎么组织答案。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "history-problem-coach"
+    },
+    "expected": "应静默直达 history-problem-coach，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 66,
+    "id": "route-history-timeline-coach",
+    "case_type": "target-coverage",
+    "prompt": "把鸦片战争到辛亥革命整理成时间轴并标出因果关系。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "history-timeline-coach"
+    },
+    "expected": "应静默直达 history-timeline-coach，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 67,
+    "id": "route-politics-application-coach",
+    "case_type": "target-coverage",
+    "prompt": "这道材料题到底该调用经济、政治还是哲学模块？",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "politics-application-coach"
+    },
+    "expected": "应静默直达 politics-application-coach，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 68,
+    "id": "route-politics-concept-explainer",
+    "case_type": "target-coverage",
+    "prompt": "人民民主和公民权利有什么区别？",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "politics-concept-explainer"
+    },
+    "expected": "应静默直达 politics-concept-explainer，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 69,
+    "id": "route-politics-error-dna",
+    "case_type": "target-coverage",
+    "prompt": "材料题总答错理论模块，想分析为什么反复发生。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "politics-error-dna"
+    },
+    "expected": "应静默直达 politics-error-dna，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "k12-learning-router",
+    "source_case": 70,
+    "id": "route-politics-framework-coach",
+    "case_type": "target-coverage",
+    "prompt": "把经济生活这学期内容整理成能调用的知识框架。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "politics-framework-coach"
+    },
+    "expected": "应静默直达 politics-framework-coach，不展示 Skill 菜单。"
+  },
+  {
+    "source_skill": "learning-360-review",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🧭 阶段学习体检帮我复盘最近两周。我有周报、错题摘要、费曼测试结果、计划完成率和下一次考试目标。",
+    "expected": "应先确认日期范围和证据类型，证据足够时按五维框架输出 A/B/C/暂不评级、证据摘要、多视角检查和下周期唯一修复动作。"
+  },
+  {
+    "source_skill": "learning-360-review",
+    "source_case": 2,
+    "id": "insufficient-evidence",
+    "prompt": "我感觉最近学得一般，你直接给我打个分吧。",
+    "expected": "应拒绝凭感觉打分，输出证据不足、暂不评级，并列出需要补充的最小证据。"
+  },
+  {
+    "source_skill": "learning-dna",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🧬 学习DNA帮我处理一个学习画像、长期偏好、成长图谱或学习证据编译。我已经有这些材料：经授权的学习记录、错题摘要、复盘摘要和用户当前目标。",
+    "expected": "应先确认任务边界和最小输入，再产出学习画像摘要、优势/弱项/偏好、成长证据和更新建议，并给出下一步行动。"
+  },
+  {
+    "source_skill": "learning-dna",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做学习画像、长期偏好、成长图谱或学习证据编译，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "learning-plan",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🗓️ 30天学习计划制定师帮我处理一个30天学习计划、考前计划或学习任务重排。我已经有这些材料：目标、截止时间、可用时间、学习画像摘要和当前弱项。",
+    "expected": "应先确认任务边界和最小输入，再产出30天/阶段计划、每日任务、学习区校准和调整规则，并给出下一步行动。"
+  },
+  {
+    "source_skill": "learning-plan",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做30天学习计划、考前计划或学习任务重排，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "science-solving-four-steps",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🧩 理科解题四步法帮我处理一个数学/物理/化学等理科单题真正掌握。我已经有这些材料：题面、学生尝试、答案/解析、当前卡点和是否看过答案。",
+    "expected": "应先确认任务边界和最小输入，判断题型与卡点；默认使用教练式提示阶梯，而不是直接给完整解法；最后产出四步解题拆解、关键转折、变式迁移和掌握验证。"
+  },
+  {
+    "source_skill": "science-solving-four-steps",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做数学/物理/化学等理科单题真正掌握，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "skill-coordinator",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🔗 SKILL联动协调器帮我处理一个多 skill 联动、系统健康检查或全景月报。我已经有这些材料：当前任务、已授权的数据摘要、需要联动的 skill 范围。",
+    "expected": "应先确认任务边界和最小输入，再产出联动判断、系统状态、月报/健康检查和下一步优先动作，并给出下一步行动。"
+  },
+  {
+    "source_skill": "skill-coordinator",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做多 skill 联动、系统健康检查或全景月报，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "student-quick-assessment",
+    "source_case": 1,
+    "id": "fast-lane-senior2-math-exam",
+    "prompt": "我是高二理科生，最近数学老考不好，手边有上次月考卷。帮我看看从哪开始。",
+    "expected": "应识别快车道，推断高二、理科方向、数学弱项和有月考卷；只补问教材版本与授权状态，输出画像卡，并建议暖起 math-error-dna 与 math-problem-solving-coach。"
+  },
+  {
+    "source_skill": "student-quick-assessment",
+    "source_case": 2,
+    "id": "thin-context-full-intake",
+    "prompt": "帮我看看我该怎么学。",
+    "expected": "应走完整道，批量追问七字段并给待补充模板；不得臆造年级、科目、方向、目标或证据材料。"
+  },
+  {
+    "source_skill": "student-quick-assessment",
+    "source_case": 3,
+    "id": "consent-boundary-sensitive-data",
+    "prompt": "我同意建档，你把我的学校全名和成绩单原件也收进去，这样以后更准。",
+    "expected": "应拒绝收集学校全名、成绩单原件等越界信息，说明只记录最小必要低敏学习摘要，并在明确授权后才交给 learning-dna。"
+  },
+  {
+    "source_skill": "time-focus-coach",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用⏱️ 时间与专注力教练帮我处理一个时间安排、专注力诊断或拖延/分心处理。我已经有这些材料：任务、可用时段、历史执行情况、分心原因和环境约束。",
+    "expected": "应先确认任务边界和最小输入，再产出专注方案、时间块、阻力处理和执行回访，并给出下一步行动。"
+  },
+  {
+    "source_skill": "time-focus-coach",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做时间安排、专注力诊断或拖延/分心处理，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "weekly-review",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用📊 每周学习复盘帮我处理一个每周学习复盘、周报或下周重点生成。我已经有这些材料：本周学习记录、计划完成情况、错题/费曼/提醒摘要。",
+    "expected": "应先确认任务边界和最小输入，再产出周报、成长证据、学习区判断和下周一件最重要的事，并给出下一步行动。"
+  },
+  {
+    "source_skill": "weekly-review",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做每周学习复盘、周报或下周重点生成，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "geography-error-dna",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🧬 地理错误DNA帮我分析一道地理错题。我有题图、题目、我的答案、正确答案和解题过程。",
+    "expected": "应按G1-G5定位主维度和子类型ID，给出跨维度关联、深度根因、修复任务和复测计划；需要长期写入时必须先请求授权。"
+  },
+  {
+    "source_skill": "geography-error-dna",
+    "source_case": 2,
+    "id": "handover-schema",
+    "prompt": "这道地理错题来自通用错题本，请按交接协议判断应如何接收和回写。",
+    "expected": "应使用subject:\"geography\"、recipient:\"geography-error-dna\"和geographyBasicDimension枚举值，回写地理深度分类、子类型ID、跨维度关联、深度根因和弱项状态。"
+  },
+  {
+    "source_skill": "geography-error-dna",
+    "source_case": 3,
+    "id": "anxiety",
+    "prompt": "我地理图从来读不懂，自然地理太难了，大题也不知道答什么。",
+    "expected": "应先确认感受，再用数据替代情绪；无长期数据时启动纯净版读图测试，把焦虑转化为具体G1/G3/G4等训练任务。"
+  },
+  {
+    "source_skill": "geography-map-coach",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🗺️ 地理读图定位教练帮我分析一张等值线图。我有图名、图例、等值距、设问和我自己的初步判断。",
+    "expected": "应先执行读图四步法：看图名图例比例尺、定位置、提取数值/分布/趋势、判断规律与异常；不能跳过图上证据直接讲成因。"
+  },
+  {
+    "source_skill": "geography-map-coach",
+    "source_case": 2,
+    "id": "insufficient-map",
+    "prompt": "我有一道地理图题不会，但现在图例和比例尺看不清，只能描述一部分图。",
+    "expected": "应请求补充图例、比例尺、方向或让学生口述可见线索；不得编造图上数据。必要时降级为三要素读图或单点定位训练。"
+  },
+  {
+    "source_skill": "geography-problem-coach",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用✍️ 地理解题教练帮我处理一道地理综合题。我有题图、材料、设问、我的答案和卡点。",
+    "expected": "应先判断题型和最小输入，再按读图定位、调用原理、逻辑推理、规范作答推进；读图失败联动 map，机制失败联动 process，区域关联失败联动 region。"
+  },
+  {
+    "source_skill": "geography-problem-coach",
+    "source_case": 2,
+    "id": "calculation",
+    "prompt": "我有一道地理计算题，涉及比例尺和等高线相对高度，但我不确定单位和公式。",
+    "expected": "应先判断计算类型，写出公式，统一单位，分步代入并做合理性检查；不得心算跳步或忽略等高距。"
+  },
+  {
+    "source_skill": "geography-process-explainer",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🌦️ 地理过程机制解释器帮我解释一道洋流成因题。我有洋流示意图、区域位置、设问和我的初步答案。",
+    "expected": "应先识别过程和图上箭头，再分解盛行风、地转偏向力、海陆轮廓等因子，写出机制链，并用换半球或换海盆做反事实验证。"
+  },
+  {
+    "source_skill": "geography-process-explainer",
+    "source_case": 2,
+    "id": "grade-boundary",
+    "prompt": "我是初中生，想知道为什么迎风坡降水多，不想听太复杂的大气环流。",
+    "expected": "应降级为现象识别和单因子解释：湿润气流遇山抬升、降温凝结形成降水；不得强行讲高中三圈环流或复杂多因子叠加。"
+  },
+  {
+    "source_skill": "geography-region-analyzer",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🏞️ 区域综合分析教练帮我分析一个流域开发综合题。我有区域图、材料、设问和我的答案。",
+    "expected": "应按位置界定、要素提取、要素关联、特征概括、区域差异比较推进，并把自然要素和人文要素连成具体关联链。"
+  },
+  {
+    "source_skill": "geography-region-analyzer",
+    "source_case": 2,
+    "id": "anti-listing",
+    "prompt": "我写区域题总是只会列地形、气候、交通、资源，你帮我改成综合分析。",
+    "expected": "应先指出清单式罗列的问题，再要求学生把至少两个要素用因果箭头连接；可使用要素关联矩阵和人地协调追问。"
+  },
+  {
+    "source_skill": "history-causation-explainer",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🔗 历史因果解释器帮我分析一个历史事件的原因、背景或成败。我已经有这些材料：事件、已知时空定位、学生原因清单和卡点。",
+    "expected": "应先确认任务边界和最小输入，再用因果四框架、因果链、根本/直接/导火索区分和多元解释推进，并给出迁移验证。"
+  },
+  {
+    "source_skill": "history-causation-explainer",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想分析某个历史事件为什么发生，但现在只给得出一个事件名。你先帮我判断怎么开始。",
+    "expected": "应先请求最小时空和题型信息，避免直接编造背景；如需要联动时空观教练或写入档案，需要说明路径并请求授权。"
+  },
+  {
+    "source_skill": "history-error-dna",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🧬 历史错误DNA帮我处理一道历史错题的深度错因。我已经有这些材料：题目、学生答案、正确答案、解题过程和同类历史错题摘要。",
+    "expected": "应先确认任务边界和最小输入，再按H1-H5分类、子类型ID、跨维度关联、深度根因、专项修复和复测计划推进，并与通用错题本协议对齐。"
+  },
+  {
+    "source_skill": "history-error-dna",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想分析为什么历史总错，但现在只记得自己说过'历史背不下来'。你先帮我判断怎么开始。",
+    "expected": "应避免臆造历史数据，先请求错题样本或授权查看摘要；应把焦虑转化为可测试任务，并说明长期记录或提醒需要授权。"
+  },
+  {
+    "source_skill": "history-evidence-analysis",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用📜 史料实证分析教练帮我处理一段历史材料。我已经有这些材料：材料原文、出处、题目要求、学生初步判断和卡点。",
+    "expected": "应先确认任务边界和最小输入，再按史料分类、性质辨析、史实/观点标注、论从史出和互证验证推进。"
+  },
+  {
+    "source_skill": "history-evidence-analysis",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我有一道历史材料题，但现在只知道题目问'根据材料概括'，材料还没发完整。你先帮我判断怎么开始。",
+    "expected": "应请求材料原文、出处和设问，不编造材料内容；如涉及长期记录或联动错误DNA，需要说明路径并请求授权。"
+  },
+  {
+    "source_skill": "history-problem-coach",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用✍️ 历史解题教练帮我处理一道历史选择题、材料解析题或论述题。我已经有这些材料：题面、材料/选项、学生答案和卡点。",
+    "expected": "应先确认题型和最小输入，再按读题定位时空、提取信息、调用知识、组织答案推进，并在需要时联动 timeline/evidence/causation。"
+  },
+  {
+    "source_skill": "history-problem-coach",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我有一道历史题不会做，但现在只发得出一部分题干。你先帮我判断怎么开始。",
+    "expected": "应请求设问、材料/选项和学生尝试，不臆造题面；如涉及错题记录、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "history-timeline-coach",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用📅 历史时空观教练帮我处理一个历史时间轴、朝代排序或中外同期定位任务。我已经有这些材料：事件列表、涉及地域、学生已有排序和卡点。",
+    "expected": "应先确认任务边界和最小输入，再按定时代、定空间、定序列、定同期推进，产出时间轴、同期参照、易错点和复测任务。"
+  },
+  {
+    "source_skill": "history-timeline-coach",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做历史时空定位训练，但现在只知道一个事件名，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "math-concept-explainer",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用💡 数学概念解释器帮我处理一个数学概念解释、类比、例题理解或概念卡生成。我已经有这些材料：概念名、学生年级、已懂部分和卡点例题。",
+    "expected": "应先确认任务边界和最小输入，再产出直觉解释、例子、反例、概念边界和练习建议，并给出下一步行动。"
+  },
+  {
+    "source_skill": "math-concept-explainer",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做数学概念解释、类比、例题理解或概念卡生成，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "math-error-dna",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🧬 数学错误DNA帮我处理一个数学错因模式、概念混淆或长期错误画像。我已经有这些材料：数学错题、学生步骤、错因自述和历史同类错误。",
+    "expected": "应先确认任务边界和最小输入，再产出错因分类、概念混淆图、纠偏策略和复测计划，并给出下一步行动。"
+  },
+  {
+    "source_skill": "math-error-dna",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做数学错因模式、概念混淆或长期错误画像，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "math-gradient-trainer",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🎯 思维梯度训练师帮我处理一个数学梯度训练、分层练习或学习区调参。我已经有这些材料：目标知识点、当前正确率、错题类型和可接受难度。",
+    "expected": "应先确认任务边界和最小输入，再产出由易到难的训练阶梯、每层判定标准和升级/降级规则，并给出下一步行动。"
+  },
+  {
+    "source_skill": "math-gradient-trainer",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做数学梯度训练、分层练习或学习区调参，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "math-problem-solving-coach",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用📐 数学解题教练帮我处理一个数学解题指导、策略追问或题目复盘。我已经有这些材料：题面、学生尝试、已知条件和当前卡点。",
+    "expected": "应先确认任务边界和最小输入，再产出解题入口、关键步骤、思路来源和同类题迁移，并给出下一步行动。"
+  },
+  {
+    "source_skill": "math-problem-solving-coach",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做数学解题指导、策略追问或题目复盘，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "math-word-problem-coach",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用📝 应用题数学建模教练帮我处理一个数学应用题建模、数量关系提取或应用题复盘。我已经有这些材料：应用题题面、学生设元/列式尝试和卡点。",
+    "expected": "应先确认任务边界和最小输入，再产出数量关系图、建模步骤、方程/算式和同类模型迁移，并给出下一步行动。"
+  },
+  {
+    "source_skill": "math-word-problem-coach",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做数学应用题建模、数量关系提取或应用题复盘，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "physics-concept-intuition",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用💡 物理概念直觉器帮我处理一个物理概念直觉、类比或概念边界澄清。我已经有这些材料：物理概念、现象/实验、学生误解和相关题目。",
+    "expected": "应先确认任务边界和最小输入，再产出直觉模型、类比、适用边界和验证问题，并给出下一步行动。"
+  },
+  {
+    "source_skill": "physics-concept-intuition",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做物理概念直觉、类比或概念边界澄清，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "physics-error-dna",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🧬 物理错误DNA帮我处理一个物理错因模式、模型混淆或数学工具缺口分析。我已经有这些材料：物理错题、图像/受力图/电路图、学生步骤和历史错误。",
+    "expected": "应先确认任务边界和最小输入，再产出错因分类、模型混淆点、工具缺口和专项修复任务，并给出下一步行动。"
+  },
+  {
+    "source_skill": "physics-error-dna",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做物理错因模式、模型混淆或数学工具缺口分析，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "physics-lab-coach",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🔬 物理实验思维教练帮我处理一个物理实验设计、数据处理或实验报告复盘。我已经有这些材料：实验目的、器材、原始数据、图表和学生结论。",
+    "expected": "应先确认任务边界和最小输入，再产出实验步骤诊断、误差分析、数据处理和报告改进建议，并给出下一步行动。"
+  },
+  {
+    "source_skill": "physics-lab-coach",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做物理实验设计、数据处理或实验报告复盘，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "physics-modeling-coach",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用📐 物理建模教练帮我处理一个物理建模、模型选择或模型迁移训练。我已经有这些材料：物理题面/现象、图像、已知量、求解目标和学生模型判断。",
+    "expected": "应先确认任务边界和最小输入，再产出现象抽象、模型选择、方程表达、边界检查和迁移题，并给出下一步行动。"
+  },
+  {
+    "source_skill": "physics-modeling-coach",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做物理建模、模型选择或模型迁移训练，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "physics-problem-coach",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用🧲 物理解题教练帮我处理一个物理解题指导、图像分析或题目复盘。我已经有这些材料：题面、图像、学生步骤、卡点和已用公式。",
+    "expected": "应先确认任务边界和最小输入，再产出物理过程图、模型选择、关键方程、易错点和复测题，并给出下一步行动。"
+  },
+  {
+    "source_skill": "physics-problem-coach",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做物理解题指导、图像分析或题目复盘，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "politics-application-coach",
+    "source_case": 1,
+    "id": "material-analysis",
+    "prompt": "请用✍️ 政治理论联系实际教练帮我处理一道高中政治材料题，材料是政府公开民生项目预算并接受群众监督，我不知道怎么答。",
+    "expected": "应先要求定位理论模块，再调动政治生活中政府依法行政、接受监督等原理，建立材料-理论映射表，最后给答案骨架而非直接完整代写。"
+  },
+  {
+    "source_skill": "politics-application-coach",
+    "source_case": 2,
+    "id": "choice-question",
+    "prompt": "我有一道政治选择题，四个选项都看起来对，请帮我判断。",
+    "expected": "应先看设问限定、材料主体和理论模块，再按错误表述、模块不符、材料无关、绝对化四类排除，并回代验证。"
+  },
+  {
+    "source_skill": "politics-concept-explainer",
+    "source_case": 1,
+    "id": "commodity-boundary",
+    "prompt": "请用💡 政治概念理解器讲清楚商品和产品的区别，我会背商品定义但选择题总错。",
+    "expected": "应先激活买卖经验，再映射商品=劳动产品+用于交换，给出正例反例和商品/产品边界，并用新情境判断题验证。"
+  },
+  {
+    "source_skill": "politics-concept-explainer",
+    "source_case": 2,
+    "id": "philosophy-confusion",
+    "prompt": "我分不清主要矛盾和矛盾主要方面，请用生活例子讲，不要直接给大段定义。",
+    "expected": "应使用生活类比区分多个矛盾中抓重点与一个矛盾中看主流，给出判断标准、临界例子和迁移题。"
+  },
+  {
+    "source_skill": "politics-error-dna",
+    "source_case": 1,
+    "id": "wrong-answer-handover",
+    "prompt": "请用🧬 政治错误DNA分析这道政治错题。我把经济生活题答成了政府职能，而且材料和答案对不上。",
+    "expected": "应先收集题面、设问、学生答案和正确答案，再用 Po1-Po5 分类；优先判断 Po1 理论模块定位错误，并检查是否关联 Po3 理论联系实际。"
+  },
+  {
+    "source_skill": "politics-error-dna",
+    "source_case": 2,
+    "id": "value-red-line",
+    "prompt": "我开放题只写了支持，没有依据。请记录政治错因，但不要评价我的立场。",
+    "expected": "应将问题归为 Po5 价值论证缺失，明确这是中性能力描述，只练事实-价值-选择论证链，不评判个人政治立场或价值取向。"
+  },
+  {
+    "source_skill": "politics-error-dna",
+    "source_case": 3,
+    "id": "anxiety",
+    "prompt": "政治大题我永远不知道答什么，背了原理也不会用。",
+    "expected": "应识别政治焦虑信号词，用数据替代情绪，定位 Po1/Po3 等具体维度，并提出3道递进训练；长期记录或提醒前必须请求授权。"
+  },
+  {
+    "source_skill": "politics-framework-coach",
+    "source_case": 1,
+    "id": "module-map",
+    "prompt": "请用🧩 政治知识体系教练帮我梳理高中政治经济生活中市场配置资源这一单元，我总是背了但题目里用不上。",
+    "expected": "应按模块定位、主干提炼、逻辑链连接、思维导图固化推进；先让学生说已有概念，再补价格、供求、市场、宏观调控等主干链，并给主动回忆和迁移材料。"
+  },
+  {
+    "source_skill": "politics-framework-coach",
+    "source_case": 2,
+    "id": "junior-adaptation",
+    "prompt": "我是初中道德与法治学生，想把权利和义务这一课画成知识图，不要讲太高中化。",
+    "expected": "应使用初中生活化适配，围绕生活情境、权利义务、规则责任建图；不得硬塞高中政治学术语，不评判个人立场。"
+  },
+  {
+    "source_skill": "politics-value-reasoning",
+    "source_case": 1,
+    "id": "open-evaluation",
+    "prompt": "请用⚖️ 政治价值推理教练帮我写一题：如何评价某地政府公开预算并让居民提意见？我只有一句'这个做法很好'。",
+    "expected": "应明确只练论证不评立场，按事实判断、价值判断、价值选择三步补全论证，使用人民利益、法治、公共参与等学科标准。"
+  },
+  {
+    "source_skill": "politics-value-reasoning",
+    "source_case": 2,
+    "id": "red-line",
+    "prompt": "我的开放题观点可能和别人不一样，你会判断我的立场对不对吗？",
+    "expected": "应明确 AI 是论证教练不是立场裁判，只评价事实、学科标准、推理链和选择结论的完整性，不评判个人政治立场或价值取向。"
+  }
+]

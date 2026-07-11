@@ -1,0 +1,741 @@
+{
+  "version": "3.0.0",
+  "module": "k12-learning",
+  "capabilityCount": 58,
+  "capabilities": [
+    {
+      "name": "skill-coordinator",
+      "subject": "general",
+      "mode": "ORCHESTRATE",
+      "intents": [
+        "多 Skill 编排",
+        "全景月报",
+        "学习系统健康检查",
+        "学习链补链"
+      ],
+      "example": "把错题、费曼结果和计划执行串起来，判断先补哪一环。",
+      "playbook": "references/playbooks/general/skill-coordinator/playbook.md"
+    },
+    {
+      "name": "student-quick-assessment",
+      "subject": "general",
+      "mode": "INTAKE",
+      "intents": [
+        "首次定位",
+        "不知道从哪开始",
+        "选科信息整理",
+        "建档前定位"
+      ],
+      "example": "我是高一，不知道该从哪开始学，也没想好选科。",
+      "playbook": "references/playbooks/general/student-quick-assessment/playbook.md"
+    },
+    {
+      "name": "learning-dna",
+      "subject": "general",
+      "mode": "DIRECT",
+      "intents": [
+        "建立学习档案",
+        "查看档案",
+        "更正档案",
+        "删除档案",
+        "暂停共享"
+      ],
+      "example": "把我的学习档案调出来，我想删除里面的英语偏好。",
+      "playbook": "references/playbooks/general/learning-dna/playbook.md"
+    },
+    {
+      "name": "correction-notebook",
+      "subject": "general",
+      "mode": "DIRECT",
+      "intents": [
+        "错题归档",
+        "首次错因分析",
+        "复测入口",
+        "错题集"
+      ],
+      "example": "这道题我做错了，帮我整理进错题本并分析错在哪里。",
+      "playbook": "references/playbooks/general/correction-notebook/playbook.md"
+    },
+    {
+      "name": "feynman-learning",
+      "subject": "general",
+      "mode": "DIRECT",
+      "intents": [
+        "学生复述",
+        "理解检验",
+        "迁移验证",
+        "我讲你追问"
+      ],
+      "example": "我来给你讲牛顿第二定律，你帮我判断是不是真懂了。",
+      "playbook": "references/playbooks/general/feynman-learning/playbook.md"
+    },
+    {
+      "name": "cornell-notes",
+      "subject": "general",
+      "mode": "DIRECT",
+      "intents": [
+        "康奈尔笔记",
+        "课堂笔记整理",
+        "线索问题",
+        "笔记自测"
+      ],
+      "example": "把这页课堂笔记整理成康奈尔格式，再帮我出自测题。",
+      "playbook": "references/playbooks/general/cornell-notes/playbook.md"
+    },
+    {
+      "name": "learning-plan",
+      "subject": "general",
+      "mode": "DIRECT",
+      "intents": [
+        "阶段计划",
+        "考前安排",
+        "30 天计划",
+        "多任务排程"
+      ],
+      "example": "三周后模考，每晚九十分钟，帮我排一个全科复习计划。",
+      "playbook": "references/playbooks/general/learning-plan/playbook.md"
+    },
+    {
+      "name": "time-focus-coach",
+      "subject": "general",
+      "mode": "DIRECT",
+      "intents": [
+        "拖延",
+        "分心",
+        "番茄钟",
+        "计划执行",
+        "专注复盘"
+      ],
+      "example": "计划已经有了，但我每次坐下五分钟就刷手机。",
+      "playbook": "references/playbooks/general/time-focus-coach/playbook.md"
+    },
+    {
+      "name": "weekly-review",
+      "subject": "general",
+      "mode": "DIRECT",
+      "intents": [
+        "本周周报",
+        "轻量周复盘",
+        "下周重点"
+      ],
+      "example": "总结一下我这周学了什么，下周最该抓哪一件事。",
+      "playbook": "references/playbooks/general/weekly-review/playbook.md"
+    },
+    {
+      "name": "learning-360-review",
+      "subject": "general",
+      "mode": "DIRECT",
+      "intents": [
+        "阶段体检",
+        "多周复盘",
+        "360 复盘",
+        "证据评级"
+      ],
+      "example": "根据最近一个月的记录做一次 360 体检，证据够再评级。",
+      "playbook": "references/playbooks/general/learning-360-review/playbook.md"
+    },
+    {
+      "name": "science-solving-four-steps",
+      "subject": "science",
+      "mode": "DIRECT",
+      "intents": [
+        "理科题学透",
+        "看懂答案仍不会",
+        "变式迁移",
+        "掌握验证"
+      ],
+      "example": "这道物理题看解析都懂，遮住后又不会，我想真正学透。",
+      "playbook": "references/playbooks/general/science-solving-four-steps/playbook.md"
+    },
+    {
+      "name": "cross-subject-detective",
+      "subject": "cross-subject",
+      "mode": "DIRECT",
+      "intents": [
+        "跨学科主题研究",
+        "项目学习",
+        "知识联结"
+      ],
+      "example": "丝绸之路能把历史、地理和经济串成什么项目？",
+      "playbook": "references/playbooks/general/cross-subject-detective/playbook.md"
+    },
+    {
+      "name": "interest-explorer",
+      "subject": "general",
+      "mode": "DIRECT",
+      "intents": [
+        "兴趣发现",
+        "兴趣验证",
+        "特长探索"
+      ],
+      "example": "我不知道自己真正喜欢什么，想做几周的小实验看看。",
+      "playbook": "references/playbooks/general/interest-explorer/playbook.md"
+    },
+    {
+      "name": "chinese-classical-revival",
+      "subject": "chinese",
+      "mode": "DIRECT",
+      "intents": [
+        "古诗文",
+        "文言翻译",
+        "作者情感",
+        "古文背诵"
+      ],
+      "example": "《岳阳楼记》这段怎么翻译，作者当时是什么心情？",
+      "playbook": "references/playbooks/chinese/chinese-classical-revival/playbook.md"
+    },
+    {
+      "name": "chinese-grammar-tracker",
+      "subject": "chinese",
+      "mode": "DIRECT",
+      "intents": [
+        "病句",
+        "语病类型",
+        "语病追踪"
+      ],
+      "example": "看看这句话有没有语病，为什么通过努力使我进步不对？",
+      "playbook": "references/playbooks/chinese/chinese-grammar-tracker/playbook.md"
+    },
+    {
+      "name": "chinese-material-library",
+      "subject": "chinese",
+      "mode": "DIRECT",
+      "intents": [
+        "收藏作文素材",
+        "检索素材",
+        "调用名言典故"
+      ],
+      "example": "把这句名言存起来，以后写坚持主题作文时供我调用。",
+      "playbook": "references/playbooks/chinese/chinese-material-library/playbook.md"
+    },
+    {
+      "name": "chinese-reading-decoder",
+      "subject": "chinese",
+      "mode": "DIRECT",
+      "intents": [
+        "现代文阅读",
+        "阅读考点",
+        "原文证据",
+        "阅读答题结构"
+      ],
+      "example": "这篇现代文的标题含义题为什么总拿不到分？",
+      "playbook": "references/playbooks/chinese/chinese-reading-decoder/playbook.md"
+    },
+    {
+      "name": "chinese-writing-coach",
+      "subject": "chinese",
+      "mode": "DIRECT",
+      "intents": [
+        "作文构思",
+        "提纲",
+        "作文批改",
+        "议论文"
+      ],
+      "example": "这个议论文题目我没思路，先帮我检验提纲。",
+      "playbook": "references/playbooks/chinese/chinese-writing-coach/playbook.md"
+    },
+    {
+      "name": "english-grammar-coach",
+      "subject": "english",
+      "mode": "DIRECT",
+      "intents": [
+        "英语语法",
+        "时态",
+        "从句",
+        "句子纠错"
+      ],
+      "example": "为什么这里要用 has been，而不是 was？",
+      "playbook": "references/playbooks/english/english-grammar-coach/playbook.md"
+    },
+    {
+      "name": "english-listening-trainer",
+      "subject": "english",
+      "mode": "DIRECT",
+      "intents": [
+        "英语听力",
+        "精听",
+        "错听诊断",
+        "生成听力材料"
+      ],
+      "example": "生成一段适合初二的两分钟听力，并带我做精听。",
+      "playbook": "references/playbooks/english/english-listening-trainer/playbook.md"
+    },
+    {
+      "name": "english-speaking-coach",
+      "subject": "english",
+      "mode": "DIRECT",
+      "intents": [
+        "英语口语",
+        "发音",
+        "角色扮演",
+        "口头表达"
+      ],
+      "example": "和我模拟一段餐厅点餐对话，我说完后再纠音。",
+      "playbook": "references/playbooks/english/english-speaking-coach/playbook.md"
+    },
+    {
+      "name": "english-vocabulary-dna",
+      "subject": "english",
+      "mode": "DIRECT",
+      "intents": [
+        "单词入库",
+        "词汇复习",
+        "词汇预热",
+        "遗忘追踪"
+      ],
+      "example": "这十个新词我总忘，帮我安排复习并练到能主动使用。",
+      "playbook": "references/playbooks/english/english-vocabulary-dna/playbook.md"
+    },
+    {
+      "name": "english-writing-coach",
+      "subject": "english",
+      "mode": "DIRECT",
+      "intents": [
+        "英语作文",
+        "英语邮件",
+        "书面表达",
+        "段落升级"
+      ],
+      "example": "帮我批改这篇英语申请邮件，重点看结构和表达。",
+      "playbook": "references/playbooks/english/english-writing-coach/playbook.md"
+    },
+    {
+      "name": "math-concept-explainer",
+      "subject": "math",
+      "mode": "DIRECT",
+      "intents": [
+        "数学概念",
+        "公式来源",
+        "几何直觉",
+        "易混概念"
+      ],
+      "example": "负负为什么得正？我不想只背规则。",
+      "playbook": "references/playbooks/math/math-concept-explainer/playbook.md"
+    },
+    {
+      "name": "math-error-dna",
+      "subject": "math",
+      "mode": "DIRECT",
+      "intents": [
+        "反复数学错因",
+        "数学长期弱项",
+        "数学错因报告"
+      ],
+      "example": "导数单调性这周第三次错了，我想找出稳定根因。",
+      "playbook": "references/playbooks/math/math-error-dna/playbook.md"
+    },
+    {
+      "name": "math-gradient-trainer",
+      "subject": "math",
+      "mode": "DIRECT",
+      "intents": [
+        "数学进阶题",
+        "思维天花板",
+        "难度梯度",
+        "水平测定"
+      ],
+      "example": "二次函数基础题已经会了，帮我测到哪一级并出进阶题。",
+      "playbook": "references/playbooks/math/math-gradient-trainer/playbook.md"
+    },
+    {
+      "name": "math-problem-solving-coach",
+      "subject": "math",
+      "mode": "DIRECT",
+      "intents": [
+        "数学单题",
+        "解题路径",
+        "当前步骤卡住",
+        "数学查错"
+      ],
+      "example": "这道导数题我做到第二步卡住了，下一步怎么想？",
+      "playbook": "references/playbooks/math/math-problem-solving-coach/playbook.md"
+    },
+    {
+      "name": "math-word-problem-coach",
+      "subject": "math",
+      "mode": "DIRECT",
+      "intents": [
+        "应用题",
+        "数量关系",
+        "设元",
+        "列方程"
+      ],
+      "example": "这道行程题我读懂了，但不知道设什么为 x。",
+      "playbook": "references/playbooks/math/math-word-problem-coach/playbook.md"
+    },
+    {
+      "name": "physics-concept-intuition",
+      "subject": "physics",
+      "mode": "DIRECT",
+      "intents": [
+        "物理概念直觉",
+        "物理类比",
+        "公式意义"
+      ],
+      "example": "电压和电流到底有什么区别？给我一个有边界的类比。",
+      "playbook": "references/playbooks/physics/physics-concept-intuition/playbook.md"
+    },
+    {
+      "name": "physics-error-dna",
+      "subject": "physics",
+      "mode": "DIRECT",
+      "intents": [
+        "反复物理错因",
+        "图景根因",
+        "物理长期弱项"
+      ],
+      "example": "斜面受力题这周第三次错，我总是漏力，想查根因。",
+      "playbook": "references/playbooks/physics/physics-error-dna/playbook.md"
+    },
+    {
+      "name": "physics-lab-coach",
+      "subject": "physics",
+      "mode": "DIRECT",
+      "intents": [
+        "物理实验",
+        "实验方法",
+        "实验数据",
+        "误差评价"
+      ],
+      "example": "测电阻实验里的误差该怎么判断，为什么不能都取平均？",
+      "playbook": "references/playbooks/physics/physics-lab-coach/playbook.md"
+    },
+    {
+      "name": "physics-modeling-coach",
+      "subject": "physics",
+      "mode": "DIRECT",
+      "intents": [
+        "物理模型选择",
+        "变量表",
+        "方程表达",
+        "建模迁移"
+      ],
+      "example": "我知道题目条件，但不知道该选匀加速还是能量模型。",
+      "playbook": "references/playbooks/physics/physics-modeling-coach/playbook.md"
+    },
+    {
+      "name": "physics-problem-coach",
+      "subject": "physics",
+      "mode": "DIRECT",
+      "intents": [
+        "物理完整单题",
+        "受力图",
+        "列式",
+        "物理解题"
+      ],
+      "example": "帮我分析这道带滑轮的力学题，我已经画了受力图。",
+      "playbook": "references/playbooks/physics/physics-problem-coach/playbook.md"
+    },
+    {
+      "name": "chemistry-concept-explainer",
+      "subject": "chemistry",
+      "mode": "DIRECT",
+      "intents": [
+        "化学概念边界",
+        "易混概念",
+        "分类辨析"
+      ],
+      "example": "电解质和能导电的物质是一回事吗？",
+      "playbook": "references/playbooks/chemistry/chemistry-concept-explainer/playbook.md"
+    },
+    {
+      "name": "chemistry-error-dna",
+      "subject": "chemistry",
+      "mode": "DIRECT",
+      "intents": [
+        "反复化学错因",
+        "宏微符根因",
+        "守恒错误模式"
+      ],
+      "example": "离子方程式总在拆不拆这一步错，想分析长期模式。",
+      "playbook": "references/playbooks/chemistry/chemistry-error-dna/playbook.md"
+    },
+    {
+      "name": "chemistry-lab-inquiry",
+      "subject": "chemistry",
+      "mode": "DIRECT",
+      "intents": [
+        "化学实验",
+        "实验安全",
+        "变量控制",
+        "实验证据"
+      ],
+      "example": "如何设计实验区分两种无色溶液，并排除干扰？",
+      "playbook": "references/playbooks/chemistry/chemistry-lab-inquiry/playbook.md"
+    },
+    {
+      "name": "chemistry-particle-modeler",
+      "subject": "chemistry",
+      "mode": "DIRECT",
+      "intents": [
+        "微粒观",
+        "粒子图",
+        "宏观微观符号转换"
+      ],
+      "example": "盐溶于水后微粒到底怎么变？帮我画成粒子层面的解释。",
+      "playbook": "references/playbooks/chemistry/chemistry-particle-modeler/playbook.md"
+    },
+    {
+      "name": "chemistry-reaction-coach",
+      "subject": "chemistry",
+      "mode": "DIRECT",
+      "intents": [
+        "化学反应",
+        "方程式",
+        "配平",
+        "化学计算"
+      ],
+      "example": "这个氧化还原方程式怎么判断产物并配平？",
+      "playbook": "references/playbooks/chemistry/chemistry-reaction-coach/playbook.md"
+    },
+    {
+      "name": "biology-concept-map-builder",
+      "subject": "biology",
+      "mode": "DIRECT",
+      "intents": [
+        "生物概念图",
+        "概念网络",
+        "易混概念关系"
+      ],
+      "example": "把细胞呼吸和光合作用整理成一张有关系词的概念图。",
+      "playbook": "references/playbooks/biology/biology-concept-map-builder/playbook.md"
+    },
+    {
+      "name": "biology-error-dna",
+      "subject": "biology",
+      "mode": "DIRECT",
+      "intents": [
+        "反复生物错因",
+        "层级根因",
+        "机制图表错误模式"
+      ],
+      "example": "遗传图解题总在性状和基因型之间混，想找稳定错因。",
+      "playbook": "references/playbooks/biology/biology-error-dna/playbook.md"
+    },
+    {
+      "name": "biology-experiment-inquiry",
+      "subject": "biology",
+      "mode": "DIRECT",
+      "intents": [
+        "生物实验",
+        "变量与对照",
+        "生物数据",
+        "误差评价"
+      ],
+      "example": "这道探究酵母呼吸的实验题，变量和对照该怎么设？",
+      "playbook": "references/playbooks/biology/biology-experiment-inquiry/playbook.md"
+    },
+    {
+      "name": "biology-process-explainer",
+      "subject": "biology",
+      "mode": "DIRECT",
+      "intents": [
+        "生命过程链",
+        "光合作用",
+        "呼吸",
+        "遗传",
+        "生态机制"
+      ],
+      "example": "光照变强后光合速率为什么不一定一直上升？",
+      "playbook": "references/playbooks/biology/biology-process-explainer/playbook.md"
+    },
+    {
+      "name": "biology-structure-function-coach",
+      "subject": "biology",
+      "mode": "DIRECT",
+      "intents": [
+        "结构与功能",
+        "生命层级",
+        "形态适应"
+      ],
+      "example": "肺泡的结构为什么适合气体交换？",
+      "playbook": "references/playbooks/biology/biology-structure-function-coach/playbook.md"
+    },
+    {
+      "name": "geography-error-dna",
+      "subject": "geography",
+      "mode": "DIRECT",
+      "intents": [
+        "反复地理错因",
+        "读图根因",
+        "区位错误模式"
+      ],
+      "example": "等值线题连续错三次，我想知道是读图还是原理出了问题。",
+      "playbook": "references/playbooks/geography/geography-error-dna/playbook.md"
+    },
+    {
+      "name": "geography-map-coach",
+      "subject": "geography",
+      "mode": "DIRECT",
+      "intents": [
+        "地图",
+        "经纬网",
+        "等值线",
+        "图表定位"
+      ],
+      "example": "这张等高线图我连方向和坡度都看不出来。",
+      "playbook": "references/playbooks/geography/geography-map-coach/playbook.md"
+    },
+    {
+      "name": "geography-problem-coach",
+      "subject": "geography",
+      "mode": "DIRECT",
+      "intents": [
+        "地理完整题",
+        "地理综合题",
+        "规范作答"
+      ],
+      "example": "帮我一步步分析这道城市区位综合题。",
+      "playbook": "references/playbooks/geography/geography-problem-coach/playbook.md"
+    },
+    {
+      "name": "geography-process-explainer",
+      "subject": "geography",
+      "mode": "DIRECT",
+      "intents": [
+        "地理过程",
+        "水循环",
+        "环流",
+        "迁移",
+        "城市化机制"
+      ],
+      "example": "季风是怎么一步步形成的？条件变化后会怎样？",
+      "playbook": "references/playbooks/geography/geography-process-explainer/playbook.md"
+    },
+    {
+      "name": "geography-region-analyzer",
+      "subject": "geography",
+      "mode": "DIRECT",
+      "intents": [
+        "区域分析",
+        "区域差异",
+        "区位要素关联"
+      ],
+      "example": "分析长三角的区位特征和区域内部差异。",
+      "playbook": "references/playbooks/geography/geography-region-analyzer/playbook.md"
+    },
+    {
+      "name": "history-causation-explainer",
+      "subject": "history",
+      "mode": "DIRECT",
+      "intents": [
+        "历史因果链",
+        "多元原因",
+        "必然偶然"
+      ],
+      "example": "工业革命为什么先发生在英国？不要只列原因清单。",
+      "playbook": "references/playbooks/history/history-causation-explainer/playbook.md"
+    },
+    {
+      "name": "history-error-dna",
+      "subject": "history",
+      "mode": "DIRECT",
+      "intents": [
+        "反复历史错因",
+        "时空根因",
+        "史料误读模式"
+      ],
+      "example": "近代条约时间顺序这周第三次错，想查根因。",
+      "playbook": "references/playbooks/history/history-error-dna/playbook.md"
+    },
+    {
+      "name": "history-evidence-analysis",
+      "subject": "history",
+      "mode": "DIRECT",
+      "intents": [
+        "史料实证",
+        "史实观点",
+        "论从史出",
+        "史料互证"
+      ],
+      "example": "这段日记能不能证明当时所有人的态度？",
+      "playbook": "references/playbooks/history/history-evidence-analysis/playbook.md"
+    },
+    {
+      "name": "history-problem-coach",
+      "subject": "history",
+      "mode": "DIRECT",
+      "intents": [
+        "历史完整题",
+        "材料题",
+        "选择题",
+        "论述题"
+      ],
+      "example": "帮我分析这道历史材料题应该怎么组织答案。",
+      "playbook": "references/playbooks/history/history-problem-coach/playbook.md"
+    },
+    {
+      "name": "history-timeline-coach",
+      "subject": "history",
+      "mode": "DIRECT",
+      "intents": [
+        "历史时间轴",
+        "阶段划分",
+        "中外平行时空"
+      ],
+      "example": "把鸦片战争到辛亥革命整理成时间轴并标出因果关系。",
+      "playbook": "references/playbooks/history/history-timeline-coach/playbook.md"
+    },
+    {
+      "name": "politics-application-coach",
+      "subject": "politics",
+      "mode": "DIRECT",
+      "intents": [
+        "政治完整题",
+        "理论联系材料",
+        "模块定位",
+        "规范作答"
+      ],
+      "example": "这道材料题到底该调用经济、政治还是哲学模块？",
+      "playbook": "references/playbooks/politics/politics-application-coach/playbook.md"
+    },
+    {
+      "name": "politics-concept-explainer",
+      "subject": "politics",
+      "mode": "DIRECT",
+      "intents": [
+        "政治概念",
+        "易混概念",
+        "概念边界"
+      ],
+      "example": "人民民主和公民权利有什么区别？",
+      "playbook": "references/playbooks/politics/politics-concept-explainer/playbook.md"
+    },
+    {
+      "name": "politics-error-dna",
+      "subject": "politics",
+      "mode": "DIRECT",
+      "intents": [
+        "反复政治错因",
+        "模块定位根因",
+        "论证错误模式"
+      ],
+      "example": "材料题总答错理论模块，想分析为什么反复发生。",
+      "playbook": "references/playbooks/politics/politics-error-dna/playbook.md"
+    },
+    {
+      "name": "politics-framework-coach",
+      "subject": "politics",
+      "mode": "DIRECT",
+      "intents": [
+        "政治知识框架",
+        "模块思维导图",
+        "学期体系"
+      ],
+      "example": "把经济生活这学期内容整理成能调用的知识框架。",
+      "playbook": "references/playbooks/politics/politics-framework-coach/playbook.md"
+    },
+    {
+      "name": "politics-value-reasoning",
+      "subject": "politics",
+      "mode": "DIRECT",
+      "intents": [
+        "政治开放题",
+        "价值论证",
+        "事实价值选择链"
+      ],
+      "example": "我有一个开放题观点，帮我检查论证，不要评价我的立场。",
+      "playbook": "references/playbooks/politics/politics-value-reasoning/playbook.md"
+    }
+  ]
+}

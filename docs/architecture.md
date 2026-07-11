@@ -1,449 +1,97 @@
-# 🏛️ 系统架构与方法论
+# 四 Product Module 架构
 
-本文档描述当前仓库保留的 **K12 学习场景 62 个 SKILL**：它们如何分层、如何协作，以及背后的方法论依据。
+> 适用版本：**V3.0**
 
----
+## 结论
 
-## 🗂️ 仓库结构
+仓库只向宿主暴露 4 个产品入口，不再暴露 63 个平级 Skill。旧能力没有消失，而是成为模块内部按需加载的 playbook。
 
-```text
-skills/
-├── general/   # 通用学习系统与成长层
-├── chinese/   # 语文学科专项
-├── math/      # 数学学科专项
-├── english/   # 英语学科专项
-├── physics/   # 物理学科专项
-├── history/   # 历史学科专项
-├── geography/ # 地理学科专项
-├── politics/  # 政治学科专项
-├── chemistry/ # 化学学科专项
-└── biology/   # 生物学科专项
+```mermaid
+flowchart LR
+    U["用户自然语言请求"] --> L["k12-learning\n日常学习唯一入口"]
+    U --> W["llm-wiki\n知识库入口"]
+    U --> A["k12-automation\n副作用入口"]
+    M["维护者"] --> S["k12-skill-studio\n治理入口"]
+    L --> P["58 个学习能力\n学科 + 通用 playbook"]
+    L -. "明确写入" .-> W
+    L -. "明确提醒/运行" .-> A
+    S --> P
 ```
 
-如果这些 SKILL 作为 Obsidian 项目级 SKILL 使用，笔记仓库建议采用 LLM Wiki 风格三层架构：
-
-```text
-100-Raw     # 原始学习证据
-200-Wiki    # 编译后的学习资产
-300-Output  # 可查看、可复盘、可交付的成果
-```
-
-从 0 搭建或适配已有学习仓库时，优先使用 `skills/general/educational-llm-wiki/`；详细说明见 [Obsidian 学习仓库架构](obsidian-vault-architecture.md)，项目级入口模板见 [AGENTS.k12-learning-vault.template.md](AGENTS.k12-learning-vault.template.md)。
-
-### 数量总览
-
-| 类别 | 数量 |
-|------|------|
-| `skills/general/` | 17 |
-| `skills/chinese/` | 5 |
-| `skills/math/` | 5 |
-| `skills/english/` | 5 |
-| `skills/physics/` | 5 |
-| `skills/history/` | 5 |
-| `skills/geography/` | 5 |
-| `skills/politics/` | 5 |
-| `skills/chemistry/` | 5 |
-| `skills/biology/` | 5 |
-| **总计** | **62** |
-
-### 单个 SKILL 可安装边界
-
-平台安装通常以单个 SKILL 目录为单位，因此每个 SKILL 必须自包含：
-
-```text
-skill-folder/
-├── SKILL.md
-├── references/   # 本 SKILL 运行所需参考材料
-├── schemas/      # 本 SKILL 运行所需数据结构
-└── assets/       # 本 SKILL 运行时需要复制或复用的模板素材
-```
-
-维护规则：
-
-- `SKILL.md` 中声明的 `references:` 必须指向本目录内文件，例如 `references/foo.md`
-- 不允许运行时依赖 `../../../references/...` 这类仓库根目录路径
-- 可复用方法论如果被多个 SKILL 使用，应复制为各自目录下的精简版本，而不是放成根目录共享依赖
-- 根目录 `references/` 只可作为原始资料或项目级研究材料存放，不作为单个 SKILL 安装时的运行依赖
-- 所有跨 SKILL 使用的学习理论必须先在根目录 `references/` 登记，再按需复制精简版到单个 SKILL 的 `references/`
-
----
-
-## 📚 完整 SKILL 清单
-
-### 一、通用学习系统（17 个）
-
-| # | SKILL 名称 | 文件夹 | 版本 | 核心功能 |
-|---|-----------|-------|------|---------|
-| 1 | 🧬 学习DNA | `skills/general/learning-dna/` | v1.1+ | 长期档案、成长图谱、学习风格、兴趣接口 |
-| 2 | ❌ 智能错题本 | `skills/general/correction-notebook/` | v1.2.1 | 错因分析、弱项预警、同类验证、学期报告 |
-| 3 | ⏰ IM智能提醒 | `skills/general/im-reminder/` | v1.1+ | 复习提醒、计划提醒、探索提醒、每日确认 |
-| 4 | 🎓 费曼学习法 | `skills/general/feynman-learning/` | v1.1.1 | 五跳追问、理解验证、挑战者模式 |
-| 5 | 📊 每周学习复盘 | `skills/general/weekly-review/` | v1.1.3 | 六模块周报、学习区检查、成长曲线、复盘追问 |
-| 6 | 🧭 教育LLM知识库 | `skills/general/educational-llm-wiki/` | v1.0.0 | 教育版三层 vault、资料编译、索引日志、健康检查 |
-| 7 | 🛠️ 教育版SKILL创建教练 | `skills/general/educational-skill-creator/` | v1.1.0 | 帮学生把学习痛点抽象成可复用工具 |
-| 8 | 📝 康奈尔笔记 | `skills/general/cornell-notes/` | v1.0.1 | 笔记提炼、自测问题、知识沉淀 |
-| 9 | 🔗 五SKILL联动协调器 | `skills/general/skill-coordinator/` | v1.1+ | 联动判断、学习区校准、全景月报、系统健康检查 |
-| 10 | 📅 30天学习计划制定师 | `skills/general/learning-plan/` | v1.0.3 | DNA 驱动计划、学习区校准、执行拆解、家庭看板 |
-| 11 | ⏱️ 时间与专注力教练 | `skills/general/time-focus-coach/` | v1.0.2 | 时间销行账、黄金时段、智能番茄钟 |
-| 12 | 🔭 跨学科侦探周 | `skills/general/cross-subject-detective/` | v1.0 | 项目式探索、跨科联结、侦探周流程 |
-| 13 | ☕ 兴趣成长探索计划 | `skills/general/interest-explorer/` | v1.0 | 52 杯咖啡、兴趣验证、兴趣DNA |
-| 14 | 🧩 理科解题四步法 | `skills/general/science-solving-four-steps/` | v1.1 | 教练式提示阶梯、题型判断、波利亚四步解题、变式迁移 |
-| 15 | 🧭 阶段学习体检 | `skills/general/learning-360-review/` | v1.0 | 证据化阶段复盘、A/B/C 判断、系统修复动作 |
-| 16 | 🪪 学生快速评测 | `skills/general/student-quick-assessment/` | v1.0.0 | 前置定位、七字段画像、证据库存、授权后的 DNA 种子 |
-| 17 | 🏅 技能体系质量打分校验器 | `skills/general/system-quality-scoring/` | v1.0.0 | 8 维行为打分、双盲评测、回归基准、红线封顶 |
-
-### 二、语文学科专项（5 个）
-
-| # | SKILL 名称 | 文件夹 | 核心功能 |
-|---|-----------|-------|---------|
-| 18 | 语文写作教练 | `skills/chinese/chinese-writing-coach/` | 5步流程、风格DNA、写作追问 |
-| 19 | 阅读理解拆解师 | `skills/chinese/chinese-reading-decoder/` | 错因识别、出题人视角、答题结构 |
-| 20 | 文言文复活计划 | `skills/chinese/chinese-classical-revival/` | 角色扮演、三级跳、背诵与理解 |
-| 21 | 语文素材库2.0 | `skills/chinese/chinese-material-library/` | 素材积累、自动标签、写作前调用 |
-| 22 | 语病追踪档案 | `skills/chinese/chinese-grammar-tracker/` | 六类语病识别、顽固档案、预警 |
-
-### 三、数学学科专项（5 个）
-
-| # | SKILL 名称 | 文件夹 | 核心功能 |
-|---|-----------|-------|---------|
-| 23 | 数学解题教练 | `skills/math/math-problem-solving-coach/` | 四步拍照法、CLAW5 模板、五问链 |
-| 24 | 数学错误DNA | `skills/math/math-error-dna/` | 错误分类、顽固追踪、月度图谱 |
-| 25 | 数学概念解释器 | `skills/math/math-concept-explainer/` | 生活类比、几何直觉、概念重建 |
-| 26 | 应用题建模教练 | `skills/math/math-word-problem-coach/` | 数量关系提取、五大题型建模 |
-| 27 | 思维梯度训练师 | `skills/math/math-gradient-trainer/` | 天花板测定、进阶序列、成长日记 |
-
-### 四、英语学科专项（5 个）
-
-| # | SKILL 名称 | 文件夹 | 核心功能 |
-|---|-----------|-------|---------|
-| 28 | 英语口语陪练 | `skills/english/english-speaking-coach/` | 热身、角色扮演、口语成长轨迹 |
-| 29 | 智能词汇DNA系统 | `skills/english/english-vocabulary-dna/` | 词汇入库、遗忘追踪、主题雷达 |
-| 30 | 英语语法突破教练 | `skills/english/english-grammar-coach/` | 语法图谱、追问、错误模式分析 |
-| 31 | 个性化英语听力训练师 | `skills/english/english-listening-trainer/` | DNA 驱动听力、四步训练、卡壳追问 |
-| 32 | 英语写作进化教练 | `skills/english/english-writing-coach/` | 三维批改、句式升级、写作档案 |
-
-### 五、物理学科专项（5 个）
-
-| # | SKILL 名称 | 文件夹 | 核心功能 |
-|---|-----------|-------|---------|
-| 33 | 物理解题教练 | `skills/physics/physics-problem-coach/` | 四步法、图景建立、物理追问 |
-| 34 | 物理错误DNA | `skills/physics/physics-error-dna/` | 五维错误分类、弱项追踪、焦虑处理 |
-| 35 | 物理概念直觉器 | `skills/physics/physics-concept-intuition/` | 类比、实验想象、公式意义还原 |
-| 36 | 物理建模教练 | `skills/physics/physics-modeling-coach/` | 建模三步法、核心模型迁移 |
-| 37 | 物理实验思维教练 | `skills/physics/physics-lab-coach/` | 实验方法、数据分析、实验评价 |
-
-### 六、历史学科专项（5 个）
-
-| # | SKILL 名称 | 文件夹 | 核心功能 |
-|---|-----------|-------|---------|
-| 38 | 历史时空观教练 | `skills/history/history-timeline-coach/` | 时空定位铁律、时间轴、中外双轨 |
-| 39 | 历史因果解释器 | `skills/history/history-causation-explainer/` | 因果四框架、因果链、多元解释 |
-| 40 | 史料实证分析教练 | `skills/history/history-evidence-analysis/` | 史料分析状态机、孤证不立 |
-| 41 | 历史解题教练 | `skills/history/history-problem-coach/` | 四步解题、题型判别、三层次追问 |
-| 42 | 历史错误DNA | `skills/history/history-error-dna/` | H1-H5 五维错因、纯净版时空测试 |
-
-### 七、地理学科专项（5 个）
-
-| # | SKILL 名称 | 文件夹 | 核心功能 |
-|---|-----------|-------|---------|
-| 43 | 地理读图定位教练 | `skills/geography/geography-map-coach/` | 无图不题铁律、读图四步、等值线 |
-| 44 | 区域综合分析教练 | `skills/geography/geography-region-analyzer/` | 区域五步框架、要素关联 |
-| 45 | 地理过程机制解释器 | `skills/geography/geography-process-explainer/` | 过程推理四步、因子机制表 |
-| 46 | 地理解题教练 | `skills/geography/geography-problem-coach/` | 四步解题、自然地理计算 |
-| 47 | 地理错误DNA | `skills/geography/geography-error-dna/` | G1-G5 五维错因、纯净版读图测试 |
-
-### 八、政治学科专项（5 个）
-
-| # | SKILL 名称 | 文件夹 | 核心功能 |
-|---|-----------|-------|---------|
-| 48 | 政治知识体系教练 | `skills/politics/politics-framework-coach/` | 模块地图、思维导图、学期级体系 |
-| 49 | 政治概念理解器 | `skills/politics/politics-concept-explainer/` | 生活类比、易混概念辨析 |
-| 50 | 政治理论联系实际教练 | `skills/politics/politics-application-coach/` | 先定位理论模块铁律、四步法 |
-| 51 | 政治价值推理教练 | `skills/politics/politics-value-reasoning/` | 价值推理三步链、只练论证不评立场 |
-| 52 | 政治错误DNA | `skills/politics/politics-error-dna/` | Po1-Po5 五维错因、纯净版审题测试 |
-
-### 九、化学学科专项（5 个）
-
-| # | SKILL 名称 | 文件夹 | 核心功能 |
-|---|-----------|-------|---------|
-| 53 | 化学微粒观建模教练 | `skills/chemistry/chemistry-particle-modeler/` | 宏观现象、微观粒子、符号表达贯通 |
-| 54 | 化学概念理解器 | `skills/chemistry/chemistry-concept-explainer/` | 物质分类、溶液、酸碱盐、氧化还原和有机基础辨析 |
-| 55 | 化学变化与方程式教练 | `skills/chemistry/chemistry-reaction-coach/` | 反应分析、方程式书写配平、守恒和基础计算 |
-| 56 | 化学实验探究教练 | `skills/chemistry/chemistry-lab-inquiry/` | 实验安全、变量控制、证据记录和干扰排除 |
-| 57 | 化学错误DNA | `skills/chemistry/chemistry-error-dna/` | Ch1-Ch5 五维错因、宏微符和守恒修复 |
-
-### 十、生物学科专项（5 个）
-
-| # | SKILL 名称 | 文件夹 | 核心功能 |
-|---|-----------|-------|---------|
-| 58 | 生物结构与功能教练 | `skills/biology/biology-structure-function-coach/` | 生命层级、结构特征、功能适应解释 |
-| 59 | 生物概念图谱教练 | `skills/biology/biology-concept-map-builder/` | 概念节点、关系词、层级/因果/并列图 |
-| 60 | 生命过程机制解释器 | `skills/biology/biology-process-explainer/` | 光合、呼吸、循环、免疫、遗传、生态机制链 |
-| 61 | 生物实验探究教练 | `skills/biology/biology-experiment-inquiry/` | 变量、对照、重复、数据图表和误差评价 |
-| 62 | 生物错误DNA | `skills/biology/biology-error-dna/` | B1-B5 五维错因、结构功能和机制链修复 |
-
----
-
-## 🔄 系统协作架构
-
-### 0. 前置入口层
-
-```text
-学生首次接触 / 不知道从哪开始 / 需要建档前
-   ↓
-student-quick-assessment
-   ↓ 输出会话内画像、证据库存、路由提示
-   ├── 未授权：只在本次会话使用
-   └── 已授权：交付最小种子给 learning-dna
-```
-
-`学生快速评测` 负责在系统启动前做低敏定位：学段年级、科目集合、文理/选科方向、近期作业试卷错题、授权状态。它不替代 `learning-dna` 的长期档案，也不直接调用所有学科 SKILL；只给 `skill-coordinator` 或下一步学科 SKILL 提供路由提示。
-
-### 1. 核心学习飞轮
-
-```text
-错题记录
-   ↓
-错因识别
-   ↓
-单题掌握（理科题目拆解 / 变式）
-   ↓
-理解验证（费曼）
-   ↓
-知识沉淀（笔记 / DNA）
-   ↓
-复习提醒
-   ↓
-每周复盘
-```
+## 为什么是四个
 
-这条飞轮对应的关键角色：
+划分依据不是“能力数量”，而是稳定的产品边界：
 
-- `学习DNA`：提供长期个性化背景
-- `智能错题本`：识别错误根因
-- `理科解题四步法`：把一道理科题拆到可解释、可迁移、可复测
-- `费曼学习法`：验证是否真正掌握
-- `康奈尔笔记`：把问题沉淀成可复用知识
-- `IM智能提醒`：负责回访和节奏
-- `每周学习复盘`：把零散行为整合成趋势判断
+1. `k12-learning` 拥有教学判断和会话内学习结果。
+2. `llm-wiki` 拥有持久知识库结构、来源、索引和日志。
+3. `k12-automation` 拥有真实副作用、授权记录和确定性运行时。
+4. `k12-skill-studio` 拥有模块/playbook 的开发与质量治理。
 
-### 2. 学习系统联动扩展
+学习 DNA、跨学科侦探、四部/四步解题法、错题本、费曼学习和各学科教练都属于“如何完成学习任务”，没有独立的安装、权限或运行边界，因此留在 `k12-learning` 内部。新增方法通常也应新增或扩展 playbook，而不是新增 Product Module。
 
-在核心飞轮之外，系统还把“这道题是否学透”和“学会了但做不到”单独拆出来处理：
+## 模块契约
 
-```text
-错题 / 盲区
-   ↓
-理科题目掌握：是否能拆结构、讲入口、做变式
-   ↓
-费曼验证是否真懂
-   ↓
-若懂但总做不到：
-   ├── 学习计划：任务是否被拆成行动
-   └── 时间专注：行动是否真正落地
-```
+### `k12-learning`
 
-所以 `五SKILL联动协调器` 回答的是一组不同问题：
+- 输入：当前问题、材料、学生已做步骤、期望结果。
+- 输出：解释、提示、练习、反馈、会话内画像或待确认的持久化建议。
+- 内部路由：一个主 playbook，必要时最多两个辅助 playbook。
+- 默认副作用：无。不自动建档、提醒、外传或写 Wiki。
+- 能力地图：`skills/k12-learning/references/capability-map.json`。
 
-- 错题本：哪里错
-- 理科解题四步法：一道题是否真的学透
-- 费曼：到底懂没懂
-- 康奈尔笔记：有没有形成沉淀
-- 学习计划：有没有把目标拆成行动
-- 时间与专注：有没有真正执行下来
+典型组合：
 
-### 3. 学习区校准
+| 用户目标 | 主 playbook | 可选辅助 |
+|---|---|---|
+| 单道物理题卡住 | `physics-problem-coach` | `science-solving-four-steps` |
+| 讲懂后验证是否真会 | 学科概念 playbook | `feynman-learning` |
+| 反复犯同类错 | 学科 `error-dna` | `correction-notebook` |
+| 做跨学科项目 | `cross-subject-detective` | 对应学科 playbook |
+| 没有明确任务、想定位 | `student-quick-assessment` | 获授权后才形成 Learning State |
 
-学生端通用层新增一个底层难度原则：只在学习区学习。
+### `llm-wiki`
 
-```text
-熟悉区：几乎全会，新增学习量很低
-学习区：大约85%熟悉内容 + 15%意外挑战
-挫败区：大量不会，持续卡住，容易放弃或只等答案
-```
+- 采用 `100-Raw / 200-Wiki / 300-Output / 999-Assets` 四层结构。
+- `200-Wiki/SCHEMA.md` 是命名、frontmatter 和 taxonomy 的单一来源。
+- 新建、迁移、批量入库、删除和安装依赖前先确认路径与范围。
+- 不自动读取 K12 Learning State；只接收当前材料或明确授权的最小摘要。
 
-落地方式：
+### `k12-automation`
 
-- `30天学习计划制定师`：安排任务时标注熟悉区 / 学习区 / 挫败区
-- `五SKILL联动协调器`：发现任务太易或太难时建议调参
-- `每周学习复盘`：回看本周学习区命中情况
-- `IM智能提醒`：用间隔学习支持复习和测验
-- `康奈尔笔记` 与 `学习DNA`：沉淀新旧知识连接
-- `理科解题四步法`：用单题变式、口头解释和间隔复测确认题目是否真正掌握
+- 提醒通过宿主 adapter 执行；没有 adapter 时只给计划，不谎报成功。
+- 夜间产线、OCR、看板和控制台位于 `scripts/nightline/`。
+- 本地建档、外部模型和 OCR 是三个独立授权门。
+- 数据根与模块安装目录分离；服务只绑定 `127.0.0.1`。
 
----
+### `k12-skill-studio`
 
-## 🧠 方法论依据
+- 只面向维护者，不参与学生日常答疑。
+- 优先深化现有 module；新 Product Module 必须通过 deletion test。
+- 负责 source mapping、行为用例、Schema、S1–S8 质量评分和发布前回归。
 
-仓库级理论资料统一登记在：
+## 关键领域对象
 
-- `references/理论资料索引.md`
-- `references/K12教育SKILL理论基础总表.md`
-- `references/大脑记忆与表达12个认知原理.md`
-- `references/学习区.md`、`references/85-15意外挑战.md`
+- **Product Module**：宿主可发现、可安装、有独立边界的 4 个入口。
+- **Playbook**：模块内部的方法实现；不能被宿主当作 Skill 发现。
+- **Capability Map**：自然语言意图到学习 playbook 的受测映射。
+- **Learning State**：经授权保存的最小学习状态，不等于聊天历史。
+- **Adapter**：提醒、模型、OCR、文件系统等真实外部执行接口。
 
-单个 SKILL 运行时所需的精简理论资料仍放在各自目录下的 `references/`。
+完整定义见 [`CONTEXT.md`](../CONTEXT.md)，决策记录见 [`adr/0001-four-product-modules.md`](adr/0001-four-product-modules.md)。
 
-### 1. 学习区与85%规则
+## 迁移与删除证明
 
-训练任务应尽量保持大约 85% 熟悉内容和 15% 意外挑战。太熟会停留在重复区，太难会进入挫败区，刚好有少量意外才更容易发生有效学习。
+- 63 个旧入口均记录在 [`legacy-skill-mapping.json`](legacy-skill-mapping.json)。
+- 旧教学流程、references、schemas、assets 与测试先迁移，校验后才删除旧 `SKILL.md`。
+- 当前保留 61 个内部 playbook：58 个学习、1 个提醒、2 个维护者 playbook。
+- 新 `llm-wiki` 以用户提供的新版本为基线，旧 `educational-llm-wiki` 只保留迁移映射。
 
-配套四法：
+## 架构不变量
 
-1. 安排间隔，不只突击
-2. 用不同场景、不同方式学习同一内容
-3. 经常测验，确认是否真的掌握
-4. 把新知识和旧知识建立连接
+1. `find skills -name SKILL.md` 必须恰好返回四项。
+2. `references/playbooks/` 下不得出现 `SKILL.md`。
+3. 真实副作用只由 `k12-automation` 或经声明的 adapter 执行。
+4. 未经确认，不形成长期状态、不外传、不安装依赖。
+5. 新能力优先进入 Capability Map 和 playbook；新增第 5 个模块必须先更新上下文、ADR 和测试。
 
-### 2. 12 个认知原理
-
-本体系把 12 个认知原理作为所有教育 SKILL 的底层设计约束：减少文本与讲解冲突，优先图表和结构化表达，保持固定版式，记录情境状态，反多任务，加入交错练习，重视错误反馈，优先主动回忆，用预热问题和故事激活理解，保持适度压力，并通过分散练习抵抗遗忘。
-
-### 3. 记忆飞轮
-
-1. 记录首次错误
-2. 在合适时间复习
-3. 用同类题或变式题做回访
-4. 找到固定错误模式
-5. 在周报 / 月报里看见趋势
-
-### 4. 费曼学习法
-
-核心不是“听懂 AI 的解释”，而是“你能不能不用原话讲出来，并迁移到新场景”。
-
-### 5. 波利亚解题法
-
-理科题目掌握不是直接套答案，而是经历四个阶段：理解题目、拟定方案、执行方案、回顾迁移。`理科解题四步法` 把这四步落成可对话流程，并加入独立重做、口头解释、变式迁移和间隔复测。
-
-### 6. AI 学习铁律
-
-所有学生端 SKILL 都遵循同一个原则：
-
-> 用 AI 辅助思考，不用 AI 替代思考。
-
-### 7. 学科能力链
-
-#### 语文能力链
-
-写作表达升级 → 阅读拆题拿分 → 古诗文理解与背诵 → 素材长期积累 → 语言表达纠偏
-
-#### 数学能力链
-
-日常解题 → 错因沉淀 → 概念重建 → 应用题建模 → 天花板突破
-
-#### 英语能力链
-
-口语开口 → 词汇长期积累 → 语法突破 → 个性化听力 → 写作升级
-
-#### 物理能力链
-
-图景建立与解题 → 错误根因追踪 → 概念直觉重建 → 建模迁移 → 实验思维
-
-#### 化学能力链
-
-宏微符建模 → 概念边界辨析 → 反应与守恒 → 实验证据 → 化学错因修复
-
-#### 生物能力链
-
-结构层级定位 → 结构功能解释 → 生命过程机制链 → 实验数据探究 → 生物错因修复
-
----
-
-## 🛡️ 权限与共享边界
-
-学生端的所有联动都不是默认开启的，必须满足：
-
-1. 当前任务明确需要
-2. 用户已对相关档案或提醒授予授权
-3. 只读取最小必要摘要
-4. 用户可以随时要求“不记忆”“不提醒”“不要共享给其他SKILL”
-
-这也是 [SECURITY_BASELINE.md](../SECURITY_BASELINE.md) 的核心原则。
-
----
-
-## 📁 目录树
-
-```text
-skills/
-├── general/
-│   ├── learning-dna/
-│   ├── correction-notebook/
-│   ├── im-reminder/
-│   ├── feynman-learning/
-│   ├── weekly-review/
-│   ├── educational-llm-wiki/
-│   ├── educational-skill-creator/
-│   ├── cornell-notes/
-│   ├── skill-coordinator/
-│   ├── learning-plan/
-│   ├── time-focus-coach/
-│   ├── cross-subject-detective/
-│   ├── interest-explorer/
-│   ├── science-solving-four-steps/
-│   ├── learning-360-review/
-│   ├── student-quick-assessment/
-│   └── system-quality-scoring/
-├── chinese/
-│   ├── chinese-writing-coach/
-│   ├── chinese-reading-decoder/
-│   ├── chinese-classical-revival/
-│   ├── chinese-material-library/
-│   └── chinese-grammar-tracker/
-├── math/
-│   ├── math-problem-solving-coach/
-│   ├── math-error-dna/
-│   ├── math-concept-explainer/
-│   ├── math-word-problem-coach/
-│   └── math-gradient-trainer/
-├── english/
-│   ├── english-speaking-coach/
-│   ├── english-vocabulary-dna/
-│   ├── english-grammar-coach/
-│   ├── english-listening-trainer/
-│   └── english-writing-coach/
-├── physics/
-│   ├── physics-problem-coach/
-│   ├── physics-error-dna/
-│   ├── physics-concept-intuition/
-│   ├── physics-modeling-coach/
-│   └── physics-lab-coach/
-├── history/
-│   ├── history-timeline-coach/
-│   ├── history-causation-explainer/
-│   ├── history-evidence-analysis/
-│   ├── history-problem-coach/
-│   └── history-error-dna/
-├── geography/
-│   ├── geography-map-coach/
-│   ├── geography-region-analyzer/
-│   ├── geography-process-explainer/
-│   ├── geography-problem-coach/
-│   └── geography-error-dna/
-├── politics/
-│   ├── politics-framework-coach/
-│   ├── politics-concept-explainer/
-│   ├── politics-application-coach/
-│   ├── politics-value-reasoning/
-│   └── politics-error-dna/
-├── chemistry/
-│   ├── chemistry-particle-modeler/
-│   ├── chemistry-concept-explainer/
-│   ├── chemistry-reaction-coach/
-│   ├── chemistry-lab-inquiry/
-│   └── chemistry-error-dna/
-└── biology/
-    ├── biology-structure-function-coach/
-    ├── biology-concept-map-builder/
-    ├── biology-process-explainer/
-    ├── biology-experiment-inquiry/
-    └── biology-error-dna/
-```
-
-每个叶子目录都是独立安装单元；其 `references/` 和 `schemas/` 会随该 SKILL 一起打包。
-
----
-
-## 📌 一句话总结
-
-这 62 个 SKILL 不是 62 个孤立工具，而是一套围绕“定位入口、记录错误、验证理解、形成沉淀、推动执行、看见成长、回归校验”的学生学习系统。
+运行 `bash pipeline/review.sh all` 会验证上述边界、Schema 和自动化运行时。
