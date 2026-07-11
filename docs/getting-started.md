@@ -11,15 +11,13 @@
 
 ## 2. 安装
 
-在仓库根目录执行：
+直接告诉 AI：
 
-```bash
-mkdir -p ~/.codex/skills
-cp -R skills/k12-learning ~/.codex/skills/
-cp -R skills/llm-wiki ~/.codex/skills/
+```text
+请安装 k12-learning 和 llm-wiki Skill。
 ```
 
-刷新或重启宿主，确认它能发现 `k12-learning` 和 `llm-wiki`。其他宿主只需把整个模块目录复制到其 Skill 搜索目录；不要单独复制内部 playbook。
+安装路径和具体操作由 AI 自行处理。其他模块话术见 [AI 安装提示词](ai-install-prompt.md)。
 
 ## 3. 直接说目标
 

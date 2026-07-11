@@ -100,4 +100,19 @@ const wikiMain = readFileSync(join(SKILLS, 'llm-wiki/SKILL.md'), 'utf8');
 for (const layer of ['100-Raw', '200-Wiki', '300-Output', '999-Assets']) assert(wikiMain.includes(layer), `llm-wiki missing ${layer}`);
 assert(!wikiMain.includes('.codex/skills'), 'llm-wiki must not hardcode deprecated Codex path');
 
+const installPromptPath = join(ROOT, 'docs/ai-install-prompt.md');
+assert(existsSync(installPromptPath), 'AI-first install prompt is missing');
+const installPrompt = readFileSync(installPromptPath, 'utf8');
+for (const marker of [
+  '请安装 k12-learning 和 llm-wiki Skill。',
+  '请安装 k12-automation Skill。',
+  '请安装 k12-skill-studio Skill。',
+  '由 AI 自行处理',
+]) assert(installPrompt.includes(marker), `AI install prompt missing contract marker: ${marker}`);
+for (const file of ['README.md', 'docs/getting-started.md', 'docs/installation-guide.md', 'docs/user-quickstart-sop.md']) {
+  const text = readFileSync(join(ROOT, file), 'utf8');
+  assert(text.includes('请安装 k12-learning 和 llm-wiki Skill。'), `${file} must lead with the one-line AI install intent`);
+  assert(!text.includes('cp -R skills/k12-learning'), `${file} must not lead ordinary users through manual copy commands`);
+}
+
 console.log(`module contract: 4 Product Modules, 61 playbooks, 58 capabilities, 63 source mappings, ${totalTests} behavior cases`);

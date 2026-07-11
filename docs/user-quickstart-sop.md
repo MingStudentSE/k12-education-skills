@@ -2,37 +2,17 @@
 
 > 适用版本：**V3.0**。目标：第一次使用者在 10 分钟内完成安装、验证和第一次真实学习任务。
 
-## A. 安装前检查
+## A. 安装
 
-在仓库根目录执行：
+告诉 AI：
 
-```bash
-test -f skills/k12-learning/SKILL.md && echo "SOURCE_OK"
-find skills -name SKILL.md -print
+```text
+请安装 k12-learning 和 llm-wiki Skill。
 ```
 
-验收：看到 `SOURCE_OK`，并且只列出 `k12-learning`、`llm-wiki`、`k12-automation`、`k12-skill-studio` 四个入口。
+安装路径和具体操作由 AI 自行处理。
 
-## B. 安装普通用户套装
-
-```bash
-mkdir -p ~/.codex/skills
-cp -R skills/k12-learning ~/.codex/skills/
-cp -R skills/llm-wiki ~/.codex/skills/
-```
-
-如果目标目录已有同名模块，先备份再替换，不要把新旧文件混合覆盖。刷新或重启 Codex。
-
-验收：
-
-```bash
-test -f ~/.codex/skills/k12-learning/SKILL.md
-test -f ~/.codex/skills/k12-learning/references/capability-map.json
-test -f ~/.codex/skills/llm-wiki/SKILL.md
-echo "INSTALL_OK"
-```
-
-## C. 第一次学习任务
+## B. 第一次学习任务
 
 复制这句话，并把题目或过程一起发出：
 
@@ -52,7 +32,7 @@ echo "INSTALL_OK"
 
 验收：这些都是 `k12-learning` 内部能力，不需要额外安装。
 
-## D. 建立或接入 Wiki（可选）
+## C. 建立或接入 Wiki（可选）
 
 准备一个空目录或已有 Markdown/Obsidian vault，然后说：
 
@@ -77,41 +57,21 @@ echo "INSTALL_OK"
 把刚才已经确认的错因和方法写入我的 Wiki。只传这次任务所需的最小内容，写入前展示文件清单。
 ```
 
-## E. 安装自动化（仅在需要时）
+## D. 安装自动化（仅在需要时）
 
-```bash
-cp -R skills/k12-automation ~/.codex/skills/
-mkdir -p ~/k12-data
-cd ~/k12-data
-mkdir -p students
-cp -R ~/.codex/skills/k12-automation/assets/student-template students/stu-001
-cp ~/.codex/skills/k12-automation/scripts/nightline/config.sample.json \
-  ~/.codex/skills/k12-automation/scripts/nightline/config.json
+需要时告诉 AI：
+
+```text
+请安装 k12-automation Skill。
 ```
 
-先打开 `config.json` 检查 endpoint、model 和业务时区。API key 只保存在本机；不要提交配置、真实学生数据、日志或看板。
+需要真正启用夜跑时再说：
 
-首次用 mock 验证：
-
-```bash
-K12_ROOT="$HOME/k12-data" \
-K12_LEARNING_DIR="$HOME/.codex/skills/k12-learning" \
-K12_MOCK_LLM=1 \
-node ~/.codex/skills/k12-automation/scripts/nightline/night-run.mjs --student stu-001
+```text
+请帮我启用夜间错题分析。
 ```
 
-若模板学生 ID 不是 `stu-001`，先按模板复制/重命名并完成授权字段。真实运行前分别确认：本地建档授权、外部模型提供方与数据范围；OCR 图片每次单独确认。
-
-启动本地控制台：
-
-```bash
-cd ~/k12-data
-node ~/.codex/skills/k12-automation/scripts/nightline/server.mjs
-```
-
-验收：服务只监听 `127.0.0.1`。没有授权或配置不完整时应拒绝执行，而不是静默放行。
-
-## F. 日常操作口令
+## E. 日常操作口令
 
 - 查看/更正/删除长期状态：“查看我的学习档案”“更正……”“删除我的档案”。
 - 会话不留存：“这次只在当前会话使用，不要保存。”
@@ -119,7 +79,7 @@ node ~/.codex/skills/k12-automation/scripts/nightline/server.mjs
 - Wiki 写入控制：“先预览变更”“这次不要写入”“撤销本次新增文件”。
 - 路由解释：“刚才用了哪些内部方法，为什么？”
 
-## G. 故障排查
+## F. 故障排查
 
 | 现象 | 检查与处理 |
 |---|---|
@@ -131,7 +91,7 @@ node ~/.codex/skills/k12-automation/scripts/nightline/server.mjs
 | 夜跑找不到 playbook | 设置 `K12_LEARNING_DIR` 为已安装的 `k12-learning` 绝对路径 |
 | 夜跑无授权仍继续 | 立即停止，保留证据并运行仓库 `bash pipeline/review.sh all` |
 
-## H. 完成标准
+## G. 完成标准
 
 满足以下条件即可投入日常使用：
 

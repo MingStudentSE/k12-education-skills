@@ -11,35 +11,13 @@
 | 提醒、OCR、夜跑、看板 | 加 `k12-automation` |
 | 开发和评测 playbook | 加 `k12-skill-studio` |
 
-## Codex 安装
+## 普通用户安装
 
-从仓库根目录执行：
-
-```bash
-mkdir -p ~/.codex/skills
-cp -R skills/k12-learning ~/.codex/skills/
-cp -R skills/llm-wiki ~/.codex/skills/
+```text
+请安装 k12-learning 和 llm-wiki Skill。
 ```
 
-按需安装：
-
-```bash
-cp -R skills/k12-automation ~/.codex/skills/
-cp -R skills/k12-skill-studio ~/.codex/skills/
-```
-
-目录必须整体复制，包括 `SKILL.md`、`references/`、`schemas/`、`scripts/` 和 `assets/`。不要把 `references/playbooks/` 中的目录复制到 Skill 根目录，否则会重新制造大量公开入口。
-
-其他兼容宿主使用同样原则：把四个模块之一复制到宿主配置的 Skill 搜索目录。
-
-## 安装后检查
-
-```bash
-find ~/.codex/skills/k12-learning ~/.codex/skills/llm-wiki -maxdepth 1 -name SKILL.md -print
-test -f ~/.codex/skills/k12-learning/references/capability-map.json
-```
-
-刷新宿主后，用自然语言发一条学习请求。不要以“列出 58 个 playbook”作为可用性测试；正确行为是模块静默选取内部方法并解决任务。
+AI 自行处理安装路径和具体操作。需要其他模块时使用 [AI 安装提示词](ai-install-prompt.md)。安装完成后，直接发一条学习请求验证即可。
 
 ## 从 63 Skill 版本升级
 

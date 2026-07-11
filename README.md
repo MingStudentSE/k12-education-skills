@@ -17,25 +17,13 @@
 
 ## 3 分钟开始
 
-普通用户默认安装前两个模块：
+普通用户直接告诉 AI：
 
-```bash
-mkdir -p ~/.codex/skills
-cp -R skills/k12-learning ~/.codex/skills/
-cp -R skills/llm-wiki ~/.codex/skills/
+```text
+请安装 k12-learning 和 llm-wiki Skill。
 ```
 
-确实需要提醒或夜间产线时再安装：
-
-```bash
-cp -R skills/k12-automation ~/.codex/skills/
-```
-
-维护本仓库或开发新 playbook 时才安装：
-
-```bash
-cp -R skills/k12-skill-studio ~/.codex/skills/
-```
+需要提醒或夜间产线时说“请安装 k12-automation Skill”；维护仓库时才安装 `k12-skill-studio`。安装路径和具体操作由 AI 处理。更多话术见 [AI 安装提示词](docs/ai-install-prompt.md)。
 
 重启或刷新宿主后直接说：
 
@@ -57,16 +45,10 @@ cp -R skills/k12-skill-studio ~/.codex/skills/
 
 ## 自动化运行
 
-`k12-automation` 带有确定性 Node.js 运行时。数据保存在你选择的工作目录，不放进 Skill 安装目录：
+`k12-automation` 带有确定性 Node.js 运行时。需要时直接说：
 
-```bash
-mkdir -p ~/k12-data
-cd ~/k12-data
-mkdir -p students
-cp -R ~/.codex/skills/k12-automation/assets/student-template students/stu-001
-cp ~/.codex/skills/k12-automation/scripts/nightline/config.sample.json \
-  ~/.codex/skills/k12-automation/scripts/nightline/config.json
-node ~/.codex/skills/k12-automation/scripts/nightline/server.mjs
+```text
+请安装 k12-automation Skill，并帮我启用夜间错题分析。
 ```
 
 真实模型、OCR、长期档案和提醒分别需要明确授权。`config.json`、真实学生数据、日志和看板不要提交版本库。详细步骤见 [夜间产线指南](docs/k12-nightline-guide.md)。
