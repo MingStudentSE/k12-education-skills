@@ -2,10 +2,13 @@
 
 ## 项目结构与模块组织
 
-本仓库维护 K12 教育 AI Skill 包及其配套文档。
+本仓库维护 K12 教育 AI 的四个 Product Module 及其配套文档。
 
-- `skills/` 存放可独立安装的 Skill。每个 Skill 使用独立目录，通常包含 `SKILL.md`、可选的 `references/`、可选的 `schemas/` 和 `test-prompts.json`。
-- `skills/general/` 存放通用学习系统 Skill；`skills/chinese/`、`skills/math/`、`skills/english/`、`skills/physics/` 存放学科专项 Skill。
+- `skills/k12-learning/` 是学生与教师的统一学习入口，学科能力、学习 DNA、错题、侦探周和解题方法均作为内部 playbook 按需组合。
+- `skills/llm-wiki/` 负责四层知识库的搭建、适配、编译与维护。
+- `skills/k12-automation/` 负责提醒、夜间错题产线、OCR、看板和授权运行时。
+- `skills/k12-skill-studio/` 仅面向维护者，负责创建 playbook、评测和系统质量治理。
+- `skills/*/references/playbooks/` 存放内部 playbook。它们不是可安装 Skill，不得新增嵌套 `SKILL.md`。
 - `docs/` 存放架构、安装、Obsidian 接入和维护说明。
 - `references/` 存放项目级理论笔记和原始资料。理论资料遵循“一个理论一个笔记”，例如 `references/主动回忆.md`。
 
@@ -15,19 +18,22 @@
 
 ```bash
 find skills -name SKILL.md | wc -l
-find skills/general -mindepth 1 -maxdepth 1 -type d | wc -l
-rg "old-name-or-path" README.md docs references skills
+find skills -name playbook.md | wc -l
+node pipeline/validate_modules.mjs
+python3 -m pip install -r pipeline/requirements.txt
+python3 pipeline/validate_schemas.py
+bash pipeline/review.sh all
 ```
 
-这些命令用于确认 Skill 数量、目录改名结果和旧路径残留。
+这些命令用于确认四模块边界、内部能力映射、Schema 与自动化运行契约。
 
 ## 写作风格与命名约定
 
-仓库主要由 Markdown 文件组成。标题要清晰，列表要简洁，示例要能直接使用。Skill 目录使用小写 kebab-case，例如 `skills/general/learning-plan/`。根目录 `references/` 下的理论笔记使用中文文件名，并保持“一个理论一个笔记”。单个 Skill 不得运行时依赖根目录 `references/`；需要随包使用的理论材料必须复制到该 Skill 自己的 `references/` 目录。
+仓库主要由 Markdown 文件组成。标题要清晰，列表要简洁，示例要能直接使用。Product Module 与 playbook 目录均使用小写 kebab-case。根目录 `references/` 下的理论笔记使用中文文件名，并保持“一个理论一个笔记”。模块不得运行时依赖根目录 `references/`；需要随包使用的理论材料必须复制到模块自己的 `references/` 目录。
 
 ## 测试指南
 
-每个 Skill 应包含 `test-prompts.json`，用于保存真实可回归的测试提示。修改 Skill 时，检查 frontmatter、`references:` 声明和被链接文件。涉及数量、目录或范围变化时，确认当前仍为 62 个 Skill、17 个通用 Skill，除非本次变更明确调整范围。
+每个 Product Module 必须包含 `test-prompts.json`，用于保存真实可回归的测试提示。修改模块时，检查 frontmatter、资源链接、Schema 和行为用例。当前契约为 **4 个 Product Module、61 个内部 playbook、58 个学习能力、63 条旧入口迁移映射**。新增或删除 Product Module 属于架构变更，必须先更新 `CONTEXT.md` 与 ADR；新增学习能力时同步更新 `skills/k12-learning/references/capability-map.json` 和回归用例，并运行 `bash pipeline/review.sh all`。
 
 ## 提交与 PR 规范
 
@@ -35,4 +41,4 @@ rg "old-name-or-path" README.md docs references skills
 
 ## 安全与配置提示
 
-遵循 `SECURITY_BASELINE.md`：未经用户明确同意，不建立长期记录、不发送提醒、不跨 Skill 共享。保持单个 Skill 的独立安装边界；除非明确需要，不新增外部依赖。
+遵循 `SECURITY_BASELINE.md`：未经用户明确同意，不建立长期记录、不发送提醒、不把本地学习数据外传。模块间默认不共享状态；跨模块传递必须有明确目的和最小范围。自动化运行时只放在 `skills/k12-automation/scripts/nightline/`，密钥与真实学生数据不得提交。

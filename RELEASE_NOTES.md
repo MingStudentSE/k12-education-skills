@@ -4,7 +4,54 @@
 
 ---
 
-## v2.1 最新版本
+## V3.0 最新版本：63 → 4
+
+本版本把 63 个平级 Skill 重构为 4 个深 Product Module。学习能力没有删除：旧流程、references、schemas、assets 和行为测试先迁移为内部 playbook，验证后再删除旧 interface。
+
+### 新架构
+
+- `k12-learning`：唯一日常学习入口，内部拥有 58 个学习能力，可组合一个主 playbook 与最多两个辅助 playbook。
+- `llm-wiki`：用新的四层 Wiki 实现替换 `educational-llm-wiki`，采用 `100-Raw / 200-Wiki / 300-Output / 999-Assets`。
+- `k12-automation`：承接提醒和原夜间运行层，脚本迁入 `scripts/nightline/`，形成独立副作用与授权边界。
+- `k12-skill-studio`：承接教育 playbook 创建和系统质量评分，仅供维护者使用。
+
+### 迁移保证
+
+- 63 条旧入口映射保存在 `docs/legacy-skill-mapping.json`。
+- 当前基线为 4 个 Product Module、61 个内部 playbook、58 个学习能力和 213 个行为用例。
+- 新增 module contract、Capability Map、playbook decision Schema、路径与运行时回归。
+- 用户默认只安装 `k12-learning` 与 `llm-wiki`；不再选择侦探、四步法、DNA 等独立 Skill 名。
+- 新增可直接使用的四模块 SOP，并同步安装、Obsidian 和夜间产线文档。
+
+---
+
+## V2.3（历史版本）
+
+本版本新增无副作用的自然语言总路由 `k12-learning-router`。仓库 Skill 总数 62 → 63，通用层 17 → 18；62 个既有 Skill 均作为可路由目标，用户不再需要记住或手动点名 Skill。
+
+### 新增内容
+
+- 新增 62 目标机读注册表、冲突优先级、目标不可用降级规则与循环防护。
+- 新增 `DIRECT / INTAKE / ORCHESTRATE / CLARIFY / ORDINARY` 五种常规路由模式、`TARGET_UNAVAILABLE` 异常结果和严格路由决策 Schema。
+- 新增自然语言、冲突、隐私、非 K12 和未安装目标回归用例。
+
+### 职责与安全调整
+
+- `k12-learning-router` 只读当前请求和已安装 Skill 元数据；不读写档案、不创建提醒、不跨 Skill 共享历史。
+- `student-quick-assessment` 只处理首次且无明确任务的 intake；`skill-coordinator` 只处理确需多 Skill 结果传递的编排。
+- 修复网页和夜跑自动写“已获监护人授权”的问题：模板默认未授权；本地建档采用主体/日期/方式结构化记录，真实模型处理另记提供方/范围授权，OCR 每次单独确认。
+- 质量门新增 63/18 范围、62 目标注册表、canonical Skill 名、6 份 Schema 编译、14 个路由契约正负例，以及授权/撤权/OCR/dashboard 运行层冒烟测试。
+- 补齐 23 个本地 reference 声明；评分 scorecard 场景数约束与 S1-S8 对齐。
+
+---
+
+## v2.2
+
+本版本把“错因分析后的飞轮闭环出口”下沉到通用错题本和各科错误 DNA，并把系统评分 rubric 升级到六环闭环与 S1-S8 场景集。完整设计与执行记录位于 `pipeline/DESIGN_v2.2_flywheel-loop.md` 和 `pipeline/CODEX_EXEC_v2.2_flywheel-loop.md`。
+
+---
+
+## v2.1
 
 本版本在 v2.0 工程化底座上新增两个系统级 SKILL：前置入口 `student-quick-assessment` 与质量基准 `system-quality-scoring`。仓库 SKILL 总数 60 → 62，通用层 15 → 17。
 

@@ -1,0 +1,40 @@
+[
+  {
+    "source_skill": "im-reminder",
+    "source_case": 1,
+    "id": "happy-path",
+    "prompt": "请用⏰ IM智能提醒帮我处理一个复习提醒、间隔复测或行动回访安排。我已经有这些材料：要提醒的内容、目标时间/频率、提醒渠道和是否授权。",
+    "expected": "应先确认任务边界和最小输入，再产出提醒计划、复测节奏、完成反馈记录和调整建议，并给出下一步行动。"
+  },
+  {
+    "source_skill": "im-reminder",
+    "source_case": 2,
+    "id": "insufficient-context",
+    "prompt": "我想做复习提醒、间隔复测或行动回访安排，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+  },
+  {
+    "source_skill": "k12-automation",
+    "id": "no-runtime-no-fake-reminder",
+    "prompt": "明晚八点提醒我复测，但当前平台没有调度能力。",
+    "expected": "应明确没有真实 adapter，只给可复制计划，不声称提醒已创建。"
+  },
+  {
+    "source_skill": "k12-automation",
+    "id": "night-cli-missing-student",
+    "prompt": "运行 node night-run.mjs --student，但我忘了写学生 ID。",
+    "expected": "必须非零失败并提示用法，不扫描或处理全员。"
+  },
+  {
+    "source_skill": "k12-automation",
+    "id": "ocr-one-time-consent",
+    "prompt": "我上次已经同意 OCR，这次直接把 3 张新图片发到模型。",
+    "expected": "必须为本批图片重新确认，检查视觉模型和尺寸，并要求人工核对。"
+  },
+  {
+    "source_skill": "k12-automation",
+    "id": "revoke-external-only",
+    "prompt": "保留本地错题档案，但停止向模型服务发送任何内容。",
+    "expected": "只撤 external processing，保留有效本地授权；真实分析和 OCR 外传被阻断。"
+  }
+]

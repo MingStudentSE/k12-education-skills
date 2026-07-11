@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/k12-learning/playbook-decision.schema.json",
+  "title": "K12 Learning Internal Playbook Decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["mode", "primaryPlaybook", "supportingPlaybooks", "confidence", "matchedSignals", "constraints", "moduleRequired", "clarification"],
+  "properties": {
+    "mode": {
+      "enum": ["DIRECT", "INTAKE", "COMPOSE", "CLARIFY", "ORDINARY", "MODULE_REQUIRED"]
+    },
+    "primaryPlaybook": {
+      "type": ["string", "null"],
+      "maxLength": 100
+    },
+    "supportingPlaybooks": {
+      "type": "array",
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": { "type": "string", "maxLength": 100 }
+    },
+    "confidence": { "enum": ["high", "medium", "low"] },
+    "matchedSignals": {
+      "type": "array",
+      "maxItems": 8,
+      "items": { "type": "string", "maxLength": 120 }
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sessionOnly", "noStateRead", "noStateWrite", "noAutomation", "noSilentInstall"],
+      "properties": {
+        "sessionOnly": { "const": true },
+        "noStateRead": { "const": true },
+        "noStateWrite": { "const": true },
+        "noAutomation": { "const": true },
+        "noSilentInstall": { "const": true }
+      }
+    },
+    "moduleRequired": {
+      "type": ["string", "null"],
+      "enum": ["llm-wiki", "k12-automation", "k12-skill-studio", null]
+    },
+    "clarification": {
+      "type": ["string", "null"],
+      "maxLength": 300
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "mode": { "enum": ["DIRECT", "INTAKE", "COMPOSE"] } } },
+      "then": { "properties": { "primaryPlaybook": { "type": "string" }, "moduleRequired": { "const": null }, "clarification": { "const": null } } }
+    },
+    {
+      "if": { "properties": { "mode": { "const": "COMPOSE" } } },
+      "then": { "properties": { "supportingPlaybooks": { "minItems": 1 } } }
+    },
+    {
+      "if": { "properties": { "mode": { "enum": ["DIRECT", "INTAKE"] } } },
+      "then": { "properties": { "supportingPlaybooks": { "maxItems": 0 } } }
+    },
+    {
+      "if": { "properties": { "mode": { "const": "CLARIFY" } } },
+      "then": { "properties": { "primaryPlaybook": { "const": null }, "supportingPlaybooks": { "maxItems": 0 }, "moduleRequired": { "const": null }, "clarification": { "type": "string", "minLength": 1 } } }
+    },
+    {
+      "if": { "properties": { "mode": { "const": "ORDINARY" } } },
+      "then": { "properties": { "primaryPlaybook": { "const": null }, "supportingPlaybooks": { "maxItems": 0 }, "moduleRequired": { "const": null }, "clarification": { "const": null } } }
+    },
+    {
+      "if": { "properties": { "mode": { "const": "MODULE_REQUIRED" } } },
+      "then": { "properties": { "primaryPlaybook": { "const": null }, "supportingPlaybooks": { "maxItems": 0 }, "moduleRequired": { "type": "string" }, "clarification": { "const": null } } }
+    }
+  ]
+}

@@ -12,10 +12,8 @@ package-lock.json
 
 .qoder/
 
-# K12 nightline local runtime
-engine/config.json
+# K12 automation local runtime
+skills/k12-automation/scripts/nightline/config.json
 dashboard.html
 logs/
 students/*
-!students/_template/
-!students/_template/**

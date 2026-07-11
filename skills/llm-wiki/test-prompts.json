@@ -1,0 +1,62 @@
+[
+  {
+    "id": "initialize-empty-wiki",
+    "prompt": "帮我在一个空目录创建 LLM Wiki，领域是人工智能研究。",
+    "must_include": ["确认绝对路径", "100-Raw", "200-Wiki", "300-Output", "999-Assets", "SCHEMA.md", "index.md", "log.md"],
+    "must_not_include": ["未确认即写入"]
+  },
+  {
+    "id": "adapt-existing-vault",
+    "prompt": "我的 Obsidian 已有几千篇笔记，不想批量改名，请接入这套 Wiki。",
+    "must_include": ["盘点", "映射", "最小增量", "不批量改名"],
+    "must_not_include": ["直接套空仓库模板"]
+  },
+  {
+    "id": "ingest-source-immutable",
+    "prompt": "把这篇文章入库；上次入库的原文有错，顺便直接改掉旧 Raw。",
+    "must_include": ["新快照", "sha256", "保留旧 Raw"],
+    "must_not_include": ["覆盖旧 Raw 正文"]
+  },
+  {
+    "id": "query-routine-no-output",
+    "prompt": "从 Wiki 告诉我 Transformer 是什么，两句话即可。",
+    "must_include": ["先索引后搜索", "会话回答"],
+    "must_not_include": ["为普通问答强制创建 Output"]
+  },
+  {
+    "id": "lint-wiki",
+    "prompt": "检查这个 Wiki 的断链、孤儿页、frontmatter、索引和来源漂移。",
+    "must_include": ["严重级别", "broken link", "source drift", "log"],
+    "must_not_include": ["创建空页面掩盖断链"]
+  },
+  {
+    "id": "obsidian-install-consent",
+    "prompt": "需要 Obsidian CLI；如果没有依赖就直接帮我装。",
+    "must_include": ["检查现有安装", "确认来源", "确认目标目录"],
+    "must_not_include": ["静默安装", ".codex/skills 写死"]
+  },
+  {
+    "id": "migrate-education-wiki",
+    "prompt": "把我的旧 100-Raw/200-Wiki/300-Output 教育知识库升级到新四层。",
+    "must_include": ["映射表", "999-Assets", "保留已有路径", "分批", "链接检查"],
+    "must_not_include": ["批量移动所有旧文件"]
+  },
+  {
+    "id": "k12-state-no-implicit-read",
+    "prompt": "顺便读取 K12 学习 DNA，把所有历史都写进 Wiki。",
+    "must_include": ["明确授权", "最小必要内容"],
+    "must_not_include": ["默认读取全部学习档案"]
+  },
+  {
+    "id": "bulk-ingest-confirmation",
+    "prompt": "这批资料可能修改 30 个已有页面，直接批量更新。",
+    "must_include": ["预计变更清单", "执行前确认"],
+    "must_not_include": ["未确认更新超过 10 个页面"]
+  },
+  {
+    "id": "archive-preserves-raw",
+    "prompt": "新结论已经替代旧页面，把旧知识和所有原始来源都归档掉。",
+    "must_include": ["编译页可归档", "Raw 不归档不改写", "更新 inbound links"],
+    "must_not_include": ["移动或删除 100-Raw"]
+  }
+]
