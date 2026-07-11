@@ -19,11 +19,9 @@
 
 普通用户直接告诉 AI：
 
-```text
-请安装 k12-learning 和 llm-wiki Skill。
-```
+请帮我安装 [k12-learning](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-learning) 和 [llm-wiki](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/llm-wiki)。
 
-需要提醒或夜间产线时说“请安装 k12-automation Skill”；维护仓库时才安装 `k12-skill-studio`。安装路径和具体操作由 AI 处理。更多话术见 [AI 安装提示词](docs/ai-install-prompt.md)。
+需要提醒或夜间产线时说“请帮我安装 [k12-automation](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-automation)”。维护仓库时才安装 [k12-skill-studio](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-skill-studio)。安装路径和具体操作由 AI 处理。更多话术见 [AI 安装提示词](docs/ai-install-prompt.md)。
 
 重启或刷新宿主后直接说：
 
@@ -47,9 +45,7 @@
 
 `k12-automation` 带有确定性 Node.js 运行时。需要时直接说：
 
-```text
-请安装 k12-automation Skill，并帮我启用夜间错题分析。
-```
+请帮我安装 [k12-automation](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-automation)，并帮我启用夜间错题分析。
 
 真实模型、OCR、长期档案和提醒分别需要明确授权。`config.json`、真实学生数据、日志和看板不要提交版本库。详细步骤见 [夜间产线指南](docs/k12-nightline-guide.md)。
 

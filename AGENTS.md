@@ -31,6 +31,19 @@ bash pipeline/review.sh all
 
 仓库主要由 Markdown 文件组成。标题要清晰，列表要简洁，示例要能直接使用。Product Module 与 playbook 目录均使用小写 kebab-case。根目录 `references/` 下的理论笔记使用中文文件名，并保持“一个理论一个笔记”。模块不得运行时依赖根目录 `references/`；需要随包使用的理论材料必须复制到模块自己的 `references/` 目录。
 
+## 面向用户的 AI 安装话术
+
+用户通常尚未克隆仓库，因此用户文档中的安装话术必须直接给出 GitHub 模块链接，而不是要求用户输入本地路径或执行 `cp`。默认话术固定为：
+
+> 请帮我安装 [k12-learning](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-learning) 和 [llm-wiki](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/llm-wiki)。
+
+按需模块分别使用：
+
+- [k12-automation](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-automation)
+- [k12-skill-studio](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-skill-studio)
+
+不要在面向普通用户的首页、快速开始、安装指南或 SOP 中展开宿主目录、克隆、复制命令和内部 playbook；让 AI 根据链接自行处理实现。话术单一来源是 `docs/ai-install-prompt.md`。
+
 ## 测试指南
 
 每个 Product Module 必须包含 `test-prompts.json`，用于保存真实可回归的测试提示。修改模块时，检查 frontmatter、资源链接、Schema 和行为用例。当前契约为 **4 个 Product Module、61 个内部 playbook、58 个学习能力、63 条旧入口迁移映射**。新增或删除 Product Module 属于架构变更，必须先更新 `CONTEXT.md` 与 ADR；新增学习能力时同步更新 `skills/k12-learning/references/capability-map.json` 和回归用例，并运行 `bash pipeline/review.sh all`。

@@ -13,9 +13,7 @@
 
 ## 普通用户安装
 
-```text
-请安装 k12-learning 和 llm-wiki Skill。
-```
+请帮我安装 [k12-learning](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-learning) 和 [llm-wiki](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/llm-wiki)。
 
 AI 自行处理安装路径和具体操作。需要其他模块时使用 [AI 安装提示词](ai-install-prompt.md)。安装完成后，直接发一条学习请求验证即可。
 

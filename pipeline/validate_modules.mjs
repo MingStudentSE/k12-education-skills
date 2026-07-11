@@ -104,15 +104,20 @@ const installPromptPath = join(ROOT, 'docs/ai-install-prompt.md');
 assert(existsSync(installPromptPath), 'AI-first install prompt is missing');
 const installPrompt = readFileSync(installPromptPath, 'utf8');
 for (const marker of [
-  '请安装 k12-learning 和 llm-wiki Skill。',
-  '请安装 k12-automation Skill。',
-  '请安装 k12-skill-studio Skill。',
+  'https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-learning',
+  'https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/llm-wiki',
+  'https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-automation',
+  'https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-skill-studio',
   '由 AI 自行处理',
 ]) assert(installPrompt.includes(marker), `AI install prompt missing contract marker: ${marker}`);
 for (const file of ['README.md', 'docs/getting-started.md', 'docs/installation-guide.md', 'docs/user-quickstart-sop.md']) {
   const text = readFileSync(join(ROOT, file), 'utf8');
-  assert(text.includes('请安装 k12-learning 和 llm-wiki Skill。'), `${file} must lead with the one-line AI install intent`);
+  assert(text.includes('https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-learning'), `${file} must link the default learning module for users without a checkout`);
+  assert(text.includes('https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/llm-wiki'), `${file} must link the default Wiki module for users without a checkout`);
   assert(!text.includes('cp -R skills/k12-learning'), `${file} must not lead ordinary users through manual copy commands`);
 }
+const agentGuide = readFileSync(join(ROOT, 'AGENTS.md'), 'utf8');
+assert(agentGuide.includes('docs/ai-install-prompt.md'), 'AGENTS.md must identify the canonical AI installation wording');
+assert(agentGuide.includes('tree/main/skills/k12-learning'), 'AGENTS.md must preserve the direct module link convention');
 
 console.log(`module contract: 4 Product Modules, 61 playbooks, 58 capabilities, 63 source mappings, ${totalTests} behavior cases`);
