@@ -70,5 +70,29 @@
     "prompt": "把刚才确认的函数错因、订正方法和复测题写入我的 Wiki。",
     "must_include": ["最小内容", "目标文件", "变更", "确认"],
     "must_not_include": ["默认读取全部学习 DNA", "未经确认直接写入"]
+  },
+  {
+    "id": "contradiction-preserved-not-overwritten",
+    "prompt": "新论文的结论和已有概念页相反，直接把旧结论删掉换成新的。",
+    "must_include": ["保留冲突主张", "标注日期与来源", "contested 或 contradictions 标记"],
+    "must_not_include": ["静默覆盖旧结论"]
+  },
+  {
+    "id": "reingest-hash-dedup",
+    "prompt": "把上周入库过的那篇文章按同一个 URL 再入库一次。",
+    "must_include": ["比较 sha256", "内容相同则跳过", "内容不同标记 source drift 并保留旧 Raw"],
+    "must_not_include": ["重复写入相同快照", "改写旧 Raw"]
+  },
+  {
+    "id": "page-threshold-no-noise-pages",
+    "prompt": "这篇文章顺带提到了 20 个名词，全部建成概念页。",
+    "must_include": ["达到建页门槛才建页", "两个来源或核心概念或可复用定义"],
+    "must_not_include": ["为一笔带过的名词建页"]
+  },
+  {
+    "id": "index-log-updated-after-batch",
+    "prompt": "刚批量更新了 8 个页面，可以收工了吧？",
+    "must_include": ["链接完整性检查", "更新 index.md", "追加 log.md", "报告每个变更文件"],
+    "must_not_include": ["跳过链接检查直接收工"]
   }
 ]

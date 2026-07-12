@@ -21,6 +21,7 @@ const LEGACY_METHOD_LINKING = new RegExp(
   `(?:联动|协同)[^，。；,\\]\\n]{0,28}${INTERNAL_METHOD_ACTOR}|${INTERNAL_METHOD_ACTOR}[^，。；,\\]\\n]{0,28}(?:联动|协同)`,
 );
 const LEGACY_HANDOFF_CONTROL = /(?:记录|任务|数据|摘要|结果|状态|请求|方法|Skill|playbook)[^，。；,\n]{0,20}(?:转交|交接|移交)[^，。；,\n]{0,28}(?:记录|任务|数据|摘要|结果|状态|请求|方法|Skill|playbook|教练|训练师|解释器|DNA|错题本)?|(?:转交|交接|移交)[^，。；,\n]{0,28}(?:记录|任务|数据|摘要|结果|状态|请求|方法|Skill|playbook|教练|训练师|解释器|DNA|错题本)/i;
+const NEGATED_HANDOFF_CONTROL = /(?:不|不再|不得|不会|不能|没有|无需|禁止|杜绝|严禁|避免)[^，。；,\n]{0,16}(?:转交|交接|移交)/;
 const LEGACY_COORDINATOR_CONTROL = /(?:Skill|方法|playbook|路由|任务|记录|数据|系统|联动)[^，。；,\n]{0,16}协调器|协调器[^，。；,\n]{0,20}(?:Skill|方法|playbook|路由|任务|记录|数据|系统|联动)/i;
 const LEGACY_ENGLISH_HANDOFF = /handover(?:Type|[_-](?:protocol|record|task|data|state))|(?:protocol|record|task|data|state)[_-]?handover|handoff(?:Type|[_-](?:protocol|record|task|data|state))|skill-coordinator/i;
 const LEGACY_CROSS_SKILL_CONTROL = /跨\s*(?:Skill|技能)[^，。；,\n]{0,20}(?:共享|传递|路由|调用|写入|读取|交接|转交)|(?:共享|传递|路由|调用|写入|读取|交接|转交)[^，。；,\n]{0,20}跨\s*(?:Skill|技能)/i;
@@ -34,7 +35,7 @@ function rejectsLearningLine(line) {
     || LEGACY_SKILL_CONTROL.test(line)
     || LEGACY_METHOD_MESSAGE_FLOW.test(line)
     || LEGACY_METHOD_LINKING.test(line)
-    || LEGACY_HANDOFF_CONTROL.test(line)
+    || (LEGACY_HANDOFF_CONTROL.test(line) && !NEGATED_HANDOFF_CONTROL.test(line))
     || LEGACY_COORDINATOR_CONTROL.test(line)
     || LEGACY_ENGLISH_HANDOFF.test(line)
     || LEGACY_CROSS_SKILL_CONTROL.test(line)
@@ -49,6 +50,9 @@ for (const [line, expected] of [
   ['业务处理完成后回写数据库状态。', false],
   ['depends_on: math-error-dna', true],
   ['把记录交接给数学方法。', true],
+  ['内部 playbook 不彼此交接或传递中间消息。', false],
+  ['禁止把记录移交给其他系统。', false],
+  ['禁止把记录移交给错题本。', true],
   ['A方法推送给B方法。', true],
   ['A方法回写给B方法。', true],
   ['IM智能提醒负责五轮复习。', true],
@@ -99,7 +103,7 @@ for (const file of runtimeMarkdown) {
     }
 
     if (
-      LEGACY_HANDOFF_CONTROL.test(line)
+      (LEGACY_HANDOFF_CONTROL.test(line) && !NEGATED_HANDOFF_CONTROL.test(line))
       || LEGACY_COORDINATOR_CONTROL.test(line)
       || LEGACY_ENGLISH_HANDOFF.test(line)
     ) {
