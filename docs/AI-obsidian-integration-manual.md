@@ -60,7 +60,7 @@
 
 ## Obsidian 专属能力
 
-只有在需要 Bases、Obsidian CLI、vault 命令或附件语义时才安装额外 Obsidian skills。`llm-wiki` 应先说明来源、目标目录和将新增的依赖，获得确认后再安装；普通 Markdown 操作不需要这些依赖。
+只有在需要 Bases、Obsidian CLI、vault 命令或附件语义时才检查额外 Obsidian skills。`llm-wiki` 会先检查现有能力；缺失时自动尝试安装官方 `kepano/obsidian-skills`，不覆盖已有同名目录。网络失败时回退到普通 Markdown 操作并如实说明未安装，不阻塞当前任务。
 
 ## 安全检查
 

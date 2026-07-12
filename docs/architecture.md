@@ -57,7 +57,7 @@ flowchart LR
 
 - 采用 `100-Raw / 200-Wiki / 300-Output / 999-Assets` 四层结构。
 - `200-Wiki/SCHEMA.md` 是命名、frontmatter 和 taxonomy 的单一来源。
-- 新建、迁移、批量入库、删除和安装依赖前先确认路径与范围。
+- 新建、迁移、批量入库和删除前先确认路径与范围；只有任务确实需要 Obsidian 原生能力时，可自动尝试安装官方 `kepano/obsidian-skills`，网络失败则降级。
 - 不自动读取 K12 Learning State；只接收当前材料或明确授权的最小摘要。
 
 ### `k12-automation`
@@ -97,7 +97,7 @@ flowchart LR
 1. `find skills -name SKILL.md` 必须恰好返回四项。
 2. `references/playbooks/` 下不得出现 `SKILL.md`。
 3. 真实副作用只由 `k12-automation` 或经声明的 adapter 执行。
-4. 未经确认，不形成长期状态、不外传、不安装依赖。
+4. 未经确认，不形成长期状态、不外传；只有 `llm-wiki` 在任务确实需要 Obsidian 原生能力时，可自动尝试官方 `kepano/obsidian-skills`，失败后降级且不声称成功。
 5. 新能力优先进入 Capability Map 和 playbook；新增第 5 个模块必须先更新上下文、ADR 和测试。
 
 运行 `bash pipeline/review.sh all` 会验证上述边界、Schema 和自动化运行时。

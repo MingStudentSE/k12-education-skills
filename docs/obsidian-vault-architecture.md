@@ -72,7 +72,7 @@ vault/
 - 不因接入 vault 自动建立学生长期档案。
 - 不记录真实住址、联系方式、证件、医疗、财务和无关家庭细节。
 - 单次错误不能直接成为“错误 DNA”；需要多次证据或用户确认。
-- 批量迁移、删除、安装依赖或大范围重写前必须确认。
+- 批量迁移、删除或大范围重写前必须确认。只有任务确实需要 Obsidian 原生能力时，可自动尝试官方 `kepano/obsidian-skills`；网络失败则降级，不覆盖已有目录。
 - 本地写入授权不等于云同步、外部模型或家长共享授权。
 
 操作话术见 [`AI-obsidian-integration-manual.md`](AI-obsidian-integration-manual.md)，可复制规则见 [`AGENTS.k12-learning-vault.template.md`](AGENTS.k12-learning-vault.template.md)。
