@@ -68,9 +68,26 @@ if (options.contractOnly) {
   process.exit(0);
 }
 
+async function fetchWithRetry(url, timeoutMs, attempts = 3) {
+  let lastError;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      const response = await fetch(url, { redirect: 'follow', signal: AbortSignal.timeout(timeoutMs) });
+      assert(response.ok, `${url}: HTTP ${response.status}`);
+      return response;
+    } catch (error) {
+      lastError = error;
+      if (attempt < attempts) {
+        console.log(`  [RETRY] ${url} attempt ${attempt}/${attempts} failed (${error.message}); backing off`);
+        await new Promise(resolve => setTimeout(resolve, attempt * 15_000));
+      }
+    }
+  }
+  throw lastError;
+}
+
 async function fetchBytes(url) {
-  const response = await fetch(url, { redirect: 'follow', signal: AbortSignal.timeout(120_000) });
-  assert(response.ok, `${url}: HTTP ${response.status}`);
+  const response = await fetchWithRetry(url, 120_000);
   const bytes = Buffer.from(await response.arrayBuffer());
   assert(bytes.subarray(0, 5).toString() === '%PDF-', `${url}: response is not a PDF`);
   return bytes;
@@ -137,8 +154,7 @@ function verifyOfficialLabels(subject, pdfPath, workDir, firstExtracted) {
 }
 
 if (options.live) {
-  const notice = await fetch(standards.standard.noticeUrl, { redirect: 'follow', signal: AbortSignal.timeout(60_000) });
-  assert(notice.ok, `official notice: HTTP ${notice.status}`);
+  const notice = await fetchWithRetry(standards.standard.noticeUrl, 60_000);
   const body = await notice.text();
   assert(body.includes('义务教育课程方案和课程标准') && body.includes('2022年秋季学期开始执行'), 'official notice no longer contains the pinned title/effective statement');
   console.log('  [PASS] official notice · title and 2022 autumn effective statement');
