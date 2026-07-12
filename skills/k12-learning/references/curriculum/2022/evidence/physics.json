@@ -1,0 +1,46 @@
+{
+  "modelVersion": "1.0.0",
+  "standardId": "cn-compulsory-2022",
+  "subjectId": "physics",
+  "routeSubject": "physics",
+  "provenance": "project-operationalization",
+  "evidencePolicy": { "singleObservationIsMastery": false, "firstUseMaxModels": 1, "minimumIndependentObservations": 2, "transferRequired": true, "defaultState": "session-only" },
+  "models": [
+    {
+      "modelId": "physics.concepts.phenomenon-concept.v1",
+      "competencyId": "physics.concepts",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能从现象中识别相关物理量、规律和适用条件", "能用物理概念解释现象并区分直觉说法与科学表述"],
+      "task": { "taskType": "phenomenon-explanation", "promptContract": "给一个可观察现象，让学生先预测，再用物理量、规律和条件解释结果。", "successCriteria": ["概念与现象中的对象和过程对应", "解释包含规律的适用条件或边界"] },
+      "feedbackAdjustment": { "whenMissing": "先只画对象和变化，标一个关键物理量。", "whenEmerging": "追问规律中的每个量在现象里对应什么。", "whenDemonstrated": "改变一个条件，要求预测并解释现象变化。", "retest": "用新现象独立完成预测—概念—边界。" },
+      "capabilityBindings": ["physics-concept-intuition", "physics-problem-coach"]
+    },
+    {
+      "modelId": "physics.scientific-thinking.model-reasoning.v1",
+      "competencyId": "physics.scientific-thinking",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能把真实过程抽象为对象、状态、相互作用和变量关系", "能基于模型推理、质疑假设并检查数量级或边界"],
+      "task": { "taskType": "physical-modeling", "promptContract": "把题目画成过程图，列假设和变量，选模型后推理并检查结果。", "successCriteria": ["模型选择有条件依据而非只套公式", "结果经过单位、方向或极端情形检查"] },
+      "feedbackAdjustment": { "whenMissing": "退回过程图，只标对象、阶段和相互作用。", "whenEmerging": "要求明确一个被忽略条件及它为什么可以忽略。", "whenDemonstrated": "改变边界条件，检验模型是否需要切换。", "retest": "用同结构新题独立完成建模—推理—检查。" },
+      "capabilityBindings": ["physics-modeling-coach", "physics-problem-coach", "physics-error-dna"]
+    },
+    {
+      "modelId": "physics.inquiry.variable-evidence.v1",
+      "competencyId": "physics.inquiry",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能提出可检验问题并识别自变量、因变量和控制变量", "能用数据和误差分析支持结论且不超出实验范围"],
+      "task": { "taskType": "physics-investigation", "promptContract": "围绕一个现象设计最小实验，写变量、步骤、记录表、预期图像和误差来源。", "successCriteria": ["变量控制使实验问题可以被检验", "结论与数据范围及误差相匹配"] },
+      "feedbackAdjustment": { "whenMissing": "先固定一个自变量和一个可测因变量。", "whenEmerging": "增加一个关键控制变量或重复测量。", "whenDemonstrated": "给异常数据，要求判断是误差、模型边界还是新问题。", "retest": "用新问题独立设计变量—证据—结论。" },
+      "capabilityBindings": ["physics-lab-coach", "physics-modeling-coach"]
+    },
+    {
+      "modelId": "physics.attitude-responsibility.evidence-boundary.v1",
+      "competencyId": "physics.attitude-responsibility",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能如实记录现象和数据并区分测量事实与解释", "能识别物理技术应用中的安全、资源或社会影响"],
+      "task": { "taskType": "evidence-and-impact", "promptContract": "分析一份实验记录或技术应用，找证据边界、安全要求和可能影响。", "successCriteria": ["不篡改或选择性忽略不利数据", "评价同时包含物理依据和实际约束"] },
+      "feedbackAdjustment": { "whenMissing": "先把原始观察与解释分成两栏。", "whenEmerging": "补一个安全或影响判断的物理依据。", "whenDemonstrated": "加入证据冲突或资源限制，要求修正方案。", "retest": "用新案例完成事实—依据—责任判断。" },
+      "capabilityBindings": ["physics-lab-coach", "physics-concept-intuition"]
+    }
+  ]
+}

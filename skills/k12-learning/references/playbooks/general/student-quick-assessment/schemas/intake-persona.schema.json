@@ -29,11 +29,9 @@
           "additionalProperties": false,
           "properties": {
             "profileEnabled": { "type": "boolean", "default": false },
-            "memoryPaused": { "type": "boolean", "default": false },
-            "crossSkillSharing": { "type": "boolean", "default": false },
-            "reminderConsent": { "type": "boolean", "default": false }
+            "memoryPaused": { "type": "boolean", "default": false }
           },
-          "required": ["profileEnabled", "memoryPaused", "crossSkillSharing", "reminderConsent"]
+          "required": ["profileEnabled", "memoryPaused"]
         }
       },
       "required": ["profileId", "schemaVersion", "createdAt", "consentStatus"]

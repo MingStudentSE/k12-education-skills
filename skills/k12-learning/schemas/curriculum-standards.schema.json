@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/k12-learning/curriculum-standards.schema.json",
+  "title": "K12 Learning Curriculum Standards Facts",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["dataVersion", "standard", "coverage", "subjects", "knownGaps"],
+  "properties": {
+    "dataVersion": { "const": "1.2.0" },
+    "standard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["standardId", "title", "jurisdiction", "educationStage", "editionYear", "effectiveFrom", "issuer", "noticeUrl", "verifiedAt"],
+      "properties": {
+        "standardId": { "const": "cn-compulsory-2022" },
+        "title": { "const": "义务教育课程方案和课程标准（2022年版）" },
+        "jurisdiction": { "const": "CN" },
+        "educationStage": { "const": "compulsory-education" },
+        "editionYear": { "const": 2022 },
+        "effectiveFrom": { "const": "2022-09" },
+        "issuer": { "const": "中华人民共和国教育部" },
+        "noticeUrl": { "type": "string", "pattern": "^https://(?:www|hudong)\\.moe\\.gov\\.cn/" },
+        "verifiedAt": { "type": "string", "format": "date" }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "statement", "officialFactFields", "projectFields"],
+      "properties": {
+        "status": { "const": "supported-routes-only" },
+        "statement": { "type": "string", "minLength": 20 },
+        "officialFactFields": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string" } },
+        "projectFields": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string" } }
+      }
+    },
+    "subjects": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": { "$ref": "#/$defs/subject" }
+    },
+    "knownGaps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["officialSubject", "status", "reason"],
+        "properties": {
+          "officialSubject": { "type": "string", "minLength": 1 },
+          "status": { "const": "not-modeled" },
+          "reason": { "type": "string", "minLength": 10 }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subjectId", "officialName", "routeSubject", "gradeRange", "standardUrl", "sourceLocator", "verificationStatus", "competencies"],
+      "properties": {
+        "subjectId": { "type": "string", "pattern": "^[a-z][a-z0-9-]+$" },
+        "officialName": { "type": "string", "minLength": 1 },
+        "routeSubject": { "enum": ["chinese", "math", "english", "history", "geography", "physics", "chemistry", "biology", "politics"] },
+        "gradeRange": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["min", "max"],
+          "properties": {
+            "min": { "type": "integer", "minimum": 1, "maximum": 9 },
+            "max": { "type": "integer", "minimum": 1, "maximum": 9 }
+          }
+        },
+        "standardUrl": { "type": "string", "pattern": "^https://(?:www|hudong)\\.moe\\.gov\\.cn/.*\\.pdf$" },
+        "sourceLocator": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["section", "pdfPage", "sha256"],
+          "properties": {
+            "section": { "type": "string", "pattern": "^三、课程目标 / （一）核心素养内涵" },
+            "pdfPage": { "type": "integer", "minimum": 1 },
+            "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+          }
+        },
+        "verificationStatus": { "const": "primary-source-verified" },
+        "competencies": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["competencyId", "officialName", "kind", "sourcePage"],
+            "properties": {
+              "competencyId": { "type": "string", "pattern": "^[a-z][a-z0-9.-]+$" },
+              "officialName": { "type": "string", "minLength": 2 },
+              "kind": { "enum": ["core-competency", "top-level-manifestation"] },
+              "sourcePage": { "type": "integer", "minimum": 1 },
+              "stageManifestations": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "primary": { "type": "array", "uniqueItems": true, "items": { "type": "string" } },
+                  "juniorSecondary": { "type": "array", "uniqueItems": true, "items": { "type": "string" } }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

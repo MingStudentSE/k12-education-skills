@@ -34,7 +34,13 @@
                   "authorized_by": { "minLength": 1 },
                   "subject": { "enum": ["student", "guardian"] },
                   "date": { "type": "string", "format": "date" },
-                  "method": { "enum": ["written", "verbal", "digital"] }
+                  "method": { "enum": ["written", "verbal", "digital"] },
+                  "action": { "enum": ["create", "update", "revoke-external"] }
+                }
+              },
+              "else": {
+                "properties": {
+                  "action": { "const": "revoke-local" }
                 }
               }
             }
@@ -59,6 +65,13 @@
                   "scope": { "const": "current-mistake,recent-3-archives" },
                   "date": { "type": "string", "format": "date" }
                 }
+              },
+              "else": {
+                "properties": {
+                  "provider": { "const": "" },
+                  "scope": { "const": "" },
+                  "date": { "const": "" }
+                }
               }
             }
           ]
@@ -75,5 +88,66 @@
         "last_action": { "enum": ["create", "update", "revoke-external", "revoke-local"] }
       }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "authorization": {
+            "properties": {
+              "external_processing": {
+                "properties": { "authorized": { "const": true } }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "authorization": {
+            "properties": {
+              "local": {
+                "properties": {
+                  "authorized": { "const": true },
+                  "action": { "enum": ["create", "update"] }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "authorization": { "properties": { "local": { "properties": { "action": { "const": "create" } } } } }
+        }
+      },
+      "then": { "properties": { "runtime": { "properties": { "last_action": { "const": "create" } } } } }
+    },
+    {
+      "if": {
+        "properties": {
+          "authorization": { "properties": { "local": { "properties": { "action": { "const": "update" } } } } }
+        }
+      },
+      "then": { "properties": { "runtime": { "properties": { "last_action": { "const": "update" } } } } }
+    },
+    {
+      "if": {
+        "properties": {
+          "authorization": { "properties": { "local": { "properties": { "action": { "const": "revoke-external" } } } } }
+        }
+      },
+      "then": { "properties": { "runtime": { "properties": { "last_action": { "const": "revoke-external" } } } } }
+    },
+    {
+      "if": {
+        "properties": {
+          "authorization": { "properties": { "local": { "properties": { "action": { "const": "revoke-local" } } } } }
+        }
+      },
+      "then": { "properties": { "runtime": { "properties": { "last_action": { "const": "revoke-local" } } } } }
+    }
+  ]
 }

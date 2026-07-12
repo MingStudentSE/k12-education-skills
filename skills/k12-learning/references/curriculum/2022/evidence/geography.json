@@ -1,0 +1,46 @@
+{
+  "modelVersion": "1.0.0",
+  "standardId": "cn-compulsory-2022",
+  "subjectId": "geography",
+  "routeSubject": "geography",
+  "provenance": "project-operationalization",
+  "evidencePolicy": { "singleObservationIsMastery": false, "firstUseMaxModels": 1, "minimumIndependentObservations": 2, "transferRequired": true, "defaultState": "session-only" },
+  "models": [
+    {
+      "modelId": "geography.human-land.tradeoff.v1",
+      "competencyId": "geography.human-land",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能同时指出人类活动对环境的利用与影响", "能依据区域条件比较方案的收益、代价和可持续边界"],
+      "task": { "taskType": "human-land-decision", "promptContract": "给一个区域开发情境，让学生列自然条件、社会需求、环境影响并选择方案。", "successCriteria": ["至少引用一项自然和一项社会证据", "方案包含代价或约束而非单向结论"] },
+      "feedbackAdjustment": { "whenMissing": "先补人类活动—环境变化的一条双向箭头。", "whenEmerging": "要求为方案增加一项限制条件或补偿措施。", "whenDemonstrated": "更换区域尺度或资源条件，检验方案是否调整。", "retest": "用新区域独立完成证据—权衡—选择。" },
+      "capabilityBindings": ["geography-problem-coach", "geography-region-analyzer"]
+    },
+    {
+      "modelId": "geography.integrated-thinking.factor-chain.v1",
+      "competencyId": "geography.integrated-thinking",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能从位置、地形、气候、水文、人口或产业中选择相关因素", "能说明因素之间的作用链而不是罗列关键词"],
+      "task": { "taskType": "factor-mechanism-chain", "promptContract": "解释一个地理现象，先筛相关因素，再画因素—过程—结果链并标主次。", "successCriteria": ["因素与设问直接相关", "至少说明一条相互作用机制"] },
+      "feedbackAdjustment": { "whenMissing": "只保留两个最相关因素，补完整一条因果箭头。", "whenEmerging": "追问主导因素如何受另一因素限制。", "whenDemonstrated": "改变一个条件，预测整条机制链如何变化。", "retest": "在新现象中独立筛因素并解释主导链。" },
+      "capabilityBindings": ["geography-process-explainer", "geography-problem-coach"]
+    },
+    {
+      "modelId": "geography.regional-cognition.compare.v1",
+      "competencyId": "geography.regional-cognition",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能用位置、尺度和区域特征定位研究对象", "能依据同一指标比较区域共性与差异"],
+      "task": { "taskType": "regional-comparison", "promptContract": "用同一组指标比较两个区域，解释差异来自哪些位置或条件。", "successCriteria": ["比较指标一致且有图表或材料依据", "区域结论不从局部样本无限外推"] },
+      "feedbackAdjustment": { "whenMissing": "先完成位置和尺度定位，再选一个指标比较。", "whenEmerging": "要求每个差异绑定一条区域条件。", "whenDemonstrated": "加入第三个区域，检验分类标准是否稳定。", "retest": "换图或换尺度完成同指标区域比较。" },
+      "capabilityBindings": ["geography-region-analyzer", "geography-map-coach"]
+    },
+    {
+      "modelId": "geography.practice.field-evidence.v1",
+      "competencyId": "geography.practice",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能从地图、数据或观察记录中提取位置与变化证据", "能设计可执行的观察、调查或制图步骤并说明误差"],
+      "task": { "taskType": "geographic-investigation", "promptContract": "围绕校园或社区问题设计一次小调查，写地点、变量、记录方式和结果表达。", "successCriteria": ["采集步骤可实际执行并能复核", "结论不超出样本与测量范围"] },
+      "feedbackAdjustment": { "whenMissing": "先固定一个地点、一个变量和一种记录方式。", "whenEmerging": "增加对照点或重复观察并说明用途。", "whenDemonstrated": "让学生把数据转成地图或图表并解释限制。", "retest": "在新地点独立设计最小调查并预判误差。" },
+      "capabilityBindings": ["geography-map-coach", "geography-region-analyzer"]
+    }
+  ]
+}

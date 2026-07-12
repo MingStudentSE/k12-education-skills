@@ -30,9 +30,9 @@
   {
     "source_skill": "biology-error-dna",
     "source_case": 3,
-    "id": "correction-notebook-handoff",
+    "id": "correction-notebook-no-duplicate",
     "prompt": "这道生物错题已经进通用错题本了，请你只补充生物深度错因和修复任务，不要重复建错题。",
-    "expected": "应说明通用错题本记录题面和基础错因，本SKILL只回写B1-B5、根因、修复任务和复测建议，不重复记录。"
+    "expected": "应说明通用错题本记录题面和基础错因，当前生物深度分析只补充 B1-B5、根因、修复任务和复测建议，不重复记录。"
   },
   {
     "source_skill": "biology-experiment-inquiry",
@@ -107,9 +107,9 @@
   {
     "source_skill": "chemistry-error-dna",
     "source_case": 3,
-    "id": "handover-correction-notebook",
+    "id": "compose-correction-notebook-chemistry",
     "prompt": "这道化学错题已经在通用错题本里记录了，请你只补充化学深度错因，不要重复建一条错题。",
-    "expected": "应说明通用错题本记录题面和基础错因，本SKILL只回写Ch1-Ch5、根因、修复任务和复测建议，不重复记录。"
+    "expected": "应在同一结果中复用通用错题记录，只补充 Ch1-Ch5、根因、修复任务和复测建议，不创建中间协议或重复记录。"
   },
   {
     "source_skill": "chemistry-lab-inquiry",
@@ -165,7 +165,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做文言文、古诗词或古典文化理解任务，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "chinese-grammar-tracker",
@@ -179,7 +179,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做语病检查、顽固语病追踪或写作前语病预警，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "chinese-material-library",
@@ -193,7 +193,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做素材存入、素材检索或写作前素材调用，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "chinese-reading-decoder",
@@ -207,7 +207,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做现代文阅读、题型识别或阅读答题复盘，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "chinese-writing-coach",
@@ -221,7 +221,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做作文构思、改稿、升格或写作卡点处理，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "english-grammar-coach",
@@ -235,7 +235,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做英语语法纠错、句子升级或语法模式追踪，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "english-listening-trainer",
@@ -249,7 +249,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做英语听力训练、听写复盘或听力微技能突破，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "english-speaking-coach",
@@ -263,7 +263,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做英语口语表达、发音、晨读或情景对话训练，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "english-vocabulary-dna",
@@ -277,7 +277,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做词汇积累、词汇复习或词汇使用画像更新，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "english-writing-coach",
@@ -291,7 +291,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做英语作文构思、改稿、表达升级或考试写作训练，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "cornell-notes",
@@ -305,7 +305,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做课堂笔记整理、知识沉淀或复习卡生成，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "correction-notebook",
@@ -319,7 +319,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做错题记录、错因分析、复测安排或错题模式归纳，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "cross-subject-detective",
@@ -333,7 +333,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做跨学科主题探索、项目周或知识连接发现，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "feynman-learning",
@@ -347,7 +347,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做费曼解释、理解验证或看懂但讲不清的概念，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "interest-explorer",
@@ -361,7 +361,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做兴趣探索、成长项目设计或长期兴趣画像更新，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -373,7 +373,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "math-problem-solving-coach"
     },
-    "expected": "静默直达数学解题教练并在同一轮继续处理，不展示 Skill 菜单。"
+    "expected": "静默直达数学解题教练并在同一轮继续处理，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -441,7 +441,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "correction-notebook"
     },
-    "expected": "错题归档和复测意图优先；目标 Skill 再处理写入与提醒授权。"
+    "expected": "错题归档和复测意图优先；当前执行流程再单独处理写入与提醒授权。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -604,7 +604,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "cross-subject-detective"
     },
-    "expected": "跨学科主题项目不进入系统协调器。"
+    "expected": "跨学科主题项目不进入额外协调层。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -640,7 +640,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "chinese-material-library"
     },
-    "expected": "收藏与检索意图进入素材库；保存动作由目标 Skill 请求授权。"
+    "expected": "收藏与检索意图进入素材库；保存动作由当前执行流程在执行前请求授权。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -760,7 +760,7 @@
       "mode": "MODULE_REQUIRED",
       "moduleRequired": "k12-automation"
     },
-    "expected": "路由无需授权；目标 Skill 必须确认提醒内容、时间、渠道和授权后才创建。"
+    "expected": "路由无需授权；当前执行流程必须确认提醒内容、时间、渠道和授权后才创建。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -772,14 +772,14 @@
       "mode": "CLARIFY",
       "primaryPlaybook": null
     },
-    "expected": "不因路由全量读取；先问今天的目标或材料，若后续确需历史数据再由目标 Skill 请求最小授权。"
+    "expected": "不因路由全量读取；先问今天的目标或材料，若后续确需历史数据再由当前执行流程请求最小授权。"
   },
   {
     "source_skill": "k12-learning-router",
     "source_case": 32,
-    "id": "explicit-no-skill",
+    "id": "explicit-ordinary-answer",
     "case_type": "negative-route",
-    "prompt": "不要用任何 Skill，直接用两句话解释什么是惯性。",
+    "prompt": "不要启动学习流程，直接用两句话解释什么是惯性。",
     "expected_route": {
       "mode": "ORDINARY",
       "primaryPlaybook": null
@@ -813,9 +813,9 @@
   {
     "source_skill": "k12-learning-router",
     "source_case": 35,
-    "id": "target-unavailable",
+    "id": "installed-module-capability-available",
     "case_type": "degradation",
-    "prompt": "当前只安装了总路由，没有安装英语口语陪练。请和我练餐厅点餐。",
+    "prompt": "我已经安装 k12-learning，请直接和我练餐厅点餐。",
     "expected_route": {
       "mode": "DIRECT",
       "primaryPlaybook": "english-speaking-coach"
@@ -832,7 +832,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "learning-dna"
     },
-    "expected": "应静默直达 learning-dna，不展示 Skill 菜单。"
+    "expected": "应静默直达 learning-dna，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -844,14 +844,14 @@
       "mode": "DIRECT",
       "primaryPlaybook": "interest-explorer"
     },
-    "expected": "应静默直达 interest-explorer，不展示 Skill 菜单。"
+    "expected": "应静默直达 interest-explorer，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
     "source_case": 38,
-    "id": "route-educational-skill-creator",
+    "id": "route-playbook-maintenance",
     "case_type": "target-coverage",
-    "prompt": "我在维护这个 K12 仓库，想新增一个可安装的化学方程式训练 Skill。",
+    "prompt": "我在维护这个 K12 仓库，想新增一个化学方程式训练流程。",
     "expected_route": {
       "mode": "MODULE_REQUIRED",
       "moduleRequired": "k12-skill-studio"
@@ -868,7 +868,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "chinese-classical-revival"
     },
-    "expected": "应静默直达 chinese-classical-revival，不展示 Skill 菜单。"
+    "expected": "应静默直达 chinese-classical-revival，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -880,7 +880,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "chinese-reading-decoder"
     },
-    "expected": "应静默直达 chinese-reading-decoder，不展示 Skill 菜单。"
+    "expected": "应静默直达 chinese-reading-decoder，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -892,7 +892,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "english-grammar-coach"
     },
-    "expected": "应静默直达 english-grammar-coach，不展示 Skill 菜单。"
+    "expected": "应静默直达 english-grammar-coach，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -904,7 +904,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "english-listening-trainer"
     },
-    "expected": "应静默直达 english-listening-trainer，不展示 Skill 菜单。"
+    "expected": "应静默直达 english-listening-trainer，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -916,7 +916,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "english-writing-coach"
     },
-    "expected": "应静默直达 english-writing-coach，不展示 Skill 菜单。"
+    "expected": "应静默直达 english-writing-coach，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -928,7 +928,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "math-concept-explainer"
     },
-    "expected": "应静默直达 math-concept-explainer，不展示 Skill 菜单。"
+    "expected": "应静默直达 math-concept-explainer，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -940,7 +940,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "math-gradient-trainer"
     },
-    "expected": "应静默直达 math-gradient-trainer，不展示 Skill 菜单。"
+    "expected": "应静默直达 math-gradient-trainer，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -952,7 +952,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "math-word-problem-coach"
     },
-    "expected": "应静默直达 math-word-problem-coach，不展示 Skill 菜单。"
+    "expected": "应静默直达 math-word-problem-coach，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -964,7 +964,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "physics-concept-intuition"
     },
-    "expected": "应静默直达 physics-concept-intuition，不展示 Skill 菜单。"
+    "expected": "应静默直达 physics-concept-intuition，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -976,7 +976,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "physics-error-dna"
     },
-    "expected": "应静默直达 physics-error-dna，不展示 Skill 菜单。"
+    "expected": "应静默直达 physics-error-dna，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -988,7 +988,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "physics-lab-coach"
     },
-    "expected": "应静默直达 physics-lab-coach，不展示 Skill 菜单。"
+    "expected": "应静默直达 physics-lab-coach，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1000,7 +1000,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "physics-problem-coach"
     },
-    "expected": "应静默直达 physics-problem-coach，不展示 Skill 菜单。"
+    "expected": "应静默直达 physics-problem-coach，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1012,7 +1012,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "chemistry-concept-explainer"
     },
-    "expected": "应静默直达 chemistry-concept-explainer，不展示 Skill 菜单。"
+    "expected": "应静默直达 chemistry-concept-explainer，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1024,7 +1024,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "chemistry-error-dna"
     },
-    "expected": "应静默直达 chemistry-error-dna，不展示 Skill 菜单。"
+    "expected": "应静默直达 chemistry-error-dna，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1036,7 +1036,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "chemistry-particle-modeler"
     },
-    "expected": "应静默直达 chemistry-particle-modeler，不展示 Skill 菜单。"
+    "expected": "应静默直达 chemistry-particle-modeler，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1048,7 +1048,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "chemistry-reaction-coach"
     },
-    "expected": "应静默直达 chemistry-reaction-coach，不展示 Skill 菜单。"
+    "expected": "应静默直达 chemistry-reaction-coach，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1060,7 +1060,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "biology-concept-map-builder"
     },
-    "expected": "应静默直达 biology-concept-map-builder，不展示 Skill 菜单。"
+    "expected": "应静默直达 biology-concept-map-builder，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1072,7 +1072,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "biology-error-dna"
     },
-    "expected": "应静默直达 biology-error-dna，不展示 Skill 菜单。"
+    "expected": "应静默直达 biology-error-dna，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1084,7 +1084,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "biology-experiment-inquiry"
     },
-    "expected": "应静默直达 biology-experiment-inquiry，不展示 Skill 菜单。"
+    "expected": "应静默直达 biology-experiment-inquiry，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1096,7 +1096,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "biology-structure-function-coach"
     },
-    "expected": "应静默直达 biology-structure-function-coach，不展示 Skill 菜单。"
+    "expected": "应静默直达 biology-structure-function-coach，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1108,7 +1108,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "geography-error-dna"
     },
-    "expected": "应静默直达 geography-error-dna，不展示 Skill 菜单。"
+    "expected": "应静默直达 geography-error-dna，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1120,7 +1120,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "geography-problem-coach"
     },
-    "expected": "应静默直达 geography-problem-coach，不展示 Skill 菜单。"
+    "expected": "应静默直达 geography-problem-coach，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1132,7 +1132,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "geography-process-explainer"
     },
-    "expected": "应静默直达 geography-process-explainer，不展示 Skill 菜单。"
+    "expected": "应静默直达 geography-process-explainer，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1144,7 +1144,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "geography-region-analyzer"
     },
-    "expected": "应静默直达 geography-region-analyzer，不展示 Skill 菜单。"
+    "expected": "应静默直达 geography-region-analyzer，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1156,7 +1156,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "history-causation-explainer"
     },
-    "expected": "应静默直达 history-causation-explainer，不展示 Skill 菜单。"
+    "expected": "应静默直达 history-causation-explainer，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1168,7 +1168,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "history-error-dna"
     },
-    "expected": "应静默直达 history-error-dna，不展示 Skill 菜单。"
+    "expected": "应静默直达 history-error-dna，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1180,7 +1180,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "history-problem-coach"
     },
-    "expected": "应静默直达 history-problem-coach，不展示 Skill 菜单。"
+    "expected": "应静默直达 history-problem-coach，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1192,7 +1192,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "history-timeline-coach"
     },
-    "expected": "应静默直达 history-timeline-coach，不展示 Skill 菜单。"
+    "expected": "应静默直达 history-timeline-coach，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1204,7 +1204,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "politics-application-coach"
     },
-    "expected": "应静默直达 politics-application-coach，不展示 Skill 菜单。"
+    "expected": "应静默直达 politics-application-coach，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1216,7 +1216,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "politics-concept-explainer"
     },
-    "expected": "应静默直达 politics-concept-explainer，不展示 Skill 菜单。"
+    "expected": "应静默直达 politics-concept-explainer，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1228,7 +1228,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "politics-error-dna"
     },
-    "expected": "应静默直达 politics-error-dna，不展示 Skill 菜单。"
+    "expected": "应静默直达 politics-error-dna，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1240,7 +1240,7 @@
       "mode": "DIRECT",
       "primaryPlaybook": "politics-framework-coach"
     },
-    "expected": "应静默直达 politics-framework-coach，不展示 Skill 菜单。"
+    "expected": "应静默直达 politics-framework-coach，不展示内部 playbook 菜单。"
   },
   {
     "source_skill": "learning-360-review",
@@ -1268,7 +1268,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做学习画像、长期偏好、成长图谱或学习证据编译，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "learning-plan",
@@ -1282,7 +1282,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做30天学习计划、考前计划或学习任务重排，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "science-solving-four-steps",
@@ -1301,10 +1301,10 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做数学/物理/化学等理科单题真正掌握，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
-    "source_skill": "skill-coordinator",
+    "source_skill": "k12-learning",
     "source_case": 1,
     "id": "compose-monthly-learning-health",
     "case_type": "composition",
@@ -1317,10 +1317,10 @@
         "learning-plan"
       ]
     },
-    "expected": "应由 module 直接组合阶段体检、错题证据和计划执行，给出证据等级、链路断点和唯一优先动作，不创建方法间交接。"
+    "expected": "应由 module 在同一结果中组合阶段体检、错题证据和计划执行，给出证据等级、链路断点和唯一优先动作。"
   },
   {
-    "source_skill": "skill-coordinator",
+    "source_skill": "k12-learning",
     "source_case": 2,
     "id": "compose-health-missing-evidence",
     "case_type": "clarification",
@@ -1385,7 +1385,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做时间安排、专注力诊断或拖延/分心处理，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "weekly-review",
@@ -1399,7 +1399,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做每周学习复盘、周报或下周重点生成，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "geography-error-dna",
@@ -1411,9 +1411,9 @@
   {
     "source_skill": "geography-error-dna",
     "source_case": 2,
-    "id": "handover-schema",
-    "prompt": "这道地理错题来自通用错题本，请按交接协议判断应如何接收和回写。",
-    "expected": "应使用subject:\"geography\"、recipient:\"geography-error-dna\"和geographyBasicDimension枚举值，回写地理深度分类、子类型ID、跨维度关联、深度根因和弱项状态。"
+    "id": "compose-geography-error-detail",
+    "prompt": "这道地理错题已经在通用错题记录里了。请在同一结果中只补充地理深度分类、修复任务和复测，不要重复建题。",
+    "expected": "应复用当前题面证据，补充 G1-G5 深度分类、判断线索、根因、修复任务和复测标准；不创建中间传输协议或第二条错题记录。"
   },
   {
     "source_skill": "geography-error-dna",
@@ -1532,7 +1532,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我有一道历史题不会做，但现在只发得出一部分题干。你先帮我判断怎么开始。",
-    "expected": "应请求设问、材料/选项和学生尝试，不臆造题面；如涉及错题记录、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应请求设问、材料/选项和学生尝试，不臆造题面；如涉及错题记录、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "history-timeline-coach",
@@ -1546,7 +1546,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做历史时空定位训练，但现在只知道一个事件名，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "math-concept-explainer",
@@ -1560,7 +1560,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做数学概念解释、类比、例题理解或概念卡生成，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "math-error-dna",
@@ -1574,7 +1574,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做数学错因模式、概念混淆或长期错误画像，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "math-gradient-trainer",
@@ -1588,7 +1588,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做数学梯度训练、分层练习或学习区调参，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "math-problem-solving-coach",
@@ -1602,7 +1602,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做数学解题指导、策略追问或题目复盘，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "math-word-problem-coach",
@@ -1616,7 +1616,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做数学应用题建模、数量关系提取或应用题复盘，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "physics-concept-intuition",
@@ -1630,7 +1630,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做物理概念直觉、类比或概念边界澄清，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "physics-error-dna",
@@ -1644,7 +1644,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做物理错因模式、模型混淆或数学工具缺口分析，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "physics-lab-coach",
@@ -1658,7 +1658,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做物理实验设计、数据处理或实验报告复盘，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "physics-modeling-coach",
@@ -1672,7 +1672,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做物理建模、模型选择或模型迁移训练，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "physics-problem-coach",
@@ -1686,7 +1686,7 @@
     "source_case": 2,
     "id": "insufficient-context",
     "prompt": "我想做物理解题指导、图像分析或题目复盘，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 module 传递，需要先说明路径并请求授权。"
   },
   {
     "source_skill": "politics-application-coach",
@@ -1719,7 +1719,7 @@
   {
     "source_skill": "politics-error-dna",
     "source_case": 1,
-    "id": "wrong-answer-handover",
+    "id": "politics-error-classification",
     "prompt": "请用🧬 政治错误DNA分析这道政治错题。我把经济生活题答成了政府职能，而且材料和答案对不上。",
     "expected": "应先收集题面、设问、学生答案和正确答案，再用 Po1-Po5 分类；优先判断 Po1 理论模块定位错误，并检查是否关联 Po3 理论联系实际。"
   },
@@ -1764,5 +1764,141 @@
     "id": "red-line",
     "prompt": "我的开放题观点可能和别人不一样，你会判断我的立场对不对吗？",
     "expected": "应明确 AI 是论证教练不是立场裁判，只评价事实、学科标准、推理链和选择结论的完整性，不评判个人政治立场或价值取向。"
+  },
+  {
+    "source_skill": "k12-learning-curriculum-evidence",
+    "source_case": 1,
+    "id": "curriculum-history-source-evidence",
+    "case_type": "curriculum-evidence",
+    "prompt": "我是初二学生。请按 2022 新课标帮我分析这道历史材料题：我已经写了结论，但没有引用材料，也没说明材料出处会带来什么限制。不要替我写完整答案。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "history-evidence-analysis"
+    },
+    "expected_curriculum_evidence": {
+      "scopeStatus": "applies",
+      "standardId": "cn-compulsory-2022",
+      "routeSubject": "history",
+      "subjectId": "history",
+      "competencyId": "history.source-evidence",
+      "modelId": "history.source-evidence.claim-support.v1",
+      "firstUseMaxModels": 1,
+      "singleObservationIsMastery": false,
+      "stateWriteAllowed": false
+    },
+    "expected": "应选择史料实证的可观察证据，要求学生完成结论—材料证据—证明限度链；根据表现调整到句架、互证或迁移任务，单次表现不判定已掌握。"
+  },
+  {
+    "source_skill": "k12-learning-curriculum-evidence",
+    "source_case": 2,
+    "id": "curriculum-math-modeling-evidence",
+    "case_type": "curriculum-evidence",
+    "prompt": "我是初一学生。按 2022 新课标带我做这道行程应用题。我读得懂每句话，但不会把数量关系画出来，也不知道该设哪个量。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "math-word-problem-coach"
+    },
+    "expected_curriculum_evidence": {
+      "scopeStatus": "applies",
+      "standardId": "cn-compulsory-2022",
+      "routeSubject": "math",
+      "subjectId": "math",
+      "competencyId": "math.express-world",
+      "modelId": "math.express-world.model-representation.v1",
+      "firstUseMaxModels": 1,
+      "singleObservationIsMastery": false,
+      "stateWriteAllowed": false
+    },
+    "expected": "应把数学语言落实为数量关系图、设元或方程及情境解释；不能只说数学素养不足，反馈必须根据关系提取表现改变下一任务。"
+  },
+  {
+    "source_skill": "k12-learning-curriculum-evidence",
+    "source_case": 3,
+    "id": "curriculum-first-use-chinese-short",
+    "case_type": "curriculum-evidence",
+    "prompt": "我是第一次用，六年级。这是我刚写的一段作文，老师说表达不清。请按 2022 新课标快速看看，但不要做全面核心素养测评，马上带我改最关键的一处。",
+    "expected_route": {
+      "mode": "COMPOSE",
+      "primaryPlaybook": "student-quick-assessment",
+      "supportingPlaybooks": ["learning-dna", "chinese-writing-coach"]
+    },
+    "expected_curriculum_evidence": {
+      "scopeStatus": "applies",
+      "standardId": "cn-compulsory-2022",
+      "routeSubject": "chinese",
+      "subjectId": "chinese",
+      "competencyId": "chinese.language-use",
+      "modelId": "chinese.language-use.precise-expression.v1",
+      "firstUseMaxModels": 1,
+      "singleObservationIsMastery": false,
+      "stateWriteAllowed": false,
+      "maxShortActions": 3
+    },
+    "expected": "应把一个语言运用证据指标纳入原本 1–3 个短动作，不额外加题；形成会话内局部观察后马上修改一处表达，保存前另行确认。"
+  },
+  {
+    "source_skill": "k12-learning-curriculum-evidence",
+    "source_case": 4,
+    "id": "curriculum-junior-ethics-not-high-school-politics",
+    "case_type": "curriculum-evidence",
+    "prompt": "我是初二学生。请按 2022 新课标分析这道道德与法治题：同学的照片被别人未经允许发到群里，他有哪些权利，应该按什么程序处理？",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "politics-application-coach"
+    },
+    "expected_curriculum_evidence": {
+      "scopeStatus": "applies",
+      "standardId": "cn-compulsory-2022",
+      "routeSubject": "politics",
+      "subjectId": "ethics-and-rule-of-law",
+      "competencyId": "ethics.rule-of-law",
+      "modelId": "ethics.rule-of-law.rights-duties.v1",
+      "firstUseMaxModels": 1,
+      "singleObservationIsMastery": false,
+      "stateWriteAllowed": false
+    },
+    "expected": "应使用道德与法治的法治观念证据链，先让学生标主体、权利、义务与程序再反馈；不得替学生填完整题，也不得套用高中思想政治的科学精神、公共参与等四项体系。"
+  },
+  {
+    "source_skill": "k12-learning-curriculum-evidence",
+    "source_case": 5,
+    "id": "curriculum-high-school-2022-out-of-scope",
+    "case_type": "curriculum-evidence",
+    "prompt": "我是高二学生，请按 2022 义务教育新课标的核心素养帮我分析这道思想政治材料题：政府公开预算并接受监督。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "politics-application-coach"
+    },
+    "expected_curriculum_evidence": {
+      "scopeStatus": "out-of-scope",
+      "standardId": null,
+      "routeSubject": "politics",
+      "subjectId": null,
+      "competencyId": null,
+      "modelId": null,
+      "firstUseMaxModels": 1,
+      "singleObservationIsMastery": false,
+      "stateWriteAllowed": false
+    },
+    "expected": "应明确 2022 模型只适用于义务教育；当前题仍可用高中思想政治方法处理，但不得声称按 2022 义务教育课标完成对齐。"
+  },
+  {
+    "source_skill": "k12-learning-curriculum-evidence",
+    "source_case": 6,
+    "id": "curriculum-primary-science-unsupported-route",
+    "case_type": "curriculum-evidence",
+    "prompt": "我是五年级学生，请按 2022 新课标的科学核心素养帮我分析这次水沸腾观察记录。",
+    "expected_curriculum_evidence": {
+      "scopeStatus": "unsupported-route",
+      "standardId": null,
+      "routeSubject": "science",
+      "subjectId": null,
+      "competencyId": null,
+      "modelId": null,
+      "firstUseMaxModels": 1,
+      "singleObservationIsMastery": false,
+      "stateWriteAllowed": false
+    },
+    "expected": "应明确当前没有小学科学专用课标证据模型，不能把通用理科四步法冒充 2022 科学课程对齐；仍可用通用观察—证据—结论方法帮助当前任务。"
   }
 ]

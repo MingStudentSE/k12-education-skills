@@ -46,22 +46,21 @@ run_check "9 SERVER-SMOKE" node "$ROOT/pipeline/server-smoke.mjs"
 
 tmp="$(mktemp -d)"
 mkdir -p "$tmp/students/demo/inbox"
-cat > "$tmp/students/demo/profile.md" <<'EOF'
----
-id: demo
-authorized: true
-authorized_by: 回归测试夹具（仅临时目录）
-authorization_subject: guardian
-authorization_date: 2026-07-11
-authorization_method: written
-external_processing_authorized: false
-external_processing_provider:
-external_processing_scope:
-external_processing_authorization_date:
----
-
-# Mock 学生画像
-EOF
+K12_STUDENT_DIR="$tmp/students/demo" node --input-type=module -e "
+  import { writeStudentAuthorization } from '$AUTO/authorization.mjs';
+  writeStudentAuthorization(process.env.K12_STUDENT_DIR, 'demo', {
+    authorized: true,
+    authorized_by: '回归测试夹具（仅临时目录）',
+    authorization_subject: 'guardian',
+    authorization_date: '2026-07-11',
+    authorization_method: 'written',
+    authorization_action: 'create',
+    external_processing_authorized: false,
+    external_processing_provider: '',
+    external_processing_scope: '',
+    external_processing_authorization_date: ''
+  }, 'create', '2026-07-11T12:00:00.000Z');
+" || FAILCNT=$((FAILCNT+1))
 cat > "$tmp/students/demo/inbox/sample.md" <<'EOF'
 ---
 subject: chemistry
@@ -93,8 +92,17 @@ fi
 
 run_check "12 PLAYBOOK-SEMANTICS" node "$ROOT/pipeline/validate_playbook_semantics.mjs"
 run_check "13 AUTOMATION-SEAM" node "$ROOT/pipeline/validate_automation_seam.mjs"
-run_check "14 V3-ROUTE-CONTRACT" node "$ROOT/pipeline/run_v3_route_regression.mjs" --contract-only
-run_check "15 FIRST-USE-CONTRACT" node "$ROOT/pipeline/validate_first_use_contract.mjs"
+run_check "14 MODULE-BEHAVIOR-RUNNER" node "$ROOT/pipeline/module-behavior-runner-smoke.mjs"
+run_check "15 MODULE-BEHAVIOR-FIXTURES" node "$ROOT/pipeline/run_module_behavior_regression.mjs" --fixture-only
+run_check "16 V3-ROUTE-CONTRACT" node "$ROOT/pipeline/run_v3_route_regression.mjs" --contract-only
+run_check "17 FIRST-USE-CONTRACT" node "$ROOT/pipeline/validate_first_use_contract.mjs"
+run_check "18 CURRICULUM-EVIDENCE" node "$ROOT/pipeline/validate_curriculum_evidence.mjs"
+run_check "19 CURRICULUM-CONTRACT" node "$ROOT/pipeline/run_curriculum_evidence_regression.mjs" --contract-only
+run_check "20 CURRICULUM-SOURCES" node "$ROOT/pipeline/verify_curriculum_sources.mjs" --contract-only
+run_check "21 CURRICULUM-SOURCE-SMOKE" node "$ROOT/pipeline/curriculum-source-verifier-smoke.mjs"
+run_check "22 REFERENCE-INTEGRITY" node "$ROOT/pipeline/validate_references.mjs"
+run_check "23 REFERENCE-SMOKE" node "$ROOT/pipeline/reference-integrity-smoke.mjs"
+run_check "24 STRUCTURED-RUNNERS" node "$ROOT/pipeline/structured-regression-runner-smoke.mjs"
 
 echo "===== SUMMARY: Product Module failures $FAILCNT ====="
 [ "$FAILCNT" -eq 0 ]

@@ -1,0 +1,46 @@
+{
+  "modelVersion": "1.0.0",
+  "standardId": "cn-compulsory-2022",
+  "subjectId": "chemistry",
+  "routeSubject": "chemistry",
+  "provenance": "project-operationalization",
+  "evidencePolicy": { "singleObservationIsMastery": false, "firstUseMaxModels": 1, "minimumIndependentObservations": 2, "transferRequired": true, "defaultState": "session-only" },
+  "models": [
+    {
+      "modelId": "chemistry.concepts.macro-micro-symbol.v1",
+      "competencyId": "chemistry.concepts",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能在宏观现象、微观粒子和化学符号之间建立对应", "能用变化、守恒和分类观念解释物质及反应"],
+      "task": { "taskType": "macro-micro-symbol", "promptContract": "对一个反应填写现象、粒子变化、符号表达三栏并说明守恒。", "successCriteria": ["三种表征描述同一过程且彼此一致", "守恒判断落实到粒子种类或数目变化"] },
+      "feedbackAdjustment": { "whenMissing": "先完成宏观现象与粒子变化两栏，不急于写方程式。", "whenEmerging": "逐项检查符号、系数和粒子图是否对应。", "whenDemonstrated": "更换反应类型，检验能否迁移三重表征。", "retest": "用新反应独立完成宏观—微观—符号。" },
+      "capabilityBindings": ["chemistry-particle-modeler", "chemistry-reaction-coach"]
+    },
+    {
+      "modelId": "chemistry.scientific-thinking.model-inference.v1",
+      "competencyId": "chemistry.scientific-thinking",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能依据组成、结构、性质或变化建立化学模型", "能从证据推理并用反例、守恒或边界检查结论"],
+      "task": { "taskType": "chemical-reasoning", "promptContract": "根据现象和数据提出粒子或反应解释，列证据，再设计一个反证检查。", "successCriteria": ["解释覆盖关键证据且不循环论证", "能说明模型适用条件或替代解释"] },
+      "feedbackAdjustment": { "whenMissing": "先区分已观察事实和待解释结论。", "whenEmerging": "要求每个推断绑定一条现象或数据。", "whenDemonstrated": "加入异常或反例，要求修改模型。", "retest": "用新证据独立完成事实—模型—检验。" },
+      "capabilityBindings": ["chemistry-concept-explainer", "chemistry-error-dna"]
+    },
+    {
+      "modelId": "chemistry.inquiry-practice.safe-evidence.v1",
+      "competencyId": "chemistry.inquiry-practice",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能在安全前提下提出可检验问题并控制变量", "能区分现象、数据、解释和结论并排除干扰"],
+      "task": { "taskType": "chemistry-investigation", "promptContract": "设计一个低风险比较实验，写安全、变量、对照、记录和证据判据。", "successCriteria": ["步骤安全且变量关系可被检验", "结论只使用已获得的现象和数据"] },
+      "feedbackAdjustment": { "whenMissing": "先完成安全边界和自变量—因变量。", "whenEmerging": "补对照、重复或鉴别证据中的一个关键缺口。", "whenDemonstrated": "加入干扰物或不一致数据，要求改进方案。", "retest": "用新问题独立设计安全—变量—证据链。" },
+      "capabilityBindings": ["chemistry-lab-inquiry", "chemistry-reaction-coach"]
+    },
+    {
+      "modelId": "chemistry.attitude-responsibility.green-decision.v1",
+      "competencyId": "chemistry.attitude-responsibility",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能如实使用化学证据并遵守实验安全与规范", "能评价化学应用的效益、风险、资源和环境影响"],
+      "task": { "taskType": "chemical-impact-decision", "promptContract": "比较两个化学方案，依据效果、安全、资源和环境证据作选择。", "successCriteria": ["选择包含化学性质或反应依据", "能说明风险、废物处理或适用边界"] },
+      "feedbackAdjustment": { "whenMissing": "先识别一项安全风险及其化学原因。", "whenEmerging": "为方案增加证据和废物处置要求。", "whenDemonstrated": "改变成本或环境条件，要求重新权衡。", "retest": "用新案例完成证据—风险—选择。" },
+      "capabilityBindings": ["chemistry-lab-inquiry", "chemistry-concept-explainer"]
+    }
+  ]
+}

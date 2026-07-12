@@ -1,7 +1,10 @@
 ---
 adapter_contract: k12-learning/night-analysis
 contract_version: v1
-request_schema: schemas/night-analysis-request-v1.schema.json
+request_schema: ../../schemas/night-analysis-request-v1.schema.json
+output_schema: ../../schemas/night-analysis-output-v1.schema.json
+policy_sections: input-boundary,analysis-task,output-contract,red-lines
+policy_rules: evidence-first,single-primary-cause,history-threshold-3,adaptive-practice,mastery-criterion,no-state-inference,no-fake-side-effects
 ---
 
 # 夜间错题分析 Adapter 契约 v1
@@ -10,7 +13,7 @@ request_schema: schemas/night-analysis-request-v1.schema.json
 
 ## 输入边界
 
-调用方按 `night-analysis-request-v1.schema.json` 提供一份最小请求：业务日期、学科、可选的低敏学习摘要、最多 3 份近期错题档案和当前错题。Automation v1 不直接读取 Learning State，因此学习摘要固定声明“未提供”；未来如需传递，必须另建由 Learning 显式产出的版本化 input，不得猜测 `profile.md` 路径。没有历史时也明确写“未提供”，不得补猜。
+调用方必须加载本文件 frontmatter 声明的 `request_schema`，并在调用模型前验证一份最小请求：业务日期、学科、可选的低敏学习摘要、最多 3 份近期错题档案和当前错题。Automation v1 不直接读取 Learning State，因此学习摘要固定声明“未提供”；未来如需传递，必须另建由 Learning 显式产出的版本化 input，不得猜测 `profile.md` 路径。没有历史时也明确写“未提供”，不得补猜。
 
 授权、模型提供方核验、读取文件、写入档案、移动 inbox 和发送提醒均不属于本契约，由 `k12-automation` 在调用前后负责。授权事实也不得被当作教学证据。
 
@@ -36,7 +39,7 @@ request_schema: schemas/night-analysis-request-v1.schema.json
 
 ## 输出契约
 
-只输出以下四节，标记各占独立一行；最后输出 `<<<END>>>`。标记之外不加寒暄。
+只输出以下四节，标记各占独立一行；最后输出 `<<<END>>>`。标记之外不加寒暄。调用方必须加载 frontmatter 声明的 `output_schema`，把四节解析为结构化输出并在任何写入前验证；Mock 与真实模型不得使用不同的解析或校验路径。
 
 ```text
 <<<DIAGNOSIS>>>

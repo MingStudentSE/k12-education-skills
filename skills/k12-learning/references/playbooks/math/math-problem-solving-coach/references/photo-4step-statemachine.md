@@ -58,7 +58,7 @@ stateDiagram-v2
     S5_SOCRATES --> S4_SIMILAR : 验证通过，出同类题
     S5_SOCRATES --> S3_PROBE_R1 : 验证未通过，回退追问
 
-    S6_ARCHIVE --> [*] : 推送错题档案+DNA
+    S6_ARCHIVE --> [*] : 输出待确认的错因与掌握摘要
 
     S1_PHOTO --> S_PAUSED : 学生离线
     S2_CLAW --> S_PAUSED
@@ -196,7 +196,7 @@ stateDiagram-v2
 | 项 | 说明 |
 |---|---|
 | **进入条件** | 同类题做对 或 五问链通过 |
-| **AI动作** | 推送记录到数学错误DNA + 更新学习DNA |
+| **AI动作** | 未授权时只输出本轮错因与掌握摘要；用户同意后更新同一条 Learning State 记录 |
 
 ### S_PREEXAM — 考前梳理子流程
 

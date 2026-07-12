@@ -11,7 +11,7 @@ description: 执行需要真实副作用的 K12 自动化。用户明确要求�
 
 - **文本提醒建议**：无需执行副作用，给出时间、内容和复测节奏即可。
 - **真实提醒**：读取 `references/playbooks/automation/im-reminder/playbook.md` 及必要 references，确认调度平台、渠道、时间、频率和授权。
-- **夜间错题产线**：读取 `references/nightline/k12-nightline-handover.md`，使用 `scripts/nightline/`。
+- **夜间错题产线**：读取 `references/nightline/k12-nightline-contract.md`，使用 `scripts/nightline/`。
 - **学生/错题网页控制台、OCR、授权更新**：运行 `scripts/nightline/server.mjs`。
 - **静态看板**：运行 `scripts/nightline/build-dashboard.mjs`。
 
@@ -26,8 +26,8 @@ description: 执行需要真实副作用的 K12 自动化。用户明确要求�
 ## 夜间产线流程
 
 1. 确认 Node.js ≥18、工作目录、学生数据目录和业务时区。
-2. 从 `scripts/nightline/config.sample.json` 创建本地 `config.json`；真实模式校验 endpoint、key、model，不提交密钥。夜间教学只读取 k12-learning 提供的版本化 night-analysis-v1 adapter，不读取其内部 playbook 目录。
-3. Automation 授权/运行状态写入学生目录的 `automation/state.json`，与 Learning 拥有的 `profile.md` 分离；旧 profile 授权只做只读兼容。外部模型处理需独立授权，OCR 每次发送图片前另行确认。
+2. 从 `scripts/nightline/config.sample.json` 创建本地 `config.json`；真实模式校验 endpoint、key、model，不提交密钥。夜间教学只读取 k12-learning 提供的版本化 night-analysis-v1 adapter 及其声明的 request/output schema，不读取其内部 playbook 目录。
+3. Automation 授权/运行状态只写入和读取学生目录的 `automation/state.json`，每次均通过本 module 的 state schema；Learning 的 `profile.md` 永不参与 steady-state 授权判断。旧授权只能由维护者显式运行一次性迁移命令，迁移后立即退出兼容路径。外部模型处理需重新独立授权，OCR 每次发送图片前另行确认。
 4. 使用精确学生 ID 运行；`--student` 缺值、非法 ID 或不存在学生必须非零退出，不可回退全员。
 5. 检查 outbox、archive、processed、日志和失败摘要；部分失败不得汇报批次成功。
 6. 撤回后停止分析；只撤外部时保留本地数据，撤本地时阻断读取与写入；导出和删除由用户分别决定。
@@ -49,6 +49,13 @@ node /path/to/k12-automation/scripts/nightline/build-dashboard.mjs
 - `K12_TIME_ZONE`：IANA 时区，默认 `Asia/Shanghai`。
 - `K12_MOCK_LLM=1`：只做流程回归，不外传、不产生真实诊断。
 
+旧数据迁移只在确有旧授权记录时由维护者显式执行；运行时不会自动 fallback：
+
+```bash
+node /path/to/k12-automation/scripts/nightline/migrate-legacy-authorization.mjs --audit
+node /path/to/k12-automation/scripts/nightline/migrate-legacy-authorization.mjs --student stu-001 --confirm
+```
+
 ## 安全红线
 
 - 安装 module、制定计划或授权本地建档，不等于允许真实提醒、外部模型或 OCR。
@@ -59,6 +66,7 @@ node /path/to/k12-automation/scripts/nightline/build-dashboard.mjs
 
 ## 资源
 
+- `references/automation-security.md`：真实提醒、外部模型、OCR、导出和撤回的最小授权表。
 - `references/playbooks/automation/im-reminder/`：提醒方法、间隔与控制策略。
 - `references/nightline/`：学生/家长指南与运营手册。
 - `scripts/nightline/`：确定性 Node.js 运行层。

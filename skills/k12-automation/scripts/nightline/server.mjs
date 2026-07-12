@@ -18,6 +18,7 @@ import {
   writeStudentAuthorization,
 } from './authorization.mjs';
 import { businessDate, businessFileTimestamp } from './business-time.mjs';
+import { loadRuntimeConfig } from './runtime-config.mjs';
 
 const ENGINE_DIR = dirname(fileURLToPath(import.meta.url));
 const ROOT = process.env.K12_ROOT || process.cwd();
@@ -25,7 +26,6 @@ const STUDENTS = join(ROOT, 'students');
 const PORT = parseInt(process.env.K12_PORT, 10) || 18350;
 const HOST = '127.0.0.1';
 const MOCK_LLM = process.env.K12_MOCK_LLM === '1';
-const CONFIG_PATH = join(ENGINE_DIR, 'config.json');
 const MAX_REQUEST_BYTES = 25_000_000;
 const MAX_OCR_IMAGES = 6;
 const MAX_OCR_IMAGE_CHARS = 8_000_000;
@@ -51,29 +51,7 @@ const SAFE = (s) => /^(?!_)[A-Za-z0-9_-]{1,80}$/.test(String(s || ''));
 let _cfg = null;
 function getCfg() {
   if (_cfg) return _cfg;
-  if (!existsSync(CONFIG_PATH)) throw new Error(`缺少配置文件：${CONFIG_PATH}`);
-  let parsed;
-  try { parsed = JSON.parse(readFileSync(CONFIG_PATH, 'utf8')); }
-  catch (e) { throw new Error(`配置文件不是有效 JSON：${e.message}`); }
-  if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) throw new Error('配置文件顶层必须是 JSON 对象');
-  const apibase = String(parsed.apibase || '').trim().replace(/\/+$/, '');
-  let endpoint;
-  try { endpoint = new URL(apibase); }
-  catch { throw new Error('config.json 的 apibase 必须是绝对 http(s) URL'); }
-  if (!['http:', 'https:'].includes(endpoint.protocol) || !endpoint.hostname) {
-    throw new Error('config.json 的 apibase 必须是绝对 http(s) URL');
-  }
-  if (endpoint.hostname === 'your-openai-compatible-endpoint') {
-    throw new Error('config.json 的 apibase 仍是示例占位值，请填写真实的模型服务地址');
-  }
-  if (typeof parsed.key !== 'string' || !parsed.key.trim()) throw new Error('config.json 的 key 必须是非空字符串');
-  if (typeof parsed.model !== 'string' || !parsed.model.trim()) throw new Error('config.json 的 model 必须是非空字符串');
-  const key = parsed.key.trim();
-  if (key.includes('REPLACE-WITH-YOUR-OWN-KEY')) {
-    throw new Error('config.json 的 key 仍是示例占位值，请填写真实的 API key');
-  }
-  const model = parsed.model.trim();
-  _cfg = { ...parsed, apibase, key, model };
+  _cfg = loadRuntimeConfig();
   return _cfg;
 }
 if (!MOCK_LLM) {

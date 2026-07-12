@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://k12-education-skills.local/schemas/module-behavior-fixture.schema.json",
+  "title": "Product Module natural-language behavior fixture",
+  "type": "object",
+  "required": ["id", "prompt"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "prompt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_skill": {
+      "description": "Migration provenance only. It is never an active route, dependency, or runtime instruction.",
+      "type": "string",
+      "minLength": 1
+    },
+    "expected": {
+      "type": "string",
+      "minLength": 1
+    },
+    "must_include": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "must_not_include": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "oneOf": [
+    {
+      "required": ["expected"],
+      "not": {
+        "anyOf": [
+          { "required": ["must_include"] },
+          { "required": ["must_not_include"] }
+        ]
+      }
+    },
+    {
+      "required": ["must_include", "must_not_include"],
+      "not": { "required": ["expected"] }
+    }
+  ],
+  "additionalProperties": true
+}

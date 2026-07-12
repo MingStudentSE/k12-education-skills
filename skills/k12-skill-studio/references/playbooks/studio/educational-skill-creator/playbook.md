@@ -1,13 +1,13 @@
 ---
 name: educational-skill-creator
-display_name: 🛠️ 教育版SKILL创建教练
+display_name: 🛠️ 教育 Playbook 设计治理
 version: 3.0.0
 author: K12 教育 AI 辅导系统
-category: 通用核心
-tags: [教育SKILL创建, 四层结构, 资料投喂, 元SKILL, 自定义, 学习流程, 学习科学]
+category: Studio/维护治理
+tags: [教育playbook, Product Module, 四层结构, 资料使用, 学习流程, 学习科学, 行为回归]
 description: >
   面向仓库维护者创建或改进 K12 Product Module 与内部 playbook。用于把教学需求写成可测试流程、
-  设计触发与反例、补齐学习科学和授权边界、迁移旧 Skill、生成行为用例并做发布前检查。
+  设计触发与反例、补齐学习科学和授权边界、迁移 V2 旧入口、生成行为用例并做发布前检查。
   学生只想调整自己的学习方式或获得个性化训练时不使用本方法，留在 k12-learning 内完成。
 compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
@@ -24,7 +24,7 @@ references:
 
 ## 触发边界
 
-- 触发：维护者要新增/优化内部 playbook、修改 Product Module、迁移旧 Skill、设计行为测试或审查教育流程。
+- 触发：维护者要新增/优化内部 playbook、修改 Product Module、迁移 V2 旧入口、设计行为测试或审查教育流程。
 - 不触发：学生只想得到专属训练、调整讲解方式或投喂当前材料；这些请求留在 `k12-learning`，不创建安装包。
 - 最小输入：学习痛点、适用场景、输入输出、已有流程、成功标准和 owner Product Module。
 - 新增公开 Product Module 前必须先读 `CONTEXT.md` 与 ADR，并通过 deletion test。
@@ -58,5 +58,5 @@ references:
 ## 参考资源
 
 - `references/creator-checklists.md`：创建前输入、四层结构、学习科学、五步流程、诊断指标和误区修复清单。
-- `references/creator-operating-manual.md`：原版长流程、理论阐述、完整诊断和协作说明。
+- `references/creator-operating-manual.md`：四模块冻结、owner、学习科学、状态 seam、测试和迭代的完整说明。
 - `references/skill-templates-library.md`：七个历史场景模板；使用前必须应用文件顶部的 V3 授权与副作用规则。

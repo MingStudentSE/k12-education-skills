@@ -1,0 +1,55 @@
+{
+  "modelVersion": "1.0.0",
+  "standardId": "cn-compulsory-2022",
+  "subjectId": "ethics-and-rule-of-law",
+  "routeSubject": "politics",
+  "provenance": "project-operationalization",
+  "evidencePolicy": { "singleObservationIsMastery": false, "firstUseMaxModels": 1, "minimumIndependentObservations": 2, "transferRequired": true, "defaultState": "session-only" },
+  "models": [
+    {
+      "modelId": "ethics.political-identity.fact-reason.v1",
+      "competencyId": "ethics.political-identity",
+      "gradeBand": "1-9",
+      "observableEvidence": ["能结合所学事实解释国家、制度或共同体概念", "能区分事实依据、学科判断与个人口号"],
+      "task": { "taskType": "fact-based-explanation", "promptContract": "围绕教材中的公共生活情境，写事实、课本原理和结论三栏。", "successCriteria": ["结论能回到材料和课本原理", "不用空泛口号替代解释"] },
+      "feedbackAdjustment": { "whenMissing": "先只找材料中的主体、行为和结果。", "whenEmerging": "要求把每个判断连接到一条教材原理。", "whenDemonstrated": "更换公共情境，检验能否独立完成事实—原理—结论。", "retest": "用新材料完成三栏解释并说明边界。" },
+      "capabilityBindings": ["politics-concept-explainer", "politics-application-coach"]
+    },
+    {
+      "modelId": "ethics.moral-cultivation.reasoned-choice.v1",
+      "competencyId": "ethics.moral-cultivation",
+      "gradeBand": "1-9",
+      "observableEvidence": ["能识别日常情境中的道德关系和行为影响", "能依据规则、他人权益和后果说明自己的选择"],
+      "task": { "taskType": "moral-scenario", "promptContract": "给一个校园或家庭情境，让学生比较两个选择并说明理由与影响。", "successCriteria": ["理由包含规则或他人权益", "能够预判选择对不同主体的影响"] },
+      "feedbackAdjustment": { "whenMissing": "先列情境中的主体和每个人可能受到的影响。", "whenEmerging": "追问选择依据是什么，是否前后一致。", "whenDemonstrated": "加入利益冲突，要求说明权衡和可执行行动。", "retest": "在新情境中独立完成选择—依据—影响链。" },
+      "capabilityBindings": ["politics-value-reasoning", "politics-concept-explainer"]
+    },
+    {
+      "modelId": "ethics.rule-of-law.rights-duties.v1",
+      "competencyId": "ethics.rule-of-law",
+      "gradeBand": "1-9",
+      "observableEvidence": ["能区分法律规则、道德倡议和一般习惯", "能在情境中识别权利、义务、程序和救济方式"],
+      "task": { "taskType": "rule-of-law-case", "promptContract": "先只给一个定位线索和空白主体—权利—义务—程序表，让学生填一行后停止；不得在作答前列出全部候选权利或处理步骤。", "successCriteria": ["概念使用符合情境而非只背定义", "处理方式包含合法程序和边界"] },
+      "feedbackAdjustment": { "whenMissing": "先只判断这是一项权利、义务还是一般愿望。", "whenEmerging": "补充主体和适用条件，排除绝对化表述。", "whenDemonstrated": "加入权利冲突或程序变化，检验能否重新判断。", "retest": "用新案例独立完成主体—规则—程序分析。" },
+      "capabilityBindings": ["politics-concept-explainer", "politics-application-coach"]
+    },
+    {
+      "modelId": "ethics.sound-personality.self-regulation.v1",
+      "competencyId": "ethics.sound-personality",
+      "gradeBand": "1-9",
+      "observableEvidence": ["能识别情绪、需要和行为后果而不把情绪等同事实", "能提出一个兼顾自己与他人的可执行调节行动"],
+      "task": { "taskType": "self-regulation-scenario", "promptContract": "对一个学习或同伴冲突情境，分开写感受、事实、需要和下一步行动。", "successCriteria": ["事实与评价或情绪分开", "行动具体且不侵犯他人边界"] },
+      "feedbackAdjustment": { "whenMissing": "先只完成感受和可核对事实两栏。", "whenEmerging": "把模糊愿望改成一个可执行动作。", "whenDemonstrated": "加入压力或观点冲突，检验是否仍能保持边界。", "retest": "在新情境中独立完成感受—事实—行动。" },
+      "capabilityBindings": ["politics-value-reasoning", "politics-application-coach"]
+    },
+    {
+      "modelId": "ethics.responsibility.public-action.v1",
+      "competencyId": "ethics.responsibility",
+      "gradeBand": "1-9",
+      "observableEvidence": ["能识别自己在家庭、学校或社会情境中的角色责任", "能提出与能力和规则相匹配的公共行动并评估影响"],
+      "task": { "taskType": "responsible-action-plan", "promptContract": "围绕真实小问题，写角色、责任、行动、协作对象和验收证据。", "successCriteria": ["行动与自身角色和规则相符", "包含可观察的完成证据及风险边界"] },
+      "feedbackAdjustment": { "whenMissing": "先把宏大倡议缩成当前角色能做的一步。", "whenEmerging": "补协作对象、时间和完成证据。", "whenDemonstrated": "改变资源或利益条件，要求调整行动方案。", "retest": "为新问题独立设计最小责任行动。" },
+      "capabilityBindings": ["politics-application-coach", "politics-value-reasoning"]
+    }
+  ]
+}

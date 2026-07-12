@@ -47,7 +47,7 @@ references:
 
 - 完整流程、项目DNA、跨项目复利、年龄适配、协作边界：`references/cross-subject-detective-full-playbook.md`
 - 项目结构模板：`references/detective-project-template.md`
-- 进入以下场景前必须读完整手册：多日侦探周、项目DNA写入、跨项目比较、康奈尔/学习DNA联动、正式展示成果。
+- 进入以下场景前必须读完整手册：多日侦探周、项目DNA写入、跨项目比较、在同一结果加入康奈尔笔记或学习画像视图、正式展示成果。
 
 ## 快速触发判断
 

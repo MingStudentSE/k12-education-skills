@@ -1,6 +1,6 @@
 # 理科解题四步法掌握检查表
 
-> 本文件随 `science-solving-four-steps` 单个 skill 安装，用于判断学生是否真正掌握一道理科题。
+> 本文件随 `science-solving-four-steps` 内部 playbook 发布，用于判断学生是否真正掌握一道理科题。
 
 ## 掌握等级
 

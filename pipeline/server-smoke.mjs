@@ -3,13 +3,15 @@ import { createServer } from 'http';
 import { copyFileSync, existsSync, mkdtempSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'fs';
 import { tmpdir } from 'os';
 import { fileURLToPath } from 'url';
-import { join } from 'path';
+import { dirname, join } from 'path';
 import { spawn, spawnSync } from 'child_process';
 import { once } from 'events';
 import {
   AUTOMATION_STATE_SCHEMA,
   EXTERNAL_PROCESSING_SCOPE,
+  writeStudentAuthorization,
 } from '../skills/k12-automation/scripts/nightline/authorization.mjs';
+import { businessDate } from '../skills/k12-automation/scripts/nightline/business-time.mjs';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const ENGINE_SOURCE = join(ROOT, 'skills/k12-automation/scripts/nightline');
@@ -29,10 +31,37 @@ async function freePort() {
 }
 
 function createServerHarness(name, configText) {
-  const engineDir = join(tempRoot, 'server-harnesses', name);
+  const moduleDir = join(tempRoot, 'server-harnesses', name, 'skills', 'k12-automation');
+  const engineDir = join(moduleDir, 'scripts', 'nightline');
+  const schemaDir = join(moduleDir, 'schemas');
   mkdirSync(engineDir, { recursive: true });
-  for (const file of ['server.mjs', 'authorization.mjs', 'business-time.mjs']) {
+  mkdirSync(schemaDir, { recursive: true });
+  for (const file of [
+    'server.mjs',
+    'authorization.mjs',
+    'business-time.mjs',
+    'contract-runtime.mjs',
+    'runtime-config.mjs',
+    'artifact-publisher.mjs',
+    'night-run.mjs',
+  ]) {
     copyFileSync(join(ENGINE_SOURCE, file), join(engineDir, file));
+  }
+  copyFileSync(
+    join(ROOT, 'skills/k12-automation/schemas/automation-state-v1.schema.json'),
+    join(schemaDir, 'automation-state-v1.schema.json'),
+  );
+  const learningRoot = join(tempRoot, 'server-harnesses', name, 'skills', 'k12-learning');
+  const adapterDir = join(learningRoot, 'references', 'adapters');
+  const learningSchemaDir = join(learningRoot, 'schemas');
+  mkdirSync(adapterDir, { recursive: true });
+  mkdirSync(learningSchemaDir, { recursive: true });
+  copyFileSync(
+    join(ROOT, 'skills/k12-learning/references/adapters/night-analysis-v1.md'),
+    join(adapterDir, 'night-analysis-v1.md'),
+  );
+  for (const file of ['night-analysis-request-v1.schema.json', 'night-analysis-output-v1.schema.json']) {
+    copyFileSync(join(ROOT, 'skills/k12-learning/schemas', file), join(learningSchemaDir, file));
   }
   if (configText !== undefined) writeFileSync(join(engineDir, 'config.json'), configText);
   return join(engineDir, 'server.mjs');
@@ -98,7 +127,22 @@ async function assertConfigFailure(name, serverPath) {
   assert(!`${result.stdout}${result.stderr}`.includes('控制台已启动'), `${name}: server listened before config rejection`);
 }
 
+async function runChild(path, options) {
+  const child = spawn(process.execPath, [path, ...(options.args || [])], {
+    cwd: options.cwd || ROOT,
+    env: options.env,
+    stdio: ['ignore', 'pipe', 'pipe'],
+  });
+  let output = '';
+  child.stdout.on('data', chunk => output += chunk);
+  child.stderr.on('data', chunk => output += chunk);
+  const [code] = await once(child, 'close');
+  return { code, output };
+}
+
 let providerCalls = 0;
+let nightProviderCalls = 0;
+let ocrProviderCalls = 0;
 const provider = createServer(async (req, res) => {
   let body = '';
   for await (const chunk of req) body += chunk;
@@ -107,8 +151,31 @@ const provider = createServer(async (req, res) => {
   assert(req.headers.authorization === 'Bearer smoke-key', 'provider did not receive configured key');
   const payload = JSON.parse(body);
   assert(payload.model === 'vision-smoke', 'provider did not receive configured model');
+  const isNightAnalysis = payload.messages?.some(message => message.role === 'system' && String(message.content).includes('k12-learning'));
+  if (isNightAnalysis) nightProviderCalls += 1;
+  else ocrProviderCalls += 1;
+  const content = isNightAnalysis ? `<<<DIAGNOSIS>>>
+# Fake real-path diagnosis
+<<<ARCHIVE>>>
+---
+date: ${businessDate()}
+subject: math
+topic: fake-real-path
+error_type: process
+recurrence_count: 1
+---
+Fake real-path archive.
+<<<PROBLEMS>>>
+1. Fake problem one.
+2. Fake problem two.
+3. Fake problem three.
+<<<SOLUTIONS>>>
+1. Fake solution one.
+2. Fake solution two.
+3. Fake solution three.
+<<<END>>>` : '# 题目原文\nMock OCR\n# 学生的卷面步骤\n无\n# 可见批注/背景\n无';
   res.writeHead(200, { 'Content-Type': 'application/json' });
-  res.end(JSON.stringify({ choices: [{ message: { content: '# 题目原文\nMock OCR\n# 学生的卷面步骤\n无\n# 可见批注/背景\n无' } }] }));
+  res.end(JSON.stringify({ choices: [{ message: { content } }] }));
 });
 
 try {
@@ -196,8 +263,32 @@ try {
   const providerPort = provider.address().port;
   const providerOrigin = `http://127.0.0.1:${providerPort}`;
   const validServer = createServerHarness('valid', JSON.stringify({
-    apibase: `${providerOrigin}/v1`, key: 'smoke-key', model: 'vision-smoke', learningAdapter: '',
+    apibase: ` ${providerOrigin}/v1/ `, key: ' smoke-key ', model: ' vision-smoke ', learningAdapter: '',
   }));
+  const directRoot = join(tempRoot, 'direct-real-root');
+  const directStudentDir = join(directRoot, 'students', 'direct-real');
+  mkdirSync(join(directStudentDir, 'inbox'), { recursive: true });
+  writeStudentAuthorization(directStudentDir, 'direct-real', {
+    authorized: true,
+    authorized_by: '真实路径回归夹具',
+    authorization_subject: 'guardian',
+    authorization_date: '2026-07-11',
+    authorization_method: 'written',
+    authorization_action: 'create',
+    external_processing_authorized: true,
+    external_processing_provider: providerOrigin,
+    external_processing_scope: EXTERNAL_PROCESSING_SCOPE,
+    external_processing_authorization_date: '2026-07-11',
+  }, 'create', '2026-07-11T12:00:00.000Z');
+  writeFileSync(join(directStudentDir, 'inbox/direct.md'), '---\nsubject: math\n---\n\n1 + 2 = 4\n');
+  const directRun = await runChild(join(dirname(validServer), 'night-run.mjs'), {
+    args: ['--student', 'direct-real'],
+    env: { ...process.env, K12_ROOT: directRoot },
+  });
+  assert(directRun.code === 0, `real night-run transport failed: ${directRun.output}`);
+  const directOut = join(directStudentDir, 'outbox', businessDate());
+  assert(existsSync(join(directOut, 'direct-错因诊断.md')), 'real night-run did not publish validated output');
+
   const realRoot = join(tempRoot, 'real-root');
   const real = await startApp({ dataRoot: realRoot, mock: false, serverPath: validServer });
   const realCreate = await post(real.base, '/api/student', {
@@ -244,13 +335,18 @@ try {
   const externalRestoreBody = await readJson(externalRestore);
   assert(externalRestore.status === 200 && externalRestoreBody.externalAuthorized, 'external authorization restore failed');
 
+  const realRun = await post(real.base, '/api/run', { student: 'stu-auth' });
+  const realRunBody = await readJson(realRun);
+  assert(realRun.status === 200 && realRunBody.ok, `real /api/run did not traverse night adapter: ${JSON.stringify(realRunBody)}`);
+  assert(existsSync(join(realRoot, 'students/stu-auth/outbox', businessDate())), 'real /api/run did not publish output');
+
   const ocr = await post(real.base, '/api/ocr', { images: [imageOfLength(100)], externalProcessingConsent: true });
   const ocrBody = await readJson(ocr);
   assert(ocr.status === 200 && String(ocrBody.text).includes('Mock OCR'), 'valid OCR did not reach configured visual model');
   assert((await post(real.base, '/api/ocr', { images: Array.from({ length: 7 }, () => imageOfLength(100)), externalProcessingConsent: true })).status === 400, 'seven OCR images must fail');
   assert((await post(real.base, '/api/ocr', { images: [imageOfLength(8_000_001)], externalProcessingConsent: true })).status === 400, 'oversized single OCR image must fail');
   assert((await post(real.base, '/api/ocr', { images: Array.from({ length: 4 }, () => imageOfLength(6_100_000)), externalProcessingConsent: true })).status === 400, 'OCR total over 24,000,000 chars must fail');
-  assert(providerCalls === 1, `rejected OCR requests reached provider; calls=${providerCalls}`);
+  assert(nightProviderCalls === 2 && ocrProviderCalls === 1 && providerCalls === 3, `real night/OCR call counts mismatch: night=${nightProviderCalls}, ocr=${ocrProviderCalls}, all=${providerCalls}`);
 
   const oversizedPayload = JSON.stringify({ padding: 'x'.repeat(25_000_100) });
   const payloadResponse = await postRaw(real.base, '/api/ocr', oversizedPayload);
@@ -271,7 +367,7 @@ try {
     authorizationSubject: 'guardian', authorizationDate: '2026-07-11', authorizationMethod: 'written',
   })).status === 409, 'external-only revoke must not silently restore revoked local authorization');
 
-  console.log('server smoke: eager config, JSON 413, OCR limits, authorization lifecycle and prior runtime gates passed');
+  console.log('server smoke: normalized shared config + real night CLI/API seam + OCR/auth lifecycle passed');
 } finally {
   await stopChildren();
   if (provider.listening) {

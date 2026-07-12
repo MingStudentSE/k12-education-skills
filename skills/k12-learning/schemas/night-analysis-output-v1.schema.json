@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/k12-learning/night-analysis-output-v1.schema.json",
+  "title": "K12 Learning Night Analysis Output v1",
+  "description": "k12-learning 夜间分析 adapter 的结构化输出。Automation 只在此 schema 通过后写入 outbox/archive。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "diagnosis", "archive", "problems", "solutions"],
+  "properties": {
+    "contract_version": { "const": "v1" },
+    "diagnosis": { "type": "string", "minLength": 1, "maxLength": 20000 },
+    "archive": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["content", "date", "subject", "topic", "error_type", "recurrence_count"],
+      "properties": {
+        "content": { "type": "string", "minLength": 1, "maxLength": 20000 },
+        "date": { "type": "string", "format": "date" },
+        "subject": {
+          "enum": ["math", "physics", "chemistry", "biology", "chinese", "english", "history", "geography", "politics", "general"]
+        },
+        "topic": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "error_type": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "recurrence_count": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "problems": { "type": "string", "minLength": 1, "maxLength": 30000 },
+    "solutions": { "type": "string", "minLength": 1, "maxLength": 30000 }
+  }
+}

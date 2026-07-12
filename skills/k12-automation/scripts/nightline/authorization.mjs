@@ -1,29 +1,39 @@
 import {
-  closeSync,
   existsSync,
   mkdirSync,
-  openSync,
   readFileSync,
-  readSync,
   renameSync,
   writeFileSync,
 } from 'fs';
 import { basename, dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+import { assertJsonSchema, loadJsonSchema } from './contract-runtime.mjs';
+import { businessDate } from './business-time.mjs';
 
 export const AUTH_SUBJECTS = new Set(['student', 'guardian']);
 export const AUTH_METHODS = new Set(['written', 'verbal', 'digital']);
 export const EXTERNAL_PROCESSING_SCOPE = 'current-mistake,recent-3-archives';
 export const AUTOMATION_STATE_SCHEMA = 'k12-automation-state/v1';
 export const AUTOMATION_STATE_RELATIVE_PATH = 'automation/state.json';
+export const AUTOMATION_STATE_SCHEMA_PATH = join(
+  dirname(fileURLToPath(import.meta.url)),
+  '..',
+  '..',
+  'schemas',
+  'automation-state-v1.schema.json',
+);
+
+const automationStateSchema = loadJsonSchema(AUTOMATION_STATE_SCHEMA_PATH, 'Automation state');
+if (automationStateSchema.properties?.schema_version?.const !== AUTOMATION_STATE_SCHEMA) {
+  throw new Error(`Automation state schema identity 必须是 ${AUTOMATION_STATE_SCHEMA}`);
+}
 
 function validPastOrTodayDate(value) {
   const text = String(value || '');
   if (!/^20\d{2}-(0[1-9]|1[0-2])-([0-2]\d|3[01])$/.test(text)) return false;
   const date = new Date(`${text}T00:00:00Z`);
   if (Number.isNaN(date.valueOf()) || date.toISOString().slice(0, 10) !== text) return false;
-  const now = new Date();
-  const localToday = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-  return text <= localToday;
+  return text <= businessDate();
 }
 
 function trueFlag(value) {
@@ -33,29 +43,6 @@ function trueFlag(value) {
 export function normalizeProvider(value) {
   try { return new URL(String(value || '')).origin; }
   catch { return ''; }
-}
-
-export function readFrontmatterPrefix(filePath, maxBytes = 8192) {
-  const fd = openSync(filePath, 'r');
-  try {
-    const byte = Buffer.alloc(1);
-    const bytesRead = [];
-    for (let position = 0; position < maxBytes; position++) {
-      const bytes = readSync(fd, byte, 0, 1, position);
-      if (!bytes) break;
-      bytesRead.push(byte[0]);
-      const n = bytesRead.length;
-      if (n >= 5 && bytesRead.slice(n - 5).join(',') === '10,45,45,45,10') break;
-    }
-    const text = Buffer.from(bytesRead).toString('utf8');
-    const match = text.match(/^---\n([\s\S]*?)\n---(?:\n|$)/);
-    const meta = {};
-    if (match) for (const line of match[1].split('\n')) {
-      const i = line.indexOf(':');
-      if (i > 0) meta[line.slice(0, i).trim()] = line.slice(i + 1).trim();
-    }
-    return meta;
-  } finally { closeSync(fd); }
 }
 
 export function hasLocalAuthorization(meta) {
@@ -114,35 +101,12 @@ function parseAutomationState(filePath) {
   let state;
   try { state = JSON.parse(readFileSync(filePath, 'utf8')); }
   catch (error) { throw new Error(`Automation 授权状态不是有效 JSON：${error.message}`); }
-  if (!state || state.schema_version !== AUTOMATION_STATE_SCHEMA || !/^[A-Za-z0-9_-]{1,80}$/.test(String(state.student_id || ''))) {
-    throw new Error(`Automation 授权状态契约不受支持：必须是 ${AUTOMATION_STATE_SCHEMA}`);
-  }
-  if (!state.authorization || !state.authorization.local || !state.authorization.external_processing) {
-    throw new Error('Automation 授权状态缺少 authorization.local/external_processing');
-  }
-  const local = state.authorization.local;
-  const external = state.authorization.external_processing;
-  if (typeof local.authorized !== 'boolean' || typeof external.authorized !== 'boolean') {
-    throw new Error('Automation 授权状态的 authorized 必须是 boolean');
-  }
-  for (const [label, value] of [
-    ['local.authorized_by', local.authorized_by],
-    ['local.subject', local.subject],
-    ['local.date', local.date],
-    ['local.method', local.method],
-    ['local.action', local.action],
-    ['external_processing.provider', external.provider],
-    ['external_processing.scope', external.scope],
-    ['external_processing.date', external.date],
-  ]) {
-    if (typeof value !== 'string') throw new Error(`Automation 授权状态的 ${label} 必须是 string`);
-  }
-  return state;
+  return assertJsonSchema(state, automationStateSchema, 'Automation state');
 }
 
 /**
- * Read Automation-owned authorization first. A legacy profile.md is a read-only
- * compatibility source and is never used when an Automation state file exists.
+ * Steady-state runtime reads only Automation-owned authorization. Legacy
+ * profile.md authorization must first pass through migrate-legacy-authorization.mjs.
  */
 export function readStudentAuthorization(studentDir) {
   const statePath = automationStatePath(studentDir);
@@ -152,10 +116,6 @@ export function readStudentAuthorization(studentDir) {
       throw new Error('Automation 授权状态的 student_id 与目录不一致');
     }
     return { source: 'automation-state', record: authorizationFromState(state), state };
-  }
-  const legacyProfile = join(studentDir, 'profile.md');
-  if (existsSync(legacyProfile)) {
-    return { source: 'legacy-profile', record: readFrontmatterPrefix(legacyProfile), state: null };
   }
   return { source: 'none', record: {}, state: null };
 }
@@ -193,6 +153,7 @@ export function writeStudentAuthorization(studentDir, studentId, record, action,
       last_action: String(action || 'update'),
     },
   };
+  assertJsonSchema(state, automationStateSchema, 'Automation state');
   mkdirSync(dirname(filePath), { recursive: true });
   const tempPath = `${filePath}.${process.pid}.${Date.now()}.tmp`;
   writeFileSync(tempPath, `${JSON.stringify(state, null, 2)}\n`);

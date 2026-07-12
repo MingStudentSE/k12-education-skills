@@ -1,0 +1,37 @@
+{
+  "modelVersion": "1.0.0",
+  "standardId": "cn-compulsory-2022",
+  "subjectId": "math",
+  "routeSubject": "math",
+  "provenance": "project-operationalization",
+  "evidencePolicy": { "singleObservationIsMastery": false, "firstUseMaxModels": 1, "minimumIndependentObservations": 2, "transferRequired": true, "defaultState": "session-only" },
+  "models": [
+    {
+      "modelId": "math.observe-world.structure-recognition.v1",
+      "competencyId": "math.observe-world",
+      "gradeBand": "1-9",
+      "observableEvidence": ["能从现实或图形情境中识别数量、关系、变化或空间结构", "能区分与问题相关和无关的信息并提出可数学化的问题"],
+      "task": { "taskType": "structure-observation", "promptContract": "给一个生活、图表或几何情境，让学生圈变量、关系与多余条件并提出一个数学问题。", "successCriteria": ["所选信息与问题目标相关", "提出的问题可以用明确数学对象表示"] },
+      "feedbackAdjustment": { "whenMissing": "只保留两个对象，先说它们可能有什么关系。", "whenEmerging": "要求把模糊描述改成可比较、可测量或可计算的量。", "whenDemonstrated": "加入多余信息或改变尺度，检验能否保持结构判断。", "retest": "用新情境独立完成对象—关系—问题识别。" },
+      "capabilityBindings": ["math-concept-explainer", "math-word-problem-coach"]
+    },
+    {
+      "modelId": "math.think-world.reasoning-validation.v1",
+      "competencyId": "math.think-world",
+      "gradeBand": "1-9",
+      "observableEvidence": ["能选择运算、推理或分类方法并说明为什么适用", "能检查条件、步骤和结论，发现反例或不成立边界"],
+      "task": { "taskType": "reasoning-validation", "promptContract": "让学生先预测方法，再完成关键步骤并用验算、反例或另一方法检查结论。", "successCriteria": ["每个关键步骤有条件或规则依据", "验证方式能真正检验原结论"] },
+      "feedbackAdjustment": { "whenMissing": "退回第一步，要求指出用了哪条定义、性质或关系。", "whenEmerging": "让学生比较两种方法并解释选择。", "whenDemonstrated": "改变一个条件，要求判断原方法何时失效。", "retest": "用同结构变式独立完成方法—推理—验证。" },
+      "capabilityBindings": ["math-problem-solving-coach", "math-error-dna", "math-gradient-trainer"]
+    },
+    {
+      "modelId": "math.express-world.model-representation.v1",
+      "competencyId": "math.express-world",
+      "gradeBand": "1-9",
+      "observableEvidence": ["能用图、表、式、方程或文字表示现实关系", "能解释表示中每个量、符号和结果在原情境中的意义"],
+      "task": { "taskType": "mathematical-modeling", "promptContract": "把一个应用情境转成关系图和方程，求解后回到情境解释结果与限制。", "successCriteria": ["表示覆盖关键数量关系且单位一致", "结果经过情境合理性和边界检查"] },
+      "feedbackAdjustment": { "whenMissing": "先画数量关系图，不急于列式。", "whenEmerging": "要求逐个解释符号、单位和等号两边含义。", "whenDemonstrated": "改变一个现实条件，要求修改模型而不是套原式。", "retest": "用新情境独立完成关系—模型—解释。" },
+      "capabilityBindings": ["math-word-problem-coach", "math-problem-solving-coach"]
+    }
+  ]
+}

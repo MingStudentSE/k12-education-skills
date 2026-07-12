@@ -4,7 +4,7 @@
     "source_case": 1,
     "id": "happy-path",
     "prompt": "我要维护这个仓库：新增一个训练化学守恒观的内部 playbook。已有学习痛点、输入输出、反例和成功标准。",
-    "expected": "应先确认 owner Product Module，优先深化 k12-learning；产出 playbook 实现、Capability Map 变更、行为测试、来源映射和验证结果，不新增公开 Skill。"
+    "expected": "应先确认 owner Product Module，优先深化 k12-learning；产出 playbook 实现、Capability Map 变更、行为测试、来源映射和验证结果，不新增公开 Product Module interface。"
   },
   {
     "source_skill": "educational-skill-creator",

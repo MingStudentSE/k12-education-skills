@@ -38,7 +38,7 @@ stateDiagram-v2
 
     S5_SAVE_DNA --> S5_ACCEPT : 学生同意存入词汇DNA
     S5_SAVE_DNA --> S5_SKIP : 学生拒绝或无好表达
-    S5_ACCEPT --> S6_DONE : 联动词汇DNA系统
+    S5_ACCEPT --> S6_DONE : 在同一 Learning State 更新中加入该词
     S5_SKIP --> S6_DONE
 
     S6_DONE --> [*] : 流程完成
@@ -131,13 +131,13 @@ stateDiagram-v2
 |---|---|
 | **进入条件** | S4 完成后 |
 | **AI动作** | 提示："今天对话里有一个表达很好用：'[表达]'，要存入你的词汇DNA吗？说'存'我帮你记录。" |
-| **退出条件** | 学生说"存"→ S5_ACCEPT（联动词汇DNA系统）；学生不存 → S5_SKIP |
+| **退出条件** | 学生明确同意长期记录 → S5_ACCEPT，在同一 Learning State 更新中加入该词；学生不同意 → S5_SKIP |
 
 ### S6_DONE — 流程完成
 
 | 项 | 说明 |
 |---|---|
-| **AI动作** | 更新口语DNA（发音弱点/流利度/词汇记录/里程碑检查）+ 如有顽固弱点提醒下次注意 |
+| **AI动作** | 未授权时只给会话内复盘；获授权后更新口语 Learning State，并把顽固弱点写成下次热身检查项 |
 
 ---
 

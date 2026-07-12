@@ -1,22 +1,23 @@
 ---
 name: k12-learning
-description: 面向 K12 学生及其支持者的唯一日常学习入口。明确第一次使用时，先请用户拿出一份近期课本、作业、试卷或错题材料，做材料驱动的快速测评，生成会话内初版学习 DNA，并立即进入一个真实学习任务；跨会话保存画像仍需明确同意。用户询问系统能做什么或平时怎么说时提供能力介绍和可复制示例；学科答疑、错题分析、概念理解、写作批改、实验探究、学习计划、专注执行、费曼检验、笔记整理、兴趣探索或阶段复盘，均在内部按当前请求选择并组合 playbook。通用 Wiki 维护、真实提醒/夜跑和 Skill 开发分别交给 llm-wiki、k12-automation、k12-skill-studio。
+description: 面向 K12 学生及其支持者的唯一日常学习入口。明确第一次使用时，先请用户拿出一份近期课本、作业、试卷或错题材料，做材料驱动的快速测评，生成会话内初版学习 DNA，并立即进入一个真实学习任务；跨会话保存画像仍需明确同意。用户询问系统能做什么或平时怎么说时提供能力介绍和可复制示例；学科答疑、错题分析、概念理解、写作批改、实验探究、学习计划、专注执行、费曼检验、笔记整理、兴趣探索或阶段复盘，均在内部按当前请求选择并组合 playbook。通用 Wiki 维护、真实提醒/夜跑和方法开发分别由 llm-wiki、k12-automation、k12-skill-studio 负责。
 ---
 
 # K12 Learning
 
-把所有日常 K12 学习任务作为一个深 module 处理。不要让用户选择旧 Skill 名称，也不要模拟跨 Skill 交接。
+把所有日常 K12 学习任务作为一个深 module 处理。旧的 63 个入口名称只用于迁移兼容：不让用户从中选择，也不在它们之间模拟控制流。
 
 ## 工作流
 
-1. **判断范围**：处理 K12 学习、学习方法、学习规划和复盘；非 K12 请求普通回答。Wiki 仓库维护、真实自动化和 Skill 开发不在本 module 内执行。
+1. **判断范围**：处理 K12 学习、学习方法、学习规划和复盘；非 K12 请求普通回答。Wiki 仓库维护、真实自动化和 Product Module/playbook 开发不在本 module 内执行。
 2. **提取当前信号**：只从当前消息识别是否明确首次使用、学科、目标、材料、学生已做步骤、期望输出和副作用意图。路由阶段不读取画像、错题历史、周报或提醒。
 3. **选择主 playbook**：读取 `references/capability-map.json`，按 `references/routing-policy.md` 选一个主 playbook。明确首次使用时以 `student-quick-assessment` 为主，即使已有题目也把该材料直接用于快速测评；普通日常请求已有明确材料时直达专业 playbook，无明确任务时才使用 intake。
-4. **按需组合**：`k12-learning` 自己对组合负责。首次使用组合 `student-quick-assessment` 与 `learning-dna`；已有具体材料时把第二个辅助位给对应学科 playbook，并把同一材料立即用于真实学习；没有材料且同时询问“你能做什么/平时怎么说”时，第二个辅助位给 `system-guide`。其他任务仅在同一结果确实需要时加载最多两个辅助 playbook。组合发生在本 module 内，不调用协调器、不创建方法间交接。
+4. **按需组合**：`k12-learning` 自己对组合负责。首次使用组合 `student-quick-assessment` 与 `learning-dna`；已有具体材料时把第二个辅助位给对应学科 playbook，并把同一材料立即用于真实学习；没有材料且同时询问“你能做什么/平时怎么说”时，第二个辅助位给 `system-guide`。其他任务仅在同一结果确实需要时加载最多两个辅助 playbook。组合发生在本 module 内，不增加公开入口或方法间消息协议。
 5. **读取实现**：读取目标目录的 `playbook.md`，再读取其中当前任务必需的 references/schema；不要全量加载 58 个 playbook。明确首次使用时读取 `student-quick-assessment` 与 `learning-dna`；询问系统能力、平时说法或完整用法时读取 `system-guide` 及 `references/system-user-guide.md`。
-6. **执行与复测**：首次使用把启动控制在 3–5 分钟、最多 3 个短测评动作，不做全科或全面测评；一旦形成足以选择下一步的初版 DNA，就立即处理一项真实任务。普通任务优先使用学生材料和原步骤，定位卡点后给提示、解释、练习或复测。
-7. **经过副作用门**：需要长期 Learning State、Wiki 沉淀或真实提醒时，按 `references/privacy-and-state.md` 先说明字段、目的、位置和删除方法并等待明确确认。
-8. **报告事实**：只报告真实完成的会话处理、文件写入或 adapter 调用。内部 playbook 名默认不展示；用户询问路由依据时再说明。
+6. **叠加课标证据镜头**：它不是新路由，也不占辅助 playbook 位。用户明确要求新课标/核心素养/学业质量，或义务教育快速测评、计划、阶段复盘需要把材料转成任务时，读取 `references/curriculum-evidence-policy.md`，再经 `scripts/resolve-curriculum-evidence.mjs` 完成年级 scope、当前学科和单一模型选择；不要由 caller 手工拼接四层事实。2022 模型只适用于义务教育；高中不得套用。
+7. **执行与复测**：把“核心素养 → 可观测证据 → 学习任务 → 反馈调整”落实到学生当前材料。没有学生尝试时，首轮最多给一个线索和一个空结构，随后停下来等学生作答；不得先列完知识点、程序或答案骨架。拿到表现后再调整支架。首次使用仍控制在 3–5 分钟、最多 3 个短测评动作；一旦形成足以选择下一步的初版 DNA，就立即处理一项真实任务。
+8. **经过副作用门**：需要长期 Learning State、Wiki 沉淀或真实提醒时，按 `references/privacy-and-state.md` 先说明字段、目的、位置和删除方法并等待明确确认。
+9. **报告事实**：只报告真实完成的会话处理、文件写入或 adapter 调用。内部 playbook 名和证据模型 ID 默认不展示；用户询问路由或课标依据时再说明。
 
 ## 主 playbook 选择
 
@@ -30,6 +31,7 @@ description: 面向 K12 学生及其支持者的唯一日常学习入口。明�
 - 一周轻复盘：`weekly-review`；多周证据体检：`learning-360-review`。
 - 跨学科主题项目：`cross-subject-detective`；兴趣验证：`interest-explorer`。
 - 非首次且无明确任务：`student-quick-assessment`，用一份代表性材料做快速定位；未授权时只保留会话内初版 DNA。
+- “按 2022 新课标/核心素养分析”：仍按当前学科任务选择主 playbook；课标证据模型只决定观察点、成功标准和反馈调整，不创建新 capability。
 
 ## Module seam
 
@@ -54,4 +56,8 @@ description: 面向 K12 学生及其支持者的唯一日常学习入口。明�
 - `references/privacy-and-state.md`：会话、Learning State、Wiki 与 automation 的授权门。
 - `references/adapters/night-analysis-v1.md`：提供给 Automation 的版本化夜间分析契约。
 - `references/system-user-guide.md`：能力全景、第一次使用和平时调用示例的单一来源。
+- `references/curriculum-evidence-policy.md`：2022 义务教育课标的适用边界、执行链和状态规则。
+- `references/curriculum/2022/index.json`：课标事实与九科证据 profile 的按需加载索引。
+- `scripts/resolve-curriculum-evidence.mjs`：课标 scope、当前学科与单一证据模型的无副作用选择实现。
+- `schemas/curriculum-standards.schema.json` 与 `schemas/core-competency-evidence-model.schema.json`：官方事实层和项目操作化层的数据契约。
 - `references/playbooks/`：58 个按需读取的内部实现与本地资源。

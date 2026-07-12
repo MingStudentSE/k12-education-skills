@@ -1,6 +1,18 @@
 # 版本历史与维护追踪
 
-> 当前版本为 **V3.0**：4 个 Product Module、61 个内部 playbook、58 个学习能力、63 条旧入口映射、223 个行为用例。
+> 当前版本为 **V3.0**：4 个 Product Module、61 个内部 playbook、58 个学习能力、63 条旧入口映射、229 条四模块自然语言行为 fixture；其中 80 条同时属于 Learning 路由白盒子集，6 条同时属于课标证据子集，行为通过以单独的 live report 为证。
+
+## 2026-07-12 · 2022 新课标核心素养证据模型
+
+- 在 `k12-learning` 内新增义务教育 2022 课标事实层与九个当前学科的项目操作化 evidence profile，不新增 capability、playbook 或 Product Module。
+- 固定“核心素养 → 可观测证据 → 学习任务 → 反馈调整”执行链；首次使用仍受 3–5 分钟与最多 3 个短动作约束。
+- 明确高中不得套用 2022 义务教育模型，初中“道德与法治”与高中“思想政治”不再混为同一课标事实。
+- 新增 Schema、引用完整性和可执行回归门；清理被 all-in-one 主文件替代的孤儿资源与旧 handover 协议。
+- 新增四模块两阶段黑盒行为 runner：generator 不读取期望，evaluator 在独立上下文中对冻结回答引用原文判定；内部路由降为次级白盒回归。
+- 恢复 `llm-wiki` 的自包含长实现，移除与主文件重复的六份 reference，并删除以 LOC 判断 module 深度的门禁。
+- 新增无副作用 curriculum resolver；九科官方事实升级为 `dataVersion 1.2.0`，学科级去重保存教育部 PDF/章节/起始页/SHA-256，每项 competency 保存精确 `sourcePage`，resolver 才组合最终引用；在线复核会 OCR 指定页并核对正式名称。
+- Automation steady-state 不再读取 Learning `profile.md`；state/request/output Schema 进入真实 runtime，Mock 与真实模型共用同一 adapter seam，旧授权只走一次性迁移 CLI。
+- semantic gate 从 58 个 `playbook.md` 扩到所有运行可达 Markdown；V2、genesis 与旧仓库审计移入 `docs/history/`。
 
 ## 2026-07-12 · V3 内部深化与用户向导
 
@@ -131,7 +143,7 @@
 维护原则：
 
 - 60 个 Skill 均须保持单目录可安装，不依赖仓库根 `references/` 或其他 Skill 目录。
-- 主 `SKILL.md` 保持 ≤150 行；长流程、模板、示例和评分细则必须在本技能 `references/` 内。
+- V2 当时曾用主文件行数约束推动内容搬家；V3 已废止该规则，不再用文件长度判断 module depth。
 - 运行层 `engine/` 可读全仓 `skills/`，但不得写入 Skill 内容或自进化。
 
 ### 2026-06-15 v1.6 化学与生物学科专项
