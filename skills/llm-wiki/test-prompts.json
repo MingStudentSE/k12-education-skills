@@ -30,10 +30,10 @@
     "must_not_include": ["创建空页面掩盖断链"]
   },
   {
-    "id": "obsidian-install-consent",
-    "prompt": "需要 Obsidian CLI；如果没有依赖就直接帮我装。",
-    "must_include": ["检查现有安装", "确认来源", "确认目标目录"],
-    "must_not_include": ["静默安装", ".codex/skills 写死"]
+    "id": "obsidian-install-auto-fallback",
+    "prompt": "需要 Obsidian CLI；如果没有 kepano/obsidian-skills 就自动帮我安装，网络失败也不用卡住。",
+    "must_include": ["检查现有安装", "kepano/obsidian-skills", "自动尝试", "网络失败", "Markdown"],
+    "must_not_include": ["等待明确同意", "静默宣称成功", ".codex/skills 写死", "替代仓库"]
   },
   {
     "id": "migrate-education-wiki",
@@ -58,5 +58,17 @@
     "prompt": "新结论已经替代旧页面，把旧知识和所有原始来源都归档掉。",
     "must_include": ["编译页可归档", "Raw 不归档不改写", "更新 inbound links"],
     "must_not_include": ["移动或删除 100-Raw"]
+  },
+  {
+    "id": "user-first-wiki-onboarding",
+    "prompt": "我想把学习资料长期整理成 Wiki，但不懂目录和 Obsidian。请告诉我第一次怎么开始。",
+    "must_include": ["新建", "已有 Obsidian", "先确认", "增量", "不批量改名"],
+    "must_not_include": ["必须先理解 100-Raw", "未确认即创建文件"]
+  },
+  {
+    "id": "k12-confirmed-learning-result-to-wiki",
+    "prompt": "把刚才确认的函数错因、订正方法和复测题写入我的 Wiki。",
+    "must_include": ["最小内容", "目标文件", "变更", "确认"],
+    "must_not_include": ["默认读取全部学习 DNA", "未经确认直接写入"]
   }
 ]

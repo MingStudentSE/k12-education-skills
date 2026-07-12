@@ -228,6 +228,15 @@ The four-layer directory is compatible with Obsidian:
 - Set the attachment folder to `999-Assets/`.
 - Keep source Markdown in `100-Raw/`; do not use the attachment folder as a substitute for raw evidence.
 
+### Optional Obsidian enhancement
+
+Only when the task needs Obsidian-native capabilities such as Bases, CLI, vault search/write, properties, or attachment embeds, read `references/Obsidian-Skill-Dependency.md`.
+
+- Check for an existing compatible Obsidian skill first; never overwrite it.
+- If it is missing, automatically attempt the exact official upstream `kepano/obsidian-skills` through the current host's Marketplace/plugin manager, then its documented `npx skills add https://github.com/kepano/obsidian-skills` fallback.
+- Report the actual result. A network, timeout, DNS, or rate-limit failure is non-blocking: continue with portable Markdown/Wikilink behavior and do not claim the enhancement was installed.
+- Do not install a substitute source, write into the vault, or treat installation as permission to read the vault or Learning State.
+
 ### Obsidian link-integrity loop
 
 After organizing, creating, renaming, moving, archiving, or deleting pages for use in Obsidian, run this loop before declaring the task complete:
@@ -253,4 +262,4 @@ After organizing, creating, renaming, moving, archiving, or deleting pages for u
 
 ## V3 Module Boundary
 
-This is the canonical Hermes LLM Wiki workflow. Within the K12 V3.0 product architecture, it does not implicitly read `k12-learning` Learning State or `k12-automation` data. A user must explicitly provide or authorize the minimum content to ingest. Obsidian-native dependencies remain optional and require confirmation under `references/Obsidian-Skill-Dependency.md`.
+This is the canonical Hermes LLM Wiki workflow. Within the K12 V3.0 product architecture, it does not implicitly read `k12-learning` Learning State or `k12-automation` data. A user must explicitly provide or authorize the minimum content to ingest. Obsidian-native dependencies remain optional; when required, the official `kepano/obsidian-skills` enhancement may be attempted automatically under `references/Obsidian-Skill-Dependency.md`.

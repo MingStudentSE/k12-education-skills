@@ -145,8 +145,46 @@ for (const file of ['README.md', 'docs/getting-started.md', 'docs/installation-g
   assert(!markdownModuleLink.test(text), `${file} must use copyable module URL text instead of Markdown module links`);
   assert(!text.includes('cp -R skills/k12-learning'), `${file} must not lead ordinary users through manual copy commands`);
 }
+const readme = readFileSync(join(ROOT, 'README.md'), 'utf8');
+for (const marker of [
+  '面向学生、家长和老师的 AI 学习系统',
+  '## 我们相信：差距在学习闭环，不在标签',
+  '分析现状',
+  '查漏补缺',
+  '不断反馈',
+  '## 它的价值，不是“多一个会答题的 AI”',
+  '## 一次真正有价值的学习，会发生什么',
+  '每次学习都留下一个更清楚的下一步',
+  '## 你会得到什么',
+  '## 第一次使用：10 分钟内从真实材料开始',
+  '## 让学习积累下来：llm-wiki',
+  '## 你的资料由你控制',
+  '## 这个系统如何组织',
+]) assert(readme.includes(marker), `README must explain the K12 system before listing modules: ${marker}`);
 const agentGuide = readFileSync(join(ROOT, 'AGENTS.md'), 'utf8');
 assert(agentGuide.includes('docs/ai-install-prompt.md'), 'AGENTS.md must identify the canonical AI installation wording');
 assert(agentGuide.includes('tree/main/skills/k12-learning'), 'AGENTS.md must preserve the direct module link convention');
+
+const systemUserGuide = readFileSync(join(learning, 'references/system-user-guide.md'), 'utf8');
+for (const marker of [
+  '## Wiki 怎么用',
+  '第一次：新建，还是接入已有库',
+  '把课本、文章、PDF 或笔记入库',
+  '把已完成的学习沉淀进去',
+  '查询、复用和体检',
+  '什么时候需要确认',
+]) assert(systemUserGuide.includes(marker), `system user guide missing Wiki user journey: ${marker}`);
+
+const wikiDependency = readFileSync(join(SKILLS, 'llm-wiki/references/Obsidian-Skill-Dependency.md'), 'utf8');
+for (const marker of [
+  '自动尝试安装唯一允许的官方来源 `kepano/obsidian-skills`',
+  'npx skills add https://github.com/kepano/obsidian-skills',
+  '网络、DNS、超时、限流或 GitHub 不可达时',
+  '继续普通 Markdown/Wikilink 工作流',
+]) assert(wikiDependency.includes(marker), `llm-wiki Obsidian dependency contract missing: ${marker}`);
+const wikiTests = JSON.parse(readFileSync(join(SKILLS, 'llm-wiki/test-prompts.json'), 'utf8'));
+const autoObsidianTest = wikiTests.find(test => test.id === 'obsidian-install-auto-fallback');
+assert(autoObsidianTest, 'llm-wiki must regress automatic Obsidian installation fallback');
+assert(autoObsidianTest.must_include?.includes('kepano/obsidian-skills') && autoObsidianTest.must_include?.includes('网络失败'), 'Obsidian install regression must cover official source and network fallback');
 
 console.log(`module contract: 4 Product Modules, 61 playbooks, 58 capabilities, 63 source mappings, ${totalTests} behavior cases`);
