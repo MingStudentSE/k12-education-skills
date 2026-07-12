@@ -68,7 +68,7 @@ if (options.contractOnly) {
   process.exit(0);
 }
 
-async function fetchWithRetry(url, timeoutMs, attempts = 3) {
+async function fetchWithRetry(url, timeoutMs, attempts = 4) {
   let lastError;
   for (let attempt = 1; attempt <= attempts; attempt += 1) {
     try {
@@ -79,7 +79,7 @@ async function fetchWithRetry(url, timeoutMs, attempts = 3) {
       lastError = error;
       if (attempt < attempts) {
         console.log(`  [RETRY] ${url} attempt ${attempt}/${attempts} failed (${error.message}); backing off`);
-        await new Promise(resolve => setTimeout(resolve, attempt * 15_000));
+        await new Promise(resolve => setTimeout(resolve, attempt * 45_000));
       }
     }
   }
