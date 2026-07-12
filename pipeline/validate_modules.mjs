@@ -134,10 +134,15 @@ for (const marker of [
   'https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-skill-studio',
   '由 AI 自行处理',
 ]) assert(installPrompt.includes(marker), `AI install prompt missing contract marker: ${marker}`);
-for (const file of ['README.md', 'docs/getting-started.md', 'docs/installation-guide.md', 'docs/user-quickstart-sop.md']) {
+assert(installPrompt.includes('k12-learning：https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-learning'), 'AI install prompt must expose k12-learning as copyable URL text');
+assert(installPrompt.includes('llm-wiki：https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/llm-wiki'), 'AI install prompt must expose llm-wiki as copyable URL text');
+const markdownModuleLink = /\[(?:k12-learning|llm-wiki|k12-automation|k12-skill-studio)\]\(https:\/\/github\.com\/MingStudentSE\/k12-education-skills\/tree\/main\/skills\//;
+assert(!markdownModuleLink.test(installPrompt), 'AI install prompt must not hide module URLs behind Markdown links');
+for (const file of ['README.md', 'docs/getting-started.md', 'docs/installation-guide.md', 'docs/user-quickstart-sop.md', 'skills/k12-learning/references/system-user-guide.md']) {
   const text = readFileSync(join(ROOT, file), 'utf8');
   assert(text.includes('https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-learning'), `${file} must link the default learning module for users without a checkout`);
   assert(text.includes('https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/llm-wiki'), `${file} must link the default Wiki module for users without a checkout`);
+  assert(!markdownModuleLink.test(text), `${file} must use copyable module URL text instead of Markdown module links`);
   assert(!text.includes('cp -R skills/k12-learning'), `${file} must not lead ordinary users through manual copy commands`);
 }
 const agentGuide = readFileSync(join(ROOT, 'AGENTS.md'), 'utf8');

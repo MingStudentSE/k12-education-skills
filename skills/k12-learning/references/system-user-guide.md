@@ -34,9 +34,13 @@
 
 ### 1. 先让 AI 安装日常模块
 
-直接发送：
+直接发送下面整段：
 
-> 请帮我安装 [k12-learning](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-learning) 和 [llm-wiki](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/llm-wiki)。
+```text
+请帮我安装以下两个模块：
+k12-learning：https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-learning
+llm-wiki：https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/llm-wiki
+```
 
 让 AI 根据当前宿主处理安装。安装后按宿主提示刷新或重启。
 
@@ -280,7 +284,9 @@ Wiki 用来长期保存已确认的知识、方法和学习产物。它不应默
 
 ### 安装按需模块
 
-> 请帮我安装 [k12-automation](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-automation)。
+```text
+请帮我安装 k12-automation：https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-automation
+```
 
 ### 创建真实提醒
 

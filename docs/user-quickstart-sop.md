@@ -4,9 +4,13 @@
 
 ## A. 安装
 
-告诉 AI：
+把下面整段发给 AI：
 
-请帮我安装 [k12-learning](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-learning) 和 [llm-wiki](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/llm-wiki)。
+```text
+请帮我安装以下两个模块：
+k12-learning：https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-learning
+llm-wiki：https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/llm-wiki
+```
 
 安装路径和具体操作由 AI 自行处理。
 
@@ -61,7 +65,7 @@
 
 需要时告诉 AI：
 
-请帮我安装 [k12-automation](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-automation)。
+请帮我安装 k12-automation：https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-automation。
 
 需要真正启用夜跑时再说：
 

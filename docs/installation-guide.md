@@ -13,7 +13,11 @@
 
 ## 普通用户安装
 
-请帮我安装 [k12-learning](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-learning) 和 [llm-wiki](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/llm-wiki)。
+```text
+请帮我安装以下两个模块：
+k12-learning：https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-learning
+llm-wiki：https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/llm-wiki
+```
 
 AI 自行处理安装路径和具体操作。需要其他模块时使用 [AI 安装提示词](ai-install-prompt.md)。安装完成后，拿出一份近期课本、作业、试卷、错题或作文材料，要求系统先做 3–5 分钟快速测评、生成会话内初版学习 DNA，再立即进入一个真实学习任务；不要做全面测评，跨会话保存前另行确认。
 

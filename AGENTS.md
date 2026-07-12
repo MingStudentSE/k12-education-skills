@@ -35,14 +35,18 @@ bash pipeline/review.sh all
 
 ## 面向用户的 AI 安装话术
 
-用户通常尚未克隆仓库，因此用户文档中的安装话术必须直接给出 GitHub 模块链接，而不是要求用户输入本地路径或执行 `cp`。默认话术固定为：
+用户通常尚未克隆仓库，因此用户文档中的安装话术必须直接给出 GitHub 模块的**裸 URL 文本**，而不是要求用户输入本地路径或执行 `cp`。不要把模块名写成 Markdown 超链接；让用户能整段复制给 AI。默认话术固定为：
 
-> 请帮我安装 [k12-learning](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-learning) 和 [llm-wiki](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/llm-wiki)。
+```text
+请帮我安装以下两个模块：
+k12-learning：https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-learning
+llm-wiki：https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/llm-wiki
+```
 
 按需模块分别使用：
 
-- [k12-automation](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-automation)
-- [k12-skill-studio](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-skill-studio)
+- `k12-automation：https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-automation`
+- `k12-skill-studio：https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-skill-studio`
 
 不要在面向普通用户的首页、快速开始、安装指南或 SOP 中展开宿主目录、克隆、复制命令和内部 playbook；让 AI 根据链接自行处理实现。安装话术单一来源是 `docs/ai-install-prompt.md`；安装后的能力与调用话术单一来源是 `skills/k12-learning/references/system-user-guide.md`。
 
