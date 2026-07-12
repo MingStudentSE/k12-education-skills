@@ -30,7 +30,13 @@ jobs:
       - name: Install PDF text and OCR extractors
         run: |
           sudo apt-get update
-          sudo apt-get install -y poppler-utils tesseract-ocr tesseract-ocr-chi-sim
+          sudo apt-get install -y poppler-utils tesseract-ocr
+          # Ubuntu packages ship the low-accuracy tessdata_fast models, which
+          # misread scanned MOE pages; use the high-accuracy tessdata_best ones.
+          mkdir -p "$HOME/tessdata"
+          curl -sSL -o "$HOME/tessdata/chi_sim.traineddata" https://github.com/tesseract-ocr/tessdata_best/raw/main/chi_sim.traineddata
+          curl -sSL -o "$HOME/tessdata/eng.traineddata" https://github.com/tesseract-ocr/tessdata_best/raw/main/eng.traineddata
+          echo "TESSDATA_PREFIX=$HOME/tessdata" >> "$GITHUB_ENV"
       - name: Verify official curriculum sources (live download)
         run: |
           if [ -n "${{ github.event.inputs.subject }}" ]; then
