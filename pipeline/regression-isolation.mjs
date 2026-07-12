@@ -74,24 +74,40 @@ export function spawnWithSourceReadDenied(command, args, {
       stderr: '',
     };
   }
-  const sandbox = process.platform === 'darwin' && existsSync('/usr/bin/sandbox-exec')
-    ? '/usr/bin/sandbox-exec'
-    : null;
-  if (!sandbox) {
-    return {
-      error: new Error('source-read isolation unavailable: live regressions require macOS /usr/bin/sandbox-exec or an implemented equivalent'),
-      status: null,
-      signal: null,
-      pid: 0,
-      stdout: '',
-      stderr: '',
-    };
+  if (process.platform === 'darwin' && existsSync('/usr/bin/sandbox-exec')) {
+    const profile = `(version 1)\n(allow default)\n(deny file-read* (subpath "${seatbeltLiteral(sourceRoot)}"))`;
+    return spawnSync('/usr/bin/sandbox-exec', ['-p', profile, executable, ...args], {
+      cwd: workspaceRoot,
+      ...spawnOptions,
+    });
   }
-  const profile = `(version 1)\n(allow default)\n(deny file-read* (subpath "${seatbeltLiteral(sourceRoot)}"))`;
-  return spawnSync(sandbox, ['-p', profile, executable, ...args], {
-    cwd: workspaceRoot,
-    ...spawnOptions,
-  });
+  if (process.platform === 'linux') {
+    const bwrap = resolveExecutable(process.env.BWRAP_BIN || 'bwrap');
+    if (bwrap) {
+      // Mask the source repo with an unreadable (mode 000) tmpfs inside a mount
+      // namespace: any path traversal under sourceRoot fails with EACCES, matching
+      // the macOS seatbelt deny semantics.
+      return spawnSync(bwrap, [
+        '--die-with-parent',
+        '--dev-bind', '/', '/',
+        '--perms', '0000',
+        '--tmpfs', sourceRoot,
+        '--',
+        executable, ...args,
+      ], {
+        cwd: workspaceRoot,
+        ...spawnOptions,
+      });
+    }
+  }
+  return {
+    error: new Error('source-read isolation unavailable: live regressions require macOS /usr/bin/sandbox-exec or Linux bubblewrap (bwrap)'),
+    status: null,
+    signal: null,
+    pid: 0,
+    stdout: '',
+    stderr: '',
+  };
 }
 
 export function invocationLifecycle(result) {

@@ -6,7 +6,7 @@
 
 `pipeline/run_module_behavior_regression.mjs` 对每个 module batch 使用两个彼此独立的 Codex ephemeral context：
 
-1. runner 把当前 module 复制到不含 `test-prompts.json` 的临时 SUT 树；generator 只读取该树中的 `SKILL.md`、必要本地资源和用户请求。macOS 外层 `sandbox-exec` 同时拒绝读取原仓库，因而不能取得 `expected`、`must_include` 或 `must_not_include`；缺少等价读取隔离时 live runner 失败关闭，不降级成伪黑盒。
+1. runner 把当前 module 复制到不含 `test-prompts.json` 的临时 SUT 树；generator 只读取该树中的 `SKILL.md`、必要本地资源和用户请求。外层沙箱同时拒绝读取原仓库（macOS 用 `sandbox-exec` seatbelt deny，Linux 用 bubblewrap 在源仓库路径挂不可读 tmpfs），因而不能取得 `expected`、`must_include` 或 `must_not_include`；两者都不可用时 live runner 失败关闭，不降级成伪黑盒。
 2. evaluator 只拿冻结回答与验收条件，逐条返回 pass/fail，并引用回答中的精确文本证据；不得改写回答。
 
 `pipeline/module-behavior-runner-smoke.mjs` 使用临时 fake Codex 主动尝试读取临时树和原仓库 fixture，确认前者不存在、后者返回 `EACCES/EPERM`；同时确认 generator stdin 不含期望、evaluator 才能看到冻结回答与条件。它只证明 runner 的阶段隔离和判定管线可执行，不是 live module 行为结果。

@@ -20,5 +20,12 @@ jobs:
           python-version: '3.12'
       - name: Install schema validator dependencies
         run: python3 -m pip install -r pipeline/requirements.txt
+      - name: Install bubblewrap for source-read isolation smokes
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y bubblewrap
+          # Ubuntu 24.04 restricts unprivileged user namespaces by default;
+          # allow them so bwrap can create its mount namespace.
+          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0 || true
       - name: Run gate suite
         run: bash pipeline/review.sh
