@@ -18,7 +18,7 @@
 - `skills/history/` 五件套 — **文科适配范例**（时空定位铁律、史料状态机、H1-H5错因、§9.4协作协议），刚通过课标网络核实与 darwin 优化（平均87.3），地理必须对齐其质量
 - `docs/learning-science-principles.md` — 8 项最低要求
 - `skills/general/correction-notebook/SKILL.md` §9.4 — 历史协作协议范例（地理协作协议 §9.5 待写入，结构与 §9.4 同构）
-- `skills/general/skill-coordinator/schemas/handover-protocol.schema.json` — 交接 schema（地理待扩展 `geographyBasicDimension`/`subject:"geography"`）
+- `skills/k12-learning/references/playbooks/general/correction-notebook/schemas/handover-protocol.schema.json` — 旧记录兼容 schema（V3 新会话不创建内部 handover）
 
 ---
 

@@ -1,7 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "SkillHandoverProtocol",
-  "description": "K12 教育 AI 辅导系统多智能体协作与数据流转强Schema协议 (v2.0)",
+  "title": "Legacy SkillHandoverProtocol",
+  "description": "仅用于读取 V3 迁移前的 v2.0 历史记录；新会话不得创建此对象，方法组合由 k12-learning 在当前会话直接完成。",
+  "$comment": "Deprecated compatibility schema. Do not use for new writes or cross-module transfer.",
   "type": "object",
   "properties": {
     "sessionId": {

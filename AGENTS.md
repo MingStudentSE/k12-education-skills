@@ -4,11 +4,12 @@
 
 本仓库维护 K12 教育 AI 的四个 Product Module 及其配套文档。
 
-- `skills/k12-learning/` 是学生与教师的统一学习入口，学科能力、学习 DNA、错题、侦探周和解题方法均作为内部 playbook 按需组合。
+- `skills/k12-learning/` 是学生日常学习的统一入口，学科能力、学习 DNA、错题、侦探周和解题方法均作为内部 playbook 按需组合。
 - `skills/llm-wiki/` 负责四层知识库的搭建、适配、编译与维护。
 - `skills/k12-automation/` 负责提醒、夜间错题产线、OCR、看板和授权运行时。
 - `skills/k12-skill-studio/` 仅面向维护者，负责创建 playbook、评测和系统质量治理。
 - `skills/*/references/playbooks/` 存放内部 playbook。它们不是可安装 Skill，不得新增嵌套 `SKILL.md`。
+- `skills/k12-learning/references/system-user-guide.md` 是能力介绍、首次使用与日常调用话术的单一来源；首页和快速开始只链接，不复制另一套能力菜单。
 - `docs/` 存放架构、安装、Obsidian 接入和维护说明。
 - `references/` 存放项目级理论笔记和原始资料。理论资料遵循“一个理论一个笔记”，例如 `references/主动回忆.md`。
 
@@ -20,6 +21,7 @@
 find skills -name SKILL.md | wc -l
 find skills -name playbook.md | wc -l
 node pipeline/validate_modules.mjs
+node pipeline/run_v3_route_regression.mjs --contract-only
 python3 -m pip install -r pipeline/requirements.txt
 python3 pipeline/validate_schemas.py
 bash pipeline/review.sh all
@@ -42,7 +44,7 @@ bash pipeline/review.sh all
 - [k12-automation](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-automation)
 - [k12-skill-studio](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-skill-studio)
 
-不要在面向普通用户的首页、快速开始、安装指南或 SOP 中展开宿主目录、克隆、复制命令和内部 playbook；让 AI 根据链接自行处理实现。话术单一来源是 `docs/ai-install-prompt.md`。
+不要在面向普通用户的首页、快速开始、安装指南或 SOP 中展开宿主目录、克隆、复制命令和内部 playbook；让 AI 根据链接自行处理实现。安装话术单一来源是 `docs/ai-install-prompt.md`；安装后的能力与调用话术单一来源是 `skills/k12-learning/references/system-user-guide.md`。
 
 ## 测试指南
 

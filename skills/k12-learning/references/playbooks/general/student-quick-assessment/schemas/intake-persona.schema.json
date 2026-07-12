@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://skills.openclaw.dev/schemas/intake-persona.schema.json",
-  "title": "IntakePersona",
-  "description": "学生快速评测的轻量种子画像。仅用于会话内定位或在明确授权后交给 learning-dna；禁止写入真实姓名、学校全称、身份证件、联系方式、住址、完整成绩单原件等高敏信息。",
+  "title": "InitialLearningDNA",
+  "description": "学生首次使用快速测评形成的初版学习 DNA。默认仅用于当前会话；明确授权后才可作为最小种子进入跨会话 learning-dna。只填写真实材料支持的字段，禁止为填满 Schema 延长测评，也禁止写入真实姓名、学校全称、身份证件、联系方式、住址、完整成绩单原件等高敏信息。",
   "type": "object",
   "additionalProperties": false,
   "properties": {

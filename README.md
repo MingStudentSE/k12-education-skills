@@ -13,7 +13,9 @@
 | [`k12-automation`](skills/k12-automation/) | 需要真实执行的人 | 提醒、OCR、夜间错题分析、看板与本地控制台 |
 | [`k12-skill-studio`](skills/k12-skill-studio/) | 仓库维护者 | 创建/审查 playbook、质量评分、行为回归与架构治理 |
 
-这不是删除通用能力。学习 DNA、错题侦探、理科四步法、费曼学习、康奈尔笔记、时间专注、周复盘和九大学科能力都保留在 `k12-learning/references/playbooks/`，只是从 59 个需要记忆的入口变成模块内部能力。
+这不是删除通用能力。学习 DNA、错题分析、理科四步法、费曼学习、康奈尔笔记、时间专注、周复盘和九大学科能力都保留在 `k12-learning/references/playbooks/`。原来的学习入口和总路由被收进 58 个内部能力，用户不再记名称。
+
+不知道第一次或平时该怎么说？查看 [K12 学习系统用户指南](skills/k12-learning/references/system-user-guide.md)，按讲题、概念、错题、写作、实验、计划、专注、笔记、复盘和兴趣等目标复制话术。
 
 ## 3 分钟开始
 
@@ -23,7 +25,13 @@
 
 需要提醒或夜间产线时说“请帮我安装 [k12-automation](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-automation)”。维护仓库时才安装 [k12-skill-studio](https://github.com/MingStudentSE/k12-education-skills/tree/main/skills/k12-skill-studio)。安装路径和具体操作由 AI 处理。更多话术见 [AI 安装提示词](docs/ai-install-prompt.md)。
 
-重启或刷新宿主后直接说：
+重启或刷新宿主后，第一次先拿出一份近期课本、作业、试卷、错题或作文材料，说：
+
+```text
+我是第一次使用。请基于这份材料做 3–5 分钟快速测评，不做全面测评；建立会话内初版学习 DNA，然后马上带我完成一个真实学习动作。跨会话保存前再问我。
+```
+
+以后直接说：
 
 ```text
 这道函数题我在第二步卡住了，先别直接给答案，帮我找到卡点。
@@ -39,7 +47,7 @@
 
 无需点名“数学教练”“学习 DNA”或“理科四步法”。如需看路由理由，可以问“刚才用了哪些内部方法，为什么”。
 
-完整操作见 [用户快速上手 SOP](docs/user-quickstart-sop.md)，模块边界见 [架构说明](docs/architecture.md)。
+完整话术见 [学习系统用户指南](skills/k12-learning/references/system-user-guide.md)，安装验证见 [用户快速上手 SOP](docs/user-quickstart-sop.md)，模块边界见 [架构说明](docs/architecture.md)。
 
 ## 自动化运行
 
@@ -74,4 +82,4 @@ python3 pipeline/validate_schemas.py
 bash pipeline/review.sh all
 ```
 
-当前基线：4 个 Product Module、61 个内部 playbook、58 个学习能力、63 条迁移映射、213 个行为用例。贡献前请读 [`CONTEXT.md`](CONTEXT.md)、[`AGENTS.md`](AGENTS.md) 和 [`SECURITY_BASELINE.md`](SECURITY_BASELINE.md)。
+当前基线：4 个 Product Module、61 个内部 playbook、58 个学习能力、63 条迁移映射、221 个行为用例。贡献前请读 [`CONTEXT.md`](CONTEXT.md)、[`AGENTS.md`](AGENTS.md) 和 [`SECURITY_BASELINE.md`](SECURITY_BASELINE.md)。

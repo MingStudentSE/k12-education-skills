@@ -522,9 +522,9 @@ Step 4：执行（出3道递进题，地理版强调读图和机制）
   本SKILL动作：启动"数据替代情绪+具体任务化"四步流程（§七）
 ```
 
-### 8.3 强 Schema 交接格式
+### 8.3 旧记录兼容格式
 
-交接必须符合 `skill-coordinator/schemas/handover-protocol.schema.json`，并与 `correction-notebook` §9.5 对齐。关键字段如下：
+V3 新会话由 `k12-learning` 直接组合方法，不创建内部交接。以下 JSON 只用于读取迁移前已存在的记录；兼容校验以 `correction-notebook/schemas/handover-protocol.schema.json` 为准，不得据此新建 handover。
 
 ```json
 {

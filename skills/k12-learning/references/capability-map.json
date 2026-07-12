@@ -4,29 +4,31 @@
   "capabilityCount": 58,
   "capabilities": [
     {
-      "name": "skill-coordinator",
+      "name": "system-guide",
       "subject": "general",
-      "mode": "ORCHESTRATE",
+      "mode": "DIRECT",
       "intents": [
-        "多 Skill 编排",
-        "全景月报",
-        "学习系统健康检查",
-        "学习链补链"
+        "系统介绍",
+        "你能做什么",
+        "怎么提问",
+        "调用示例"
       ],
-      "example": "把错题、费曼结果和计划执行串起来，判断先补哪一环。",
-      "playbook": "references/playbooks/general/skill-coordinator/playbook.md"
+      "example": "请介绍你能帮我做什么，以及我平时应该怎么说。",
+      "playbook": "references/playbooks/general/system-guide/playbook.md"
     },
     {
       "name": "student-quick-assessment",
       "subject": "general",
       "mode": "INTAKE",
       "intents": [
+        "第一次使用",
+        "首次建立学习 DNA",
         "首次定位",
         "不知道从哪开始",
-        "选科信息整理",
-        "建档前定位"
+        "材料快速测评",
+        "初版个人画像"
       ],
-      "example": "我是高一，不知道该从哪开始学，也没想好选科。",
+      "example": "我是第一次用，这是我最近的作业，请快速测评并建立初版学习 DNA，然后马上带我做一道题。",
       "playbook": "references/playbooks/general/student-quick-assessment/playbook.md"
     },
     {

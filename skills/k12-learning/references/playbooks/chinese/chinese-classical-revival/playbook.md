@@ -6,7 +6,7 @@ author: K12 教育 AI 辅导系统
 category: 语文专项
 tags: [文言文, 古诗词, 古人扮演, 背诵, 诗词鉴赏, 语文, 经典]
 description: >
-  让古人开口、让古诗词活起来的经典语文阅读专项SKILL。
+  让古人开口、让古诗词活起来的经典语文阅读专项方法。
   当学生需要理解古诗文、文言文翻译、作者心情、诗词背景、背诵游戏、
   写作引用，或请求“扮演苏轼/李白/杜甫”等古人时使用。
   核心方法是古人第一人称角色扮演 + 古诗词三级跳（背会→真懂→能用）
@@ -15,12 +15,11 @@ compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/classical-author-profiles.md
   - references/classical-revival-demos.md
-depends_on: learning-dna
 ---
 
-> **内部 playbook**：本文件由旧 Skill 迁移，不是平台可发现 interface。文中的“调用/转交 Skill”统一解释为当前 Product Module 内部组合；Product Module 主文件、授权门与安全规则优先。
+> **内部 playbook**：本文件是当前 Product Module 按需加载的方法说明；Product Module 主文件、授权门与安全规则优先。
 
-# 🏛️ 文言文复活计划 SKILL
+# 🏛️ 文言文复活计划方法
 
 > **一句话定位：** 不是只翻译古文，而是让学生听见古人在那个时代、那个处境里的真实心声。
 
@@ -33,7 +32,7 @@ depends_on: learning-dna
 2. 收集最小输入：篇目或原文、学生卡点、年级/考试要求；缺信息时只追问必要项。
 3. 选模块执行：文言文复活、三级跳、背诵游戏或场景匹配。
 4. 输出可操作结果：逐句理解、情感线、关键词解释、答题/背诵/引用下一步。
-5. 复盘沉淀：只有用户明确同意时，才写入学习记录或跨 SKILL 共享摘要。
+5. 复盘沉淀：只有用户明确同意时，才写入学习记录或在内部组合中共享摘要。
 
 ## 2. 模块A：文言文复活（古人角色扮演）
 
@@ -78,7 +77,7 @@ depends_on: learning-dna
 - 答对：简短肯定 + 进入下一题。
 - 小错：指出错字、正确字、混淆原因。
 - 答错：给原文、定位差异，并把同一知识点稍后重出一次。
-- 结束：只在用户同意时记录正确率或安排提醒；不能擅自创建长期提醒。
+- 结束：只在用户同意时记录正确率或向 `k12-automation` 提交提醒请求；不能擅自向 `k12-automation` 提交长期提醒请求。
 
 限时挑战示范见 `references/classical-revival-demos.md`。
 

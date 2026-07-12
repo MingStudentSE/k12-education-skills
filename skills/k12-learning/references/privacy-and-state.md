@@ -39,5 +39,7 @@
 ## Adapter 数据流
 
 - 到 `llm-wiki`：只传当前产物或用户指定的最小摘要；不传完整 Learning State。
-- 到 `k12-automation`：只传任务内容、时间、学生标识和已记录的授权状态；不传无关历史。
+- 到 `k12-automation` 的提醒请求：只传任务内容、时间、学生标识和已记录的授权状态；不传无关历史。
+- 到夜间分析 adapter：按 `schemas/night-analysis-request-v1.schema.json` 传当前错题和最多 3 份经授权的近期错题摘要；可选学习摘要必须由 Learning 明确产出，Automation 不得自行读取 `profile.md` 正文。
+- Automation 只拥有调度授权与运行状态，不拥有 Learning profile；它只能读取 `references/adapters/night-analysis-v1.md` 这一稳定契约，不遍历内部 playbook 目录。
 - Adapter 不可反向要求全量读取画像来决定是否执行。

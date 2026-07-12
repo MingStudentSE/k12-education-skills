@@ -15,40 +15,52 @@
 - 服务只在本机使用，不直接暴露公网；
 - 真实模型需要 OpenAI 兼容 endpoint、key 和 model。
 
-## 2. 建立数据根
+## 2. 建立数据根与运行对象
 
 ```bash
 mkdir -p ~/k12-data/students
-cp -R ~/.codex/skills/k12-automation/assets/student-template \
-  ~/k12-data/students/stu-001
+cd ~/k12-data
+K12_ROOT="$HOME/k12-data" K12_MOCK_LLM=1 \
+node ~/.codex/skills/k12-automation/scripts/nightline/server.mjs
 ```
 
-将 `students/stu-001/profile.md` 中的 `id` 改为 `stu-001`。模板默认 `authorized: false`，这是正确状态。
+浏览器打开 `http://127.0.0.1:18350`，用“注册运行对象”建立低敏学生 ID 与授权。该操作只创建 `students/<id>/automation/state.json` 和 inbox/archive/outbox，不创建姓名、年级或任意学习画像。
+
+Learning State 仍由 `k12-learning` 拥有。Automation v1 不读取 profile 的姓名、年级或正文；旧 `students/<id>/profile.md` 仅为授权 frontmatter 提供只读兼容。首次更新或撤回后，新 `automation/state.json` 优先，旧字段不能恢复已撤授权。未来若要传递学习摘要，必须由 Learning 显式产出版本化 adapter input。
 
 ## 3. 授权
 
-本地长期档案需要同时填写：
+本地运行授权写入 `automation/state.json`，建议通过控制台完成。核心记录为：
 
-```yaml
-authorized: true
-authorized_by: 监护人电子确认
-authorization_subject: guardian
-authorization_date: 2026-07-11
-authorization_method: digital
+```json
+{
+  "local": {
+    "authorized": true,
+    "authorized_by": "监护人，2026-07-11，电子确认（仅本地处理）",
+    "subject": "guardian",
+    "date": "2026-07-11",
+    "method": "digital",
+    "action": "create"
+  }
+}
 ```
 
 也可通过本地控制台完成。主体仅可为 `student|guardian`，方式仅可为 `written|verbal|digital`，日期不能在未来。
 
-真实模型另需独立授权：
+真实模型另需独立授权，同样记录在 `automation/state.json`：
 
-```yaml
-external_processing_authorized: true
-external_processing_provider: https://api.example.com
-external_processing_scope: profile-summary,current-mistake,recent-3-archives
-external_processing_authorization_date: 2026-07-11
+```json
+{
+  "external_processing": {
+    "authorized": true,
+    "provider": "https://api.example.com",
+    "scope": "current-mistake,recent-3-archives",
+    "date": "2026-07-11"
+  }
+}
 ```
 
-provider 必须与 `apibase` 的 origin 一致；scope 必须原样填写。Mock 不外传。OCR 每次上传仍需单独确认，不能由以上授权自动覆盖。
+provider 必须与 `apibase` 的 origin 一致；scope 必须原样填写。旧的 `profile-summary,...` scope 不再接受，升级后需重新确认外部授权。Mock 不外传。OCR 每次上传仍需单独确认，不能由以上授权自动覆盖。
 
 ## 4. 配置
 
@@ -64,11 +76,11 @@ cp ~/.codex/skills/k12-automation/scripts/nightline/config.sample.json \
   "apibase": "https://api.example.com/v1",
   "key": "本机密钥",
   "model": "支持的模型名",
-  "learningDir": "/Users/you/.codex/skills/k12-learning"
+  "learningAdapter": "/Users/you/.codex/skills/k12-learning/references/adapters/night-analysis-v1.md"
 }
 ```
 
-不要提交此文件。也可以用 `K12_LEARNING_DIR` 覆盖 `learningDir`。
+不要提交此文件。通常无需填写 `learningAdapter`，相邻安装会自动找到固定的 v1 契约；非相邻安装可用 `K12_LEARNING_ADAPTER` 覆盖。它必须指向受支持的版本化契约文件，不能指向 playbook 目录。
 
 ## 5. 先做 Mock 验证
 
@@ -77,7 +89,7 @@ cp ~/.codex/skills/k12-automation/scripts/nightline/config.sample.json \
 ```bash
 cd ~/k12-data
 K12_ROOT="$HOME/k12-data" \
-K12_LEARNING_DIR="$HOME/.codex/skills/k12-learning" \
+K12_LEARNING_ADAPTER="$HOME/.codex/skills/k12-learning/references/adapters/night-analysis-v1.md" \
 K12_MOCK_LLM=1 \
 node ~/.codex/skills/k12-automation/scripts/nightline/night-run.mjs --student stu-001
 ```
@@ -102,7 +114,7 @@ node ~/.codex/skills/k12-automation/scripts/nightline/build-dashboard.mjs
 ```bash
 cd ~/k12-data
 K12_ROOT="$HOME/k12-data" \
-K12_LEARNING_DIR="$HOME/.codex/skills/k12-learning" \
+K12_LEARNING_ADAPTER="$HOME/.codex/skills/k12-learning/references/adapters/night-analysis-v1.md" \
 node ~/.codex/skills/k12-automation/scripts/nightline/server.mjs
 ```
 
@@ -113,15 +125,15 @@ node ~/.codex/skills/k12-automation/scripts/nightline/server.mjs
 定时任务使用绝对路径，并把数据根与时区写清楚：
 
 ```cron
-30 1 * * * cd /Users/you/k12-data && K12_ROOT=/Users/you/k12-data K12_LEARNING_DIR=/Users/you/.codex/skills/k12-learning K12_TIME_ZONE=Asia/Shanghai node /Users/you/.codex/skills/k12-automation/scripts/nightline/night-run.mjs >> /Users/you/k12-data/logs/cron.log 2>&1
+30 1 * * * cd /Users/you/k12-data && K12_ROOT=/Users/you/k12-data K12_LEARNING_ADAPTER=/Users/you/.codex/skills/k12-learning/references/adapters/night-analysis-v1.md K12_TIME_ZONE=Asia/Shanghai node /Users/you/.codex/skills/k12-automation/scripts/nightline/night-run.mjs >> /Users/you/k12-data/logs/cron.log 2>&1
 ```
 
 先手动通过 Mock 和真实单学生运行，再启用 cron。
 
 ## 9. 撤回与清理
 
-- 撤回外部处理：将 `external_processing_authorized` 改为 `false`；本地档案可保留。
-- 撤回本地建档：将 `authorized` 改为 `false`；后续分析必须停止。
+- 撤回外部处理：在控制台选择“仅撤回外部处理”；本地运行授权可保留。
+- 撤回本地处理：在控制台选择“撤回本地及外部处理”；后续读取、写入与分析必须停止。
 - 删除、导出或保留 profile、archive、outbox、dashboard 和日志是独立决定，不因撤回自动删除。
 - API key、真实学生数据、日志、看板和授权记录不得进入版本库。
 

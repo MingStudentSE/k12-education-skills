@@ -12,12 +12,11 @@ compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/biology-process-chain-guide.md
   - references/biology-life-process-bank.md
-depends_on: learning-dna, biology-structure-function-coach, biology-error-dna
 ---
 
-> **内部 playbook**：本文件由旧 Skill 迁移，不是平台可发现 interface。文中的“调用/转交 Skill”统一解释为当前 Product Module 内部组合；Product Module 主文件、授权门与安全规则优先。
+> **内部 playbook**：本文件是当前 Product Module 按需加载的方法说明；Product Module 主文件、授权门与安全规则优先。
 
-# 🔁 生命过程机制解释器 SKILL
+# 🔁 生命过程机制解释器方法
 
 > **一句话定位：** 生命过程不是结论清单，而是从起点到终点的物质、能量、信息和调节链。
 
@@ -29,17 +28,17 @@ depends_on: learning-dna, biology-structure-function-coach, biology-error-dna
 2. **收集最小输入**：只追问过程名称、题干条件、图表、学生已有解释、起点终点和卡点。
 3. **执行主流程**：按“定位过程起点终点 → 拆阶段/物质能量信息流 → 建机制链 → 改条件预测结果”推进。
 4. **产出结果**：给出过程链、关键结构、输入输出、调节点、条件变化预测和迁移题。
-5. **复盘与写入**：反复机制断链经同意交接 `biology-error-dna`；未授权时不写入长期档案。
+5. **复盘与写入**：反复机制断链经同意后组合 `biology-error-dna`；未授权时不写入长期档案。
 
 ---
 
 ## 通用边界与降级策略
 
 - **信息不足**：先请求过程名、图表或学生解释；不编造实验数据或教材范围。
-- **任务不匹配**：结构功能入口不清转 `biology-structure-function-coach`；概念关系图转 `biology-concept-map-builder`；实验图表转 `biology-experiment-inquiry`。
+- **任务不匹配**：结构功能入口不清切换到 `biology-structure-function-coach`；概念关系图切换到 `biology-concept-map-builder`；实验图表切换到 `biology-experiment-inquiry`。
 - **学生只要答案**：可给简明机制，但先提示要真正会迁移必须能改条件预测。
 - **教练默认**：先让学生说起点、终点和中间步骤，再补链条。
-- **长期记录**：未经明确同意，不写入档案、不提醒、不跨 SKILL 共享。
+- **长期记录**：未经明确同意，不写入档案、不提醒、不在内部组合中共享。
 - **生命科学边界**：不做医疗、营养治疗、疾病诊断建议。
 
 ---
@@ -64,7 +63,7 @@ depends_on: learning-dna, biology-structure-function-coach, biology-error-dna
 结构   物质流   能量/信息/调节
 ```
 
-任何生物问题先定位“结构层级 → 功能过程 → 调节关系”。本 SKILL 负责第二步和第三步：把功能过程与调节关系连成机制链。
+任何生物问题先定位“结构层级 → 功能过程 → 调节关系”。本方法负责第二步和第三步：把功能过程与调节关系连成机制链。
 
 ---
 
@@ -121,13 +120,13 @@ depends_on: learning-dna, biology-structure-function-coach, biology-error-dna
 
 ---
 
-## 五、Cross-skill boundaries（跨 Skill 边界）
+## 五、Internal composition boundaries（内部组合边界）
 
 | 任务 | 处理方式 |
 |------|----------|
-| 过程依赖结构功能不清 | 联动 `biology-structure-function-coach` |
-| 需要整理多个概念关系 | 联动 `biology-concept-map-builder` |
-| 过程来自实验数据、变量或图表 | 转 `biology-experiment-inquiry` |
-| 机制链反复断裂 | 经同意交接 `biology-error-dna` |
+| 过程依赖结构功能不清 | 组合 `biology-structure-function-coach` |
+| 需要整理多个概念关系 | 组合 `biology-concept-map-builder` |
+| 过程来自实验数据、变量或图表 | 切换到 `biology-experiment-inquiry` |
+| 机制链反复断裂 | 经同意后组合 `biology-error-dna` |
 
-交接摘要只包含过程名、断链位置、条件变化、学生原解释和复测建议。
+内部组合摘要只包含过程名、断链位置、条件变化、学生原解释和复测建议。

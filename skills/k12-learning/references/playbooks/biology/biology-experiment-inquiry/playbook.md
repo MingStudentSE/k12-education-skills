@@ -12,12 +12,11 @@ compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/biology-experiment-design-guide.md
   - references/biology-data-analysis-guide.md
-depends_on: learning-dna, biology-process-explainer, biology-error-dna
 ---
 
-> **内部 playbook**：本文件由旧 Skill 迁移，不是平台可发现 interface。文中的“调用/转交 Skill”统一解释为当前 Product Module 内部组合；Product Module 主文件、授权门与安全规则优先。
+> **内部 playbook**：本文件是当前 Product Module 按需加载的方法说明；Product Module 主文件、授权门与安全规则优先。
 
-# 🔬 生物实验探究教练 SKILL
+# 🔬 生物实验探究教练方法
 
 > **一句话定位：** 生物实验先看探究问题和变量，再看对照、重复、数据和结论范围。
 
@@ -29,17 +28,17 @@ depends_on: learning-dna, biology-process-explainer, biology-error-dna
 2. **收集最小输入**：只追问探究问题、材料方法、变量、数据表/图、学生结论、学段和卡点。
 3. **执行主流程**：按“明确探究问题 → 设计变量/对照/重复 → 读数据图表 → 得结论并评估误差”推进。
 4. **产出结果**：给出变量表、对照设计、数据解读、结论句式、误差与改进。
-5. **复盘与写入**：实验探究错误反复出现，经同意交接 `biology-error-dna`。
+5. **复盘与写入**：实验探究错误反复出现，经同意后组合 `biology-error-dna`。
 
 ---
 
 ## 通用边界与降级策略
 
 - **信息不足**：先要探究问题和数据/方案；不编造实验数据或图表趋势。
-- **任务不匹配**：结构功能解释转 `biology-structure-function-coach`；生命过程机制转 `biology-process-explainer`；术语图谱转 `biology-concept-map-builder`。
+- **任务不匹配**：结构功能解释切换到 `biology-structure-function-coach`；生命过程机制切换到 `biology-process-explainer`；术语图谱切换到 `biology-concept-map-builder`。
 - **学生只要结论**：可给结论框架，但必须指出证据和范围。
 - **教练默认**：先让学生指出自变量、因变量和控制变量，再修正。
-- **长期记录**：未经明确同意，不写入长期档案、不发提醒、不跨 SKILL 共享。
+- **长期记录**：未经明确同意，不写入长期档案、不发提醒、不在内部组合中共享。
 - **生命科学安全**：不提供人体试验、动物伤害、微生物培养风险操作或医疗建议。
 
 ---
@@ -114,13 +113,13 @@ depends_on: learning-dna, biology-process-explainer, biology-error-dna
 
 ---
 
-## 五、Cross-skill boundaries（跨 Skill 边界）
+## 五、Internal composition boundaries（内部组合边界）
 
 | 任务 | 处理方式 |
 |------|----------|
-| 实验背后结构功能不清 | 联动 `biology-structure-function-coach` |
-| 实验现象需要过程机制解释 | 联动 `biology-process-explainer` |
-| 实验涉及多个概念关系 | 联动 `biology-concept-map-builder` |
-| 变量、图表、结论反复错 | 经同意交接 `biology-error-dna` |
+| 实验背后结构功能不清 | 组合 `biology-structure-function-coach` |
+| 实验现象需要过程机制解释 | 组合 `biology-process-explainer` |
+| 实验涉及多个概念关系 | 组合 `biology-concept-map-builder` |
+| 变量、图表、结论反复错 | 经同意后组合 `biology-error-dna` |
 
-交接摘要只包含探究问题、变量表、数据断点、结论问题和修复建议。
+内部组合摘要只包含探究问题、变量表、数据断点、结论问题和修复建议。

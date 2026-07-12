@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/k12-automation/automation-state-v1.schema.json",
+  "title": "K12 Automation State v1",
+  "description": "Automation-owned authorization and runtime state. It must not contain Learning State or arbitrary student biography.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "student_id", "authorization", "runtime"],
+  "properties": {
+    "schema_version": { "const": "k12-automation-state/v1" },
+    "student_id": { "type": "string", "pattern": "^[A-Za-z0-9_-]{1,80}$" },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["local", "external_processing"],
+      "properties": {
+        "local": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["authorized", "authorized_by", "subject", "date", "method", "action"],
+          "properties": {
+            "authorized": { "type": "boolean" },
+            "authorized_by": { "type": "string", "maxLength": 240 },
+            "subject": { "enum": ["student", "guardian", ""] },
+            "date": { "type": "string", "maxLength": 10 },
+            "method": { "enum": ["written", "verbal", "digital", ""] },
+            "action": { "enum": ["create", "update", "revoke-external", "revoke-local"] }
+          },
+          "allOf": [
+            {
+              "if": { "properties": { "authorized": { "const": true } } },
+              "then": {
+                "properties": {
+                  "authorized_by": { "minLength": 1 },
+                  "subject": { "enum": ["student", "guardian"] },
+                  "date": { "type": "string", "format": "date" },
+                  "method": { "enum": ["written", "verbal", "digital"] }
+                }
+              }
+            }
+          ]
+        },
+        "external_processing": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["authorized", "provider", "scope", "date"],
+          "properties": {
+            "authorized": { "type": "boolean" },
+            "provider": { "type": "string", "maxLength": 2048 },
+            "scope": { "type": "string", "maxLength": 200 },
+            "date": { "type": "string", "maxLength": 10 }
+          },
+          "allOf": [
+            {
+              "if": { "properties": { "authorized": { "const": true } } },
+              "then": {
+                "properties": {
+                  "provider": { "type": "string", "format": "uri", "minLength": 1 },
+                  "scope": { "const": "current-mistake,recent-3-archives" },
+                  "date": { "type": "string", "format": "date" }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["created_at", "updated_at", "last_action"],
+      "properties": {
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" },
+        "last_action": { "enum": ["create", "update", "revoke-external", "revoke-local"] }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": "k12-automation-state/v1",
+  "student_id": "stu-XXX",
+  "authorization": {
+    "local": {
+      "authorized": false,
+      "authorized_by": "",
+      "subject": "",
+      "date": "",
+      "method": "",
+      "action": "revoke-local"
+    },
+    "external_processing": {
+      "authorized": false,
+      "provider": "",
+      "scope": "",
+      "date": ""
+    }
+  },
+  "runtime": {
+    "created_at": "1970-01-01T00:00:00.000Z",
+    "updated_at": "1970-01-01T00:00:00.000Z",
+    "last_action": "revoke-local"
+  }
+}

@@ -7,7 +7,7 @@ category: 英语专项
 tags: [英语, 口语, 发音, 晨间热身, 角色扮演, 口语DNA, 授权可控]
 description: >
   随时待命的英语口语陪练：处理晨间热身、情景对话、即兴演讲、纠音闭环与开口恐惧。
-  信息不足时先补齐最小输入；涉及口语DNA、提醒、长期档案或跨 Skill 联动时必须先说明路径并获得授权。
+  信息不足时先补齐最小输入；涉及口语DNA、提醒、长期档案或内部组合必须先说明路径并获得授权。
 compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/speaking-coach-workflows.md
@@ -18,7 +18,7 @@ references:
   - references/topic-bank.md
 ---
 
-> **内部 playbook**：本文件由旧 Skill 迁移，不是平台可发现 interface。文中的“调用/转交 Skill”统一解释为当前 Product Module 内部组合；Product Module 主文件、授权门与安全规则优先。
+> **内部 playbook**：本文件是当前 Product Module 按需加载的方法说明；Product Module 主文件、授权门与安全规则优先。
 
 # 🎙️ 英语口语陪练
 
@@ -32,7 +32,7 @@ references:
 - 纠音闭环：定位问题音，给动作提示、对比句、下一次验证。
 - 口语DNA：仅在学生授权时记录发音弱点、卡壳场景、兴趣话题和下次提醒。
 
-不负责：替代真实听说考试评分系统；未经授权写长期档案；把听力材料生成、作文批改、语法系统讲解扩展成本 Skill 主任务。
+不负责：替代真实听说考试评分系统；未经授权写长期档案；把听力材料生成、作文批改、语法系统讲解扩展成本方法主任务。
 
 ## 2. 触发与首轮输入
 
@@ -110,12 +110,13 @@ Now practise: sound → word → sentence.
 One more time, and I will check whether it improved.
 ```
 
-## 6. 档案、授权与跨 Skill
+## 6. 档案、授权与内部组合
 
 - 口语DNA只记录英语口语相关画像：发音弱点、流利度卡点、常用话题、角色扮演表现、下次热身提醒。
-- 学习DNA是通用学习画像；需要跨学科策略、长期学习偏好或多 Skill 协同时，必须说明读取/写入路径并请求授权。
-- vocabulary-dna 只在需要判断词汇可及度或沉淀口语新词时协作，不把词汇雷达职责搬到本 Skill。
-- writing/grammar/listening 的深度任务应转交对应 Skill；本 Skill 只保留“说出口”所需的最小改写、纠错和复盘。
+- 如需把“下次热身”变成实际提醒，必须由用户明确要求并授权，再向 `k12-automation` 提交最小提醒请求。
+- 学习DNA是通用学习画像；需要跨学科策略、长期学习偏好或多方法协同时，必须说明读取/写入路径并请求授权。
+- vocabulary-dna 只在需要判断词汇可及度或沉淀口语新词时协作，不把词汇雷达职责搬到本方法。
+- writing/grammar/listening 的深度任务应切换到对应方法；本方法只保留“说出口”所需的最小改写、纠错和复盘。
 
 ## 7. 引用索引自检
 

@@ -69,7 +69,7 @@
 - scorecard 写入 `<runDir>/scorecard.json`；盲测单裁判结果可写入 `<runDir>/judged/<judge-or-run>.json`；最终聚合可写入 `<runDir>/FINAL_aggregate.json`。
 - 必须按 `references/report-template.md` 的固定章节顺序输出。
 - 必须包含评估概况、场景得分、8 维度雷达、加权总分、核心发现、重要免责声明、产物路径。
-- 当 `evalMode=dry_run`、同模型自评、非盲测、场景覆盖不足 5/5、或缺少独立裁判时，必须在“重要免责声明”显式写明。
+- 当 `evalMode=dry_run`、同模型自评、非盲测、场景覆盖不足 8/8、或缺少独立裁判时，必须在“重要免责声明”显式写明。
 - 报告不得保留重复表格、截断句子、`Thought for ...`、流式残片或未清理的中间输出。
 - 不得把评分运行产物写入 `pipeline/`；`logs/` 已被 gitignore。
 

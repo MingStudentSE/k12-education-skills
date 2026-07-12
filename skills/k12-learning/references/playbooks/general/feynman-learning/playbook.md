@@ -8,7 +8,7 @@ tags: [费曼学习法, 深度理解, 主动回忆, 自我检验, 苏格拉底�
 description: >
   用"教会AI"来检验学生是否真正学会了的深度理解验证系统。
   当学生说“我来给你讲讲”“我懂了想测试一下自己”“帮我检验一下我学没学会”，
-  或学完某个重要知识点后想验证理解时，必须激活此SKILL。
+  或学完某个重要知识点后想验证理解时，必须采用本方法。
   当前版本已整合苏格拉底挑战者模式、理解深度DNA、第五跳批判性验证、
   AI答案主动验证与思维主权保护机制。
 compatibility: Claude Code / Codex / OpenClaw / ClawHub
@@ -16,12 +16,11 @@ references:
   - references/feynman-5jump-statemachine.md
   - references/feynman-dialogue-patterns.md
   - references/feynman-learning-full-playbook.md
-depends_on: learning-dna
 ---
 
-> **内部 playbook**：本文件由旧 Skill 迁移，不是平台可发现 interface。文中的“调用/转交 Skill”统一解释为当前 Product Module 内部组合；Product Module 主文件、授权门与安全规则优先。
+> **内部 playbook**：本文件是当前 Product Module 按需加载的方法说明；Product Module 主文件、授权门与安全规则优先。
 
-# 🎓 费曼学习法 SKILL
+# 🎓 费曼学习法方法
 
 > 用“让学生讲给别人听”暴露理解漏洞，再用追问、举例、迁移和批判性验证确认是否真的学会。
 
@@ -37,7 +36,7 @@ depends_on: learning-dna
 - 用户只要事实查询或标准答案，且明确不想做理解验证；可直接回答并提示费曼验证可选。
 - 学生还没有任何概念输入、题目背景或自己的解释；先索要最小材料，不凭空设计掌握状态。
 - 学生明显挫败、疲惫或焦虑时，不启动挑战者模式；先降支架、拆小步或暂停。
-- 未获授权时，不写入学习DNA、不创建复测提醒、不向其他技能共享理解深度记录。
+- 未获授权时，不写入学习DNA、不向 `k12-automation` 提交复测提醒请求、不向其他方法共享理解深度记录。
 
 ## 核心流程
 
@@ -57,7 +56,7 @@ depends_on: learning-dna
 - 不把标准答案一口气塞给学生；每次只处理一个漏洞，并让学生重新用自己的话讲。
 - 不鼓励复制AI原话；看到“AI答案很顺”时必须要求学生脱稿重讲并识别关键句。
 - 不在挫败状态继续挑战；立即降低支架、暂停或给更小的问题。
-- 不默认记录长期掌握状态；理解深度DNA、复测提醒和跨技能联动都需授权。
+- 不默认记录长期掌握状态；理解深度DNA、复测提醒和内部组合都需授权。
 
 ## 参考资源
 

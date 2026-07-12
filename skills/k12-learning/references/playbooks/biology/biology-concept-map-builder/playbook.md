@@ -12,12 +12,11 @@ compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/biology-concept-confusion-map.md
   - references/biology-concept-map-guide.md
-depends_on: learning-dna, biology-structure-function-coach
 ---
 
-> **内部 playbook**：本文件由旧 Skill 迁移，不是平台可发现 interface。文中的“调用/转交 Skill”统一解释为当前 Product Module 内部组合；Product Module 主文件、授权门与安全规则优先。
+> **内部 playbook**：本文件是当前 Product Module 按需加载的方法说明；Product Module 主文件、授权门与安全规则优先。
 
-# 🌿 生物概念图谱教练 SKILL
+# 🌿 生物概念图谱教练方法
 
 > **一句话定位：** 生物概念不是一串名词，而是有层级、因果、并列和调节关系的网络。
 
@@ -29,17 +28,17 @@ depends_on: learning-dna, biology-structure-function-coach
 2. **收集最小输入**：只追问概念范围、学段、教材章节、学生已有概念清单、易混点和输出形式。
 3. **执行主流程**：按“列核心概念 → 标关系词 → 画层级/因果/并列图 → 用题目或现象回测”推进。
 4. **产出结果**：给出概念节点、关系词、图谱文本版、易混边界和回测题。
-5. **复盘与写入**：反复术语混淆经同意交接 `biology-error-dna`；未授权时不写入长期档案。
+5. **复盘与写入**：反复术语混淆经同意后组合 `biology-error-dna`；未授权时不写入长期档案。
 
 ---
 
 ## 通用边界与降级策略
 
 - **信息不足**：先要章节、概念清单或易混词；不凭空判断学生已学范围。
-- **任务不匹配**：结构功能解释转 `biology-structure-function-coach`；生命过程机制转 `biology-process-explainer`；实验数据转 `biology-experiment-inquiry`。
+- **任务不匹配**：结构功能解释切换到 `biology-structure-function-coach`；生命过程机制切换到 `biology-process-explainer`；实验数据切换到 `biology-experiment-inquiry`。
 - **学生只要定义**：可给简明定义，但提示定义要放回关系网络才能用于题目。
 - **教练默认**：先让学生列自己想到的概念，再补漏和修正关系。
-- **长期记录**：未经明确同意，不写入画像、提醒或跨 SKILL 共享。
+- **长期记录**：未经明确同意，不写入画像、提醒或在内部组合中共享。
 - **生命科学边界**：不提供医疗诊断或治疗建议。
 
 ---
@@ -119,13 +118,13 @@ depends_on: learning-dna, biology-structure-function-coach
 
 ---
 
-## 五、Cross-skill boundaries（跨 Skill 边界）
+## 五、Internal composition boundaries（内部组合边界）
 
 | 任务 | 处理方式 |
 |------|----------|
-| 概念节点背后结构功能不清 | 联动 `biology-structure-function-coach` |
-| 概念之间是动态生命过程 | 转 `biology-process-explainer` |
-| 概念来自实验数据或图表 | 转 `biology-experiment-inquiry` |
-| 术语和图谱反复混乱 | 经同意交接 `biology-error-dna` |
+| 概念节点背后结构功能不清 | 组合 `biology-structure-function-coach` |
+| 概念之间是动态生命过程 | 切换到 `biology-process-explainer` |
+| 概念来自实验数据或图表 | 切换到 `biology-experiment-inquiry` |
+| 术语和图谱反复混乱 | 经同意后组合 `biology-error-dna` |
 
-交接摘要只包含概念范围、图谱断点、易混组、学生原判断和回测结果。
+内部组合摘要只包含概念范围、图谱断点、易混组、学生原判断和回测结果。

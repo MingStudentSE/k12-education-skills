@@ -56,6 +56,12 @@ const capabilities = capabilityMap.capabilities;
 assert(capabilityMap.capabilityCount === 58 && capabilities.length === 58, 'k12-learning must expose 58 internal capabilities');
 const names = capabilities.map(item => item.name);
 assert(new Set(names).size === names.length, 'capability names must be unique');
+assert(!names.includes('skill-coordinator'), 'deep module must compose playbooks directly; skill-coordinator must not return');
+assert(names.includes('system-guide'), 'k12-learning must expose the internal system-guide capability');
+assert(!existsSync(join(learning, 'references/playbooks/general/skill-coordinator')), 'legacy skill-coordinator directory must not return');
+for (const item of capabilities) {
+  assert(['DIRECT', 'INTAKE'].includes(item.mode), `capability map uses legacy/unknown mode for ${item.name}: ${item.mode}`);
+}
 for (const item of capabilities) {
   const playbook = join(learning, item.playbook);
   assert(existsSync(playbook), `missing capability playbook: ${item.name}`);
@@ -64,7 +70,9 @@ for (const item of capabilities) {
 const routeTests = JSON.parse(readFileSync(join(learning, 'test-prompts.json'), 'utf8'));
 const allowedRouteModes = new Set(['DIRECT', 'INTAKE', 'COMPOSE', 'CLARIFY', 'ORDINARY', 'MODULE_REQUIRED']);
 const allowedModules = new Set(['llm-wiki', 'k12-automation', 'k12-skill-studio']);
-for (const test of routeTests.filter(item => item.expected_route)) {
+const structuredRouteTests = routeTests.filter(item => item.expected_route);
+assert(new Set(structuredRouteTests.map(item => item.id)).size === structuredRouteTests.length, 'structured route test ids must be unique');
+for (const test of structuredRouteTests) {
   const route = test.expected_route;
   assert(allowedRouteModes.has(route.mode), `legacy/unknown route mode in ${test.id}: ${route.mode}`);
   assert(!Object.hasOwn(route, 'primarySkill'), `legacy primarySkill field remains in ${test.id}`);
@@ -76,6 +84,14 @@ for (const test of routeTests.filter(item => item.expected_route)) {
   } else {
     assert(route.primaryPlaybook === null, `${route.mode} must not select a playbook in ${test.id}`);
   }
+  const supporting = route.supportingPlaybooks || [];
+  assert(Array.isArray(supporting), `${test.id}: supportingPlaybooks must be an array when present`);
+  assert(supporting.length <= 2, `${test.id}: at most two supporting playbooks are allowed`);
+  assert(new Set(supporting).size === supporting.length, `${test.id}: supporting playbooks must be unique`);
+  assert(supporting.every(name => names.includes(name)), `${test.id}: unknown supporting playbook`);
+  assert(!supporting.includes(route.primaryPlaybook), `${test.id}: primary playbook cannot also be supporting`);
+  if (route.mode === 'COMPOSE') assert(supporting.length >= 1, `${test.id}: COMPOSE must assert at least one supporting playbook`);
+  else assert(supporting.length === 0, `${test.id}: only COMPOSE may assert supporting playbooks`);
 }
 const covered = new Set(routeTests.map(test => test.expected_route?.primaryPlaybook).filter(Boolean));
 assert(names.every(name => covered.has(name)), `capability route coverage missing: ${names.filter(name => !covered.has(name))}`);
@@ -86,6 +102,10 @@ assert(playbooks.length === 61, `expected 61 internal playbooks, got ${playbooks
 const mapping = JSON.parse(readFileSync(join(ROOT, 'docs/legacy-skill-mapping.json'), 'utf8'));
 assert(mapping.version === 'V3.0', 'legacy source map must identify release V3.0');
 assert(mapping.legacySkillCount === 63 && mapping.mappings.length === 63, 'legacy source map must cover 63 old Skills');
+assert(mapping.sourceSnapshot?.gitTrackedSkillCount === 62, 'source map must disclose the 62 Git-tracked legacy Skills');
+assert(mapping.sourceSnapshot?.gitCommit === '42d1f0d2453f618c7ca1c1227bbcfb2801edf9ea', 'source map must pin the auditable legacy commit');
+assert(JSON.stringify(mapping.sourceSnapshot?.auditOnlyLegacySkills) === JSON.stringify(['k12-learning-router']), 'source map must isolate the audit-only router provenance');
+assert(mapping.sourceSnapshot.gitTrackedSkillCount + mapping.sourceSnapshot.auditOnlyLegacySkills.length === mapping.legacySkillCount, 'Git-tracked plus audit-only source counts must equal legacySkillCount');
 assert(new Set(mapping.mappings.map(item => item.legacy_skill)).size === 63, 'legacy source map names must be unique');
 for (const item of mapping.mappings) assert(existsSync(join(ROOT, item.new_path)), `source map target missing: ${item.legacy_skill}`);
 

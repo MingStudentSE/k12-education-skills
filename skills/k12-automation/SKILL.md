@@ -26,8 +26,8 @@ description: 执行需要真实副作用的 K12 自动化。用户明确要求�
 ## 夜间产线流程
 
 1. 确认 Node.js ≥18、工作目录、学生数据目录和业务时区。
-2. 从 `scripts/nightline/config.sample.json` 创建本地 `config.json`；真实模式校验 endpoint、key、model，不提交密钥。
-3. 本地建档与外部模型处理分开授权；OCR 每次发送图片前单独确认。
+2. 从 `scripts/nightline/config.sample.json` 创建本地 `config.json`；真实模式校验 endpoint、key、model，不提交密钥。夜间教学只读取 k12-learning 提供的版本化 night-analysis-v1 adapter，不读取其内部 playbook 目录。
+3. Automation 授权/运行状态写入学生目录的 `automation/state.json`，与 Learning 拥有的 `profile.md` 分离；旧 profile 授权只做只读兼容。外部模型处理需独立授权，OCR 每次发送图片前另行确认。
 4. 使用精确学生 ID 运行；`--student` 缺值、非法 ID 或不存在学生必须非零退出，不可回退全员。
 5. 检查 outbox、archive、processed、日志和失败摘要；部分失败不得汇报批次成功。
 6. 撤回后停止分析；只撤外部时保留本地数据，撤本地时阻断读取与写入；导出和删除由用户分别决定。
@@ -45,7 +45,7 @@ node /path/to/k12-automation/scripts/nightline/build-dashboard.mjs
 运行时通过当前 module 路径发现脚本，不把示例绝对路径写进配置或长期文件。自动化部署时可设置：
 
 - `K12_ROOT`：数据根目录，默认当前工作目录。
-- `K12_LEARNING_DIR`：`k12-learning` module 路径，默认查找相邻 module。
+- `K12_LEARNING_ADAPTER`：Learning 夜间分析契约文件；默认从相邻 k12-learning module 解析 night-analysis-v1 adapter。
 - `K12_TIME_ZONE`：IANA 时区，默认 `Asia/Shanghai`。
 - `K12_MOCK_LLM=1`：只做流程回归，不外传、不产生真实诊断。
 
@@ -62,4 +62,4 @@ node /path/to/k12-automation/scripts/nightline/build-dashboard.mjs
 - `references/playbooks/automation/im-reminder/`：提醒方法、间隔与控制策略。
 - `references/nightline/`：学生/家长指南与运营手册。
 - `scripts/nightline/`：确定性 Node.js 运行层。
-- `assets/student-template/`：默认未授权的学生数据模板。
+- `assets/student-template/`：默认未授权且不含 Learning profile 的 Automation 运行模板。
