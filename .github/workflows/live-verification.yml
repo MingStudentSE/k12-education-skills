@@ -1,0 +1,40 @@
+name: live-verification
+
+# Weekly re-verification against the real outside world:
+# download the 9 official MOE curriculum PDFs and check that their sha256,
+# pinned section markers, and official subject/competency labels still match
+# the evidence pinned in curriculum/2022/standards.json. A failure here means
+# the official source drifted (or is unreachable from the runner), not that
+# the repo is broken.
+
+on:
+  schedule:
+    - cron: '0 2 * * 1' # Mondays 02:00 UTC (10:00 Beijing)
+  workflow_dispatch:
+    inputs:
+      subject:
+        description: 'Optional single subjectId to verify (default: all 9)'
+        required: false
+        default: ''
+
+jobs:
+  curriculum-sources:
+    name: MOE PDF hash + pinned section verification
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install PDF text and OCR extractors
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils tesseract-ocr tesseract-ocr-chi-sim
+      - name: Verify official curriculum sources (live download)
+        run: |
+          if [ -n "${{ github.event.inputs.subject }}" ]; then
+            node pipeline/verify_curriculum_sources.mjs --live --subject "${{ github.event.inputs.subject }}"
+          else
+            node pipeline/verify_curriculum_sources.mjs --live
+          fi

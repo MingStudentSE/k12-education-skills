@@ -101,7 +101,7 @@ flowchart LR
 4. 未经确认，不形成长期状态、不外传；只有 `llm-wiki` 在任务确实需要 Obsidian 原生能力时，可自动尝试官方 `kepano/obsidian-skills`，失败后降级且不声称成功。
 5. 新能力优先进入 Capability Map 和 playbook；新增第 5 个模块必须先更新上下文、ADR 和测试。
 
-运行 `bash pipeline/review.sh all` 会验证上述边界、Schema、自动化运行时，以及 229 条 module behavior、其中重叠的 80 条路由白盒与 6 条课标证据 fixture 的契约；它不调用模型，也不声称 live 行为已经通过。
+运行 `bash pipeline/review.sh all` 会验证上述边界、Schema、自动化运行时，以及 242 条 module behavior、其中重叠的 80 条路由白盒与 6 条课标证据 fixture 的契约；它不调用模型，也不声称 live 行为已经通过。
 
 四个 Product Module 的主要行为回归入口是：
 
