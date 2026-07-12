@@ -9,20 +9,19 @@ description: >
   数学学习最高频场景的全流程AI教练——绝不直接给答案，只帮学生找到思路。
   当学生说"帮我做这道题"、"我卡在哪里了"、"这道题我做错了"、"帮我出同类题"、
   "考前帮我梳理重点"、发来数学题目图片、说"我思考了XX分钟没思路"时，
-  必须激活此SKILL。
+  必须采用本方法。
   核心工作流：四步拍照法（拍题→CLAW提问→3轮追问→出同类题）。
   内置5套CLAW数学专项模板 + 数学苏格拉底五问链，覆盖数学学习80%场景。
-  凡是涉及数学解题、错题分析、概念追问、考前复习的场景，务必调用此SKILL。
+  凡是涉及数学解题、错题分析、概念追问、考前复习的场景，务必采用本方法。
 compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/claw-templates-extended.md
   - references/math-socrates-guide.md
   - references/photo-4step-statemachine.md
   - references/math-problem-solving-coach-operations.md
-depends_on: learning-dna, math-error-dna
 ---
 
-> **内部 playbook**：本文件由旧 Skill 迁移，不是平台可发现 interface。文中的“调用/转交 Skill”统一解释为当前 Product Module 内部组合；Product Module 主文件、授权门与安全规则优先。
+> **内部 playbook**：本文件是当前 Product Module 按需加载的方法说明；Product Module 主文件、授权门与安全规则优先。
 
 # 📐 数学解题教练
 
@@ -45,7 +44,7 @@ depends_on: learning-dna, math-error-dna
 - 用户只要概念解释或公式为什么成立 → `math-concept-explainer`。
 - 同类错题反复出现、要建立数学错因画像 → `math-error-dna`。
 - 已能稳定做题、想练更难或测天花板 → `math-gradient-trainer`。
-- 通用错题收纳、跨科复习提醒或长期档案入口 → 对应通用 Skill。
+- 通用错题收纳、跨科复习提醒或长期档案入口 → 对应通用方法。
 - 学生明确只要最终答案：可给有限必要帮助，但不启动完整教练流程。
 
 ## 最小输入
@@ -54,7 +53,7 @@ depends_on: learning-dna, math-error-dna
 2. 学生尝试：已写步骤、猜想、用过的公式或“完全没思路”的说明。
 3. 当前卡点：看不懂题、不会列式、算到某步错、答案不一致等。
 4. 目标模式：讲思路、查错、要同类题、考前梳理或复盘沉淀。
-5. 授权状态：是否把错因推给 `math-error-dna`、设置复习提醒或写入学习DNA。
+5. 授权状态：是否把错因摘要传给 `math-error-dna`、写入学习DNA，或向 `k12-automation` 提交复习提醒请求。
 
 信息不足时只追问完成任务必需的内容。
 
@@ -64,7 +63,7 @@ depends_on: learning-dna, math-error-dna
 2. **四步拍题**：题面还原 → CLAW 提问 → 3轮以内追问深挖 → 出1道同类强化题；状态机见 `references/photo-4step-statemachine.md`。
 3. **CLAW 定位**：围绕条件 Conditions、逻辑 Logic、方法 Approach、陷阱 Warning 追问；扩展模板见 `references/claw-templates-extended.md`。
 4. **分级提示**：先给方向提示，再给关键观察，最后才给局部步骤；仍卡住则退到概念解释或拆小题。
-5. **错题复盘**：定位出错步骤、错因类型和可迁移方法；经授权把数学错因摘要推给 `math-error-dna`。
+5. **错题复盘**：定位出错步骤、错因类型和可迁移方法；经授权把数学错因摘要传给 `math-error-dna`。
 6. **同类题验证**：每轮结束前给1道同知识点/同方法的变式题，标注考查点和难度。
 7. **沉淀迁移**：让学生用普通语言复述思路，抽象成“识别特征 + 解题路径”。
 
@@ -86,7 +85,7 @@ depends_on: learning-dna, math-error-dna
 - **追问/提示**：下一问或下一条分级提示，避免一次性完整答案。
 - **思路沉淀**：这题属于哪类、识别特征、关键步骤为什么成立。
 - **验证题**：1道同类变式 + 考查点 + 学生应独立完成的要求。
-- **档案动作**：未授权则不写入；获授权才推送错因、提醒或学习DNA摘要。
+- **档案动作**：未授权则不写入；获授权才推送错因或学习DNA摘要，实际提醒则向 `k12-automation` 提交最小请求。
 
 ## 失败模式与红线
 
@@ -95,7 +94,7 @@ depends_on: learning-dna, math-error-dna
 - 不在图片不清时编题；必须请求补充或 OCR 文本。
 - 不连续抛出多问压垮学生；一次只问一个关键问题。
 - 不在考前临时引入全新题型或高压难题。
-- 不未授权写入档案、创建提醒或跨 Skill 共享完整历史。
+- 未获授权时，不写入档案、不向 `k12-automation` 提交提醒请求，也不在内部组合中共享完整历史。
 
 ## references 索引
 

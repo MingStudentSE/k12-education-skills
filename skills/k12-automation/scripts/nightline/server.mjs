@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-// K12 交互式控制台（路线 B）—— 在静态看板基础上加 4 个操作：新建学生 / 交错题 / 一键跑分析 / 在线看产出
+// K12 交互式控制台（路线 B）—— 注册 Automation 运行对象 / 交错题 / 一键跑分析 / 在线看产出
 // 安全：只绑 127.0.0.1，必须经 SSH 隧道访问（ssh -L 18350:localhost:18350 ...），公网不可见，故不另设密码。
 // 用法: 在数据根运行 node /path/to/server.mjs（读取 K12_ROOT/students/*；分析会 spawn 同目录 night-run.mjs）
 import { createServer } from 'http';
-import { readFileSync, writeFileSync, readdirSync, existsSync, statSync, mkdirSync, renameSync } from 'fs';
+import { readFileSync, writeFileSync, readdirSync, existsSync, statSync, mkdirSync } from 'fs';
 import { basename, join, dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { spawn } from 'child_process';
@@ -13,8 +13,9 @@ import {
   hasExternalProcessingAuthorization,
   hasLocalAuthorization,
   normalizeProvider,
-  readFrontmatterPrefix,
+  readStudentAuthorization,
   validateAuthorizationInput,
+  writeStudentAuthorization,
 } from './authorization.mjs';
 import { businessDate, businessFileTimestamp } from './business-time.mjs';
 
@@ -46,9 +47,7 @@ const subjectOptions = (selected = 'math') => Object.entries(SUBJ)
   .filter(([key]) => key !== 'general')
   .map(([key, label]) => `<option value="${key}"${key === selected ? ' selected' : ''}>${label}</option>`)
   .join('');
-const SAFE = (s) => /^[A-Za-z0-9_-]+$/.test(String(s || ''));
-const oneLine = (value, maxLength = 120) => String(value || '').replace(/[\r\n]+/g, ' ').trim().slice(0, maxLength);
-const blockText = (value, maxLength = 2000) => String(value || '').trim().slice(0, maxLength);
+const SAFE = (s) => /^(?!_)[A-Za-z0-9_-]{1,80}$/.test(String(s || ''));
 let _cfg = null;
 function getCfg() {
   if (_cfg) return _cfg;
@@ -100,38 +99,14 @@ function frontmatter(text) {
   if (m) for (const line of m[1].split('\n')) { const i = line.indexOf(':'); if (i > 0) out[line.slice(0, i).trim()] = line.slice(i + 1).trim(); }
   return out;
 }
-function hasProfileAuthorization(student) {
-  const profilePath = join(STUDENTS, student, 'profile.md');
-  if (!existsSync(profilePath)) return false;
-  return hasLocalAuthorization(readFrontmatterPrefix(profilePath));
+function studentAuthorization(student) {
+  return readStudentAuthorization(join(STUDENTS, student));
 }
-function hasProfileExternalAuthorization(student, provider) {
-  const profilePath = join(STUDENTS, student, 'profile.md');
-  if (!existsSync(profilePath)) return false;
-  return hasExternalProcessingAuthorization(readFrontmatterPrefix(profilePath), provider);
+function hasStudentAuthorization(student) {
+  return hasLocalAuthorization(studentAuthorization(student).record);
 }
-function updateFrontmatterFields(text, updates) {
-  const match = text.match(/^---\n([\s\S]*?)\n---/);
-  if (!match) throw new Error('学生 profile.md 缺少有效 frontmatter');
-  const pending = new Map(Object.entries(updates).map(([key, value]) => [key, String(value ?? '')]));
-  const seen = new Set();
-  const lines = [];
-  for (const line of match[1].split('\n')) {
-    const i = line.indexOf(':');
-    const key = i > 0 ? line.slice(0, i).trim() : '';
-    if (!pending.has(key)) { lines.push(line); continue; }
-    if (seen.has(key)) continue;
-    lines.push(`${key}: ${pending.get(key)}`);
-    seen.add(key);
-  }
-  for (const [key, value] of pending) if (!seen.has(key)) lines.push(`${key}: ${value}`);
-  return `---\n${lines.join('\n')}\n---${text.slice(match[0].length)}`;
-}
-function writeAuthorizationUpdate(profilePath, updates) {
-  const next = updateFrontmatterFields(readFileSync(profilePath, 'utf8'), updates);
-  const tempPath = `${profilePath}.${process.pid}.${Date.now()}.tmp`;
-  writeFileSync(tempPath, next);
-  renameSync(tempPath, profilePath);
+function hasStudentExternalAuthorization(student, provider) {
+  return hasExternalProcessingAuthorization(studentAuthorization(student).record, provider);
 }
 function authorizationEventSummary(input, action, external) {
   if (action === 'update') {
@@ -144,13 +119,12 @@ function authorizationEventSummary(input, action, external) {
 }
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const listDir = (d, f = () => true) => existsSync(d) ? readdirSync(d).filter(f) : [];
-const parseSubjects = (raw) => String(raw || '').replace(/[\[\]]/g, '').split(/[,，\s]+/).map(s => s.trim()).filter(Boolean);
 const sev = (rec) => rec >= 3 ? 'red' : rec === 2 ? 'amber' : 'slate';
 
 function readStudent(id) {
   const dir = join(STUDENTS, id);
-  const fm = existsSync(join(dir, 'profile.md')) ? readFrontmatterPrefix(join(dir, 'profile.md')) : {};
-  if (!hasLocalAuthorization(fm)) {
+  const authorization = readStudentAuthorization(dir);
+  if (!hasLocalAuthorization(authorization.record)) {
     return { id, name: '未授权档案', grade: '', subjects: [], totalEntries: 0, weak: [], maxCount: 1, lastDay: '', lastDayFiles: [], pending: 0, authorized: false };
   }
   const archDir = join(dir, 'archive');
@@ -169,7 +143,7 @@ function readStudent(id) {
   const lastDay = outDays[outDays.length - 1] || '';
   const lastDayFiles = lastDay ? listDir(join(outDir, lastDay), f => f.endsWith('.md')) : [];
   const pending = listDir(join(dir, 'inbox'), f => /\.(md|txt)$/.test(f) && statSync(join(dir, 'inbox', f)).isFile()).length;
-  return { id, name: fm.name || id, grade: fm.grade || '', subjects: parseSubjects(fm.subjects), totalEntries, weak, maxCount, lastDay, lastDayFiles, pending, authorized: true };
+  return { id, name: id, grade: '', subjects: [], totalEntries, weak, maxCount, lastDay, lastDayFiles, pending, authorized: true };
 }
 const allStudents = () => listDir(STUDENTS, d => !d.startsWith('_') && statSync(join(STUDENTS, d)).isDirectory()).map(readStudent);
 
@@ -193,7 +167,7 @@ function card(s) {
     : '<span class="muted">无</span>';
   return `<article class="card">
   <header class="card-head"><div class="avatar sev-${triggered.length ? 'red' : 'slate'}">${initial}</div>
-    <div class="who"><div class="name">${esc(s.name)}</div><div class="sub">${esc(s.grade)} ${pills}</div></div>
+    <div class="who"><div class="name">${esc(s.name)}</div><div class="sub">Automation 运行 ID ${pills}</div></div>
     <div class="card-actions">
       ${SAFE(s.id) ? `<button class="mini" onclick="openAuthorization('${s.id}')">授权设置</button>` : ''}
       <button class="mini" onclick="openMistake('${esc(s.id)}')">+ 交错题</button>
@@ -265,14 +239,14 @@ details{margin-top:6px}summary{cursor:pointer;font-size:13px;color:#64748b;paddi
 .spin{display:inline-block;width:14px;height:14px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:6px}@keyframes sp{to{transform:rotate(360deg)}}
 </style></head><body>
 <header class="top"><div class="wrap"><div><h1>📊 K12 错题控制台</h1><div class="sub">交互版 · 本地隧道访问 · 数据截至 ${today()}</div></div>
-  <div class="tools"><button class="btn ghost" onclick="openStudent()">+ 新建学生</button><button class="btn" onclick="location.reload()">⟳ 刷新</button></div></div></header>
+  <div class="tools"><button class="btn ghost" onclick="openStudent()">+ 注册运行对象</button><button class="btn" onclick="location.reload()">⟳ 刷新</button></div></div></header>
 <div class="wrap">
   <div class="summary">
     <div class="stat"><div class="ic">👨‍🎓</div><div><div class="n">${students.length}</div><div class="l">在册学生</div></div></div>
     <div class="stat${totalTriggered ? ' hot' : ''}"><div class="ic">🔴</div><div><div class="n">${totalTriggered}</div><div class="l">已触发专项弱项</div></div></div>
     <div class="stat${totalPending ? ' hot' : ''}"><div class="ic">📥</div><div><div class="n">${totalPending}</div><div class="l">待处理错题</div></div></div>
   </div>
-  <div class="grid">${students.map(card).join('\n') || '<div class="empty">还没有学生，点右上角「+ 新建学生」。</div>'}</div>
+  <div class="grid">${students.map(card).join('\n') || '<div class="empty">还没有运行对象，点右上角「+ 注册运行对象」。此操作只建立 Automation 授权与运行目录，不创建学习画像。</div>'}</div>
 </div>
 <div class="modal-bg" id="modal"><div class="modal" id="modalBody"></div></div>
 <div id="toast"></div>
@@ -284,23 +258,22 @@ function closeModal(){M.classList.remove('show')}
 M.onclick=e=>{if(e.target===M)closeModal()};
 function toast(t){const el=document.getElementById('toast');el.textContent=t;el.style.display='block';setTimeout(()=>el.style.display='none',2600)}
 async function api(path,body){const r=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const d=await r.json();if(!r.ok||d.error)throw new Error(d.error||('HTTP '+r.status));return d}
-function openStudent(){MB.innerHTML=\`<h3>新建学生</h3>
-  <div class="row"><div><label>学号(英文/数字)</label><input id="f_id" placeholder="stu-002"></div><div><label>姓名</label><input id="f_name" placeholder="张同学"></div></div>
-  <div class="row"><div><label>年级</label><input id="f_grade" placeholder="初二"></div><div><label>学科</label><select id="f_subj">${subjectOptions()}</select></div></div>
-  <label>学习画像(可空)</label><textarea id="f_bio" placeholder="只填与当前学习任务有关的低敏摘要"></textarea>
-  <label class="consent-row"><input type="checkbox" id="f_consent">我确认已获得学生本人或其监护人明确同意，在本机建立并处理这份学习档案。</label>
+function openStudent(){MB.innerHTML=\`<h3>注册 Automation 运行对象</h3>
+  <label>低敏学生 ID（英文/数字/-/_）</label><input id="f_id" placeholder="stu-002">
+  <p class="muted">这里只创建 inbox/archive/outbox 与 <code>automation/state.json</code>，不会创建或修改 Learning 的 profile.md，也不接收姓名、年级或任意学习画像。需要长期学习画像时请在 k12-learning 中另行授权建立。</p>
+  <label class="consent-row"><input type="checkbox" id="f_consent">我确认已获得学生本人或其监护人明确同意，在本机建立 Automation 运行目录并处理提交的错题。</label>
   <div class="row"><div><label>授权主体</label><select id="f_auth_subject"><option value="guardian">监护人</option><option value="student">学生本人</option></select></div><div><label>授权日期</label><input type="date" id="f_auth_date" value="${today()}"></div><div><label>授权方式</label><select id="f_auth_method"><option value="written">书面</option><option value="digital">电子确认</option><option value="verbal">口头</option></select></div></div>
-  <label class="consent-row"><input type="checkbox" id="f_external_consent">另行同意：运行真实分析时，将低敏画像摘要、当前错题和最近 3 份错题档案发送到 k12-automation 本地 config.json 配置的模型服务。提供方变化后需重新授权。</label>
+  <label class="consent-row"><input type="checkbox" id="f_external_consent">另行同意：运行真实分析时，将当前错题和最近 3 份错题档案发送到 k12-automation 本地 config.json 配置的模型服务。Automation v1 不读取 Learning profile；提供方或 scope 变化后需重新授权。</label>
   <div class="modal-foot"><button class="cancel btn" onclick="closeModal()">取消</button><button class="btn" onclick="submitStudent(this)">创建</button></div>\`;M.classList.add('show')}
-async function submitStudent(btn){try{if(!f_consent.checked)return alert('请先确认已获得明确建档授权');if(!f_auth_date.value)return alert('请选择授权日期');
+async function submitStudent(btn){try{if(!f_consent.checked)return alert('请先确认已获得明确的本地运行授权');if(!f_auth_date.value)return alert('请选择授权日期');
   btn.innerHTML='<span class=spin></span>创建中';btn.disabled=1;
-  await api('/api/student',{id:f_id.value.trim(),name:f_name.value.trim(),grade:f_grade.value.trim(),subjects:f_subj.value,bio:f_bio.value.trim(),consent:true,authorizationSubject:f_auth_subject.value,authorizationDate:f_auth_date.value,authorizationMethod:f_auth_method.value,externalProcessingConsent:f_external_consent.checked});
-  toast('学生已创建');setTimeout(()=>location.reload(),700)}catch(e){alert(e.message);btn.innerHTML='创建';btn.disabled=0}}
+  await api('/api/student',{id:f_id.value.trim(),consent:true,authorizationSubject:f_auth_subject.value,authorizationDate:f_auth_date.value,authorizationMethod:f_auth_method.value,externalProcessingConsent:f_external_consent.checked});
+  toast('Automation 运行对象已注册');setTimeout(()=>location.reload(),700)}catch(e){alert(e.message);btn.innerHTML='创建';btn.disabled=0}}
 function openAuthorization(id){MB.innerHTML=\`<h3>更新/撤回授权 → \${id}</h3>
   <p class="muted">每次变更都要重新记录授权主体、日期和方式。撤回本地授权会同时撤回外部处理授权。</p>
   <label>操作</label><select id="a_action" onchange="syncAuthorizationForm()"><option value="update">更新/恢复本地授权</option><option value="revoke-external">仅撤回外部处理授权</option><option value="revoke-local">撤回本地及外部处理授权</option></select>
   <div class="row"><div><label>授权主体</label><select id="a_subject"><option value="guardian">监护人</option><option value="student">学生本人</option></select></div><div><label>记录日期</label><input type="date" id="a_date" value="${today()}"></div><div><label>记录方式</label><select id="a_method"><option value="written">书面</option><option value="digital">电子确认</option><option value="verbal">口头</option></select></div></div>
-  <label class="consent-row" id="a_external_row"><input type="checkbox" id="a_external">同时授权/恢复外部模型处理；不勾选会清除已有外部授权。提供方取当前 config origin，范围固定为低敏画像摘要、当前错题和最近 3 份档案。</label>
+  <label class="consent-row" id="a_external_row"><input type="checkbox" id="a_external">同时授权/恢复外部模型处理；不勾选会清除已有外部授权。提供方取当前 config origin，范围固定为当前错题和最近 3 份档案。</label>
   <div id="a_hint" class="muted"></div>
   <label class="consent-row"><input type="checkbox" id="a_confirm">我确认以上操作和结构化记录准确。</label>
   <div class="modal-foot"><button class="cancel btn" onclick="closeModal()">取消</button><button class="btn" onclick="submitAuthorization(this,'\${id}')">确认变更</button></div>\`;M.classList.add('show');syncAuthorizationForm()}
@@ -373,7 +346,7 @@ const server = createServer(async (req, res) => {
     if (req.method === 'GET' && u.pathname === '/api/file') {
       const { student, day, name } = Object.fromEntries(u.searchParams);
       if (!SAFE(student) || !SAFE(day.replace(/-/g, ''))) return send(res, 400, 'bad params', 'text/plain');
-      if (!hasProfileAuthorization(student)) return send(res, 403, 'student profile is not authorized', 'text/plain');
+      if (!hasStudentAuthorization(student)) return send(res, 403, 'student automation state is not authorized', 'text/plain');
       const fname = String(name || '');
       if (!fname.endsWith('.md') || fname !== basename(fname) || /[\\/\0]/.test(fname)) return send(res, 400, 'bad file name', 'text/plain');
       const base = resolve(STUDENTS, student, 'outbox', day);
@@ -385,7 +358,7 @@ const server = createServer(async (req, res) => {
     if (req.method === 'POST' && u.pathname === '/api/student') {
       const b = await readBody(req);
       if (!SAFE(b.id)) return send(res, 400, JSON.stringify({ error: '学号只能用英文/数字/-/_' }), 'application/json');
-      if (b.consent !== true) return send(res, 400, JSON.stringify({ error: '未确认建档授权，不能创建长期学生档案' }), 'application/json');
+      if (b.consent !== true) return send(res, 400, JSON.stringify({ error: '未确认本地运行授权，不能注册 Automation 运行对象' }), 'application/json');
       const authInput = { subject: b.authorizationSubject, date: b.authorizationDate, method: b.authorizationMethod };
       const authError = validateAuthorizationInput(authInput);
       if (authError) return send(res, 400, JSON.stringify({ error: authError }), 'application/json');
@@ -399,28 +372,34 @@ const server = createServer(async (req, res) => {
       const dir = join(STUDENTS, b.id);
       if (existsSync(dir)) return send(res, 400, JSON.stringify({ error: '该学号已存在' }), 'application/json');
       mkdirSync(join(dir, 'inbox'), { recursive: true }); mkdirSync(join(dir, 'archive'), { recursive: true }); mkdirSync(join(dir, 'outbox'), { recursive: true });
-      const name = oneLine(b.name, 80) || b.id;
-      const grade = oneLine(b.grade, 40);
-      const subject = SUBJ[b.subjects] && b.subjects !== 'general' ? b.subjects : 'math';
-      const bio = blockText(b.bio) || '（待补充）';
       const external = b.externalProcessingConsent === true;
-      const profile = `---\nid: ${b.id}\nname: ${name}\ngrade: ${grade}\nsubjects: [${subject}]\nauthorized: true\nauthorized_by: ${authorizedBy}\nauthorization_subject: ${authInput.subject}\nauthorization_date: ${authInput.date}\nauthorization_method: ${authInput.method}\nexternal_processing_authorized: ${external}\nexternal_processing_provider: ${externalProvider}\nexternal_processing_scope: ${external ? EXTERNAL_PROCESSING_SCOPE : ''}\nexternal_processing_authorization_date: ${external ? authInput.date : ''}\n---\n\n# 学习画像\n\n${bio}\n`;
-      writeFileSync(join(dir, 'profile.md'), profile);
-      return send(res, 200, JSON.stringify({ ok: true }), 'application/json');
+      writeStudentAuthorization(dir, b.id, {
+        authorized: true,
+        authorized_by: `${authorizedBy}（${external ? '本地及外部处理' : '仅本地处理'}）`,
+        authorization_subject: authInput.subject,
+        authorization_date: authInput.date,
+        authorization_method: authInput.method,
+        authorization_action: 'create',
+        external_processing_authorized: external,
+        external_processing_provider: externalProvider,
+        external_processing_scope: external ? EXTERNAL_PROCESSING_SCOPE : '',
+        external_processing_authorization_date: external ? authInput.date : '',
+      }, 'create');
+      return send(res, 200, JSON.stringify({ ok: true, learningProfileCreated: false }), 'application/json');
     }
 
     if (req.method === 'POST' && u.pathname === '/api/authorization') {
       const b = await readBody(req);
-      const profilePath = SAFE(b.student) ? join(STUDENTS, b.student, 'profile.md') : '';
-      if (!profilePath || !existsSync(profilePath)) return send(res, 400, JSON.stringify({ error: '学生不存在或缺少 profile.md' }), 'application/json');
+      const studentDir = SAFE(b.student) ? join(STUDENTS, b.student) : '';
+      if (!studentDir || !existsSync(studentDir) || !statSync(studentDir).isDirectory()) return send(res, 400, JSON.stringify({ error: '学生运行对象不存在' }), 'application/json');
       if (b.confirmation !== true) return send(res, 400, JSON.stringify({ error: '未确认本次授权变更' }), 'application/json');
       const actions = new Set(['update', 'revoke-external', 'revoke-local']);
       if (!actions.has(b.action)) return send(res, 400, JSON.stringify({ error: '不支持的授权操作' }), 'application/json');
       const authInput = { subject: b.authorizationSubject, date: b.authorizationDate, method: b.authorizationMethod };
       const authError = validateAuthorizationInput(authInput);
       if (authError) return send(res, 400, JSON.stringify({ error: authError }), 'application/json');
-      const current = readFrontmatterPrefix(profilePath);
-      if (b.action === 'revoke-external' && !hasLocalAuthorization(current)) {
+      const current = readStudentAuthorization(studentDir);
+      if (b.action === 'revoke-external' && !hasLocalAuthorization(current.record)) {
         return send(res, 409, JSON.stringify({ error: '本地授权当前无效；请使用“更新/恢复本地授权”' }), 'application/json');
       }
 
@@ -432,7 +411,7 @@ const server = createServer(async (req, res) => {
         catch (e) { return send(res, 400, JSON.stringify({ error: `不能记录外部处理授权：${e.message}` }), 'application/json'); }
         provider = normalizeProvider(cfg.apibase);
       }
-      writeAuthorizationUpdate(profilePath, {
+      writeStudentAuthorization(studentDir, b.student, {
         authorized: localAuthorized,
         authorized_by: authorizationEventSummary(authInput, b.action, externalAuthorized),
         authorization_subject: authInput.subject,
@@ -443,14 +422,14 @@ const server = createServer(async (req, res) => {
         external_processing_provider: externalAuthorized ? provider : '',
         external_processing_scope: externalAuthorized ? EXTERNAL_PROCESSING_SCOPE : '',
         external_processing_authorization_date: externalAuthorized ? authInput.date : '',
-      });
-      return send(res, 200, JSON.stringify({ ok: true, localAuthorized, externalAuthorized, provider: externalAuthorized ? provider : null }), 'application/json');
+      }, b.action);
+      return send(res, 200, JSON.stringify({ ok: true, localAuthorized, externalAuthorized, provider: externalAuthorized ? provider : null, previousSource: current.source }), 'application/json');
     }
 
     if (req.method === 'POST' && u.pathname === '/api/mistake') {
       const b = await readBody(req);
       if (!SAFE(b.student) || !existsSync(join(STUDENTS, b.student))) return send(res, 400, JSON.stringify({ error: '学生不存在' }), 'application/json');
-      if (!hasProfileAuthorization(b.student)) return send(res, 403, JSON.stringify({ error: '学生档案未记录明确授权，不能写入错题' }), 'application/json');
+      if (!hasStudentAuthorization(b.student)) return send(res, 403, JSON.stringify({ error: 'Automation 未记录有效本地授权，不能写入错题' }), 'application/json');
       if (typeof b.content !== 'string' || !b.content.trim()) return send(res, 400, JSON.stringify({ error: '错题内容为空' }), 'application/json');
       if (b.content.length > 20000) return send(res, 400, JSON.stringify({ error: '错题内容超过 20000 字符，请只保留当前题目、学生步骤和必要背景' }), 'application/json');
       const subj = SUBJ[b.subject] ? b.subject : 'math';
@@ -463,11 +442,11 @@ const server = createServer(async (req, res) => {
     if (req.method === 'POST' && u.pathname === '/api/run') {
       const b = await readBody(req);
       if (!SAFE(b.student) || !existsSync(join(STUDENTS, b.student))) return send(res, 400, JSON.stringify({ error: '学生不存在' }), 'application/json');
-      if (!hasProfileAuthorization(b.student)) return send(res, 403, JSON.stringify({ error: '学生档案未记录明确授权，不能运行长期分析' }), 'application/json');
+      if (!hasStudentAuthorization(b.student)) return send(res, 403, JSON.stringify({ error: 'Automation 未记录有效本地授权，不能运行分析' }), 'application/json');
       if (!MOCK_LLM) {
         let cfg; try { cfg = getCfg(); } catch (e) { return send(res, 500, JSON.stringify({ error: e.message }), 'application/json'); }
         const provider = normalizeProvider(cfg.apibase);
-        if (!hasProfileExternalAuthorization(b.student, provider)) return send(res, 403, JSON.stringify({ error: '未授权向当前模型服务发送低敏画像摘要、当前错题和最近 3 份错题档案，或提供方已变化' }), 'application/json');
+        if (!hasStudentExternalAuthorization(b.student, provider)) return send(res, 403, JSON.stringify({ error: '未授权向当前模型服务发送当前错题和最近 3 份错题档案，或提供方/scope 已变化' }), 'application/json');
       }
       const child = spawn(process.execPath, [join(ENGINE_DIR, 'night-run.mjs'), '--student', b.student], { cwd: ROOT, env: { ...process.env, K12_ROOT: ROOT } });
       let out = '';

@@ -9,7 +9,7 @@ description: >
   把“猜答案”变成“懂出题人逻辑”的阅读理解专项教练。
   当学生说“帮我做阅读理解”“这道题为什么我做错了”“帮我分析这篇文章”
   “阅读理解怎么答”“这道题的考点是什么”“我总是丢分在阅读”，
-  或发来现代文阅读文章/题目/答案时，必须激活此 SKILL。
+  或发来现代文阅读文章/题目/答案时，必须采用本方法。
   核心方法：五大坑诊断 + 现代文精读4步法 + 出题人视角分析 + 错题三追问。
   不直接代写标准答案；先让学生理解考点、证据和答题格式。
 compatibility: Claude Code / Codex / OpenClaw / ClawHub
@@ -18,24 +18,23 @@ references:
   - references/pit-training.md
   - references/question-type-library.md
   - references/reading-4step-flow.md
-depends_on: learning-dna
 ---
 
-> **内部 playbook**：本文件由旧 Skill 迁移，不是平台可发现 interface。文中的“调用/转交 Skill”统一解释为当前 Product Module 内部组合；Product Module 主文件、授权门与安全规则优先。
+> **内部 playbook**：本文件是当前 Product Module 按需加载的方法说明；Product Module 主文件、授权门与安全规则优先。
 
-# 📖 阅读理解拆解师 SKILL
+# 📖 阅读理解拆解师方法
 
 > 阅读理解不是“凭感觉猜答案”，而是看懂出题人考什么，再用阅卷老师能给分的格式表达。
 
 ## 触发与目标
 
-遇到以下任一情况必须调用本技能：
+遇到以下任一情况必须采用本方法：
 
 - 学生发来现代文阅读文章、题目、自己的答案或批改结果。
 - 学生说“阅读理解总丢分”“不会概括主旨”“答题没格式”“不知道考点”。
 - 学生需要分析词句赏析、人物形象、环境描写、标题含义、段落作用、论证/说明类题。
 
-本技能只做三件事：定位掉分坑，拆出题人逻辑，训练可迁移的答题结构。
+本方法只做三件事：定位掉分坑，拆出题人逻辑，训练可迁移的答题结构。
 
 ## 最小执行闭环
 
@@ -74,8 +73,8 @@ depends_on: learning-dna
 
 - `learning-dna`：只在授权后记录阅读薄弱点、稳定错因和训练反馈。
 - `chinese-material-library`：发现精妙表达时可建议保存，必须先问“要不要存入”。
-- `chinese-classical-revival`：古诗文/文言文阅读转交文言文技能；现代文阅读留在本技能。
-- IM 提醒类能力：仅在学生明确同意后设置答题规范复习提醒。
+- `chinese-classical-revival`：古诗文/文言文阅读切换到文言文方法；现代文阅读留在本方法。
+- `k12-automation`：仅在学生明确要求并授权后，提交答题规范复习提醒请求。
 
 ## 红线
 

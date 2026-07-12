@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/k12-learning/night-analysis-request-v1.schema.json",
+  "title": "K12 Learning Night Analysis Request v1",
+  "description": "k12-learning 向副作用 adapter 暴露的最小夜间错题分析输入；不得包含授权记录、运行时状态或由 Automation 猜测读取的 Learning State。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "business_date", "subject", "learning_summary", "recent_archives", "current_mistake"],
+  "properties": {
+    "contract_version": { "const": "v1" },
+    "business_date": { "type": "string", "format": "date" },
+    "subject": {
+      "enum": ["math", "physics", "chemistry", "biology", "chinese", "english", "history", "geography", "politics", "general"]
+    },
+    "learning_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["grade", "subjects", "notes"],
+      "properties": {
+        "grade": { "type": "string", "maxLength": 80 },
+        "subjects": { "type": "string", "maxLength": 240 },
+        "notes": { "type": "string", "maxLength": 4000 }
+      }
+    },
+    "recent_archives": {
+      "type": "array",
+      "maxItems": 3,
+      "items": { "type": "string", "maxLength": 6000 }
+    },
+    "current_mistake": { "type": "string", "minLength": 1, "maxLength": 20000 }
+  }
+}

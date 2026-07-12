@@ -95,6 +95,25 @@ def decision_contract() -> int:
             unknown = [item for item in selected if item and item not in names]
             if unknown:
                 raise AssertionError(f"playbook decision {name} 选择未知实现: {unknown}")
+
+    structured_routes = [case for case in tests if isinstance(case, dict) and case.get("expected_route")]
+    for case in structured_routes:
+        route = case["expected_route"]
+        mode = route["mode"]
+        canonical = {
+            "mode": mode,
+            "primaryPlaybook": route.get("primaryPlaybook"),
+            "supportingPlaybooks": route.get("supportingPlaybooks", []),
+            "confidence": "high",
+            "matchedSignals": ["regression fixture"],
+            "constraints": constraints,
+            "moduleRequired": route.get("moduleRequired"),
+            "clarification": "需要一个最小澄清问题" if mode == "CLARIFY" else None,
+        }
+        try:
+            check.validate(canonical)
+        except Exception as exc:
+            raise AssertionError(f"route fixture {case.get('id')} 不能形成合法 decision: {exc}") from exc
     return len(cases)
 
 

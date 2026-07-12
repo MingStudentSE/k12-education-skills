@@ -382,10 +382,42 @@
     "case_type": "conflict",
     "prompt": "我第一次来，这是我的初二数学题，我卡在第二步。",
     "expected_route": {
-      "mode": "DIRECT",
-      "primaryPlaybook": "math-problem-solving-coach"
+      "mode": "COMPOSE",
+      "primaryPlaybook": "student-quick-assessment",
+      "supportingPlaybooks": [
+        "learning-dna",
+        "math-problem-solving-coach"
+      ]
     },
-    "expected": "明确题目优先，不先做七字段 intake。"
+    "expected": "明确首次使用优先走最短 onboarding；直接把现有数学题作为快速测评材料，形成会话内初版学习 DNA 后立即继续处理第二步，不另起长问卷。"
+  },
+  {
+    "source_skill": "system-guide",
+    "source_case": 0,
+    "id": "system-guide-capability-overview",
+    "case_type": "natural-route",
+    "prompt": "我已经在用了，现在想看看你都能帮我做哪些学习任务，以及平时应该怎么说。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "system-guide"
+    },
+    "expected": "按学习目标介绍能力类别和可复制话术，不展示内部 playbook 菜单，也不重新触发首次画像。"
+  },
+  {
+    "source_skill": "system-guide",
+    "source_case": 1,
+    "id": "first-use-onboarding",
+    "case_type": "composition",
+    "prompt": "我是第一次用。请先告诉我你能帮我做什么、平时应该怎么跟你说，再带我选一个起点。",
+    "expected_route": {
+      "mode": "COMPOSE",
+      "primaryPlaybook": "student-quick-assessment",
+      "supportingPlaybooks": [
+        "learning-dna",
+        "system-guide"
+      ]
+    },
+    "expected": "能力介绍保持简短，随后请用户拿出一份近期材料，用 1–3 个短动作形成会话内初版学习 DNA 并立即开始一个真实任务；不展示内部名单，不做全面测评。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -397,7 +429,7 @@
       "mode": "INTAKE",
       "primaryPlaybook": "student-quick-assessment"
     },
-    "expected": "转入轻量定位，只使用当前会话信息。"
+    "expected": "请用户拿出一份代表性材料；没有材料时只用一道微题快速定位，形成会话内初版学习 DNA 并立即给一个真实行动，不追问完整字段。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -442,10 +474,13 @@
     "case_type": "conflict",
     "prompt": "这道物理题看解析都懂，遮住答案又不会，我想学透并做变式。",
     "expected_route": {
-      "mode": "DIRECT",
-      "primaryPlaybook": "science-solving-four-steps"
+      "mode": "COMPOSE",
+      "primaryPlaybook": "physics-problem-coach",
+      "supportingPlaybooks": [
+        "science-solving-four-steps"
+      ]
     },
-    "expected": "掌握验证和变式信号优先于普通物理解题。"
+    "expected": "物理单题方法负责主结果，四步法负责变式掌握；用户没有要求自己复述时不额外叠加费曼。组合在 module 内完成。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -515,9 +550,13 @@
     "prompt": "把我的错题、费曼结果和计划执行串起来，看看整条学习链断在哪里。",
     "expected_route": {
       "mode": "COMPOSE",
-      "primaryPlaybook": "skill-coordinator"
+      "primaryPlaybook": "correction-notebook",
+      "supportingPlaybooks": [
+        "feynman-learning",
+        "learning-plan"
+      ]
     },
-    "expected": "确需多 Skill 结果传递才进入协调器；协调器再单独请求数据授权。"
+    "expected": "由 k12-learning 直接组合错题、理解验证和计划方法；读取任何历史摘要前单独请求数据授权。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -812,12 +851,12 @@
     "source_case": 38,
     "id": "route-educational-skill-creator",
     "case_type": "target-coverage",
-    "prompt": "我想做一个专门训练化学方程式的学习 Skill。",
+    "prompt": "我在维护这个 K12 仓库，想新增一个可安装的化学方程式训练 Skill。",
     "expected_route": {
       "mode": "MODULE_REQUIRED",
       "moduleRequired": "k12-skill-studio"
     },
-    "expected": "应静默直达 educational-skill-creator，不展示 Skill 菜单。"
+    "expected": "应切到维护者 module，优先评估能否新增内部 playbook，不展示学生能力菜单。"
   },
   {
     "source_skill": "k12-learning-router",
@@ -1249,7 +1288,12 @@
     "source_skill": "science-solving-four-steps",
     "source_case": 1,
     "id": "happy-path",
-    "prompt": "请用🧩 理科解题四步法帮我处理一个数学/物理/化学等理科单题真正掌握。我已经有这些材料：题面、学生尝试、答案/解析、当前卡点和是否看过答案。",
+    "case_type": "target-coverage",
+    "prompt": "我想学一套理科单题从理解、计划、执行到回看的通用四步方法，先用一个小例子带我练。",
+    "expected_route": {
+      "mode": "DIRECT",
+      "primaryPlaybook": "science-solving-four-steps"
+    },
     "expected": "应先确认任务边界和最小输入，判断题型与卡点；默认使用教练式提示阶梯，而不是直接给完整解法；最后产出四步解题拆解、关键转折、变式迁移和掌握验证。"
   },
   {
@@ -1262,30 +1306,65 @@
   {
     "source_skill": "skill-coordinator",
     "source_case": 1,
-    "id": "happy-path",
-    "prompt": "请用🔗 SKILL联动协调器帮我处理一个多 skill 联动、系统健康检查或全景月报。我已经有这些材料：当前任务、已授权的数据摘要、需要联动的 skill 范围。",
-    "expected": "应先确认任务边界和最小输入，再产出联动判断、系统状态、月报/健康检查和下一步优先动作，并给出下一步行动。"
+    "id": "compose-monthly-learning-health",
+    "case_type": "composition",
+    "prompt": "根据我明确授权提供的本月错题摘要、复测结果和计划执行记录，判断学习链最该先补哪一环。",
+    "expected_route": {
+      "mode": "COMPOSE",
+      "primaryPlaybook": "learning-360-review",
+      "supportingPlaybooks": [
+        "correction-notebook",
+        "learning-plan"
+      ]
+    },
+    "expected": "应由 module 直接组合阶段体检、错题证据和计划执行，给出证据等级、链路断点和唯一优先动作，不创建方法间交接。"
   },
   {
     "source_skill": "skill-coordinator",
     "source_case": 2,
-    "id": "insufficient-context",
-    "prompt": "我想做多 skill 联动、系统健康检查或全景月报，但现在只知道一点点，不确定资料够不够。你先帮我判断怎么开始。",
-    "expected": "应避免臆造学生长期数据，先给最小补充信息模板；如涉及写入档案、提醒或跨 skill 联动，需要先说明路径并请求授权。"
+    "id": "compose-health-missing-evidence",
+    "case_type": "clarification",
+    "prompt": "我感觉整个学习系统都不太对，你直接读完我的全部历史后告诉我哪里坏了。",
+    "expected_route": {
+      "mode": "CLARIFY",
+      "primaryPlaybook": null
+    },
+    "expected": "不得默认读取全部历史；先说明所需最小证据和用途，询问用户愿意提供当前会话材料还是授权指定摘要。"
+  },
+  {
+    "source_skill": "system-guide",
+    "source_case": 2,
+    "id": "system-guide-parent-first-use",
+    "prompt": "我是初一孩子的家长，第一次用。你能怎么帮助孩子学习、我平时该怎么说？别让我研究一堆功能名称。",
+    "expected": "应先请家长和孩子从手头选一份近期课本、作业或试卷材料，简短说明将做 3–5 分钟快速测评；形成会话内初版学习 DNA 后立即处理一项真实任务。不替家长监控或评价孩子，跨会话保存、Wiki 和提醒分别确认。"
   },
   {
     "source_skill": "student-quick-assessment",
     "source_case": 1,
     "id": "fast-lane-senior2-math-exam",
     "prompt": "我是高二理科生，最近数学老考不好，手边有上次月考卷。帮我看看从哪开始。",
-    "expected": "应识别快车道，推断高二、理科方向、数学弱项和有月考卷；只补问教材版本与授权状态，输出画像卡，并建议暖起 math-error-dna 与 math-problem-solving-coach。"
+    "expected": "应请用户发月考卷中一页或几道代表题及原过程，不先追问教材版本和完整授权；用 1–3 个短动作形成有证据的初版学习 DNA，并马上修复其中一道题。"
   },
   {
     "source_skill": "student-quick-assessment",
     "source_case": 2,
     "id": "thin-context-full-intake",
     "prompt": "帮我看看我该怎么学。",
-    "expected": "应走完整道，批量追问七字段并给待补充模板；不得臆造年级、科目、方向、目标或证据材料。"
+    "expected": "应先请用户任选一份近期材料；没有材料时最多补问年级和当前关注点，再用一道微题启动。不得批量追问七字段，不得做全面测评或臆造画像。"
+  },
+  {
+    "source_skill": "student-quick-assessment",
+    "source_case": 4,
+    "id": "first-use-rejects-comprehensive-assessment",
+    "prompt": "第一次用。你先把九科都全面测一遍，问多少问题都行，测完再开始学习。",
+    "expected": "应说明首次启动只需一份代表性材料和 1–3 个短动作，避免用全科全面测评拖延启动；请用户选当前最想解决的一科或一份材料，3–5 分钟形成初版学习 DNA 后立即行动。"
+  },
+  {
+    "source_skill": "student-quick-assessment",
+    "source_case": 5,
+    "id": "first-use-dna-before-persistence",
+    "prompt": "我是第一次使用，这是我的英语作业和订正。先帮我建立个人画像，然后开始学习。",
+    "expected": "应直接以英语作业和订正做快速测评，先展示仅本次会话的初版学习 DNA，再马上完成一个真实英语学习动作；完成后才询问是否跨会话保存，并说明拟保存字段和删除方式。"
   },
   {
     "source_skill": "student-quick-assessment",

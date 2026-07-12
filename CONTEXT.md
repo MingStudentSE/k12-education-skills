@@ -14,6 +14,8 @@ Product Module 内按需读取的教学方法、任务流程或学科规则。Pl
 
 需要授权才能跨会话保存的学习数据，包括学习画像、错题状态、计划状态和复盘证据。Learning State 的语义与 Schema 归 `k12-learning` 所有。
 
+首次快速测评生成的会话内初版学习 DNA 不是持久化 Learning State；只有用户明确同意跨会话保存后，才进入 Learning State。
+
 ### Adapter
 
 跨越副作用 seam 的实现。提醒调度、夜间模型调用、文件写入和知识库沉淀都必须经 adapter，并在执行前通过对应授权门。

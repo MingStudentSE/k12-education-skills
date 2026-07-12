@@ -20,7 +20,7 @@
 
 | 场景 | 建议暖起 |
 |---|---|
-| 初三全科冲刺 | `learning-plan`、`skill-coordinator`、`correction-notebook` |
+| 初三全科冲刺 | 以 `learning-plan` 为主，按需组合 `correction-notebook` |
 | 初中数学错题 | `math-error-dna`、`math-problem-solving-coach`、`math-concept-explainer` |
 | 初中物理/化学错题 | `physics-error-dna` 或 `chemistry-error-dna`，再接 `science-solving-four-steps` |
 | 文综材料题 | `history-problem-coach`、`geography-problem-coach`、`politics-application-coach`，只练论证不评立场 |

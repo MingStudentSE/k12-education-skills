@@ -27,7 +27,7 @@
 同时读取：
 - `docs/learning-science-principles.md` — 学习科学 8 项最低要求
 - `skills/general/correction-notebook/SKILL.md` §9.4 — 已写好的历史协作协议（history-error-dna 必须与之对齐）
-- `skills/general/skill-coordinator/schemas/handover-protocol.schema.json` — 交接 schema（已扩展支持 history）
+- `skills/k12-learning/references/playbooks/general/correction-notebook/schemas/handover-protocol.schema.json` — 旧记录兼容 schema（V3 新会话不创建内部 handover）
 
 ---
 

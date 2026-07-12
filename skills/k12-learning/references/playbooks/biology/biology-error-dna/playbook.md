@@ -13,12 +13,11 @@ references:
   - references/biology-error-dimension-table.md
   - references/biology-concept-confusion-map.md
   - references/biology-data-analysis-guide.md
-depends_on: learning-dna, correction-notebook, feynman-learning
 ---
 
-> **内部 playbook**：本文件由旧 Skill 迁移，不是平台可发现 interface。文中的“调用/转交 Skill”统一解释为当前 Product Module 内部组合；Product Module 主文件、授权门与安全规则优先。
+> **内部 playbook**：本文件是当前 Product Module 按需加载的方法说明；Product Module 主文件、授权门与安全规则优先。
 
-# 🧬 生物错误DNA SKILL
+# 🧬 生物错误DNA方法
 
 > **一句话定位：** 普通错题本记录“哪道生物题错了”，生物错误DNA定位“为什么总在层级、结构功能、机制链、实验或图表术语上断裂”。
 
@@ -36,11 +35,11 @@ depends_on: learning-dna, correction-notebook, feynman-learning
 
 ## 通用边界与降级策略
 
-- **不是第二套错题本**：通用 `correction-notebook` 记录题目和基础错因，本 SKILL 只补生物深度根因。
+- **不是第二套错题本**：通用 `correction-notebook` 记录题目和基础错因，本方法只补生物深度根因。
 - **信息不足**：没有题目、图表或学生过程时，先做最小错因访谈，不编造长期数据。
-- **任务不匹配**：单题讲解按问题转 `biology-structure-function-coach`、`biology-concept-map-builder`、`biology-process-explainer` 或 `biology-experiment-inquiry`。
+- **任务不匹配**：单题讲解按问题切换到 `biology-structure-function-coach`、`biology-concept-map-builder`、`biology-process-explainer` 或 `biology-experiment-inquiry`。
 - **学生只要答案**：可给必要答案，但不把会背答案当成错因修复完成。
-- **长期记录**：未经明确同意，不写入长期档案、不提醒、不跨 SKILL 共享。
+- **长期记录**：未经明确同意，不写入长期档案、不提醒、不在内部组合中共享。
 - **生命科学边界**：不提供医疗诊断、治疗、用药、人体实验或动物伤害建议。
 - **不得分析完就结束**：错因诊断后必须产出飞轮闭环出口四要素；只给修复任务而无掌握验证/沉淀/复测/复盘推进，等同"分析完就结束"。
 
@@ -51,7 +50,7 @@ depends_on: learning-dna, correction-notebook, feynman-learning
 ### 飞轮闭环出口（本轮错因必须推进）
 - ① 掌握验证：B1层级/B2结构功能/B3过程机制→`feynman-learning`（画层级树/机制链+口述结构如何支持功能）；B4实验/B5图表→1道变式（对应生物教练，独立做到第一步）。判定：能独立说清结构层级→功能过程→调节算掌握。
 - ② 沉淀入口：通用错题本记表面+本DNA记根因（同一事件去重一条）；概念混淆→同时写康奈尔线索栏。给字段摘要+授权状态（未授权只给建议字段，不实写）。
-- ③ 复测安排：T+1→T+3→T+7→T+14 间隔序列，复测用变式题（非原题），载体 `im-reminder`（授权后）。
+- ③ 复测安排：T+1→T+3→T+7→T+14 间隔序列，复测用变式题（非原题）；需要实际提醒时，经授权后向 `k12-automation` 提交最小提醒请求。
 - ④ 复盘入口：本题+本周同类纳入 `weekly-review`，给触发信号（同类累计≥3 或 复测未过）。
 
 ---
@@ -72,10 +71,10 @@ depends_on: learning-dna, correction-notebook, feynman-learning
 
 | 维度 | 名称 | 典型特征 | 修复路径 |
 |------|------|----------|----------|
-| B1 | 层级定位错误 | 细胞/组织/器官/系统、种群/群落/生态系统混乱 | 层级树、判断表，联动 `biology-structure-function-coach` |
+| B1 | 层级定位错误 | 细胞/组织/器官/系统、种群/群落/生态系统混乱 | 层级树、判断表，组合 `biology-structure-function-coach` |
 | B2 | 结构功能断裂 | 会背功能但说不清结构特征如何支持功能 | 结构-功能表、反例验证 |
-| B3 | 过程机制断链 | 光合/呼吸/循环/免疫/遗传/生态链条跳步或方向反 | 起点终点、机制链、条件预测，联动 `biology-process-explainer` |
-| B4 | 实验探究错误 | 变量、对照、重复、误差或结论范围错误 | 变量表、数据证据、误差改进，联动 `biology-experiment-inquiry` |
+| B3 | 过程机制断链 | 光合/呼吸/循环/免疫/遗传/生态链条跳步或方向反 | 起点终点、机制链、条件预测，组合 `biology-process-explainer` |
+| B4 | 实验探究错误 | 变量、对照、重复、误差或结论范围错误 | 变量表、数据证据、误差改进，组合 `biology-experiment-inquiry` |
 | B5 | 图表信息与术语表达错误 | 坐标单位漏读、趋势写不清、术语混用、答案口语化 | 图表阅读顺序、术语改写、证据化结论 |
 
 ### 主错因判定
@@ -131,20 +130,20 @@ depends_on: learning-dna, correction-notebook, feynman-learning
 ### 工作流 C：与通用错题本协作
 
 1. 通用错题本负责题目、答案、日期、基础错因。
-2. 本 SKILL 接收生物题摘要、图表和学生过程。
-3. 本 SKILL 回写 B1-B5、根因、修复任务和复测建议。
+2. 本方法接收生物题摘要、图表和学生过程。
+3. 本方法回写 B1-B5、根因、修复任务和复测建议。
 4. 不重复建题目记录，不重复提醒。
 
 ---
 
-## 五、Cross-skill boundaries（跨 Skill 边界）
+## 五、Internal composition boundaries（内部组合边界）
 
 | 任务 | 处理方式 |
 |------|----------|
-| 只需要结构功能解释 | 转 `biology-structure-function-coach` |
-| 只需要概念图或易混概念 | 转 `biology-concept-map-builder` |
-| 只需要生命过程机制链 | 转 `biology-process-explainer` |
-| 只需要实验设计或数据分析 | 转 `biology-experiment-inquiry` |
+| 只需要结构功能解释 | 切换到 `biology-structure-function-coach` |
+| 只需要概念图或易混概念 | 切换到 `biology-concept-map-builder` |
+| 只需要生命过程机制链 | 切换到 `biology-process-explainer` |
+| 只需要实验设计或数据分析 | 切换到 `biology-experiment-inquiry` |
 | 需要长期错题记录 | 与 `correction-notebook` 协作，先获授权 |
 
-跨 SKILL 只传递最小摘要：题目类型、错误步骤、B 维度、修复建议和复测结果。
+内部组合只传递最小摘要：题目类型、错误步骤、B 维度、修复建议和复测结果。

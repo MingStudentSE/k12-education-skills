@@ -11,7 +11,6 @@ description: >
   核心流程：先判断题型与卡点，再用教练式提示阶梯推进理解题目 → 拟定方案 → 执行方案 → 回顾迁移；
   最后用掌握验证确认是否真的学会。默认不直接替学生做完整解法，除非学生明确要求。
 compatibility: Claude Code / Codex / OpenClaw / ClawHub
-depends_on: learning-dna, correction-notebook, feynman-learning, cornell-notes
 references:
   - references/polya-four-step-guide.md
   - references/science-solving-four-steps-checklist.md
@@ -19,7 +18,7 @@ references:
   - references/science-solving-four-steps-full-playbook.md
 ---
 
-> **内部 playbook**：本文件由旧 Skill 迁移，不是平台可发现 interface。文中的“调用/转交 Skill”统一解释为当前 Product Module 内部组合；Product Module 主文件、授权门与安全规则优先。
+> **内部 playbook**：本文件是当前 Product Module 按需加载的方法说明；Product Module 主文件、授权门与安全规则优先。
 
 # 🧩 理科解题四步法
 
@@ -30,14 +29,14 @@ references:
 - 学生带来数学、物理、化学、生物或综合理科单题，想真正掌握而不是只拿答案。
 - 学生说“看懂了但不会想”“这题怎么学透”“第一步为什么这样来”“帮我做变式/复盘”。
 - 学生已经看过答案、做错题或卡在某一步，需要定位卡点并把题目沉淀成可复用方法。
-- 其他技能（错题本、费曼、康奈尔、复测提醒）需要单题掌握拆解或变式迁移时。
+- 其他方法（错题本、费曼、康奈尔、复测提醒）需要单题掌握拆解或变式迁移时。
 
 ## 什么时候不要使用我
 
 - 题目不完整，缺题面、学生尝试、答案/解析、卡点或是否看过答案；先索要最小输入。
 - 学生明确只要完整答案；可转入“完整解法模式”，但仍标注关键入口、依据和可复用信号。
 - 题目强依赖学科专项知识且通用四步不足；先按通用流程定位，再建议联动学科专项教练。
-- 未获授权时，不写入错题本、不安排复测、不向学习DNA或其他技能共享记录。
+- 未获授权时，不写入错题本、不安排复测、不向学习DNA或其他方法共享记录。
 
 ## 最小输入
 
@@ -58,7 +57,7 @@ references:
 5. **执行方案**：检查每一步依据、公式适用条件、计算/单位/符号风险；只在学生明确要答案时给完整推导。
 6. **回顾迁移**：总结关键转折、方法边界、同类题信号；设计一个保持学习区的轻量变式，参考 `references/learning-zone-principles.md`。
 7. **掌握验证**：用独立重做、口头解释、变式迁移、间隔复测判定A/B/C/D等级，详见 `references/science-solving-four-steps-checklist.md`。
-8. **沉淀与联动**：如需记录错因、生成笔记、触发费曼验证或提醒复测，先说明路径并请求授权。
+8. **沉淀与内部组合**：如需记录错因、生成笔记、触发费曼验证或向 `k12-automation` 提交复测提醒请求，先说明路径并请求授权。
 
 ## 输出模板
 

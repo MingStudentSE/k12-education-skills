@@ -5,7 +5,7 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync, statSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { hasLocalAuthorization, readFrontmatterPrefix } from './authorization.mjs';
+import { hasLocalAuthorization, readStudentAuthorization } from './authorization.mjs';
 import { businessDate } from './business-time.mjs';
 
 const ENGINE_DIR = dirname(fileURLToPath(import.meta.url));
@@ -34,14 +34,14 @@ function frontmatter(text) {
 }
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const listDir = (d, filter = () => true) => existsSync(d) ? readdirSync(d).filter(filter) : [];
-const parseSubjects = (raw) => String(raw || '').replace(/[\[\]]/g, '').split(/[,，\s]+/).map(s => s.trim()).filter(Boolean);
 const sev = (rec) => rec >= 3 ? 'red' : rec === 2 ? 'amber' : 'slate';
 
 function readStudent(id) {
   const dir = join(STUDENTS, id);
-  const profilePath = join(dir, 'profile.md');
-  const fm = existsSync(profilePath) ? readFrontmatterPrefix(profilePath) : {};
-  if (!hasLocalAuthorization(fm)) return null;
+  let authorization;
+  try { authorization = readStudentAuthorization(dir); }
+  catch { return null; }
+  if (!hasLocalAuthorization(authorization.record)) return null;
 
   const archDir = join(dir, 'archive');
   const groups = {};
@@ -67,7 +67,7 @@ function readStudent(id) {
   const inbox = join(dir, 'inbox');
   const pending = listDir(inbox, f => /\.(md|txt)$/.test(f) && statSync(join(inbox, f)).isFile()).length;
 
-  return { id, name: fm.name || id, grade: fm.grade || '', subjects: parseSubjects(fm.subjects), totalEntries, weak, maxCount, lastDay, lastDayFiles, pending };
+  return { id, name: id, grade: '', subjects: [], totalEntries, weak, maxCount, lastDay, lastDayFiles, pending };
 }
 
 function card(s) {
@@ -173,7 +173,7 @@ footer{text-align:center;color:var(--mut);font-size:12px;margin-top:32px}
     <div class="stat${totalTriggered ? ' hot' : ''}"><div class="ic">🔴</div><div><div class="n">${totalTriggered}</div><div class="l">已触发专项弱项</div></div></div>
     <div class="stat${totalPending ? ' hot' : ''}"><div class="ic">📥</div><div><div class="n">${totalPending}</div><div class="l">待处理错题</div></div></div>
   </div>
-  <div class="grid">${students.map(card).join('\n') || '<div class="empty">还没有学生，请把 module 的 <code>assets/student-template</code> 复制为 <code>students/&lt;student-id&gt;</code>。</div>'}</div>
+  <div class="grid">${students.map(card).join('\n') || '<div class="empty">没有已授权的 Automation 运行对象。请先通过本地控制台注册，或按运行手册建立 <code>automation/state.json</code>。</div>'}</div>
   <footer>K12 错题分析产线 · 看板由 build-dashboard.mjs 生成 · 数据源 vault 文件夹</footer>
 </div>
 </body></html>`;

@@ -1,6 +1,17 @@
 # 版本历史与维护追踪
 
-> 当前版本为 **V3.0**：4 个 Product Module、61 个内部 playbook、58 个学习能力、63 条旧入口映射、213 个行为用例。
+> 当前版本为 **V3.0**：4 个 Product Module、61 个内部 playbook、58 个学习能力、63 条旧入口映射、221 个行为用例。
+
+## 2026-07-12 · V3 内部深化与用户向导
+
+- 根据首次使用反馈，将 onboarding 改为“拿一份手头材料 → 3–5 分钟快速测评 → 会话内初版学习 DNA → 立即完成一个真实动作”；删除七字段完整道和“有题就跳过画像”的旧默认。
+- 新增首次使用可执行契约门，固定材料优先、测评上限、初版 DNA、立即行动与跨会话保存授权，并加入首次带材料、拒绝全面测评等回归用例。
+- 用内部 `system-guide` 替换冗余的 `skill-coordinator`；多方法组合改由 `k12-learning` 主流程直接负责，公开 Product Module 仍为 4 个。
+- 新增 canonical 用户指南，覆盖第一次使用、日常学习、九学科、Wiki、提醒、OCR、夜间分析与授权话术。
+- 清理学习 playbook 主文件中的 `depends_on`、旧公开 Skill 和跨 Skill 交接语义；真实提醒统一通过 `k12-automation` seam。
+- 夜间产线改为读取 Learning 拥有的版本化 adapter，不再遍历内部 playbook 目录；Automation 授权/运行状态与 Learning State 分离。
+- 新增 V3 路由契约与 live Codex 回归入口，组合用例扩为 5 条，并让 route fixture 可形成完整 decision Schema。
+- 迁移映射补记可审计来源：Git 快照为 62 个旧 Skill，`k12-learning-router` 作为仅有审计记录、无 Git object 的例外单列。
 > 本文档面向维护者；v2.x 的 63-Skill 表格从下方“历史版本状态”起保留作追溯，不代表当前安装结构。公开发布说明见 [Release Notes](../RELEASE_NOTES.md)。
 
 ---

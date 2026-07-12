@@ -13,12 +13,11 @@ references:
   - references/chemistry-reaction-4step-statemachine.md
   - references/chemistry-equation-balancing-guide.md
   - references/chemistry-calculation-checklist.md
-depends_on: learning-dna, chemistry-particle-modeler, chemistry-error-dna
 ---
 
-> **内部 playbook**：本文件由旧 Skill 迁移，不是平台可发现 interface。文中的“调用/转交 Skill”统一解释为当前 Product Module 内部组合；Product Module 主文件、授权门与安全规则优先。
+> **内部 playbook**：本文件是当前 Product Module 按需加载的方法说明；Product Module 主文件、授权门与安全规则优先。
 
-# 🔥 化学变化与方程式教练 SKILL
+# 🔥 化学变化与方程式教练方法
 
 > **一句话定位：** 反应题先看证据和粒子变化，再写反应物生成物，最后用守恒、配平和计算验证。
 
@@ -30,17 +29,17 @@ depends_on: learning-dna, chemistry-particle-modeler, chemistry-error-dna
 2. **收集最小输入**：只追问题干、已知物质、实验现象、学生写出的方程式/计算式、卡点和学段。
 3. **执行主流程**：按“判断反应类型与证据 → 写反应物生成物 → 配平与守恒检查 → 计算/迁移验证”推进。
 4. **产出结果**：给出反应分析表、方程式检查、守恒依据、必要计算步骤和一道变式验证。
-5. **复盘与写入**：反复配平、守恒或计算错误，经同意交接 `chemistry-error-dna`。
+5. **复盘与写入**：反复配平、守恒或计算错误，经同意后组合 `chemistry-error-dna`。
 
 ---
 
 ## 通用边界与降级策略
 
 - **信息不足**：先要物质、条件、现象或学生尝试；不编造反应产物和实验事实。
-- **任务不匹配**：微粒/符号意义不清转 `chemistry-particle-modeler`；概念边界不清转 `chemistry-concept-explainer`；实验方案转 `chemistry-lab-inquiry`。
+- **任务不匹配**：微粒/符号意义不清切换到 `chemistry-particle-modeler`；概念边界不清切换到 `chemistry-concept-explainer`；实验方案切换到 `chemistry-lab-inquiry`。
 - **学生只要答案**：可给最终方程式或计算结果，但先提示完整训练需要反应证据和守恒检查。
 - **教练默认**：不直接替学生跳过判断、配平和单位检查；先让学生写反应物生成物或列已知未知。
-- **长期记录**：未经明确同意，不写入长期错因、不发送提醒、不跨 SKILL 共享。
+- **长期记录**：未经明确同意，不写入长期错因、不请求 `k12-automation` 发送提醒、不在内部组合中共享。
 - **安全边界**：不指导危险制备、爆炸、有毒气体或校外不安全实验操作。
 
 ---
@@ -116,13 +115,13 @@ depends_on: learning-dna, chemistry-particle-modeler, chemistry-error-dna
 
 ---
 
-## 五、Cross-skill boundaries（跨 Skill 边界）
+## 五、Internal composition boundaries（内部组合边界）
 
 | 任务 | 处理方式 |
 |------|----------|
-| 学生不懂式子代表哪些粒子 | 联动 `chemistry-particle-modeler` |
-| 反应类型和概念边界不清 | 联动 `chemistry-concept-explainer` |
-| 反应来自实验探究和证据设计 | 转 `chemistry-lab-inquiry` |
-| 配平、守恒、计算反复错 | 经同意交接 `chemistry-error-dna` |
+| 学生不懂式子代表哪些粒子 | 组合 `chemistry-particle-modeler` |
+| 反应类型和概念边界不清 | 组合 `chemistry-concept-explainer` |
+| 反应来自实验探究和证据设计 | 切换到 `chemistry-lab-inquiry` |
+| 配平、守恒、计算反复错 | 经同意后组合 `chemistry-error-dna` |
 
-交接摘要只包含本题方程式、错误步骤、守恒检查结果和建议复测，不传递完整历史。
+内部组合摘要只包含本题方程式、错误步骤、守恒检查结果和建议复测，不传递完整历史。

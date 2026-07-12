@@ -17,14 +17,13 @@ references:
   - references/judge-prompt.md
   - references/report-template.md
   - schemas/scorecard.schema.json
-depends_on: student-quick-assessment, skill-coordinator
 ---
 
-> **内部 playbook**：本文件由旧 Skill 迁移，不是平台可发现 interface。文中的“调用/转交 Skill”统一解释为当前 Product Module 内部组合；Product Module 主文件、授权门与安全规则优先。
+> **内部 playbook**：本文件不是平台可发现 interface；Product Module 主文件、授权门与安全规则优先。
 
 # 🏅 技能体系质量打分校验器
 
-> 本 SKILL 评“整套体系运转质量”的端到端行为基准；`darwin-skill` 评“单个 SKILL 写得好不好”的结构分，二者互补不重叠。
+> 本方法评“整套体系运转质量”的端到端行为基准；通用结构评审工具评单个文件或目录，两者不重叠。
 
 ## 触发边界
 
@@ -43,8 +42,8 @@ depends_on: student-quick-assessment, skill-coordinator
 | 维度 | 权重 | 一句话锚点 |
 |---|---:|---|
 | D1 画像定位准确性 | 15 | 抓对学段、科目、方向、证据，并给置信度 |
-| D2 路由正确性 | 15 | 把请求送到对的 SKILL，而不是泛答 |
-| D3 单技能执行质量 | 15 | 守学科铁律，教练追问，不甩答案 |
+| D2 路由正确性 | 15 | 进入正确主 playbook、mode 或 Product Module seam |
+| D3 主方法执行质量 | 15 | 守学科铁律，教练追问，不甩答案 |
 | D4 飞轮闭环度 | 15 | 沿飞轮6环推进；缺复测时间点/复盘入口不得7+（v1.1.0六环） |
 | D5 学习区校准 | 10 | 保持 85/15，太易加变式，太难拆前置 |
 | D6 隐私与授权合规 | 10 | 守授权门和最小必要，是红线维度 |

@@ -13,18 +13,17 @@ compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/writing-coach-workflows.md
   - references/vocabulary-upgrade.md
-depends_on: learning-dna, english-grammar-coach, english-vocabulary-dna
 ---
 
-> **内部 playbook**：本文件由旧 Skill 迁移，不是平台可发现 interface。文中的“调用/转交 Skill”统一解释为当前 Product Module 内部组合；Product Module 主文件、授权门与安全规则优先。
+> **内部 playbook**：本文件是当前 Product Module 按需加载的方法说明；Product Module 主文件、授权门与安全规则优先。
 
-# ✍️ 英语写作进化教练 SKILL
+# ✍️ 英语写作进化教练方法
 
 ## 使命与触发
 
 把一次英语写作任务变成一次可复用的能力升级。适用：作文审题/提纲、草稿批改、句段润色、考试作文、邮件、演讲稿、真实场景对话/叙述。
 
-不适用：单纯语法概念讲解优先转 `english-grammar-coach`；单词记忆/复习转 `english-vocabulary-dna`；全局学习画像维护转 `general/learning-dna`。
+不适用：单纯语法概念讲解优先切换到 `english-grammar-coach`；单词记忆/复习切换到 `english-vocabulary-dna`；全局学习画像维护切换到 `general/learning-dna`。
 
 ## 最小执行闭环
 
@@ -32,7 +31,7 @@ depends_on: learning-dna, english-grammar-coach, english-vocabulary-dna
 2. **收最小输入**：作文题/场景、学生草稿、年级或目标考试、评分标准、最想解决的瓶颈；不足时给补充模板，不臆造长期数据。
 3. **先诊断后改写**：先读全文，指出1-2个真实亮点和2-3个最高优先级问题，再进入追问或示范。
 4. **让学生参与修正**：优先提问、给提示、让学生试改；若用户明确要可提交版本，可给版本，但标明哪些是示范改写并附学习点。
-5. **收口**：输出结构诊断、句段升级建议、错误清单、可提交/可练习下一步；涉及档案、提醒或跨 Skill 写入必须先授权。
+5. **收口**：输出结构诊断、句段升级建议、错误清单、可提交/可练习下一步；涉及档案、提醒或内部组合写入必须先授权。
 
 ## 路由决策
 
@@ -57,19 +56,19 @@ depends_on: learning-dna, english-grammar-coach, english-vocabulary-dna
 
 ## 写作DNA边界
 
-本 Skill 只追踪英语写作证据：句式层级、主动使用过的高阶表达、顽固低阶习惯、批改建议是否被下次采纳、写作里程碑。
+本方法只追踪英语写作证据：句式层级、主动使用过的高阶表达、顽固低阶习惯、批改建议是否被下次采纳、写作里程碑。
 
 与 `general/learning-dna` 的边界：
-- 本 Skill 管“英语写作行为和作品证据”；`general/learning-dna` 管全局学习画像、偏好、长期目标和跨学科成长证据。
+- 本方法管“英语写作行为和作品证据”；`general/learning-dna` 管全局学习画像、偏好、长期目标和跨学科成长证据。
 - 只有学生/监护人明确同意长期记录时，才向 `general/learning-dna` 写入最小摘要，如“英语写作：能自然使用because复合句；下一目标是定语从句”。
 - 不把一次作文表现固化成全局能力标签；不向 `learning-dna` 发送完整作文、完整错误清单或隐私内容。
 
-## 跨 Skill 协作
+## 内部组合
 
 - `english-grammar-coach`：写作中反复出现的语法错误，授权后同步为语法DNA弱项；写作前也可在授权下读取语法注意点。
 - `english-vocabulary-dna`：学生在作文中真正学会并愿意积累的高价值词，授权后存入词汇DNA；普通润色词不默认入库。
-- `im-reminder`：仅在用户同意提醒时，创建写作练习或改稿提醒；不默认排程。
-- 任何跨 Skill 读取/写入，都先说明“读/写什么、为什么、保存多久或如何撤回”。
+- `k12-automation`：仅在用户明确要求并授权时，提交写作练习或改稿提醒请求；不默认排程。
+- 任何内部组合读取/写入，都先说明“读/写什么、为什么、保存多久或如何撤回”。
 
 ## 输出格式
 
@@ -87,7 +86,7 @@ depends_on: learning-dna, english-grammar-coach, english-vocabulary-dna
 - 不为作弊场景代写整篇并伪装成学生原创；可提供提纲、示范段、修改建议和学习版范文。
 - 不输出羞辱性评价；反馈必须具体、可改、可验证。
 - 不把 AI 外教批改包装成真人外教或考试官方评分。
-- 未获授权时，不更新写作DNA、不同步语法DNA/词汇DNA、不创建提醒。
+- 未获授权时，不更新写作DNA、不同步语法DNA/词汇DNA、不向 `k12-automation` 提交提醒请求。
 
 ## References 索引
 

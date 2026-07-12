@@ -70,7 +70,7 @@ subject: chemistry
 Fe + O2 -> FeO
 EOF
 business_day="$(node --input-type=module -e "import {businessDate} from '$AUTO/business-time.mjs'; console.log(businessDate())")"
-if K12_ROOT="$tmp" K12_STUDENTS_DIR="$tmp/students" K12_LOG_DIR="$tmp/logs" K12_LEARNING_DIR="$ROOT/skills/k12-learning" K12_MOCK_LLM=1 node "$AUTO/night-run.mjs" --student demo >/tmp/k12-night-mock.log 2>&1 \
+if K12_ROOT="$tmp" K12_STUDENTS_DIR="$tmp/students" K12_LOG_DIR="$tmp/logs" K12_LEARNING_ADAPTER="$ROOT/skills/k12-learning/references/adapters/night-analysis-v1.md" K12_MOCK_LLM=1 node "$AUTO/night-run.mjs" --student demo >/tmp/k12-night-mock.log 2>&1 \
   && [ -f "$tmp/students/demo/outbox/$business_day/sample-错因诊断.md" ] \
   && [ -f "$tmp/students/demo/outbox/$business_day/sample-变式训练题.md" ] \
   && [ -f "$tmp/students/demo/outbox/$business_day/sample-答案与讲解.md" ] \
@@ -90,6 +90,11 @@ if grep -RqsE --exclude-dir=node_modules '\[TODO|TODO:' "$ROOT/skills"; then
 else
   echo "  [11 PLACEHOLDER] OK"
 fi
+
+run_check "12 PLAYBOOK-SEMANTICS" node "$ROOT/pipeline/validate_playbook_semantics.mjs"
+run_check "13 AUTOMATION-SEAM" node "$ROOT/pipeline/validate_automation_seam.mjs"
+run_check "14 V3-ROUTE-CONTRACT" node "$ROOT/pipeline/run_v3_route_regression.mjs" --contract-only
+run_check "15 FIRST-USE-CONTRACT" node "$ROOT/pipeline/validate_first_use_contract.mjs"
 
 echo "===== SUMMARY: Product Module failures $FAILCNT ====="
 [ "$FAILCNT" -eq 0 ]

@@ -13,12 +13,11 @@ references:
   - references/chemistry-lab-safety-guide.md
   - references/chemistry-experiment-inquiry-methods.md
   - references/chemistry-evidence-table.md
-depends_on: learning-dna, chemistry-concept-explainer, chemistry-error-dna
 ---
 
-> **内部 playbook**：本文件由旧 Skill 迁移，不是平台可发现 interface。文中的“调用/转交 Skill”统一解释为当前 Product Module 内部组合；Product Module 主文件、授权门与安全规则优先。
+> **内部 playbook**：本文件是当前 Product Module 按需加载的方法说明；Product Module 主文件、授权门与安全规则优先。
 
-# 🧯 化学实验探究教练 SKILL
+# 🧯 化学实验探究教练方法
 
 > **一句话定位：** 化学实验先定安全边界，再设计变量和证据；不用“我觉得”替代观察记录。
 
@@ -30,7 +29,7 @@ depends_on: learning-dna, chemistry-concept-explainer, chemistry-error-dna
 2. **收集最小输入**：只追问探究问题、可用材料、实验条件、学生方案、观察记录、数据表和安全限制。
 3. **执行主流程**：按“明确问题与安全边界 → 设计变量/对照/步骤 → 观察证据与记录 → 解释结论并排除干扰”推进。
 4. **产出结果**：给出安全检查、变量表、步骤草案、证据表、结论句式和干扰排除。
-5. **复盘与写入**：反复实验证据错误经同意交接 `chemistry-error-dna`；未授权时不建立长期记录。
+5. **复盘与写入**：反复实验证据错误经同意后组合 `chemistry-error-dna`；未授权时不建立长期记录。
 
 ---
 
@@ -38,10 +37,10 @@ depends_on: learning-dna, chemistry-concept-explainer, chemistry-error-dna
 
 - **安全优先**：不提供危险化学品制备、爆炸、有毒气体、强酸强碱不当操作、家庭高风险实验等指导。
 - **信息不足**：先请求探究问题、材料、变量和安全条件；不编造数据或实验现象。
-- **任务不匹配**：概念边界转 `chemistry-concept-explainer`；方程式与计算转 `chemistry-reaction-coach`；微粒解释转 `chemistry-particle-modeler`。
+- **任务不匹配**：概念边界切换到 `chemistry-concept-explainer`；方程式与计算切换到 `chemistry-reaction-coach`；微粒解释切换到 `chemistry-particle-modeler`。
 - **学生只要结论**：可给证据化结论框架，但提醒没有证据不能判定实验结论。
 - **教练默认**：先让学生写变量、对照和预测，再修正方案。
-- **长期记录**：未经明确同意，不写入档案、不提醒、不跨 SKILL 共享。
+- **长期记录**：未经明确同意，不写入档案、不提醒、不在内部组合中共享。
 
 ---
 
@@ -113,13 +112,13 @@ depends_on: learning-dna, chemistry-concept-explainer, chemistry-error-dna
 
 ---
 
-## 五、Cross-skill boundaries（跨 Skill 边界）
+## 五、Internal composition boundaries（内部组合边界）
 
 | 任务 | 处理方式 |
 |------|----------|
-| 实验涉及概念混淆 | 联动 `chemistry-concept-explainer` |
-| 实验现象需要微粒解释 | 联动 `chemistry-particle-modeler` |
-| 实验结果要写方程式或计算 | 转 `chemistry-reaction-coach` |
-| 变量、证据、误差反复出错 | 经同意交接 `chemistry-error-dna` |
+| 实验涉及概念混淆 | 组合 `chemistry-concept-explainer` |
+| 实验现象需要微粒解释 | 组合 `chemistry-particle-modeler` |
+| 实验结果要写方程式或计算 | 切换到 `chemistry-reaction-coach` |
+| 变量、证据、误差反复出错 | 经同意后组合 `chemistry-error-dna` |
 
-交接摘要只包含探究问题、变量表、证据缺口、错误类型和修复建议。
+内部组合摘要只包含探究问题、变量表、证据缺口、错误类型和修复建议。

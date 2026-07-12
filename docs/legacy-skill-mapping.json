@@ -2,6 +2,14 @@
   "version": "V3.0",
   "legacySkillCount": 63,
   "productModuleCount": 4,
+  "sourceSnapshot": {
+    "gitCommit": "42d1f0d2453f618c7ca1c1227bbcfb2801edf9ea",
+    "gitTrackedSkillCount": 62,
+    "auditOnlyLegacySkills": [
+      "k12-learning-router"
+    ],
+    "note": "Git 快照可复现 62 个旧 Skill；k12-learning-router 仅见于迁移前审计记录，Git object 不可复现，因此单独标记，不冒充已提交来源。"
+  },
   "mappings": [
     {
       "legacy_skill": "biology-concept-map-builder",
@@ -205,7 +213,7 @@
       "legacy_skill": "skill-coordinator",
       "legacy_path": "skills/general/skill-coordinator",
       "owner": "k12-learning",
-      "new_path": "skills/k12-learning/references/playbooks/general/skill-coordinator/playbook.md"
+      "new_path": "skills/k12-learning/SKILL.md"
     },
     {
       "legacy_skill": "student-quick-assessment",

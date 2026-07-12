@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "V3 Route Regression Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mode",
+    "primaryPlaybook",
+    "supportingPlaybooks",
+    "confidence",
+    "matchedSignals",
+    "constraints",
+    "moduleRequired",
+    "clarification"
+  ],
+  "properties": {
+    "mode": {
+      "type": "string",
+      "enum": ["DIRECT", "INTAKE", "COMPOSE", "CLARIFY", "ORDINARY", "MODULE_REQUIRED"]
+    },
+    "primaryPlaybook": {
+      "type": ["string", "null"]
+    },
+    "supportingPlaybooks": {
+      "type": "array",
+      "maxItems": 2,
+      "items": { "type": "string" }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["high", "medium", "low"]
+    },
+    "matchedSignals": {
+      "type": "array",
+      "maxItems": 8,
+      "items": { "type": "string" }
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sessionOnly", "noStateRead", "noStateWrite", "noAutomation", "noSilentInstall"],
+      "properties": {
+        "sessionOnly": { "type": "boolean" },
+        "noStateRead": { "type": "boolean" },
+        "noStateWrite": { "type": "boolean" },
+        "noAutomation": { "type": "boolean" },
+        "noSilentInstall": { "type": "boolean" }
+      }
+    },
+    "moduleRequired": {
+      "type": ["string", "null"],
+      "enum": ["llm-wiki", "k12-automation", "k12-skill-studio", null]
+    },
+    "clarification": {
+      "type": ["string", "null"]
+    }
+  }
+}

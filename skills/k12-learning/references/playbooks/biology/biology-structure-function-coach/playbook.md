@@ -12,12 +12,11 @@ compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/biology-structure-function-map.md
   - references/biology-levels-of-organization.md
-depends_on: learning-dna, biology-error-dna
 ---
 
-> **内部 playbook**：本文件由旧 Skill 迁移，不是平台可发现 interface。文中的“调用/转交 Skill”统一解释为当前 Product Module 内部组合；Product Module 主文件、授权门与安全规则优先。
+> **内部 playbook**：本文件是当前 Product Module 按需加载的方法说明；Product Module 主文件、授权门与安全规则优先。
 
-# 🧫 生物结构与功能教练 SKILL
+# 🧫 生物结构与功能教练方法
 
 > **一句话定位：** 任何生物问题先定位“结构层级 → 功能过程 → 调节关系”，
 > 不先背零散结论；先看生命结构在什么层级、为哪种功能服务。
@@ -30,17 +29,17 @@ depends_on: learning-dna, biology-error-dna
 2. **收集最小输入**：只追问生物对象、结构图或描述、学段、学生已有解释、卡点和题目要求。
 3. **执行主流程**：按“定位生命层级 → 识别结构特征 → 连接功能/适应 → 用反例或迁移验证”推进。
 4. **产出结果**：给出层级定位、结构-功能表、关键机制、反例或迁移题。
-5. **复盘与写入**：反复结构功能断裂经同意交接 `biology-error-dna`；未授权时只输出本轮结果。
+5. **复盘与写入**：反复结构功能断裂经同意后组合 `biology-error-dna`；未授权时只输出本轮结果。
 
 ---
 
 ## 通用边界与降级策略
 
 - **信息不足**：先要生物对象、结构图、题干或学生原解释；不编造图像细节和学生水平。
-- **任务不匹配**：概念图谱转 `biology-concept-map-builder`；生命过程机制转 `biology-process-explainer`；实验探究转 `biology-experiment-inquiry`。
+- **任务不匹配**：概念图谱切换到 `biology-concept-map-builder`；生命过程机制切换到 `biology-process-explainer`；实验探究切换到 `biology-experiment-inquiry`。
 - **学生只要答案**：可给简明结论，但先提示结构功能训练需要学生自己说出连接理由。
 - **教练默认**：不直接替学生完成可训练的结构识别和功能推理步骤。
-- **长期记录**：未经明确同意，不写入长期档案、不发提醒、不跨 SKILL 共享。
+- **长期记录**：未经明确同意，不写入长期档案、不发提醒、不在内部组合中共享。
 - **生命科学边界**：不提供医疗诊断、治疗建议或人体健康处置，只做课程学习解释。
 
 ---
@@ -69,7 +68,7 @@ depends_on: learning-dna, biology-error-dna
 结构层级 → 结构特征 → 功能过程 → 适应意义/限制条件
 ```
 
-本 SKILL 的第一步铁律：
+本方法的第一步铁律：
 
 ```text
 任何生物问题先定位“结构层级 → 功能过程 → 调节关系”。
@@ -125,13 +124,13 @@ depends_on: learning-dna, biology-error-dna
 
 ---
 
-## 五、Cross-skill boundaries（跨 Skill 边界）
+## 五、Internal composition boundaries（内部组合边界）
 
 | 任务 | 处理方式 |
 |------|----------|
-| 多概念关系梳理、易混术语 | 转 `biology-concept-map-builder` |
-| 光合、呼吸、循环、免疫、遗传、生态过程链 | 转 `biology-process-explainer`，本 SKILL 提供结构入口 |
-| 实验设计、变量、图表数据 | 转 `biology-experiment-inquiry` |
-| 反复层级定位或结构功能错 | 经同意交接 `biology-error-dna` |
+| 多概念关系梳理、易混术语 | 切换到 `biology-concept-map-builder` |
+| 光合、呼吸、循环、免疫、遗传、生态过程链 | 切换到 `biology-process-explainer`，本方法提供结构入口 |
+| 实验设计、变量、图表数据 | 切换到 `biology-experiment-inquiry` |
+| 反复层级定位或结构功能错 | 经同意后组合 `biology-error-dna` |
 
-交接摘要只包含生命层级、结构特征、功能断点、学生卡点和建议训练。
+内部组合摘要只包含生命层级、结构特征、功能断点、学生卡点和建议训练。

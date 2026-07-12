@@ -18,9 +18,10 @@
 ### 迁移保证
 
 - 63 条旧入口映射保存在 `docs/legacy-skill-mapping.json`。
-- 当前基线为 4 个 Product Module、61 个内部 playbook、58 个学习能力和 213 个行为用例。
+- 当前基线为 4 个 Product Module、61 个内部 playbook、58 个学习能力和 221 个行为用例。
 - 新增 module contract、Capability Map、playbook decision Schema、路径与运行时回归。
 - 用户默认只安装 `k12-learning` 与 `llm-wiki`；不再选择侦探、四步法、DNA 等独立 Skill 名。
+- 首次使用采用“拿一份手头材料 → 3–5 分钟快速测评 → 会话内初版学习 DNA → 立即完成一个真实动作”；不做全科全面测评，跨会话保存另行确认。
 - 新增可直接使用的四模块 SOP，并同步安装、Obsidian 和夜间产线文档。
 
 ---

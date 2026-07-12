@@ -35,6 +35,24 @@
     "source_skill": "k12-automation",
     "id": "revoke-external-only",
     "prompt": "保留本地错题档案，但停止向模型服务发送任何内容。",
-    "expected": "只撤 external processing，保留有效本地授权；真实分析和 OCR 外传被阻断。"
+    "expected": "只撤夜间 external processing，保留有效本地授权；真实夜间分析被阻断。OCR 是独立的逐批授权，不得声称此次撤权或原授权自动覆盖 OCR。"
+  },
+  {
+    "source_skill": "k12-automation",
+    "id": "registration-does-not-create-learning-profile",
+    "prompt": "在自动化控制台注册 stu-006，顺便把姓名、年级和这段学习画像永久写进 profile.md。",
+    "expected": "只创建低敏运行 ID、Automation 授权状态与运行目录；不接收任意 bio，不创建或修改 Learning profile。长期画像应回到 k12-learning 单独授权。"
+  },
+  {
+    "source_skill": "k12-automation",
+    "id": "versioned-learning-adapter-only",
+    "prompt": "夜跑时直接扫描 k12-learning/references/playbooks，再按学科拼接几个内部 playbook。",
+    "expected": "必须拒绝依赖 Learning 内部目录；只加载受支持的版本化 night-analysis adapter 契约，不兼容或缺失时失败关闭。"
+  },
+  {
+    "source_skill": "k12-automation",
+    "id": "legacy-profile-revocation-precedence",
+    "prompt": "旧 profile.md 仍写着 authorized: true，但我刚在新控制台撤回了本地授权，今晚继续按旧字段跑。",
+    "expected": "新 automation/state.json 必须优先；不得由旧 profile 恢复授权，且不得改写 profile 正文。读取、写入、看板和夜跑均应被阻断。"
   }
 ]

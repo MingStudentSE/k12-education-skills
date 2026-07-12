@@ -14,12 +14,11 @@ references:
   - references/chemistry-error-dimension-table.md
   - references/chemistry-concept-confusion-map.md
   - references/chemistry-calculation-checklist.md
-depends_on: learning-dna, correction-notebook, feynman-learning
 ---
 
-> **内部 playbook**：本文件由旧 Skill 迁移，不是平台可发现 interface。文中的“调用/转交 Skill”统一解释为当前 Product Module 内部组合；Product Module 主文件、授权门与安全规则优先。
+> **内部 playbook**：本文件是当前 Product Module 按需加载的方法说明；Product Module 主文件、授权门与安全规则优先。
 
-# 🧬 化学错误DNA SKILL
+# 🧬 化学错误DNA方法
 
 > **一句话定位：** 普通错题本记录“哪道题错了”，化学错误DNA定位“为什么总在宏微符、守恒、实验或化学用语上断裂”。
 
@@ -37,11 +36,11 @@ depends_on: learning-dna, correction-notebook, feynman-learning
 
 ## 通用边界与降级策略
 
-- **不是第二套错题本**：通用 `correction-notebook` 记录题目和基础错因，本 SKILL 只做化学深度根因。
+- **不是第二套错题本**：通用 `correction-notebook` 记录题目和基础错因，本方法只做化学深度根因。
 - **信息不足**：没有题目或学生过程时，先做“最小错因访谈”，不凭空生成错因档案。
-- **任务不匹配**：单题讲解可转 `chemistry-reaction-coach`、`chemistry-concept-explainer`、`chemistry-particle-modeler` 或 `chemistry-lab-inquiry`。
+- **任务不匹配**：单题讲解可切换到 `chemistry-reaction-coach`、`chemistry-concept-explainer`、`chemistry-particle-modeler` 或 `chemistry-lab-inquiry`。
 - **学生只要答案**：可给必要答案，但不把“答案会了”当成错因修复完成。
-- **长期记录**：未经明确同意，不写入长期档案、不发提醒、不跨 SKILL 共享。
+- **长期记录**：未经明确同意，不写入长期档案、不发提醒、不在内部组合中共享。
 - **安全边界**：实验类错因只分析安全课堂证据，不指导危险操作。
 - **不得分析完就结束**：错因诊断后必须产出飞轮闭环出口四要素；只给修复任务而无掌握验证/沉淀/复测/复盘推进，等同"分析完就结束"。
 
@@ -52,14 +51,14 @@ depends_on: learning-dna, correction-notebook, feynman-learning
 ### 飞轮闭环出口（本轮错因必须推进）
 - ① 掌握验证：Ch1宏微符/Ch2概念→`feynman-learning`（画微粒图/三列表+口述意义）；Ch3守恒/Ch4实验/Ch5计算→1道变式（对应化学教练，独立做到第一步）。判定：能独立说清宏观→微观→符号算掌握。
 - ② 沉淀入口：通用错题本记表面+本DNA记根因（同一事件去重一条）；概念混淆→同时写康奈尔线索栏。给字段摘要+授权状态（未授权只给建议字段，不实写）。
-- ③ 复测安排：T+1→T+3→T+7→T+14 间隔序列，复测用变式题（非原题），载体 `im-reminder`（授权后）。
+- ③ 复测安排：T+1→T+3→T+7→T+14 间隔序列，复测用变式题（非原题）；需要实际提醒时，经授权后向 `k12-automation` 提交最小提醒请求。
 - ④ 复盘入口：本题+本周同类纳入 `weekly-review`，给触发信号（同类累计≥3 或 复测未过）。
 
 ---
 
 ## 一、核心使命
 
-化学错题常见表面描述是“粗心、不会配平、概念不熟”。这些描述不能指导训练。本 SKILL 把错因落到化学特有能力链：
+化学错题常见表面描述是“粗心、不会配平、概念不熟”。这些描述不能指导训练。本方法把错因落到化学特有能力链：
 
 ```text
 宏观现象 → 微观粒子 → 符号表达 → 反应守恒 → 实验证据/定量计算
@@ -73,10 +72,10 @@ depends_on: learning-dna, correction-notebook, feynman-learning
 
 | 维度 | 名称 | 典型特征 | 修复路径 |
 |------|------|----------|----------|
-| Ch1 | 宏微符断裂 | 看得出现象但说不清粒子；会写式子但解释不了意义 | 三列表、微粒图、符号拆解，联动 `chemistry-particle-modeler` |
-| Ch2 | 概念分类混淆 | 纯净物/混合物、酸/酸性、盐/食盐、氧化剂/还原剂混用 | 必要条件表、正反例、微粒解释，联动 `chemistry-concept-explainer` |
-| Ch3 | 反应与守恒错误 | 产物写错、配平改下标、质量/电荷/电子不守恒 | 反应四步状态机、守恒表，联动 `chemistry-reaction-coach` |
-| Ch4 | 实验证据错误 | 变量不清、对照缺失、现象和结论混写、忽略安全 | 变量表、证据表、干扰排除，联动 `chemistry-lab-inquiry` |
+| Ch1 | 宏微符断裂 | 看得出现象但说不清粒子；会写式子但解释不了意义 | 三列表、微粒图、符号拆解，组合 `chemistry-particle-modeler` |
+| Ch2 | 概念分类混淆 | 纯净物/混合物、酸/酸性、盐/食盐、氧化剂/还原剂混用 | 必要条件表、正反例、微粒解释，组合 `chemistry-concept-explainer` |
+| Ch3 | 反应与守恒错误 | 产物写错、配平改下标、质量/电荷/电子不守恒 | 反应四步状态机、守恒表，组合 `chemistry-reaction-coach` |
+| Ch4 | 实验证据错误 | 变量不清、对照缺失、现象和结论混写、忽略安全 | 变量表、证据表、干扰排除，组合 `chemistry-lab-inquiry` |
 | Ch5 | 计算与化学用语错误 | 单位混乱、比例错、溶质/溶液混、符号表达不规范 | 已知未知表、单位检查、术语规范、复测 |
 
 ### 主错因判定
@@ -132,20 +131,20 @@ depends_on: learning-dna, correction-notebook, feynman-learning
 ### 工作流 C：与通用错题本协作
 
 1. 通用错题本负责题目、答案、日期、基础错因。
-2. 本 SKILL 接收化学题摘要和学生过程。
-3. 本 SKILL 回写 Ch1-Ch5、根因、修复任务和复测建议。
+2. 本方法接收化学题摘要和学生过程。
+3. 本方法回写 Ch1-Ch5、根因、修复任务和复测建议。
 4. 不重复建题目记录，不重复提醒。
 
 ---
 
-## 五、Cross-skill boundaries（跨 Skill 边界）
+## 五、Internal composition boundaries（内部组合边界）
 
 | 任务 | 处理方式 |
 |------|----------|
-| 只需要讲清本题概念 | 转 `chemistry-concept-explainer` |
-| 只需要微粒图和符号解释 | 转 `chemistry-particle-modeler` |
-| 只需要方程式、配平、计算 | 转 `chemistry-reaction-coach` |
-| 只需要实验方案和证据分析 | 转 `chemistry-lab-inquiry` |
+| 只需要讲清本题概念 | 切换到 `chemistry-concept-explainer` |
+| 只需要微粒图和符号解释 | 切换到 `chemistry-particle-modeler` |
+| 只需要方程式、配平、计算 | 切换到 `chemistry-reaction-coach` |
+| 只需要实验方案和证据分析 | 切换到 `chemistry-lab-inquiry` |
 | 需要长期错题记录 | 与 `correction-notebook` 协作，先获授权 |
 
-跨 SKILL 只传递最小摘要：题目类型、错误步骤、Ch 维度、修复建议和复测结果。
+内部组合只传递最小摘要：题目类型、错误步骤、Ch 维度、修复建议和复测结果。

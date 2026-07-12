@@ -18,7 +18,7 @@
 - `skills/history/` + `skills/geography/` 五件套 — **文科适配范例**（刚通过课标网络核实与 darwin 优化，平均87+，政治必须对齐）
 - `docs/learning-science-principles.md` — 8 项最低要求
 - `skills/general/correction-notebook/SKILL.md` §9.5 地理协作协议（政治 §9.6 待写入，同构）
-- `skills/general/skill-coordinator/schemas/handover-protocol.schema.json`（政治待扩展 `politicsBasicDimension`/`subject:"politics"`）
+- `skills/k12-learning/references/playbooks/general/correction-notebook/schemas/handover-protocol.schema.json`（旧记录兼容；V3 新会话不创建内部 handover）
 
 ---
 

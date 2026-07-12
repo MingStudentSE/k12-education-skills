@@ -1,12 +1,15 @@
 #!/usr/bin/env node
 import { createServer } from 'http';
-import { copyFileSync, mkdtempSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'fs';
+import { copyFileSync, existsSync, mkdtempSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'fs';
 import { tmpdir } from 'os';
 import { fileURLToPath } from 'url';
 import { join } from 'path';
 import { spawn, spawnSync } from 'child_process';
 import { once } from 'events';
-import { EXTERNAL_PROCESSING_SCOPE } from '../skills/k12-automation/scripts/nightline/authorization.mjs';
+import {
+  AUTOMATION_STATE_SCHEMA,
+  EXTERNAL_PROCESSING_SCOPE,
+} from '../skills/k12-automation/scripts/nightline/authorization.mjs';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const ENGINE_SOURCE = join(ROOT, 'skills/k12-automation/scripts/nightline');
@@ -139,13 +142,23 @@ try {
     consent: true, authorizationSubject: 'guardian', authorizationDate: '2026-07-11',
     authorizationMethod: 'written', externalProcessingConsent: false,
   });
-  assert(create.status === 200, `valid student creation must be 200: ${await create.text()}`);
+  const createBody = await readJson(create);
+  assert(create.status === 200, `valid student creation must be 200: ${JSON.stringify(createBody)}`);
+  assert(createBody.learningProfileCreated === false, 'Automation must declare that it did not create Learning State');
   const profilePath = join(mockRoot, 'students/stu-test/profile.md');
-  const profile = readFileSync(profilePath, 'utf8');
-  assert(profile.includes('authorization_subject: guardian'), 'structured subject missing');
-  assert(profile.includes('external_processing_authorized: false'), 'external consent default missing');
+  const statePath = join(mockRoot, 'students/stu-test/automation/state.json');
+  assert(!existsSync(profilePath), 'Automation /api/student created Learning-owned profile.md');
+  const state = JSON.parse(readFileSync(statePath, 'utf8'));
+  assert(state.schema_version === AUTOMATION_STATE_SCHEMA, 'Automation state schema/version missing');
+  assert(state.authorization.local.subject === 'guardian', 'structured subject missing from Automation state');
+  assert(state.authorization.external_processing.authorized === false, 'external consent default missing from Automation state');
+  assert(!readFileSync(statePath, 'utf8').includes('低敏学习摘要'), 'arbitrary bio leaked into Automation state');
+
+  const learningProfile = `---\nid: stu-test\nname: 测试同学\ngrade: 初二\nsubjects: [math]\n---\n\n# Learning-owned profile\n\n低敏学习摘要\n`;
+  writeFileSync(profilePath, learningProfile);
   const mockHome = await (await fetch(mock.base + '/')).text();
-  assert(mockHome.includes('测试同学'), 'authorized homepage must decode frontmatter UTF-8 correctly');
+  assert(mockHome.includes('stu-test'), 'authorized homepage must show the low-sensitivity Automation ID');
+  assert(!mockHome.includes('测试同学') && !mockHome.includes('低敏学习摘要'), 'Automation homepage read Learning profile fields/body');
   assert(mockHome.includes('更新/撤回授权') && mockHome.includes('支持视觉输入'), 'authorization UI or visual-model notice missing');
   assert((await post(mock.base, '/api/mistake', { student: 'stu-test', subject: 'math', content: '1 + 1 = 3' })).status === 200, 'authorized write must succeed');
   assert((await post(mock.base, '/api/ocr', { images: [imageOfLength(100)] })).status === 400, 'OCR without one-time consent must be 400');
@@ -156,14 +169,19 @@ try {
   assert(partial.status === 500, 'partial batch failure must be HTTP 500');
   assert(String(partialBody.error || '').includes('✗'), 'partial failure must return failed item, not a success summary');
 
-  writeFileSync(profilePath, profile.replace('authorized: true', 'authorized: false'));
+  const mockRevoke = await post(mock.base, '/api/authorization', {
+    student: 'stu-test', action: 'revoke-local', confirmation: true,
+    authorizationSubject: 'student', authorizationDate: '2026-07-11', authorizationMethod: 'digital',
+  });
+  assert(mockRevoke.status === 200, `mock local revocation failed: ${await mockRevoke.text()}`);
+  assert(readFileSync(profilePath, 'utf8') === learningProfile, 'authorization update modified Learning-owned profile');
   assert((await post(mock.base, '/api/mistake', { student: 'stu-test', subject: 'math', content: '2 + 2 = 5' })).status === 403, 'revoked write must be 403');
   const home = await (await fetch(mock.base + '/')).text();
   assert(!home.includes('测试同学') && !home.includes('低敏学习摘要'), 'revoked homepage must not expose profile data');
   const dashboardRun = spawnSync(process.execPath, [join(ENGINE_SOURCE, 'build-dashboard.mjs')], { cwd: ROOT, env: { ...process.env, K12_ROOT: mockRoot }, encoding: 'utf8' });
   assert(dashboardRun.status === 0, `dashboard generation failed: ${dashboardRun.stderr}`);
   const dashboard = readFileSync(join(mockRoot, 'dashboard.html'), 'utf8');
-  assert(!dashboard.includes('测试同学') && !dashboard.includes('低敏学习摘要'), 'revoked dashboard must exclude student data');
+  assert(!dashboard.includes('测试同学') && !dashboard.includes('低敏学习摘要') && !dashboard.includes('evidence-based'), 'revoked dashboard must exclude student data');
   const outDays = readdirSync(join(mockRoot, 'students/stu-test/outbox'));
   if (outDays.length) {
     const files = readdirSync(join(mockRoot, 'students/stu-test/outbox', outDays[0]));
@@ -178,7 +196,7 @@ try {
   const providerPort = provider.address().port;
   const providerOrigin = `http://127.0.0.1:${providerPort}`;
   const validServer = createServerHarness('valid', JSON.stringify({
-    apibase: `${providerOrigin}/v1`, key: 'smoke-key', model: 'vision-smoke', learningDir: '',
+    apibase: `${providerOrigin}/v1`, key: 'smoke-key', model: 'vision-smoke', learningAdapter: '',
   }));
   const realRoot = join(tempRoot, 'real-root');
   const real = await startApp({ dataRoot: realRoot, mock: false, serverPath: validServer });
@@ -201,9 +219,12 @@ try {
   const externalGrantBody = await readJson(externalGrant);
   assert(externalGrant.status === 200 && externalGrantBody.localAuthorized && externalGrantBody.externalAuthorized, 'external grant/update failed');
   assert(externalGrantBody.provider === providerOrigin, 'external authorization did not use config origin');
-  let authProfile = readFileSync(join(realRoot, 'students/stu-auth/profile.md'), 'utf8');
-  assert(authProfile.includes(`external_processing_provider: ${providerOrigin}`), 'profile missing external provider origin');
-  assert(authProfile.includes(`external_processing_scope: ${EXTERNAL_PROCESSING_SCOPE}`), 'profile missing fixed external scope');
+  const realProfilePath = join(realRoot, 'students/stu-auth/profile.md');
+  const realStatePath = join(realRoot, 'students/stu-auth/automation/state.json');
+  assert(!existsSync(realProfilePath), 'real-mode Automation registration created a Learning profile');
+  let authState = JSON.parse(readFileSync(realStatePath, 'utf8'));
+  assert(authState.authorization.external_processing.provider === providerOrigin, 'Automation state missing external provider origin');
+  assert(authState.authorization.external_processing.scope === EXTERNAL_PROCESSING_SCOPE, 'Automation state missing fixed external scope');
 
   const externalRevoke = await post(real.base, '/api/authorization', {
     student: 'stu-auth', action: 'revoke-external', confirmation: true,
@@ -211,9 +232,9 @@ try {
   });
   const externalRevokeBody = await readJson(externalRevoke);
   assert(externalRevoke.status === 200 && externalRevokeBody.localAuthorized && !externalRevokeBody.externalAuthorized, 'external-only revocation failed');
-  authProfile = readFileSync(join(realRoot, 'students/stu-auth/profile.md'), 'utf8');
-  assert(authProfile.includes('authorized: true') && authProfile.includes('external_processing_authorized: false'), 'external-only revocation did not preserve local authorization');
-  assert(authProfile.includes('authorization_subject: student') && authProfile.includes('authorization_method: verbal'), 'external revocation did not recollect structured evidence');
+  authState = JSON.parse(readFileSync(realStatePath, 'utf8'));
+  assert(authState.authorization.local.authorized && !authState.authorization.external_processing.authorized, 'external-only revocation did not preserve local authorization');
+  assert(authState.authorization.local.subject === 'student' && authState.authorization.local.method === 'verbal', 'external revocation did not recollect structured evidence');
   assert((await post(real.base, '/api/mistake', { student: 'stu-auth', subject: 'math', content: '3 + 3 = 7' })).status === 200, 'external-only revocation incorrectly blocked local write');
 
   const externalRestore = await post(real.base, '/api/authorization', {
@@ -242,8 +263,8 @@ try {
   });
   const localRevokeBody = await readJson(localRevoke);
   assert(localRevoke.status === 200 && !localRevokeBody.localAuthorized && !localRevokeBody.externalAuthorized, 'local revocation failed');
-  authProfile = readFileSync(join(realRoot, 'students/stu-auth/profile.md'), 'utf8');
-  assert(authProfile.includes('authorized: false') && authProfile.includes('external_processing_authorized: false'), 'local revocation did not clear both scopes');
+  authState = JSON.parse(readFileSync(realStatePath, 'utf8'));
+  assert(!authState.authorization.local.authorized && !authState.authorization.external_processing.authorized, 'local revocation did not clear both scopes');
   assert((await post(real.base, '/api/mistake', { student: 'stu-auth', subject: 'math', content: '4 + 4 = 9' })).status === 403, 'local revocation did not block writes');
   assert((await post(real.base, '/api/authorization', {
     student: 'stu-auth', action: 'revoke-external', confirmation: true,

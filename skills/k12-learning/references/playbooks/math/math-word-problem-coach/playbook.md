@@ -9,18 +9,17 @@ description: >
   把"看不懂应用题"变成"会建数学模型"——训练的是能力，不是套路。
   当学生说"应用题读了三遍不知道怎么列方程"、"题目看懂了但建不起模型"、
   "不知道设什么为x"、"条件和条件之间的关系理不清"、
-  "行程/工程/浓度/利润题总是做错"时，必须激活此SKILL。
+  "行程/工程/浓度/利润题总是做错"时，必须采用本方法。
   核心方法：数量关系三步提取法（识别量→说关系→转方程）。
   不直接建模，用追问引导学生自己完成文字到数学语言的转化。
-  凡是涉及应用题理解、数学建模、设元列方程的场景，务必调用此SKILL。
+  凡是涉及应用题理解、数学建模、设元列方程的场景，务必采用本方法。
 compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/modeling-patterns.md
   - references/math-word-problem-coach-operations.md
-depends_on: learning-dna, math-error-dna
 ---
 
-> **内部 playbook**：本文件由旧 Skill 迁移，不是平台可发现 interface。文中的“调用/转交 Skill”统一解释为当前 Product Module 内部组合；Product Module 主文件、授权门与安全规则优先。
+> **内部 playbook**：本文件是当前 Product Module 按需加载的方法说明；Product Module 主文件、授权门与安全规则优先。
 
 # 📝 应用题数学建模教练
 
@@ -86,7 +85,7 @@ depends_on: learning-dna, math-error-dna
 - 不把“行程题套公式”当建模；公式只能服务于本题数量关系。
 - 不只解一题就结束；至少做一次迁移测试。
 - 不在题面缺失或图片不清时臆造条件。
-- 不未授权写入档案、提醒或跨 Skill 共享完整历史。
+- 未获授权时，不写入档案、不提交提醒请求，也不在内部组合中共享完整历史；实际提醒必须交给 `k12-automation`。
 
 ## references 索引
 

@@ -13,7 +13,7 @@ references:
   - references/physics-modeling-practice-guide.md
 ---
 
-> **内部 playbook**：本文件由旧 Skill 迁移，不是平台可发现 interface。文中的“调用/转交 Skill”统一解释为当前 Product Module 内部组合；Product Module 主文件、授权门与安全规则优先。
+> **内部 playbook**：本文件是当前 Product Module 按需加载的方法说明；Product Module 主文件、授权门与安全规则优先。
 
 # 📐 物理建模教练
 
@@ -28,8 +28,8 @@ references:
 ## 边界与降级
 
 - 不臆造题目、图像、学生长期表现；材料不足时给最小补充模板。
-- 不默认写入学习档案、创建IM提醒或跨 skill 联动；需说明路径并获得授权。
-- 完整解题流程转 `physics-problem-coach`；实验数据/误差分析转 `physics-lab-coach`。
+- 不默认写入学习档案、向 `k12-automation` 提交提醒请求或内部组合；需说明路径并获得授权。
+- 完整解题流程切换到 `physics-problem-coach`；实验数据/误差分析切换到 `physics-lab-coach`。
 - 细则：五大模型见 `physics-modeling-patterns.md`；模型选择/变量抽象/迁移训练/误用警戒见 `physics-modeling-practice-guide.md`。
 
 ## 核心使命
@@ -127,7 +127,7 @@ references:
 
 - 可记录标签：现象识别、模型选择、变量抽象、方程表达、边界检查、模型迁移。
 - 仅在用户授权后，将稳定模式摘要交给 learning-dna 或 physics-error-dna；不共享完整题目隐私。
-- 需要档案沉淀、IM提醒或跨 skill 联动时，先说明用途、路径和撤销方式。
+- 需要档案沉淀、`k12-automation` 提醒请求或内部组合，先说明用途、路径和撤销方式。
 
 ## 参考资源
 
@@ -139,4 +139,4 @@ references:
 - 不跳过现象识别直接告诉学生公式或模型。
 - 不检查适用条件、单位、方向、边界就计算。
 - 不把同一过程套两个矛盾模型；不把多过程题强行合并。
-- 不默认写入档案、创建IM提醒或跨 skill 共享历史。
+- 不默认写入档案、向 `k12-automation` 提交提醒请求或在内部组合中共享历史。

@@ -12,12 +12,11 @@ compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/chemistry-concept-confusion-map.md
   - references/chemistry-analogy-bank.md
-depends_on: learning-dna, chemistry-particle-modeler
 ---
 
-> **内部 playbook**：本文件由旧 Skill 迁移，不是平台可发现 interface。文中的“调用/转交 Skill”统一解释为当前 Product Module 内部组合；Product Module 主文件、授权门与安全规则优先。
+> **内部 playbook**：本文件是当前 Product Module 按需加载的方法说明；Product Module 主文件、授权门与安全规则优先。
 
-# ⚗️ 化学概念理解器 SKILL
+# ⚗️ 化学概念理解器方法
 
 > **一句话定位：** 化学概念不是定义背诵，而是“现象 → 本质属性 → 边界反例 → 微粒解释”的判断工具。
 
@@ -29,17 +28,17 @@ depends_on: learning-dna, chemistry-particle-modeler
 2. **收集最小输入**：只追问概念名称、学段、学生原理解、易混对象、题目或生活/实验情境。
 3. **执行主流程**：按“先说生活/实验现象 → 抽取本质属性 → 对比易混概念 → 用反例和微粒解释验证”推进。
 4. **产出结果**：给出定义要素、边界表、正反例、微粒解释和一道迁移判断题。
-5. **复盘与写入**：反复概念混淆经同意交接 `chemistry-error-dna`；未授权时不写入长期记录。
+5. **复盘与写入**：反复概念混淆经同意后组合 `chemistry-error-dna`；未授权时不写入长期记录。
 
 ---
 
 ## 通用边界与降级策略
 
 - **信息不足**：先请求概念、学段或学生原话；不臆造教材范围或错题历史。
-- **任务不匹配**：微粒模型转 `chemistry-particle-modeler`；方程式/计算转 `chemistry-reaction-coach`；实验探究转 `chemistry-lab-inquiry`。
+- **任务不匹配**：微粒模型切换到 `chemistry-particle-modeler`；方程式/计算切换到 `chemistry-reaction-coach`；实验探究切换到 `chemistry-lab-inquiry`。
 - **学生只要定义**：可给一句话定义和一个例子，但提示定义不足以应对辨析题。
 - **教练默认**：先让学生说自己的例子或判断，再给边界修正。
-- **长期记录**：概念弱项、提醒和跨 SKILL 共享必须先获得明确同意。
+- **长期记录**：概念弱项和内部组合共享必须先获得明确同意；实际提醒只向 `k12-automation` 提交最小请求。
 - **安全边界**：涉及酸碱、燃烧、气体等内容时只做课堂安全解释，不给危险操作建议。
 
 ---
@@ -56,7 +55,7 @@ depends_on: learning-dna, chemistry-particle-modeler
 
 ## 一、核心使命
 
-化学概念常见低效状态是“定义背得出，题目判断错”。本 SKILL 训练的是概念边界：
+化学概念常见低效状态是“定义背得出，题目判断错”。本方法训练的是概念边界：
 
 ```text
 生活/实验现象 → 本质属性 → 易混边界 → 微粒解释 → 新情境判断
@@ -118,13 +117,13 @@ depends_on: learning-dna, chemistry-particle-modeler
 
 ---
 
-## 五、Cross-skill boundaries（跨 Skill 边界）
+## 五、Internal composition boundaries（内部组合边界）
 
 | 任务 | 处理方式 |
 |------|----------|
-| 概念背后粒子图不清 | 联动 `chemistry-particle-modeler` |
-| 概念应用到反应、方程式或定量计算 | 转 `chemistry-reaction-coach` |
-| 概念来自实验现象和证据判断 | 转 `chemistry-lab-inquiry` |
-| 同类概念反复混淆 | 经同意交接 `chemistry-error-dna` |
+| 概念背后粒子图不清 | 组合 `chemistry-particle-modeler` |
+| 概念应用到反应、方程式或定量计算 | 切换到 `chemistry-reaction-coach` |
+| 概念来自实验现象和证据判断 | 切换到 `chemistry-lab-inquiry` |
+| 同类概念反复混淆 | 经同意后组合 `chemistry-error-dna` |
 
-交接只包含概念名、混淆对象、学生原判断、边界修复建议和验证结果。
+内部组合只包含概念名、混淆对象、学生原判断、边界修复建议和验证结果。

@@ -12,12 +12,11 @@ compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
   - references/chemistry-particle-model-guide.md
   - references/chemistry-symbol-representation.md
-depends_on: learning-dna, chemistry-error-dna
 ---
 
-> **内部 playbook**：本文件由旧 Skill 迁移，不是平台可发现 interface。文中的“调用/转交 Skill”统一解释为当前 Product Module 内部组合；Product Module 主文件、授权门与安全规则优先。
+> **内部 playbook**：本文件是当前 Product Module 按需加载的方法说明；Product Module 主文件、授权门与安全规则优先。
 
-# 🧪 化学微粒观建模教练 SKILL
+# 🧪 化学微粒观建模教练方法
 
 > **一句话定位：** 任何化学题先定位“宏观现象 → 微观粒子 → 符号表达”，
 > 不先背结论、不先套方程；先看见粒子怎么变，再写化学语言。
@@ -30,17 +29,17 @@ depends_on: learning-dna, chemistry-error-dna
 2. **收集最小输入**：只追问必要信息：宏观现象、涉及物质、学段、学生已有解释、符号或图示卡点。
 3. **执行主流程**：按“观察宏观现象 → 识别粒子种类与相互作用 → 画微粒/结构示意 → 回到化学符号验证”推进。
 4. **产出结果**：给出宏观-微观-符号三列表、粒子示意规则、关键追问、一个反例或迁移题。
-5. **复盘与写入**：若发现反复宏微符断裂，经同意交接 `chemistry-error-dna`；未授权时只输出本轮结果。
+5. **复盘与写入**：若发现反复宏微符断裂，经同意后组合 `chemistry-error-dna`；未授权时只输出本轮结果。
 
 ---
 
 ## 通用边界与降级策略
 
 - **信息不足**：先要现象、物质名称或学生原解释；不凭空编造实验现象、题图或学生水平。
-- **任务不匹配**：概念群辨析转 `chemistry-concept-explainer`；反应方程式与计算转 `chemistry-reaction-coach`；实验设计转 `chemistry-lab-inquiry`。
+- **任务不匹配**：概念群辨析切换到 `chemistry-concept-explainer`；反应方程式与计算切换到 `chemistry-reaction-coach`；实验设计切换到 `chemistry-lab-inquiry`。
 - **学生只要答案**：可以给简明结论，但先提示“快速答案”和“真正掌握”不同；若学生坚持，不强行进入完整训练。
 - **教练默认**：不直接替学生完成可训练步骤，先让学生尝试说现象、粒子和符号关系。
-- **长期记录**：只有用户明确同意后，才写入错因、画像、提醒或跨 SKILL 共享摘要。
+- **长期记录**：只有用户明确同意后，才写入错因、画像或在内部组合中共享摘要；实际提醒只向 `k12-automation` 提交最小请求。
 - **安全边界**：涉及实验时只做课堂安全范围内的现象解释，不指导危险操作。
 
 ---
@@ -67,7 +66,7 @@ depends_on: learning-dna, chemistry-error-dna
 符号：化学式、离子符号、方程式、结构示意图如何表达
 ```
 
-本 SKILL 的第一步铁律：
+本方法的第一步铁律：
 
 ```text
 任何化学题先定位“宏观现象 → 微观粒子 → 符号表达”。
@@ -133,13 +132,13 @@ depends_on: learning-dna, chemistry-error-dna
 
 ---
 
-## 五、Cross-skill boundaries（跨 Skill 边界）
+## 五、Internal composition boundaries（内部组合边界）
 
 | 任务 | 处理方式 |
 |------|----------|
-| 概念分类、酸碱盐、氧化还原边界 | 转 `chemistry-concept-explainer` |
-| 方程式书写、配平、化学计算 | 转 `chemistry-reaction-coach`，本 SKILL 提供粒子图和守恒理解 |
-| 实验设计、变量、证据结论 | 转 `chemistry-lab-inquiry` |
-| 反复宏微符断裂或符号错误 | 经同意交接 `chemistry-error-dna` |
+| 概念分类、酸碱盐、氧化还原边界 | 切换到 `chemistry-concept-explainer` |
+| 方程式书写、配平、化学计算 | 切换到 `chemistry-reaction-coach`，本方法提供粒子图和守恒理解 |
+| 实验设计、变量、证据结论 | 切换到 `chemistry-lab-inquiry` |
+| 反复宏微符断裂或符号错误 | 经同意后组合 `chemistry-error-dna` |
 
-交接摘要只包含本题必要信息：现象、粒子判断、符号错误、学生卡点和建议训练；不共享完整学习历史。
+内部组合摘要只包含本题必要信息：现象、粒子判断、符号错误、学生卡点和建议训练；不共享完整学习历史。
