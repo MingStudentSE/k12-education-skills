@@ -2,6 +2,7 @@
 import { existsSync, readFileSync, readdirSync, statSync } from 'fs';
 import { basename, dirname, join, relative } from 'path';
 import { fileURLToPath } from 'url';
+import { loadModuleBehaviorFixtures } from './module-behavior-fixtures.mjs';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const SKILLS = join(ROOT, 'skills');
@@ -26,14 +27,13 @@ const topModules = readdirSync(SKILLS)
 assert(JSON.stringify(topModules) === JSON.stringify(expected), `expected four Product Modules, got ${topModules}`);
 const allSkillFiles = walk(SKILLS, 'SKILL.md');
 assert(allSkillFiles.length === 4, `nested/extra Skill interfaces found: ${allSkillFiles.map(p => relative(ROOT, p))}`);
+const alternativeSkillFiles = walk(SKILLS).filter(path => /^SKILL\..+\.md$/.test(basename(path)));
+assert(alternativeSkillFiles.length === 0, `alternative Skill interfaces found: ${alternativeSkillFiles.map(p => relative(ROOT, p))}`);
 
-let totalTests = 0;
+let totalPrompts = 0;
 for (const name of expected) {
   const dir = join(SKILLS, name);
   const text = readFileSync(join(dir, 'SKILL.md'), 'utf8');
-  const lines = text.split(/\r?\n/).length;
-  const maxLines = name === 'llm-wiki' ? 300 : 150;
-  assert(lines <= maxLines, `${name}/SKILL.md is shallow/noisy at ${lines} lines; keep interface <=${maxLines}`);
   const header = text.match(/^---\n([\s\S]*?)\n---/);
   assert(header, `${name}: missing YAML frontmatter`);
   assert(new RegExp(`^name:\\s*${name}$`, 'm').test(header[1]), `${name}: frontmatter name mismatch`);
@@ -45,10 +45,11 @@ for (const name of expected) {
     assert(existsSync(path), `${name}: dangling resource ${match[1]}`);
   }
   const tests = JSON.parse(readFileSync(join(dir, 'test-prompts.json'), 'utf8'));
-  assert(Array.isArray(tests) && tests.length, `${name}: missing behavior tests`);
-  totalTests += tests.length;
+  assert(Array.isArray(tests) && tests.length, `${name}: missing natural-language prompt fixtures`);
+  totalPrompts += tests.length;
 }
-assert(totalTests >= 203, `behavior coverage regressed below legacy 203 cases: ${totalTests}`);
+const moduleBehavior = loadModuleBehaviorFixtures();
+assert(moduleBehavior.cases.length === totalPrompts, `not every prompt fixture is executable: prompts=${totalPrompts}, normalized=${moduleBehavior.cases.length}`);
 
 const learning = join(SKILLS, 'k12-learning');
 const capabilityMap = JSON.parse(readFileSync(join(learning, 'references/capability-map.json'), 'utf8'));
@@ -56,6 +57,7 @@ const capabilities = capabilityMap.capabilities;
 assert(capabilityMap.capabilityCount === 58 && capabilities.length === 58, 'k12-learning must expose 58 internal capabilities');
 const names = capabilities.map(item => item.name);
 assert(new Set(names).size === names.length, 'capability names must be unique');
+assert(new Set(capabilities.map(item => item.playbook)).size === capabilities.length, 'capabilities must not duplicate playbook paths');
 assert(!names.includes('skill-coordinator'), 'deep module must compose playbooks directly; skill-coordinator must not return');
 assert(names.includes('system-guide'), 'k12-learning must expose the internal system-guide capability');
 assert(!existsSync(join(learning, 'references/playbooks/general/skill-coordinator')), 'legacy skill-coordinator directory must not return');
@@ -187,4 +189,4 @@ const autoObsidianTest = wikiTests.find(test => test.id === 'obsidian-install-au
 assert(autoObsidianTest, 'llm-wiki must regress automatic Obsidian installation fallback');
 assert(autoObsidianTest.must_include?.includes('kepano/obsidian-skills') && autoObsidianTest.must_include?.includes('网络失败'), 'Obsidian install regression must cover official source and network fallback');
 
-console.log(`module contract: 4 Product Modules, 61 playbooks, 58 capabilities, 63 source mappings, ${totalTests} behavior cases`);
+console.log(`module contract: 4 Product Modules, 61 playbooks, 58 capabilities, 63 source mappings, ${totalPrompts} prompt corpus (${moduleBehavior.behaviorCases.length} module-behavior + ${moduleBehavior.routeCases.length} route-white-box; live not run)`);

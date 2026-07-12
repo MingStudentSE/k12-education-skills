@@ -1,6 +1,6 @@
-# 教育SKILL创建检查清单
+# 教育 Playbook 创建检查清单
 
-> 本文件依据原版 `SKILL.md` 的“学习科学约束”“功能模块总览”“五步创建流程”“最佳实践”“SKILL效果诊断”等章节整理；完整原文见 `references/creator-operating-manual.md`。
+> 本文件用于检查内部 playbook 的 owner、结构、学习科学、状态授权和行为证据；完整规则见 `references/creator-operating-manual.md`。
 
 ## 1. 创建前最小输入
 
@@ -12,13 +12,17 @@
 期望输出：
 已有流程：
 成功标准：
+反例/不触发场景：
+owner Product Module：
 隐私与写入授权：
+跨 module seam：
+```
 
 ## 2. 四层结构
 
 - 角色层：限定它是谁、只负责什么、不负责什么。
 - 规则层：写出稳定行为，至少覆盖追问、反馈、边界、迭代。
-- 记忆层：只记录必要字段；长期记录必须先获授权。
+- 状态层：区分当前结果、Learning State 和 Automation state；长期记录必须先获授权。
 - 输出层：固定格式、语气和每轮下一步。
 
 ## 3. 学习科学必检

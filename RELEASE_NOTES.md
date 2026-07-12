@@ -11,17 +11,21 @@
 ### 新架构
 
 - `k12-learning`：唯一日常学习入口，内部拥有 58 个学习能力，可组合一个主 playbook 与最多两个辅助 playbook。
-- `llm-wiki`：用新的四层 Wiki 实现替换 `educational-llm-wiki`，采用 `100-Raw / 200-Wiki / 300-Output / 999-Assets`。
+- `llm-wiki`：以自包含长 `SKILL.md` 提供完整四层 Wiki 实现，采用 `100-Raw / 200-Wiki / 300-Output / 999-Assets`；不按文件长度拆浅。
 - `k12-automation`：承接提醒和原夜间运行层，脚本迁入 `scripts/nightline/`，形成独立副作用与授权边界。
 - `k12-skill-studio`：承接教育 playbook 创建和系统质量评分，仅供维护者使用。
 
 ### 迁移保证
 
 - 63 条旧入口映射保存在 `docs/legacy-skill-mapping.json`。
-- 当前基线为 4 个 Product Module、61 个内部 playbook、58 个学习能力和 223 个行为用例。
+- 当前基线为 4 个 Product Module、61 个内部 playbook、58 个学习能力，以及 229 条四模块自然语言行为 fixture；其中 80 条同时属于 Learning 路由白盒子集，6 条同时属于课标证据子集，静态契约不冒充 live 行为通过结果。
 - 新增 module contract、Capability Map、playbook decision Schema、路径与运行时回归。
 - 用户默认只安装 `k12-learning` 与 `llm-wiki`；不再选择侦探、四步法、DNA 等独立 Skill 名。
 - 首次使用采用“拿一份手头材料 → 3–5 分钟快速测评 → 会话内初版学习 DNA → 立即完成一个真实动作”；不做全科全面测评，跨会话保存另行确认。
+- 新增义务教育 2022 新课标证据层，把核心素养转成可观测证据、最小学习任务和反馈调整；高中版本与道德与法治/思想政治边界分别处理。
+- 课标 scope、学科和单一模型统一经过 resolver；官方事实 `dataVersion 1.2.0` 由学科级 PDF/章节/指纹与 competency 级精确 `sourcePage` 组成，在线复核分别验证下载 hash、指定页章节和正式名称。
+- Learning 与 Automation 分开拥有状态：提醒授权和运行状态只写 `automation/state.json`，夜间 adapter 的 request/output Schema 在 Mock 与真实路径中都会执行；旧 `profile.md` 授权只能显式一次性迁移。
+- 运行可达的 references 已纳入旧语义门禁；V2 与 genesis 指令隔离到 `docs/history/`，不再参与当前 AI 导航。
 - 新增可直接使用的四模块 SOP，并同步安装、Obsidian 和夜间产线文档。
 
 ---
@@ -48,7 +52,7 @@
 
 ## v2.2
 
-本版本把“错因分析后的飞轮闭环出口”下沉到通用错题本和各科错误 DNA，并把系统评分 rubric 升级到六环闭环与 S1-S8 场景集。完整设计与执行记录位于 `pipeline/DESIGN_v2.2_flywheel-loop.md` 和 `pipeline/CODEX_EXEC_v2.2_flywheel-loop.md`。
+本版本把“错因分析后的飞轮闭环出口”下沉到通用错题本和各科错误 DNA，并把系统评分 rubric 升级到六环闭环与 S1-S8 场景集。历史设计与执行记录现归档于 `docs/history/v2/DESIGN_v2.2_flywheel-loop.md` 和 `docs/history/v2/CODEX_EXEC_v2.2_flywheel-loop.md`，不再作为当前指令。
 
 ---
 
@@ -84,9 +88,9 @@
 
 **质量门 `pipeline/`（让改动可验证、不越改越差）**
 
-- 新增 `pipeline/CLAUDE_GUIDE_K12_v2.md`：规则单一来源（鲁班五动作 + 班规）。
+- 当时新增的 `CLAUDE_GUIDE_K12_v2.md` 已归档到 `docs/history/v2/`，仅保留版本追溯价值。
 - 新增 `pipeline/review.sh`：瘦身质量门，检查主文件行数、悬空引用、JSON 合法性、关键词覆盖与锚点反查。
-- 新增 `pipeline/EXAM_CLOSED_BOOK.md` 与 `REVIEW_K12_002/003/004.md`：闭卷考场与三轮终审判卷记录，用于教学性能回归，改产线前后各跑一次防退化。
+- 当时的 `EXAM_CLOSED_BOOK.md` 与 `REVIEW_K12_002/003/004.md` 已归档到 `docs/history/v2/`，不属于当前门禁。
 
 **学生运行模板 `students/_template/`**
 

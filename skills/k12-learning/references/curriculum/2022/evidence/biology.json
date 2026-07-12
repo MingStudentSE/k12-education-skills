@@ -1,0 +1,46 @@
+{
+  "modelVersion": "1.0.0",
+  "standardId": "cn-compulsory-2022",
+  "subjectId": "biology",
+  "routeSubject": "biology",
+  "provenance": "project-operationalization",
+  "evidencePolicy": { "singleObservationIsMastery": false, "firstUseMaxModels": 1, "minimumIndependentObservations": 2, "transferRequired": true, "defaultState": "session-only" },
+  "models": [
+    {
+      "modelId": "biology.life-concepts.structure-process.v1",
+      "competencyId": "biology.life-concepts",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能用结构与功能、物质与能量或稳态等观念解释生命现象", "能在细胞、个体、种群或生态系统层级间正确切换"],
+      "task": { "taskType": "life-mechanism", "promptContract": "选择一个生命现象，标层级、结构、过程和结果并解释它们的关系。", "successCriteria": ["结构或过程与功能结果存在明确机制", "没有混淆细胞、组织、器官或生态层级"] },
+      "feedbackAdjustment": { "whenMissing": "先固定一个层级和一条结构—功能关系。", "whenEmerging": "追问物质、能量或信息如何经过该结构。", "whenDemonstrated": "改变环境或结构条件，预测系统变化。", "retest": "用新生命现象独立完成层级—机制—结果。" },
+      "capabilityBindings": ["biology-structure-function-coach", "biology-process-explainer"]
+    },
+    {
+      "modelId": "biology.scientific-thinking.model-evidence.v1",
+      "competencyId": "biology.scientific-thinking",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能分类、比较、建模或推理生命科学信息", "能用证据检验因果解释并识别相关不等于因果"],
+      "task": { "taskType": "biological-modeling", "promptContract": "根据图表或现象提出机制模型，列支持证据和一个替代解释。", "successCriteria": ["模型解释关键趋势或结构关系", "结论区分相关、条件和因果范围"] },
+      "feedbackAdjustment": { "whenMissing": "先读坐标、变量和趋势，不急于解释原因。", "whenEmerging": "为机制补一条证据并排除一个替代解释。", "whenDemonstrated": "加入新数据，要求更新模型而非维护原答案。", "retest": "用新图表独立完成趋势—模型—证据。" },
+      "capabilityBindings": ["biology-concept-map-builder", "biology-error-dna"]
+    },
+    {
+      "modelId": "biology.inquiry-practice.variable-evidence.v1",
+      "competencyId": "biology.inquiry-practice",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能提出可检验的生物学问题并设置变量、对照和重复", "能记录数据、解释异常并让结论服从证据范围"],
+      "task": { "taskType": "biology-investigation", "promptContract": "为一个生命现象设计探究，写材料、变量、对照、重复、记录和结论边界。", "successCriteria": ["实验设计能区分目标变量影响", "数据记录足以支持或否定假设"] },
+      "feedbackAdjustment": { "whenMissing": "先明确一个自变量、一个因变量和一个对照。", "whenEmerging": "补重复、样本或测量方法中的关键缺口。", "whenDemonstrated": "加入异常结果，要求判断误差或修订假设。", "retest": "用新问题独立设计变量—对照—证据。" },
+      "capabilityBindings": ["biology-experiment-inquiry", "biology-process-explainer"]
+    },
+    {
+      "modelId": "biology.attitude-responsibility.life-decision.v1",
+      "competencyId": "biology.attitude-responsibility",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能尊重生命与实验证据并识别健康、生态或伦理边界", "能依据生物学证据评价生活与社会决策而不夸大结论"],
+      "task": { "taskType": "life-science-decision", "promptContract": "分析一个健康或生态情境，区分事实、风险、价值与可行行动。", "successCriteria": ["事实判断使用可靠且相关的生物学证据", "行动说明适用范围、不确定性或风险"] },
+      "feedbackAdjustment": { "whenMissing": "先把材料事实和个人态度分栏。", "whenEmerging": "为风险判断补机制或数据依据。", "whenDemonstrated": "加入证据不确定或利益冲突，要求调整建议。", "retest": "用新案例完成证据—风险—行动。" },
+      "capabilityBindings": ["biology-experiment-inquiry", "biology-concept-map-builder"]
+    }
+  ]
+}

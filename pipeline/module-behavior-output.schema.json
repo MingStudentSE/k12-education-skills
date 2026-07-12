@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://k12-education-skills.local/schemas/module-behavior-output.schema.json",
+  "title": "Product Module live behavior batch output",
+  "type": "object",
+  "required": ["module", "results"],
+  "additionalProperties": false,
+  "properties": {
+    "module": {
+      "type": "string",
+      "enum": ["k12-learning", "llm-wiki", "k12-automation", "k12-skill-studio"]
+    },
+    "results": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["caseKey", "response", "checks"],
+        "additionalProperties": false,
+        "properties": {
+          "caseKey": {
+            "type": "string",
+            "minLength": 1
+          },
+          "response": {
+            "type": "string",
+            "minLength": 1
+          },
+          "checks": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["assertionId", "passed", "evidence"],
+              "additionalProperties": false,
+              "properties": {
+                "assertionId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "passed": {
+                  "type": "boolean"
+                },
+                "evidence": {
+                  "type": ["string", "null"]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

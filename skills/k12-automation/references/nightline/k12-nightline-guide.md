@@ -26,7 +26,17 @@ node ~/.codex/skills/k12-automation/scripts/nightline/server.mjs
 
 浏览器打开 `http://127.0.0.1:18350`，用“注册运行对象”建立低敏学生 ID 与授权。该操作只创建 `students/<id>/automation/state.json` 和 inbox/archive/outbox，不创建姓名、年级或任意学习画像。
 
-Learning State 仍由 `k12-learning` 拥有。Automation v1 不读取 profile 的姓名、年级或正文；旧 `students/<id>/profile.md` 仅为授权 frontmatter 提供只读兼容。首次更新或撤回后，新 `automation/state.json` 优先，旧字段不能恢复已撤授权。未来若要传递学习摘要，必须由 Learning 显式产出版本化 adapter input。
+Learning State 仍由 `k12-learning` 拥有。Automation steady-state runtime 完全不读取 `profile.md`，授权只来自通过 schema 的 `automation/state.json`。若确有旧授权数据，由维护者先执行下面的一次性迁移；外部处理不会随迁移继承，必须重新授权。未来若要传递学习摘要，必须由 Learning 显式产出版本化 adapter input。
+
+```bash
+K12_ROOT="$HOME/k12-data" \
+node ~/.codex/skills/k12-automation/scripts/nightline/migrate-legacy-authorization.mjs --audit
+
+K12_ROOT="$HOME/k12-data" \
+node ~/.codex/skills/k12-automation/scripts/nightline/migrate-legacy-authorization.mjs --student stu-001 --confirm
+```
+
+正常的 server、night-run 和 dashboard 都不会调用迁移脚本，也不会把旧 profile 当作 fallback。
 
 ## 3. 授权
 
@@ -80,7 +90,7 @@ cp ~/.codex/skills/k12-automation/scripts/nightline/config.sample.json \
 }
 ```
 
-不要提交此文件。通常无需填写 `learningAdapter`，相邻安装会自动找到固定的 v1 契约；非相邻安装可用 `K12_LEARNING_ADAPTER` 覆盖。它必须指向受支持的版本化契约文件，不能指向 playbook 目录。
+不要提交此文件。通常无需填写 `learningAdapter`，相邻安装会自动找到固定的 v1 契约；非相邻安装可用 `K12_LEARNING_ADAPTER` 覆盖。它必须指向受支持的版本化契约文件，不能指向 playbook 目录；adapter 声明的 request/output schema 也必须与它一同安装，否则 Mock 和真实运行都会失败关闭。
 
 ## 5. 先做 Mock 验证
 
@@ -137,4 +147,4 @@ node ~/.codex/skills/k12-automation/scripts/nightline/server.mjs
 - 删除、导出或保留 profile、archive、outbox、dashboard 和日志是独立决定，不因撤回自动删除。
 - API key、真实学生数据、日志、看板和授权记录不得进入版本库。
 
-仓库维护者的路径与回归说明见 [交接文档](k12-nightline-handover.md)。
+仓库维护者的路径与回归说明见 [运行时契约](k12-nightline-contract.md)。

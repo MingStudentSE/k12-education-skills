@@ -1,0 +1,36 @@
+{
+  "modelVersion": "1.0.0",
+  "priority": "high",
+  "standardId": "cn-compulsory-2022",
+  "scope": "grades-1-9-only",
+  "chain": [
+    "core-competency",
+    "observable-evidence",
+    "learning-task",
+    "feedback-adjustment"
+  ],
+  "officialFacts": "standards.json",
+  "policy": "../../curriculum-evidence-policy.md",
+  "resolver": "../../../scripts/resolve-curriculum-evidence.mjs",
+  "profiles": [
+    { "routeSubject": "chinese", "subjectId": "chinese", "file": "evidence/chinese.json" },
+    { "routeSubject": "math", "subjectId": "math", "file": "evidence/math.json" },
+    { "routeSubject": "english", "subjectId": "english", "file": "evidence/english.json" },
+    { "routeSubject": "history", "subjectId": "history", "file": "evidence/history.json" },
+    { "routeSubject": "geography", "subjectId": "geography", "file": "evidence/geography.json" },
+    { "routeSubject": "physics", "subjectId": "physics", "file": "evidence/physics.json" },
+    { "routeSubject": "chemistry", "subjectId": "chemistry", "file": "evidence/chemistry.json" },
+    { "routeSubject": "biology", "subjectId": "biology", "file": "evidence/biology.json" },
+    { "routeSubject": "politics", "subjectId": "ethics-and-rule-of-law", "file": "evidence/ethics-and-rule-of-law.json" }
+  ],
+  "outOfScope": [
+    {
+      "signal": "senior-secondary",
+      "action": "Do not claim cn-compulsory-2022 alignment; verify the 2017 edition with 2020 revision before using high-school competency labels."
+    },
+    {
+      "signal": "primary-science",
+      "action": "Report the current science-route gap; do not treat science-solving-four-steps as the official Science curriculum model."
+    }
+  ]
+}

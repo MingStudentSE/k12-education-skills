@@ -11,6 +11,7 @@
 - `skills/*/references/playbooks/` 存放内部 playbook。它们不是可安装 Skill，不得新增嵌套 `SKILL.md`。
 - `skills/k12-learning/references/system-user-guide.md` 是能力介绍、首次使用与日常调用话术的单一来源；首页和快速开始只链接，不复制另一套能力菜单。
 - `docs/` 存放架构、安装、Obsidian 接入和维护说明。
+- `docs/history/` 仅保存 V2 与 genesis 历史快照，不是当前执行指令或事实来源；当前 AI 不得从该目录推导运行行为。
 - `references/` 存放项目级理论笔记和原始资料。理论资料遵循“一个理论一个笔记”，例如 `references/主动回忆.md`。
 
 ## 构建、测试与开发命令
@@ -22,12 +23,13 @@ find skills -name SKILL.md | wc -l
 find skills -name playbook.md | wc -l
 node pipeline/validate_modules.mjs
 node pipeline/run_v3_route_regression.mjs --contract-only
+node pipeline/verify_curriculum_sources.mjs --contract-only
 python3 -m pip install -r pipeline/requirements.txt
 python3 pipeline/validate_schemas.py
 bash pipeline/review.sh all
 ```
 
-这些命令用于确认四模块边界、内部能力映射、Schema 与自动化运行契约。
+这些命令用于确认四模块边界、内部能力映射、Schema、课标来源定位与自动化运行契约。发布课标事实更新前，另运行 `node pipeline/verify_curriculum_sources.mjs --live` 核对教育部 PDF 内容指纹。
 
 ## 写作风格与命名约定
 

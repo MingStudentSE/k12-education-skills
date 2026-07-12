@@ -73,6 +73,7 @@ flowchart LR
 
 - 只面向维护者，不参与学生日常答疑。
 - 优先深化现有 module；新 Product Module 必须通过 deletion test。
+- 课程标准作为 `k12-learning` 的跨切证据层存在：先选 playbook，再由单一 resolver 按学段、学科和当前材料叠加一个“素养—证据—任务—反馈”模型；它不参与顶层路由，也不增加 module 数量。官方事实固定到教育部 PDF、章节、PDF 页码与内容 SHA-256，项目操作化不得冒充课标原文。
 - 负责 source mapping、行为用例、Schema、S1–S8 质量评分和发布前回归。
 
 ## 关键领域对象
@@ -100,9 +101,18 @@ flowchart LR
 4. 未经确认，不形成长期状态、不外传；只有 `llm-wiki` 在任务确实需要 Obsidian 原生能力时，可自动尝试官方 `kepano/obsidian-skills`，失败后降级且不声称成功。
 5. 新能力优先进入 Capability Map 和 playbook；新增第 5 个模块必须先更新上下文、ADR 和测试。
 
-运行 `bash pipeline/review.sh all` 会验证上述边界、Schema 和自动化运行时。
+运行 `bash pipeline/review.sh all` 会验证上述边界、Schema、自动化运行时，以及 229 条 module behavior、其中重叠的 80 条路由白盒与 6 条课标证据 fixture 的契约；它不调用模型，也不声称 live 行为已经通过。
 
-路由 fixture 的离线契约检查使用：
+四个 Product Module 的主要行为回归入口是：
+
+```bash
+node pipeline/run_module_behavior_regression.mjs --fixture-only
+node pipeline/run_module_behavior_regression.mjs --release --batch-size 20 --model gpt-5.6-terra
+```
+
+live 模式先在看不到期望的独立上下文中冻结用户可见回答，再由第二个独立上下文按验收条件引用原文判定。完整命令、分模块覆盖与调用成本见 [Product Module 行为回归](behavior-regression.md)。
+
+内部路由是次级白盒回归。其离线契约检查使用：
 
 ```bash
 node pipeline/run_v3_route_regression.mjs --contract-only
@@ -115,4 +125,4 @@ node pipeline/run_v3_route_regression.mjs --case first-use-onboarding --case sci
 node pipeline/run_v3_route_regression.mjs --all --model gpt-5.6-terra
 ```
 
-live 回归会产生模型调用，因此不作为普通静态提交门自动执行。
+live 回归会产生模型调用，因此不作为普通静态提交门自动执行。发布前还需同时运行 module behavior、路由、课标证据和官方来源 live 校验；完整命令见上述行为回归文档。

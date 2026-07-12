@@ -1,0 +1,55 @@
+{
+  "modelVersion": "1.0.0",
+  "standardId": "cn-compulsory-2022",
+  "subjectId": "history",
+  "routeSubject": "history",
+  "provenance": "project-operationalization",
+  "evidencePolicy": { "singleObservationIsMastery": false, "firstUseMaxModels": 1, "minimumIndependentObservations": 2, "transferRequired": true, "defaultState": "session-only" },
+  "models": [
+    {
+      "modelId": "history.historical-materialism.mechanism.v1",
+      "competencyId": "history.historical-materialism",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能区分历史现象、直接原因与更深层社会条件", "能用生产生活、制度或群体关系解释变化而不只归因于个人"],
+      "task": { "taskType": "causal-mechanism", "promptContract": "给一个熟悉事件，让学生画出现象—条件—机制—结果链并说明哪条证据支持机制。", "successCriteria": ["至少区分一项直接原因和一项深层条件", "每个机制判断能回到史实或材料"] },
+      "feedbackAdjustment": { "whenMissing": "退回事件前后对比，只补一个社会条件。", "whenEmerging": "保留已有因果链，追问条件如何通过具体机制产生结果。", "whenDemonstrated": "换到另一时期，检验同一机制是否仍成立及边界。", "retest": "用一则新材料独立写出三段因果链并标证据。" },
+      "capabilityBindings": ["history-causation-explainer", "history-problem-coach"]
+    },
+    {
+      "modelId": "history.time-space.concurrent-location.v1",
+      "competencyId": "history.time-space",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能把事件放入正确年代、地域与发展阶段", "能比较同一时期不同地区事件的先后、联系和差异"],
+      "task": { "taskType": "timeline-location", "promptContract": "把材料中的事件放到时间轴和区域位置上，再补一个同期参照并解释联系。", "successCriteria": ["时间与空间定位均有材料依据", "同期比较不把并存误写成因果"] },
+      "feedbackAdjustment": { "whenMissing": "先只做年代范围和地图区域二选一定位。", "whenEmerging": "增加一个同期参照，要求说明相同与不同。", "whenDemonstrated": "加入跨区域传播或长时段变化，检验尺度切换。", "retest": "用未见事件完成时间—空间—同期三点定位。" },
+      "capabilityBindings": ["history-timeline-coach", "history-problem-coach"]
+    },
+    {
+      "modelId": "history.source-evidence.claim-support.v1",
+      "competencyId": "history.source-evidence",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能区分材料陈述、作者观点与自己的结论", "能引用相关信息并说明它如何支持结论", "能指出出处、立场或信息范围造成的证明限度"],
+      "task": { "taskType": "source-comparison", "promptContract": "给两则部分差异的短材料；标事实、观点和出处；写一条结论、一条证据及一个限度。", "successCriteria": ["结论与材料证据逐项绑定", "不以单一材料下超出证据范围的绝对结论"] },
+      "feedbackAdjustment": { "whenMissing": "退回证据—说明—结论三格句架。", "whenEmerging": "保留结论，要求逐句标材料编号并补证明限度。", "whenDemonstrated": "增加来源立场不同的材料，要求互证或修正结论。", "retest": "用新材料独立完成结论、证据、限度三项。" },
+      "capabilityBindings": ["history-evidence-analysis", "history-error-dna"]
+    },
+    {
+      "modelId": "history.interpretation.reasoned-account.v1",
+      "competencyId": "history.interpretation",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能区分史实陈述与对史实的解释", "能用证据、概念和因果关系形成可检验的解释"],
+      "task": { "taskType": "historical-explanation", "promptContract": "围绕一个为什么问题，先列共同史实，再写两个可能解释并比较哪一个证据更充分。", "successCriteria": ["解释没有替换或捏造史实", "选择解释时说明证据和推理理由"] },
+      "feedbackAdjustment": { "whenMissing": "先把答案拆成史实栏与解释栏。", "whenEmerging": "追问当前证据排除了哪个替代解释。", "whenDemonstrated": "加入新证据，要求判断原解释是否需要修订。", "retest": "换一个事件独立完成史实—解释—证据链。" },
+      "capabilityBindings": ["history-causation-explainer", "history-evidence-analysis"]
+    },
+    {
+      "modelId": "history.national-sentiment.evidence-reflection.v1",
+      "competencyId": "history.national-sentiment",
+      "gradeBand": "7-9",
+      "observableEvidence": ["能基于史实说明人物、群体或国家选择的影响", "能把价值判断与事实依据分开并表达有边界的历史反思"],
+      "task": { "taskType": "evidence-reflection", "promptContract": "根据指定史实写事实判断、价值判断和现实启示各一句，并标明事实来源。", "successCriteria": ["价值判断有明确史实依据", "不以口号替代历史解释"] },
+      "feedbackAdjustment": { "whenMissing": "退回事实判断，只补一条可核对依据。", "whenEmerging": "让学生说明价值判断与哪条史实相连。", "whenDemonstrated": "加入不同主体视角，检验判断能否保持证据边界。", "retest": "在新主题中独立写出事实—价值—启示链。" },
+      "capabilityBindings": ["history-problem-coach", "history-evidence-analysis"]
+    }
+  ]
+}

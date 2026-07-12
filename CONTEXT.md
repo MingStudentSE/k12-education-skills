@@ -24,6 +24,10 @@ Product Module 内按需读取的教学方法、任务流程或学科规则。Pl
 
 `k12-learning` 内部从自然语言意图到 playbook 的机读映射。它只选择内部实现，不选择其他学习 Skill。
 
+### Curriculum Evidence Model
+
+`k12-learning` 内部的课标执行证据层。官方事实与项目操作化分开存放，把“核心素养 → 可观测证据 → 学习任务 → 反馈调整”叠加到已选中的学科 playbook；它不是新 capability、playbook、Product Module 或 Learning State。scope、当前学科和单一模型统一由无副作用 resolver 决定，caller 不得自行拼接四层事实。每项官方名称固定到教育部 PDF、章节、PDF 页码和 SHA-256。当前 `cn-compulsory-2022` 只适用于义务教育，高中不得套用。
+
 ## 四个 Product Module
 
 | Product Module | 领域职责 | 不负责 |
@@ -42,3 +46,4 @@ Product Module 内按需读取的教学方法、任务流程或学科规则。Pl
 5. `k12-automation` 是外部副作用 seam；未获授权时只返回计划，不执行提醒、外传或长期写入。
 6. `k12-skill-studio` 只进入维护者安装面，不出现在学生默认安装清单。
 7. 删除旧 Skill interface 前，必须把其方法、Schema 与行为用例迁入新 module，并保留来源映射。
+8. 课标名称、学段和版本只有一个模块级事实来源；学科 playbook 不复制一份可能漂移的素养清单。

@@ -1,6 +1,6 @@
 # 波利亚四步解题法提炼
 
-> 本文件随 `science-solving-four-steps` 单个 skill 安装。内容只提取可用于学生端 skill 的少量方法框架，不复刻原书内容。
+> 本文件随 `science-solving-four-steps` 内部 playbook 发布。内容只提取可用于学生端的少量方法框架，不复刻原书内容。
 
 ## 核心四阶段
 

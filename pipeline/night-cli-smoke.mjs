@@ -5,6 +5,8 @@ import { fileURLToPath } from 'url';
 import { join } from 'path';
 import { spawnSync } from 'child_process';
 import { writeStudentAuthorization } from '../skills/k12-automation/scripts/nightline/authorization.mjs';
+import { publishNightAnalysisArtifacts } from '../skills/k12-automation/scripts/nightline/artifact-publisher.mjs';
+import { loadRuntimeConfig } from '../skills/k12-automation/scripts/nightline/runtime-config.mjs';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const tempRoot = mkdtempSync(join(tmpdir(), 'k12-night-cli-'));
@@ -75,9 +77,61 @@ function assertUntouched(id) {
   assert(readdirSync(join(dir, 'inbox')).join(',') === 'sample.md', `${id}: invalid CLI changed inbox`);
 }
 
+function assertPublishFailureIsClean(name, operationOverrides) {
+  const dir = join(tempRoot, `publisher-${name}`);
+  const inbox = join(dir, 'inbox');
+  mkdirSync(inbox, { recursive: true });
+  const itemPath = join(inbox, 'failure.md');
+  writeFileSync(itemPath, 'failure fixture');
+  let rejected = false;
+  try {
+    publishNightAnalysisArtifacts({
+      studentDir: dir,
+      itemPath,
+      businessDate: '2026-07-12',
+      preferredSlug: 'failure',
+      diagnosis: 'diagnosis',
+      problems: 'problems',
+      solutions: 'solutions',
+      archive: 'archive',
+    }, operationOverrides);
+  } catch { rejected = true; }
+  assert(rejected, `${name}: injected publish failure was not observed`);
+  assert(existsSync(itemPath), `${name}: failed publish moved the inbox source`);
+  const outDir = join(dir, 'outbox/2026-07-12');
+  const archiveDir = join(dir, 'archive');
+  assert(!existsSync(outDir) || readdirSync(outDir).length === 0, `${name}: failed publish left visible outbox files`);
+  assert(!existsSync(archiveDir) || readdirSync(archiveDir).length === 0, `${name}: failed publish left an archive record`);
+  const staging = join(dir, 'automation/staging');
+  assert(!existsSync(staging) || readdirSync(staging).length === 0, `${name}: failed publish left staging data`);
+}
+
 try {
+  const mockConfigPath = join(tempRoot, 'mock-placeholder-config.json');
+  writeFileSync(mockConfigPath, JSON.stringify({
+    apibase: 'https://your-openai-compatible-endpoint/v1/',
+    key: 'sk-REPLACE-WITH-YOUR-OWN-KEY',
+    model: ' placeholder-model ',
+    learningAdapter: ' /tmp/night-analysis-v1.md ',
+  }));
+  const mockConfig = loadRuntimeConfig({ configPath: mockConfigPath, mock: true });
+  assert(mockConfig.model === 'placeholder-model' && mockConfig.learningAdapter === '/tmp/night-analysis-v1.md', 'Mock mode incorrectly required production credentials or failed to normalize adapter path');
+
+  let writes = 0;
+  assertPublishFailureIsClean('write', {
+    writeFileSync(path, content, options) {
+      writes += 1;
+      if (writes === 2) throw new Error('injected staging write failure');
+      return writeFileSync(path, content, options);
+    },
+  });
+  assertPublishFailureIsClean('rename', {
+    renameSync() { throw new Error('injected inbox rename failure'); },
+  });
+
   makeStudent('alpha');
-  makeStudent('beta', { legacy: true });
+  makeStudent('beta');
+  makeStudent('legacy-only', { legacy: true });
 
   const invalidCases = [
     ['missing-value', ['--student']],
@@ -97,6 +151,7 @@ try {
     assert(!`${result.stdout}${result.stderr}`.includes('夜间产线启动'), `${name}: processing started before CLI rejection`);
     assertUntouched('alpha');
     assertUntouched('beta');
+    assertUntouched('legacy-only');
     assert(!existsSync(logsDir), `${name}: CLI rejection should happen before runtime logging starts`);
   }
 
@@ -107,6 +162,13 @@ try {
   assert(`${badAdapter.stdout}${badAdapter.stderr}`.includes('Learning adapter 契约不兼容'), 'adapter failure was not controlled');
   assertUntouched('alpha');
   assertUntouched('beta');
+  assertUntouched('legacy-only');
+
+  const legacyFallback = run(['--student', 'legacy-only']);
+  assert(legacyFallback.status !== 0, 'steady-state runtime must reject legacy profile authorization fallback');
+  assert(`${legacyFallback.stdout}${legacyFallback.stderr}`.includes('缺少有效的 Automation 本地授权记录'), 'legacy-only failure was not controlled');
+  assertUntouched('legacy-only');
+  rmSync(join(studentsDir, 'legacy-only/inbox/sample.md'));
 
   const one = run(['--student', 'alpha']);
   assert(one.status === 0, `valid --student failed: ${one.stderr || one.stdout}`);
@@ -115,11 +177,25 @@ try {
   assert(!existsSync(join(studentsDir, 'alpha/profile.md')), 'Automation test fixture unexpectedly created a Learning profile');
   assertUntouched('beta');
 
+  makeStudent('collision');
+  rmSync(join(studentsDir, 'collision/inbox/sample.md'));
+  writeFileSync(join(studentsDir, 'collision/inbox/same.md'), '---\nsubject: math\n---\n\n1 + 1 = 3\n');
+  writeFileSync(join(studentsDir, 'collision/inbox/same.txt'), '---\nsubject: math\n---\n\n2 + 2 = 5\n');
+
   const all = run([]);
   assert(all.status === 0, `no-argument all-student run failed: ${all.stderr || all.stdout}`);
-  assert(existsSync(join(studentsDir, 'beta/outbox')), 'no-argument run did not process remaining student');
+  assert(existsSync(join(studentsDir, 'beta/outbox')), 'no-argument run did not process remaining Automation-state student');
+  const collisionOutRoot = join(studentsDir, 'collision/outbox');
+  const collisionDay = readdirSync(collisionOutRoot)[0];
+  const collisionOutputs = readdirSync(join(collisionOutRoot, collisionDay));
+  for (const label of ['错因诊断', '变式训练题', '答案与讲解']) {
+    assert(collisionOutputs.filter(name => name.endsWith(`-${label}.md`)).length === 2, `same-stem ${label} output was overwritten`);
+  }
+  assert(readdirSync(join(studentsDir, 'collision/archive')).filter(name => name.endsWith('.md')).length === 2, 'same-stem archive count mismatch');
+  const processed = readdirSync(join(studentsDir, 'collision/inbox/processed'));
+  assert(processed.some(name => name.endsWith('same.md')) && processed.some(name => name.endsWith('same.txt')), 'same-stem sources were not both preserved');
 
-  console.log(`night CLI smoke: ${invalidCases.length} invalid CLI cases + incompatible adapter rejected; new-state exact student and legacy all-student modes passed`);
+  console.log(`night CLI smoke: ${invalidCases.length} invalid CLI + adapter/legacy rejection + staged rollback + same-stem no-clobber passed`);
 } finally {
   rmSync(tempRoot, { recursive: true, force: true });
 }

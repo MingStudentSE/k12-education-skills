@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/k12-learning/core-competency-evidence-model.schema.json",
+  "title": "K12 Learning Core Competency Evidence Model",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["modelVersion", "standardId", "subjectId", "routeSubject", "provenance", "evidencePolicy", "models"],
+  "properties": {
+    "modelVersion": { "const": "1.0.0" },
+    "standardId": { "const": "cn-compulsory-2022" },
+    "subjectId": { "type": "string", "pattern": "^[a-z][a-z0-9-]+$" },
+    "routeSubject": { "enum": ["chinese", "math", "english", "history", "geography", "physics", "chemistry", "biology", "politics"] },
+    "provenance": { "const": "project-operationalization" },
+    "evidencePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["singleObservationIsMastery", "firstUseMaxModels", "minimumIndependentObservations", "transferRequired", "defaultState"],
+      "properties": {
+        "singleObservationIsMastery": { "const": false },
+        "firstUseMaxModels": { "const": 1 },
+        "minimumIndependentObservations": { "type": "integer", "minimum": 2 },
+        "transferRequired": { "const": true },
+        "defaultState": { "const": "session-only" }
+      }
+    },
+    "models": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["modelId", "competencyId", "gradeBand", "observableEvidence", "task", "feedbackAdjustment", "capabilityBindings"],
+        "properties": {
+          "modelId": { "type": "string", "pattern": "^[a-z][a-z0-9.-]+\\.v[0-9]+$" },
+          "competencyId": { "type": "string", "pattern": "^[a-z][a-z0-9.-]+$" },
+          "gradeBand": { "enum": ["1-9", "3-9", "7-9"] },
+          "observableEvidence": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 4,
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 8 }
+          },
+          "task": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["taskType", "promptContract", "successCriteria"],
+            "properties": {
+              "taskType": { "type": "string", "pattern": "^[a-z][a-z0-9-]+$" },
+              "promptContract": { "type": "string", "minLength": 12 },
+              "successCriteria": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 3,
+                "uniqueItems": true,
+                "items": { "type": "string", "minLength": 6 }
+              }
+            }
+          },
+          "feedbackAdjustment": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["whenMissing", "whenEmerging", "whenDemonstrated", "retest"],
+            "properties": {
+              "whenMissing": { "type": "string", "minLength": 8 },
+              "whenEmerging": { "type": "string", "minLength": 8 },
+              "whenDemonstrated": { "type": "string", "minLength": 8 },
+              "retest": { "type": "string", "minLength": 8 }
+            }
+          },
+          "capabilityBindings": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 4,
+            "uniqueItems": true,
+            "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]+$" }
+          }
+        }
+      }
+    }
+  }
+}

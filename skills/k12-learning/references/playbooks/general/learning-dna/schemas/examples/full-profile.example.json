@@ -7,8 +7,6 @@
     "consentStatus": {
       "profileEnabled": true,
       "memoryPaused": false,
-      "crossSkillSharing": true,
-      "reminderConsent": true,
       "interestTrackingConsent": true,
       "emotionTrackingConsent": true
     }

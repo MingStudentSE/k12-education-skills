@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["scopeStatus", "standardId", "routeSubject", "subjectId", "competencyId", "modelId", "sourceEvidence", "observableEvidence", "learningTask", "feedbackAdjustment", "scopeNote", "constraints"],
+  "properties": {
+    "scopeStatus": { "enum": ["applies", "out-of-scope", "needs-context", "unsupported-route"] },
+    "standardId": { "type": ["string", "null"] },
+    "routeSubject": { "type": "string", "minLength": 1 },
+    "subjectId": { "type": ["string", "null"] },
+    "competencyId": { "type": ["string", "null"] },
+    "modelId": { "type": ["string", "null"] },
+    "sourceEvidence": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["standardUrl", "section", "pdfPage", "sha256"],
+      "properties": {
+        "standardUrl": { "type": "string", "pattern": "^https://(?:www|hudong)\\.moe\\.gov\\.cn/.*\\.pdf$" },
+        "section": { "type": "string", "pattern": "^三、课程目标 / （一）核心素养内涵" },
+        "pdfPage": { "type": "integer", "minimum": 1 },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "observableEvidence": { "type": "array", "maxItems": 3, "uniqueItems": true, "items": { "type": "string", "minLength": 8 } },
+    "learningTask": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["instruction", "successCriteria"],
+      "properties": {
+        "instruction": { "type": "string", "minLength": 12 },
+        "successCriteria": { "type": "array", "minItems": 2, "maxItems": 3, "uniqueItems": true, "items": { "type": "string", "minLength": 6 } }
+      }
+    },
+    "feedbackAdjustment": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["whenMissing", "whenEmerging", "whenDemonstrated", "retest"],
+      "properties": {
+        "whenMissing": { "type": "string", "minLength": 8 },
+        "whenEmerging": { "type": "string", "minLength": 8 },
+        "whenDemonstrated": { "type": "string", "minLength": 8 },
+        "retest": { "type": "string", "minLength": 8 }
+      }
+    },
+    "scopeNote": { "type": "string", "minLength": 8, "maxLength": 500 },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sessionOnly", "noStateWrite", "singleObservationIsMastery", "maxSelectedModels", "noExtraAssessment", "studentActionRequired", "maxShortActions"],
+      "properties": {
+        "sessionOnly": { "const": true },
+        "noStateWrite": { "const": true },
+        "singleObservationIsMastery": { "const": false },
+        "maxSelectedModels": { "const": 1 },
+        "noExtraAssessment": { "const": true },
+        "studentActionRequired": { "const": true },
+        "maxShortActions": { "type": ["integer", "null"], "minimum": 1, "maximum": 3 }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "scopeStatus": { "const": "applies" } } },
+      "then": {
+        "properties": {
+          "standardId": { "const": "cn-compulsory-2022" },
+          "subjectId": { "type": "string" },
+          "competencyId": { "type": "string" },
+          "modelId": { "type": "string" },
+          "sourceEvidence": { "type": "object" },
+          "observableEvidence": { "minItems": 1 },
+          "learningTask": { "type": "object" },
+          "feedbackAdjustment": { "type": "object" }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "scopeStatus": { "enum": ["out-of-scope", "needs-context", "unsupported-route"] } } },
+      "then": {
+        "properties": {
+          "standardId": { "const": null },
+          "subjectId": { "const": null },
+          "competencyId": { "const": null },
+          "modelId": { "const": null },
+          "sourceEvidence": { "const": null },
+          "observableEvidence": { "maxItems": 0 },
+          "learningTask": { "const": null },
+          "feedbackAdjustment": { "const": null }
+        }
+      }
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # 初版学习 DNA 交付模板
 
-所有模板默认会话内使用；只有用户明确同意建档时，才把最小摘要交给 `learning-dna`。方法组合由 `k12-learning` 主流程基于当前请求直接完成。
+所有模板默认会话内使用；只有用户明确同意建档时，才允许 `learning-dna` 使用该最小摘要。方法组合由 `k12-learning` 主流程基于当前请求直接完成。
 
 ## 初版学习 DNA Markdown 模板
 
@@ -14,8 +14,6 @@
 - consentStatus:
   - profileEnabled: {{true/false}}
   - memoryPaused: {{true/false}}
-  - crossSkillSharing: {{true/false}}
-  - reminderConsent: {{true/false}}
 
 ### routingHints
 - gradeLevel: { value: {{学段年级}}, confidenceLevel: {{...}} }
@@ -52,9 +50,7 @@
     "createdAt": "2026-07-11T09:00:00+08:00",
     "consentStatus": {
       "profileEnabled": false,
-      "memoryPaused": false,
-      "crossSkillSharing": false,
-      "reminderConsent": false
+      "memoryPaused": false
     }
   },
   "routingHints": {

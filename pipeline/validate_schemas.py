@@ -132,6 +132,90 @@ def dna_example() -> None:
     validator(load(base / "dna-profile.schema.json")).validate(load(base / "examples/full-profile.example.json"))
 
 
+def curriculum_evidence_examples() -> int:
+    base = LEARNING / "references/curriculum/2022"
+    standards_check = validator(load(LEARNING / "schemas/curriculum-standards.schema.json"))
+    evidence_check = validator(load(LEARNING / "schemas/core-competency-evidence-model.schema.json"))
+    standards_check.validate(load(base / "standards.json"))
+    profiles = sorted((base / "evidence").glob("*.json"))
+    if len(profiles) != 9:
+        raise AssertionError(f"2022 证据模型必须恰有 9 个当前学科 profile，实际 {len(profiles)}")
+    for path in profiles:
+        evidence_check.validate(load(path))
+    return len(profiles)
+
+
+def curriculum_output_contract() -> None:
+    check = validator(load(ROOT / "pipeline/curriculum-evidence-output.schema.json"))
+    constraints = {
+        "sessionOnly": True,
+        "noStateWrite": True,
+        "singleObservationIsMastery": False,
+        "maxSelectedModels": 1,
+        "noExtraAssessment": True,
+        "studentActionRequired": True,
+        "maxShortActions": None,
+    }
+    applies = {
+        "scopeStatus": "applies",
+        "standardId": "cn-compulsory-2022",
+        "routeSubject": "history",
+        "subjectId": "history",
+        "competencyId": "history.source-evidence",
+        "modelId": "history.source-evidence.claim-support.v1",
+        "sourceEvidence": {
+            "standardUrl": "https://www.moe.gov.cn/srcsite/A26/s8001/202204/W020220420582345700037.pdf",
+            "section": "三、课程目标 / （一）核心素养内涵",
+            "pdfPage": 11,
+            "sha256": "c807b9162d7f7a652c9acedc187c39b28d29b73edfa9e6964045f9a8672a90ef",
+        },
+        "observableEvidence": ["能引用相关信息并说明它如何支持结论"],
+        "learningTask": {
+            "instruction": "为当前结论补一条材料证据和一个证明限度。",
+            "successCriteria": ["结论与证据逐项绑定", "没有超出材料范围"],
+        },
+        "feedbackAdjustment": {
+            "whenMissing": "退回证据—说明—结论句架。",
+            "whenEmerging": "补材料编号和证明限度。",
+            "whenDemonstrated": "加入不同来源材料做互证。",
+            "retest": "用新材料完成同一证据链。",
+        },
+        "scopeNote": "适用于初中历史的 2022 义务教育课程标准。",
+        "constraints": constraints,
+    }
+    out_of_scope = {
+        "scopeStatus": "out-of-scope",
+        "standardId": None,
+        "routeSubject": "politics",
+        "subjectId": None,
+        "competencyId": None,
+        "modelId": None,
+        "sourceEvidence": None,
+        "observableEvidence": [],
+        "learningTask": None,
+        "feedbackAdjustment": None,
+        "scopeNote": "高二不属于 2022 义务教育课标适用范围。",
+        "constraints": constraints,
+    }
+    unsupported_route = {
+        **out_of_scope,
+        "scopeStatus": "unsupported-route",
+        "routeSubject": "science",
+        "scopeNote": "当前没有小学科学专用证据模型，不能冒充 2022 科学课程对齐。",
+    }
+    check.validate(applies)
+    check.validate(out_of_scope)
+    check.validate(unsupported_route)
+    invalid = [
+        {**applies, "standardId": None},
+        {**applies, "constraints": {**constraints, "singleObservationIsMastery": True}},
+        {**out_of_scope, "modelId": "history.source-evidence.claim-support.v1"},
+    ]
+    for index, value in enumerate(invalid, start=1):
+        if check.is_valid(value):
+            raise AssertionError(f"curriculum output invalid fixture {index} was accepted")
+
+
 def module_contract() -> None:
     expected = {"k12-learning", "llm-wiki", "k12-automation", "k12-skill-studio"}
     actual = {path.parent.name for path in (ROOT / "skills").glob("*/SKILL.md")}
@@ -143,7 +227,25 @@ def module_contract() -> None:
     for name in expected:
         tests = load(ROOT / f"skills/{name}/test-prompts.json")
         if not isinstance(tests, list) or not tests:
-            raise AssertionError(f"{name} 缺少 module 级行为测试")
+            raise AssertionError(f"{name} 缺少自然语言 prompt fixture")
+
+
+def behavior_fixture_contract() -> int:
+    fixture_schema = load(ROOT / "pipeline/module-behavior-fixture.schema.json")
+    fixture_check = validator(fixture_schema)
+    validator(load(ROOT / "pipeline/module-behavior-response.schema.json"))
+    validator(load(ROOT / "pipeline/module-behavior-output.schema.json"))
+    validator(load(ROOT / "pipeline/v3-route-output.schema.json"))
+    validator(load(ROOT / "pipeline/v3-route-batch-output.schema.json"))
+    count = 0
+    for name in ["k12-learning", "llm-wiki", "k12-automation", "k12-skill-studio"]:
+        for index, case in enumerate(load(ROOT / f"skills/{name}/test-prompts.json"), start=1):
+            try:
+                fixture_check.validate(case)
+            except Exception as exc:
+                raise AssertionError(f"{name} prompt fixture #{index} 不符合共享 schema: {exc}") from exc
+            count += 1
+    return count
 
 
 def main() -> None:
@@ -154,10 +256,13 @@ def main() -> None:
     for path in schemas:
         validator(load(path))
     module_contract()
+    behavior_fixtures = behavior_fixture_contract()
     decision_cases = decision_contract()
     intake_example()
     dna_example()
-    print(f"schema validation: 4 modules; {len(schemas)} schemas; 58 capabilities; {decision_cases} decision cases; intake + DNA examples valid")
+    curriculum_profiles = curriculum_evidence_examples()
+    curriculum_output_contract()
+    print(f"schema validation: 4 modules; {len(schemas)} module schemas; {behavior_fixtures} prompt fixtures share one schema; 58 capabilities; {decision_cases} decision cases; intake + DNA + {curriculum_profiles} curriculum profiles + curriculum output valid")
 
 
 if __name__ == "__main__":

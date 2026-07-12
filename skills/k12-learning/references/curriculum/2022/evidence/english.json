@@ -1,0 +1,46 @@
+{
+  "modelVersion": "1.0.0",
+  "standardId": "cn-compulsory-2022",
+  "subjectId": "english",
+  "routeSubject": "english",
+  "provenance": "project-operationalization",
+  "evidencePolicy": { "singleObservationIsMastery": false, "firstUseMaxModels": 1, "minimumIndependentObservations": 2, "transferRequired": true, "defaultState": "session-only" },
+  "models": [
+    {
+      "modelId": "english.language-ability.meaningful-communication.v1",
+      "competencyId": "english.language-ability",
+      "gradeBand": "3-9",
+      "observableEvidence": ["能在具体语境中理解或表达关键信息和意图", "能使用词汇、语法、语音和语篇线索完成沟通并自我修正"],
+      "task": { "taskType": "meaningful-communication", "promptContract": "设置一个真实听说读写目的，让学生先完成信息任务，再针对影响意义的语言问题修改。", "successCriteria": ["关键信息和交际意图被准确传达", "修正优先处理影响理解的问题"] },
+      "feedbackAdjustment": { "whenMissing": "缩短输入或句型，只保留一个关键信息目标。", "whenEmerging": "提供关键词或句架后立即撤掉一部分支架。", "whenDemonstrated": "更换对象、语境或表达方式，检验能否迁移。", "retest": "用新场景独立完成同类沟通任务。" },
+      "capabilityBindings": ["english-speaking-coach", "english-writing-coach", "english-listening-trainer"]
+    },
+    {
+      "modelId": "english.cultural-awareness.context-comparison.v1",
+      "competencyId": "english.cultural-awareness",
+      "gradeBand": "3-9",
+      "observableEvidence": ["能从语篇和情境识别文化信息及交往习惯", "能比较不同表达选择并避免无证据的刻板概括"],
+      "task": { "taskType": "cultural-context-comparison", "promptContract": "比较两个相似交往场景中的表达，说明对象、关系和文化情境如何影响选择。", "successCriteria": ["比较依据来自具体语篇或场景", "结论避免把个别例子扩大为群体标签"] },
+      "feedbackAdjustment": { "whenMissing": "先只识别说话对象、关系和目的。", "whenEmerging": "要求把合适或不合适连接到具体语境线索。", "whenDemonstrated": "加入多元场景，检验能否灵活调整而非套模板。", "retest": "在新场景中选择表达并解释文化与语用理由。" },
+      "capabilityBindings": ["english-speaking-coach", "english-listening-trainer"]
+    },
+    {
+      "modelId": "english.thinking-quality.inference-evaluation.v1",
+      "competencyId": "english.thinking-quality",
+      "gradeBand": "3-9",
+      "observableEvidence": ["能分类、概括、比较语篇信息并作出有依据的推断", "能检查观点、证据和表达之间是否一致"],
+      "task": { "taskType": "discourse-inference", "promptContract": "从短语篇提取事实与观点，写一条推断、证据和可能的其他解释。", "successCriteria": ["推断不超出文本证据范围", "能说明语言线索如何支持判断"] },
+      "feedbackAdjustment": { "whenMissing": "先把原文事实和自己的推断分栏。", "whenEmerging": "为每条推断补一个原文词句或结构线索。", "whenDemonstrated": "加入含混或反向信息，要求修正原推断。", "retest": "用新语篇完成事实—推断—证据。" },
+      "capabilityBindings": ["english-listening-trainer", "english-writing-coach"]
+    },
+    {
+      "modelId": "english.learning-ability.strategy-adjustment.v1",
+      "competencyId": "english.learning-ability",
+      "gradeBand": "3-9",
+      "observableEvidence": ["能选择适合目标的预习、理解、记忆或练习策略", "能根据错误和复测结果调整策略而非只增加重复次数"],
+      "task": { "taskType": "strategy-experiment", "promptContract": "让学生为一个英语目标选择策略，完成短任务并根据结果写下一轮调整。", "successCriteria": ["策略与具体任务和困难相匹配", "调整依据来自表现证据而非感觉"] },
+      "feedbackAdjustment": { "whenMissing": "先固定一个小目标和一种策略，避免同时改变多个变量。", "whenEmerging": "比较使用策略前后的一个可观察指标。", "whenDemonstrated": "在不同材料中复用并说明何时需要换策略。", "retest": "用新材料独立执行策略—证据—调整循环。" },
+      "capabilityBindings": ["english-vocabulary-dna", "english-listening-trainer", "english-speaking-coach"]
+    }
+  ]
+}

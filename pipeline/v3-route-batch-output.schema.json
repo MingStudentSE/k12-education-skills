@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "V3 Route Regression Batch Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["results"],
+  "properties": {
+    "results": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 40,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["caseId", "decision"],
+        "properties": {
+          "caseId": { "type": "string", "minLength": 1 },
+          "decision": { "$ref": "#/$defs/decision" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "primaryPlaybook", "supportingPlaybooks", "confidence", "matchedSignals", "constraints", "moduleRequired", "clarification"],
+      "properties": {
+        "mode": { "enum": ["DIRECT", "INTAKE", "COMPOSE", "CLARIFY", "ORDINARY", "MODULE_REQUIRED"] },
+        "primaryPlaybook": { "type": ["string", "null"] },
+        "supportingPlaybooks": { "type": "array", "maxItems": 2, "items": { "type": "string" } },
+        "confidence": { "enum": ["high", "medium", "low"] },
+        "matchedSignals": { "type": "array", "maxItems": 8, "items": { "type": "string" } },
+        "constraints": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["sessionOnly", "noStateRead", "noStateWrite", "noAutomation", "noSilentInstall"],
+          "properties": {
+            "sessionOnly": { "const": true },
+            "noStateRead": { "const": true },
+            "noStateWrite": { "const": true },
+            "noAutomation": { "const": true },
+            "noSilentInstall": { "const": true }
+          }
+        },
+        "moduleRequired": { "enum": ["llm-wiki", "k12-automation", "k12-skill-studio", null] },
+        "clarification": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

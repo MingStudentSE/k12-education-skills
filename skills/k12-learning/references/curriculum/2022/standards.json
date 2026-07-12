@@ -1,0 +1,233 @@
+{
+  "dataVersion": "1.2.0",
+  "standard": {
+    "standardId": "cn-compulsory-2022",
+    "title": "义务教育课程方案和课程标准（2022年版）",
+    "jurisdiction": "CN",
+    "educationStage": "compulsory-education",
+    "editionYear": 2022,
+    "effectiveFrom": "2022-09",
+    "issuer": "中华人民共和国教育部",
+    "noticeUrl": "https://hudong.moe.gov.cn/srcsite/A26/s8001/202204/t20220420_619921.html",
+    "verifiedAt": "2026-07-12"
+  },
+  "coverage": {
+    "status": "supported-routes-only",
+    "statement": "当前只为 k12-learning 已有九个学科路由建立事实映射，不表示已经覆盖教育部发布的全部课程标准。",
+    "officialFactFields": ["officialName", "gradeRange", "competencies", "competencies.sourcePage", "standardUrl", "sourceLocator"],
+    "projectFields": ["routeSubject", "evidence models", "capability bindings", "feedback adjustments"]
+  },
+  "subjects": [
+    {
+      "subjectId": "ethics-and-rule-of-law",
+      "officialName": "道德与法治",
+      "routeSubject": "politics",
+      "gradeRange": { "min": 1, "max": 9 },
+      "standardUrl": "https://www.moe.gov.cn/srcsite/A26/s8001/202204/W020220420582343475848.pdf",
+      "sourceLocator": {
+        "section": "三、课程目标 / （一）核心素养内涵",
+        "pdfPage": 12,
+        "sha256": "16c0a291b522ce5b0afe3b1a28e696d8cca0d4d63cc01ff552a1d6ce06506cf0"
+      },
+      "verificationStatus": "primary-source-verified",
+      "competencies": [
+        { "competencyId": "ethics.political-identity", "officialName": "政治认同", "kind": "core-competency", "sourcePage": 12 },
+        { "competencyId": "ethics.moral-cultivation", "officialName": "道德修养", "kind": "core-competency", "sourcePage": 12 },
+        { "competencyId": "ethics.rule-of-law", "officialName": "法治观念", "kind": "core-competency", "sourcePage": 12 },
+        { "competencyId": "ethics.sound-personality", "officialName": "健全人格", "kind": "core-competency", "sourcePage": 12 },
+        { "competencyId": "ethics.responsibility", "officialName": "责任意识", "kind": "core-competency", "sourcePage": 12 }
+      ]
+    },
+    {
+      "subjectId": "chinese",
+      "officialName": "语文",
+      "routeSubject": "chinese",
+      "gradeRange": { "min": 1, "max": 9 },
+      "standardUrl": "https://www.moe.gov.cn/srcsite/A26/s8001/202204/W020220420582344386456.pdf",
+      "sourceLocator": {
+        "section": "三、课程目标 / （一）核心素养内涵",
+        "pdfPage": 11,
+        "sha256": "3ef0ec8a30b5a950211202658df07d99f5427f750f8ba0c3cfda12736b7bd71a"
+      },
+      "verificationStatus": "primary-source-verified",
+      "competencies": [
+        { "competencyId": "chinese.cultural-confidence", "officialName": "文化自信", "kind": "core-competency", "sourcePage": 11 },
+        { "competencyId": "chinese.language-use", "officialName": "语言运用", "kind": "core-competency", "sourcePage": 11 },
+        { "competencyId": "chinese.thinking", "officialName": "思维能力", "kind": "core-competency", "sourcePage": 11 },
+        { "competencyId": "chinese.aesthetic-creation", "officialName": "审美创造", "kind": "core-competency", "sourcePage": 11 }
+      ]
+    },
+    {
+      "subjectId": "history",
+      "officialName": "历史",
+      "routeSubject": "history",
+      "gradeRange": { "min": 7, "max": 9 },
+      "standardUrl": "https://www.moe.gov.cn/srcsite/A26/s8001/202204/W020220420582345700037.pdf",
+      "sourceLocator": {
+        "section": "三、课程目标 / （一）核心素养内涵",
+        "pdfPage": 11,
+        "sha256": "c807b9162d7f7a652c9acedc187c39b28d29b73edfa9e6964045f9a8672a90ef"
+      },
+      "verificationStatus": "primary-source-verified",
+      "competencies": [
+        { "competencyId": "history.historical-materialism", "officialName": "唯物史观", "kind": "core-competency", "sourcePage": 11 },
+        { "competencyId": "history.time-space", "officialName": "时空观念", "kind": "core-competency", "sourcePage": 11 },
+        { "competencyId": "history.source-evidence", "officialName": "史料实证", "kind": "core-competency", "sourcePage": 11 },
+        { "competencyId": "history.interpretation", "officialName": "历史解释", "kind": "core-competency", "sourcePage": 11 },
+        { "competencyId": "history.national-sentiment", "officialName": "家国情怀", "kind": "core-competency", "sourcePage": 11 }
+      ]
+    },
+    {
+      "subjectId": "math",
+      "officialName": "数学",
+      "routeSubject": "math",
+      "gradeRange": { "min": 1, "max": 9 },
+      "standardUrl": "https://www.moe.gov.cn/srcsite/A26/s8001/202204/W020220510531636118932.pdf",
+      "sourceLocator": {
+        "section": "三、课程目标 / （一）核心素养内涵 / 核心素养的构成",
+        "pdfPage": 12,
+        "sha256": "1183b95c58a65eaac4c456f2d2b329bbe42f65a6482993edb537e3eaf8baa144"
+      },
+      "verificationStatus": "primary-source-verified",
+      "competencies": [
+        {
+          "competencyId": "math.observe-world",
+          "officialName": "会用数学的眼光观察现实世界",
+          "kind": "top-level-manifestation",
+          "sourcePage": 12,
+          "stageManifestations": {
+            "primary": ["数感", "量感", "符号意识", "几何直观", "空间观念", "数据意识"],
+            "juniorSecondary": ["抽象能力", "几何直观", "空间观念", "数据观念"]
+          }
+        },
+        {
+          "competencyId": "math.think-world",
+          "officialName": "会用数学的思维思考现实世界",
+          "kind": "top-level-manifestation",
+          "sourcePage": 13,
+          "stageManifestations": {
+            "primary": ["运算能力", "推理意识"],
+            "juniorSecondary": ["运算能力", "推理能力"]
+          }
+        },
+        {
+          "competencyId": "math.express-world",
+          "officialName": "会用数学的语言表达现实世界",
+          "kind": "top-level-manifestation",
+          "sourcePage": 13,
+          "stageManifestations": {
+            "primary": ["模型意识", "应用意识", "创新意识"],
+            "juniorSecondary": ["模型观念", "应用意识", "创新意识"]
+          }
+        }
+      ]
+    },
+    {
+      "subjectId": "english",
+      "officialName": "英语",
+      "routeSubject": "english",
+      "gradeRange": { "min": 3, "max": 9 },
+      "standardUrl": "https://www.moe.gov.cn/srcsite/A26/s8001/202204/W020220420582349487953.pdf",
+      "sourceLocator": {
+        "section": "三、课程目标 / （一）核心素养内涵",
+        "pdfPage": 11,
+        "sha256": "59ec3971e0dbd6ca487c4e4972cbc80effaf2fd62418d07e5f62c6698fa222fb"
+      },
+      "verificationStatus": "primary-source-verified",
+      "competencies": [
+        { "competencyId": "english.language-ability", "officialName": "语言能力", "kind": "core-competency", "sourcePage": 11 },
+        { "competencyId": "english.cultural-awareness", "officialName": "文化意识", "kind": "core-competency", "sourcePage": 11 },
+        { "competencyId": "english.thinking-quality", "officialName": "思维品质", "kind": "core-competency", "sourcePage": 11 },
+        { "competencyId": "english.learning-ability", "officialName": "学习能力", "kind": "core-competency", "sourcePage": 11 }
+      ]
+    },
+    {
+      "subjectId": "geography",
+      "officialName": "地理",
+      "routeSubject": "geography",
+      "gradeRange": { "min": 7, "max": 9 },
+      "standardUrl": "https://www.moe.gov.cn/srcsite/A26/s8001/202204/W020220420582354066450.pdf",
+      "sourceLocator": {
+        "section": "三、课程目标 / （一）核心素养内涵",
+        "pdfPage": 11,
+        "sha256": "5aade5cb5cfa103c48277c8ff663783df69cafb0fec2411f4aad1924d75c67b8"
+      },
+      "verificationStatus": "primary-source-verified",
+      "competencies": [
+        { "competencyId": "geography.human-land", "officialName": "人地协调观", "kind": "core-competency", "sourcePage": 11 },
+        { "competencyId": "geography.integrated-thinking", "officialName": "综合思维", "kind": "core-competency", "sourcePage": 11 },
+        { "competencyId": "geography.regional-cognition", "officialName": "区域认知", "kind": "core-competency", "sourcePage": 11 },
+        { "competencyId": "geography.practice", "officialName": "地理实践力", "kind": "core-competency", "sourcePage": 11 }
+      ]
+    },
+    {
+      "subjectId": "physics",
+      "officialName": "物理",
+      "routeSubject": "physics",
+      "gradeRange": { "min": 7, "max": 9 },
+      "standardUrl": "https://www.moe.gov.cn/srcsite/A26/s8001/202204/W020220420582357585169.pdf",
+      "sourceLocator": {
+        "section": "三、课程目标 / （一）核心素养内涵",
+        "pdfPage": 11,
+        "sha256": "884069da6c924acb27b966ea20b9c7a4d8f0d6dfc828c80cd252aa72bf990340"
+      },
+      "verificationStatus": "primary-source-verified",
+      "competencies": [
+        { "competencyId": "physics.concepts", "officialName": "物理观念", "kind": "core-competency", "sourcePage": 11 },
+        { "competencyId": "physics.scientific-thinking", "officialName": "科学思维", "kind": "core-competency", "sourcePage": 11 },
+        { "competencyId": "physics.inquiry", "officialName": "科学探究", "kind": "core-competency", "sourcePage": 11 },
+        { "competencyId": "physics.attitude-responsibility", "officialName": "科学态度与责任", "kind": "core-competency", "sourcePage": 11 }
+      ]
+    },
+    {
+      "subjectId": "chemistry",
+      "officialName": "化学",
+      "routeSubject": "chemistry",
+      "gradeRange": { "min": 7, "max": 9 },
+      "standardUrl": "https://www.moe.gov.cn/srcsite/A26/s8001/202204/W020230605524875861384.pdf",
+      "sourceLocator": {
+        "section": "三、课程目标 / （一）核心素养内涵",
+        "pdfPage": 12,
+        "sha256": "8e04592efba9a6baf41ebf6970d868f2461fbd8e43328fb2ddb57165aa0c2b5c"
+      },
+      "verificationStatus": "primary-source-verified",
+      "competencies": [
+        { "competencyId": "chemistry.concepts", "officialName": "化学观念", "kind": "core-competency", "sourcePage": 12 },
+        { "competencyId": "chemistry.scientific-thinking", "officialName": "科学思维", "kind": "core-competency", "sourcePage": 12 },
+        { "competencyId": "chemistry.inquiry-practice", "officialName": "科学探究与实践", "kind": "core-competency", "sourcePage": 12 },
+        { "competencyId": "chemistry.attitude-responsibility", "officialName": "科学态度与责任", "kind": "core-competency", "sourcePage": 12 }
+      ]
+    },
+    {
+      "subjectId": "biology",
+      "officialName": "生物学",
+      "routeSubject": "biology",
+      "gradeRange": { "min": 7, "max": 9 },
+      "standardUrl": "https://www.moe.gov.cn/srcsite/A26/s8001/202204/W020220420582359998122.pdf",
+      "sourceLocator": {
+        "section": "三、课程目标 / （一）核心素养内涵",
+        "pdfPage": 11,
+        "sha256": "95993bea87c30104631fa10f2f20f11b98d0718d69c4aeeac46c53a387f43c00"
+      },
+      "verificationStatus": "primary-source-verified",
+      "competencies": [
+        { "competencyId": "biology.life-concepts", "officialName": "生命观念", "kind": "core-competency", "sourcePage": 11 },
+        { "competencyId": "biology.scientific-thinking", "officialName": "科学思维", "kind": "core-competency", "sourcePage": 11 },
+        { "competencyId": "biology.inquiry-practice", "officialName": "探究实践", "kind": "core-competency", "sourcePage": 11 },
+        { "competencyId": "biology.attitude-responsibility", "officialName": "态度责任", "kind": "core-competency", "sourcePage": 11 }
+      ]
+    }
+  ],
+  "knownGaps": [
+    {
+      "officialSubject": "科学",
+      "status": "not-modeled",
+      "reason": "当前没有专用小学科学路由；通用理科解题方法不能代替科学课程标准。"
+    },
+    {
+      "officialSubject": "信息科技、体育与健康、艺术、劳动及其他外语",
+      "status": "not-modeled",
+      "reason": "当前 k12-learning 没有对应学科 playbook，不能宣称完成 2022 全课程覆盖。"
+    }
+  ]
+}

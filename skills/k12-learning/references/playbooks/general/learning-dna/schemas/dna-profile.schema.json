@@ -20,7 +20,7 @@
         },
         "schemaVersion": {
           "type": "string",
-          "description": "档案结构版本号，与 SKILL 版本对应",
+          "description": "档案结构版本号，与 k12-learning 数据契约版本对应",
           "enum": ["1.0.0", "1.1.0", "1.1.1", "1.2.0"]
         },
         "createdAt": {
@@ -46,16 +46,6 @@
             "memoryPaused": {
               "type": "boolean",
               "description": "是否暂停记忆（本次不读取也不写入）",
-              "default": false
-            },
-            "crossSkillSharing": {
-              "type": "boolean",
-              "description": "是否允许跨SKILL共享最小字段摘要",
-              "default": false
-            },
-            "reminderConsent": {
-              "type": "boolean",
-              "description": "是否同意接收IM提醒",
               "default": false
             },
             "interestTrackingConsent": {

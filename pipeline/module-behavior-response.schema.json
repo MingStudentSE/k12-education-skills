@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://k12-education-skills.local/schemas/module-behavior-response.schema.json",
+  "title": "Product Module frozen user-visible response batch",
+  "type": "object",
+  "required": ["module", "results"],
+  "additionalProperties": false,
+  "properties": {
+    "module": {
+      "type": "string",
+      "enum": ["k12-learning", "llm-wiki", "k12-automation", "k12-skill-studio"]
+    },
+    "results": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["caseKey", "response"],
+        "additionalProperties": false,
+        "properties": {
+          "caseKey": {
+            "type": "string",
+            "minLength": 1
+          },
+          "response": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}
