@@ -22,9 +22,12 @@ jobs:
     name: MOE PDF hash + pinned section verification
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    permissions:
+      contents: read
+      issues: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: '22'
       - name: Install PDF text and OCR extractors
@@ -32,10 +35,16 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y poppler-utils tesseract-ocr
           # Ubuntu packages ship the low-accuracy tessdata_fast models, which
-          # misread scanned MOE pages; use the high-accuracy tessdata_best ones.
+          # misread scanned MOE pages; use the high-accuracy tessdata_best ones,
+          # pinned by sha256 so a model swap upstream cannot change results silently.
           mkdir -p "$HOME/tessdata"
           curl -sSL -o "$HOME/tessdata/chi_sim.traineddata" https://github.com/tesseract-ocr/tessdata_best/raw/main/chi_sim.traineddata
           curl -sSL -o "$HOME/tessdata/eng.traineddata" https://github.com/tesseract-ocr/tessdata_best/raw/main/eng.traineddata
+          cd "$HOME/tessdata"
+          sha256sum -c <<'SUMS'
+          4fef2d1306c8e87616d4d3e4c6c67faf5d44be3342290cf8f2f0f6e3aa7e735b  chi_sim.traineddata
+          8280aed0782fe27257a68ea10fe7ef324ca0f8d85bd2fd145d1c2b560bcb66ba  eng.traineddata
+          SUMS
           echo "TESSDATA_PREFIX=$HOME/tessdata" >> "$GITHUB_ENV"
       - name: Verify official curriculum sources (live download)
         run: |
@@ -44,3 +53,20 @@ jobs:
           else
             node pipeline/verify_curriculum_sources.mjs --live
           fi
+      - name: Open a tracking issue on failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          {
+            echo "每周教育部课标来源校验失败。运行日志：$RUN_URL"
+            echo
+            echo "两种可能，请对照日志区分："
+            echo "1. 官方来源漂移（sha256 或章节标记不匹配）→ 重新钉住 skills/k12-learning/references/curriculum/2022/standards.json 中的证据。"
+            echo "2. runner 到教育部 CDN 的网络故障（重试 4 次后仍 ETIMEDOUT）→ 直接重跑 workflow。"
+          } > /tmp/issue-body.md
+          gh issue create \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "live-verification 失败：$(date -u +%F)" \
+            --body-file /tmp/issue-body.md
