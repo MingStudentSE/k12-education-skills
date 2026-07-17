@@ -10,10 +10,10 @@ description: 面向 K12 学生及其支持者的唯一日常学习入口。明�
 ## 工作流
 
 1. **判断范围**：处理 K12 学习、学习方法、学习规划和复盘；非 K12 请求普通回答。Wiki 仓库维护、真实自动化和 Product Module/playbook 开发不在本 module 内执行。
-2. **提取当前信号**：只从当前消息识别是否明确首次使用、学科、目标、材料、学生已做步骤、期望输出和副作用意图。路由阶段不读取画像、错题历史、周报或提醒。
+2. **提取当前信号并执行安全抢占**：只从当前消息识别是否明确首次使用、学科、目标、材料、学生已做步骤、期望输出和副作用意图。路由阶段不读取画像、错题历史、周报或提醒。当信号合理指向用户、当前学生或另一位现实中可能正处危险的人时，不继续普通学习路由，立即读取 `references/crisis-referral-protocol.md`；危机例外优先于低敏改写、温情转化、周报、计划和画像更新。课文、历史人物、新闻题或纯假设中的自伤/死亡内容本身不触发危机流程；指向不清时只做一次最小确认。
 3. **选择主 playbook**：读取 `references/capability-map.json`，按 `references/routing-policy.md` 选一个主 playbook。明确首次使用时以 `student-quick-assessment` 为主，即使已有题目也把该材料直接用于快速测评；普通日常请求已有明确材料时直达专业 playbook，无明确任务时才使用 intake。
 4. **按需组合**：`k12-learning` 自己对组合负责。首次使用组合 `student-quick-assessment` 与 `learning-dna`；已有具体材料时把第二个辅助位给对应学科 playbook，并把同一材料立即用于真实学习；没有材料且同时询问“你能做什么/平时怎么说”时，第二个辅助位给 `system-guide`。其他任务仅在同一结果确实需要时加载最多两个辅助 playbook。组合发生在本 module 内，不增加公开入口或方法间消息协议。
-5. **读取实现**：读取目标目录的 `playbook.md`，再读取其中当前任务必需的 references/schema；不要全量加载 58 个 playbook。明确首次使用时读取 `student-quick-assessment` 与 `learning-dna`；询问系统能力、平时说法或完整用法时读取 `system-guide` 及 `references/system-user-guide.md`。
+5. **读取实现**：读取目标目录的 `playbook.md`，再读取其中当前任务必需的 references/schema；不要全量加载 58 个 playbook。明确首次使用时读取 `student-quick-assessment` 与 `learning-dna`；询问系统能力、平时说法或完整用法时读取 `system-guide` 及 `references/system-user-guide.md`。任务依赖 TTS、音频分析、视觉/OCR 或调度能力时，同时读取 `references/platform-capability-fallbacks.md`，先检查真实能力再执行或降级。
 6. **叠加课标证据镜头**：它不是新路由，也不占辅助 playbook 位。用户明确要求新课标/核心素养/学业质量，或义务教育快速测评、计划、阶段复盘需要把材料转成任务时，读取 `references/curriculum-evidence-policy.md`，再经 `scripts/resolve-curriculum-evidence.mjs` 完成年级 scope、当前学科和单一模型选择；不要由 caller 手工拼接四层事实。2022 模型只适用于义务教育；高中不得套用。
 7. **执行与复测**：把“核心素养 → 可观测证据 → 学习任务 → 反馈调整”落实到学生当前材料。没有学生尝试时，首轮最多给一个线索和一个空结构，随后停下来等学生作答；不得先列完知识点、程序或答案骨架。拿到表现后再调整支架。首次使用仍控制在 3–5 分钟、最多 3 个短测评动作；一旦形成足以选择下一步的初版 DNA，就立即处理一项真实任务。
 8. **经过副作用门**：需要长期 Learning State、Wiki 沉淀或真实提醒时，按 `references/privacy-and-state.md` 先说明字段、目的、位置和删除方法并等待明确确认。
@@ -46,6 +46,8 @@ description: 面向 K12 学生及其支持者的唯一日常学习入口。明�
 - 不跳过学生证据推断长期弱项、性格、家庭或能力标签。
 - 不默认读取或写入 Learning State，不默认共享给其他 module。
 - 不代写作业、作文或考试答案；可给结构、提示、示范片段和评价标准。
+- 不诊断、审问或低敏包装危机求助信号；不继续讲题、排计划或生成周报来替代可信成年人、专业支持和当地紧急服务。
+- 不把纯文本当音频、把转写当发音证据、把未识别图片当已 OCR，也不把计划当作已创建提醒；平台能力不足时按统一矩阵诚实降级。
 - 不让用户从内部 playbook 菜单中选择，不因组合任务重新引入 58 个公开 interface；系统介绍只展示用户目标与示例说法。
 - 学习资料涉及医疗、法律、升学政策等高风险判断时，只辅助理解与表达，不替代专业意见。
 
@@ -54,6 +56,8 @@ description: 面向 K12 学生及其支持者的唯一日常学习入口。明�
 - `references/capability-map.json`：58 个内部能力的意图、示例和 playbook 路径。
 - `references/routing-policy.md`：冲突优先级、组合限制和最小澄清规则。
 - `references/privacy-and-state.md`：会话、Learning State、Wiki 与 automation 的授权门。
+- `references/crisis-referral-protocol.md`：危机信号识别、即时危险响应、按地区转介和最小记录边界的安全单一来源。
+- `references/platform-capability-fallbacks.md`：TTS、音频评估、视觉/OCR 和真实调度的能力检查与诚实降级矩阵。
 - `references/adapters/night-analysis-v1.md`：提供给 Automation 的版本化夜间分析契约。
 - `references/system-user-guide.md`：能力全景、第一次使用和平时调用示例的单一来源。
 - `references/curriculum-evidence-policy.md`：2022 义务教育课标的适用边界、执行链和状态规则。

@@ -13,6 +13,7 @@ description: >
   如果用户明确要求“阶段学习体检 / 360 复盘 / A-B-C 评级 / 系统审计”，应建议改用可选高级方法 `learning-360-review`。
 compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
+  - ../../../crisis-referral-protocol.md
   - references/learning-zone-principles.md
   - references/review-report-template.md
   - references/weekly-review-full-playbook.md
@@ -40,6 +41,8 @@ references:
 
 ## 核心流程骨架
 
+**安全抢占（先于下列步骤）**：本周材料出现自伤、轻生、严重伤害或无法保证安全等危机信号时，停止周报与家庭版美化，立即按 `../../../crisis-referral-protocol.md` 处理；不得把信号写进“阳光总结”或普通焦虑行动卡。
+
 1. **确认范围**：确认日期范围通常为本周，并说明这不是阶段评级；若范围含多周且要评级，切换到 `learning-360-review`。
 2. **收集最小输入**：请求本周学习记录、计划完成情况、错题/费曼/提醒摘要、情绪或专注异常；只取当前周所需字段。
 3. **先回忆后汇总**：先让学生说本周最重要收获、卡点和一件想改进的事，再用数据校准，避免完全代替复盘。
@@ -55,11 +58,13 @@ references:
 - 不只看完成率；必须检查主动回忆、错误反馈、交错练习、分散复习和学习区命中。
 - 不一次给一堆下周建议；下周只聚焦一个最重要动作，并给验收方式。
 - 不羞辱、不贴人格标签；高压或挫败时优先减载、修复系统和给家庭低压支持。
+- 普通学习压力可以低敏表达，但危机信号必须如实说明安全关切并连接安全成年人、专业支持或当地紧急服务；不诊断、不审问、不复制创伤细节。
 - 不默认向 `k12-automation` 提交提醒请求、写入档案或在内部组合中共享；未授权时只输出本轮结果。
 - 不越权生成月度全景报告或 A/B/C 阶段评级；这类需求切换到 `learning-360-review`，其余组合由 `k12-learning` 主入口决定。
 
 ## 参考资源
 
 - `references/weekly-review-full-playbook.md`：需要原版完整三维复盘、六模块周报、学习存折、七问、成长曲线、双通道模板和协作图时读取。
+- `../../../crisis-referral-protocol.md`：家庭分享版与低敏转化的危机例外、安全响应和外部行动边界。
 - `references/review-report-template.md`：需要具体周报文案、进步描述、下周建议、结语和月度摘要素材时读取。
 - `references/learning-zone-principles.md`：需要判断熟悉区/学习区/挫败区、85%规则、间隔学习和变式调参时读取。

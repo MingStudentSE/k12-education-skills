@@ -2,10 +2,78 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://skills.openclaw.dev/schemas/dna-profile.schema.json",
   "title": "LearningDNAProfile",
-  "description": "学习DNA —— AI长期记忆核心引擎的数据结构定义。覆盖六大基础维度（基础信息、学科强弱、学习风格、错误模式、对话摘要、成长轨迹）与 v1.1 扩展（成长图谱、兴趣DNA）及 v1.2 扩展（学习情绪）。所有字段均为可选（optional），默认只记录完成个性化辅导所必需的最小信息。",
+  "description": "学习DNA —— AI长期记忆核心引擎的数据结构定义。覆盖六大基础维度（基础信息、学科强弱、学习风格、错误模式、对话摘要、成长轨迹）、v1.1 扩展（成长图谱、兴趣DNA）、v1.2 扩展（学习情绪）与 v1.3 扩展（实体—关系概念图谱）。除 meta 外字段均为可选，默认只记录完成个性化辅导所必需的最小信息。",
 
   "type": "object",
   "additionalProperties": false,
+
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "meta": {
+            "properties": {
+              "schemaVersion": { "const": "1.3.0" }
+            },
+            "required": ["schemaVersion"]
+          }
+        },
+        "required": ["meta"]
+      },
+      "then": {
+        "properties": {
+          "growthMap": {
+            "not": { "required": ["knowledgeAccumulationTree"] }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "meta": {
+            "properties": {
+              "schemaVersion": { "enum": ["1.0.0", "1.1.0", "1.1.1", "1.2.0"] }
+            },
+            "required": ["schemaVersion"]
+          }
+        },
+        "required": ["meta"]
+      },
+      "then": {
+        "properties": {
+          "growthMap": {
+            "not": { "required": ["conceptGraph"] }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "growthMap": {
+            "required": ["conceptGraph"]
+          }
+        },
+        "required": ["growthMap"]
+      },
+      "then": {
+        "properties": {
+          "meta": {
+            "properties": {
+              "consentStatus": {
+                "properties": {
+                  "profileEnabled": { "const": true }
+                },
+                "required": ["profileEnabled"]
+              }
+            },
+            "required": ["consentStatus"]
+          }
+        }
+      }
+    }
+  ],
 
   "properties": {
     "meta": {
@@ -21,7 +89,7 @@
         "schemaVersion": {
           "type": "string",
           "description": "档案结构版本号，与 k12-learning 数据契约版本对应",
-          "enum": ["1.0.0", "1.1.0", "1.1.1", "1.2.0"]
+          "enum": ["1.0.0", "1.1.0", "1.1.1", "1.2.0", "1.3.0"]
         },
         "createdAt": {
           "type": "string",
@@ -244,6 +312,21 @@
                 "type": "string",
                 "format": "date",
                 "description": "首次识别为固定模式的日期"
+              },
+              "primarySubtypeId": {
+                "type": "string",
+                "description": "可选的学科专属主错因规范 ID；持久化时必须带学科命名空间，禁止只写 C01 等局部短码。",
+                "pattern": "^(math:[CBMR]|physics:[PCFRT])[0-9]{2}$"
+              },
+              "relatedSubtypeIds": {
+                "type": "array",
+                "description": "同一错误记录的次要关联规范 ID；每项必须带学科命名空间。",
+                "maxItems": 8,
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "pattern": "^(math:[CBMR]|physics:[PCFRT])[0-9]{2}$"
+                }
               }
             },
             "required": ["errorType", "subject", "knowledgePoint", "occurrenceCount", "rootCause"]
@@ -431,7 +514,7 @@
     },
 
     "growthMap": {
-      "description": "v1.1 扩展 · 成长图谱：让进步变得可见、可追踪、可对比",
+      "description": "v1.1–v1.3 扩展 · 成长图谱：让进步变得可见、可追踪、可对比；v1.3 起跨学科知识联结以 conceptGraph 为正式结构",
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -573,8 +656,10 @@
           }
         },
         "knowledgeAccumulationTree": {
-          "description": "5.4 知识积累树：跨学科联结记录",
+          "description": "5.4 旧版知识积累树：仅用于读取和迁移 v1.2.0 及更早档案，新写入应使用 conceptGraph。只允许低敏课程概念联结，禁止写入真实姓名、学校全称、身份证件、联系方式、账户信息、医疗诊断、心理标签、家庭纠纷或财务细节。",
           "type": "array",
+          "deprecated": true,
+          "readOnly": true,
           "items": {
             "type": "object",
             "additionalProperties": false,
@@ -614,6 +699,91 @@
             },
             "required": ["pointA", "pointB", "linkType"]
           }
+        },
+        "conceptGraph": {
+          "description": "5.4 跨学科实体—关系概念图谱，是 v1.3 起的新写入首选。只记录经用户授权且有学习证据支持的低敏课程概念及其关系；禁止用节点或边承载真实姓名、学校全称、身份证件、联系方式、账户信息、医疗诊断、心理标签、家庭纠纷或财务细节。",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "nodes": {
+              "description": "知识实体节点；nodeId 应在当前档案内唯一。概念名和学科只写课程语义，不写个人身份或经历。",
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 200,
+              "uniqueItems": true,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "nodeId": {
+                    "type": "string",
+                    "description": "档案内唯一的非身份化节点标识；使用生成的短 ID，不得使用学生姓名、学号或其他身份信息。",
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "maxLength": 64
+                  },
+                  "conceptName": {
+                    "type": "string",
+                    "description": "课程概念名称；禁止写入个人身份、医疗诊断、心理标签、家庭或财务信息。",
+                    "minLength": 1,
+                    "maxLength": 120
+                  },
+                  "subject": {
+                    "type": "string",
+                    "description": "概念所属学科或学习领域；禁止用学校、班级或学生姓名代替学科。",
+                    "minLength": 1,
+                    "maxLength": 40
+                  },
+                  "masteryLevel": {
+                    "type": "string",
+                    "description": "由学习证据支持的三档掌握层级；不得把单次表现直接标记为真正掌握。",
+                    "enum": ["会复述", "会解释", "真正掌握"]
+                  }
+                },
+                "required": ["nodeId", "conceptName", "subject", "masteryLevel"]
+              }
+            },
+            "edges": {
+              "description": "有向概念关系。sourceNodeId 和 targetNodeId 必须引用同一 conceptGraph.nodes 中已存在的节点；不得用自由文本附带个人信息。",
+              "type": "array",
+              "maxItems": 400,
+              "uniqueItems": true,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "sourceNodeId": {
+                    "type": "string",
+                    "description": "有向关系的起点节点 ID；使用非身份化短 ID。",
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "maxLength": 64
+                  },
+                  "targetNodeId": {
+                    "type": "string",
+                    "description": "有向关系的终点节点 ID；使用非身份化短 ID。",
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "maxLength": 64
+                  },
+                  "relationType": {
+                    "type": "string",
+                    "description": "有向关系类型：requires 表示起点依赖终点，isParentOf 表示起点是终点的上位概念，appliesTo 表示起点可迁移应用到终点，correlatesWith 表示两者存在可说明的关联。",
+                    "enum": ["requires", "isParentOf", "appliesTo", "correlatesWith"]
+                  },
+                  "discoverySource": {
+                    "type": "string",
+                    "description": "低敏关系证据来源分类，不记录材料中的个人身份或隐私内容。",
+                    "enum": ["跨学科侦探周", "学习中自然发现", "当前会话材料"]
+                  },
+                  "discoveryDate": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "关系首次被学习证据支持的日期"
+                  }
+                },
+                "required": ["sourceNodeId", "targetNodeId", "relationType"]
+              }
+            }
+          },
+          "required": ["nodes", "edges"]
         }
       }
     },

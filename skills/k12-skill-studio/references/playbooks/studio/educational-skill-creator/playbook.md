@@ -1,7 +1,7 @@
 ---
 name: educational-skill-creator
 display_name: 🛠️ 教育 Playbook 设计治理
-version: 3.0.0
+version: 3.0.1
 author: K12 教育 AI 辅导系统
 category: Studio/维护治理
 tags: [教育playbook, Product Module, 四层结构, 资料使用, 学习流程, 学习科学, 行为回归]
@@ -34,7 +34,7 @@ references:
 1. **定需求**：把维护请求落到学习对象、场景、输入、输出、反例、边界和成功标准。
 2. **定 owner**：教学方法进入 `k12-learning`；副作用进入 `k12-automation`；Wiki 规则进入 `llm-wiki`；治理进入 Studio。
 3. **嵌学习科学**：至少命中主动回忆、错误反馈、分散复习、交错练习、学习区中的关键项。
-4. **组织资源**：流程写入 `playbook.md`，长理论、Schema 与样例按需放 references/schemas/assets；内部 playbook 不含嵌套 `SKILL.md`。
+4. **组织资源**：流程写入 `playbook.md`，长理论、Schema 与样例按需放 references/schemas/assets；内部 playbook 不含嵌套 `SKILL.md`。结构化输出先区分持久化字段、派生视图和仅报告文本：只有真实持久化字段进入状态/档案 Schema；后两类如需机器校验，进入独立只读 output/report Schema，并明确不得回写。
 5. **测试迭代**：用 happy path、信息不足、越界请求、失败案例跑测；3-5 次真实使用后改一轮。
 6. **交付下一步**：输出实现、Capability Map 变更、测试 prompt、来源映射、验证结果和剩余风险。
 
@@ -44,6 +44,7 @@ references:
 - 错题、作文、口语、实验、计划失败等场景必须有“错误—修正—再犯预警—变式验证”。
 - 训练不能只做同类重复，要安排易混题、换场景复测和后续复习。
 - 记录类方法的字段顺序稳定；概念类方法优先使用图、表、关系链或短故事。
+- 接口只承诺 Schema 中真实存在的持久化字段；派生视图写明计算输入与失效条件，仅报告文本写明不落库，避免把生成内容伪装成状态。
 - 难度失配时调参：太易加迁移/变式，太难拆子问题/补前置/降一级。
 
 ## 失败红线

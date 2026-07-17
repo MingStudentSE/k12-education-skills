@@ -19,7 +19,7 @@ description: 面向仓库维护者创建、迁移、审查和评测 K12 Product 
 1. 定义学习对象、具体场景、输入材料、成功标准和不触发反例。
 2. 选择 owner Product Module；教学方法通常属于 `k12-learning`，副作用属于 `k12-automation`，Wiki 规则属于 `llm-wiki`。
 3. 先搜索现有 playbook；能扩展现有实现时不新建平行目录。
-4. 把流程、决策规则写入 `playbook.md`；长理论、Schema、例子分别放 references/schemas/assets。
+4. 把流程、决策规则写入 `playbook.md`；长理论、Schema、例子分别放 references/schemas/assets。涉及结构化接口时，先把每个输出归为 `persisted`、`derived` 或 `report-only`：只有真实持久化字段进入状态/档案 Schema；派生视图和仅报告文本如需结构校验，只能进入独立的只读 output/report Schema，并声明非持久化语义。
 5. 在 Capability Map 中增加 mode 或 intents，而不是新增平台 Skill。
 6. 添加具体材料、相邻冲突、信息不足、授权撤回和红线用例。
 7. 运行 module 级结构、行为、安全和来源覆盖测试。
@@ -47,6 +47,7 @@ description: 面向仓库维护者创建、迁移、审查和评测 K12 Product 
 
 - 不把真实学生数据、API key 或私有端点作为 fixture。
 - 新增持久化字段必须有长度、枚举、格式和高敏禁止项；授权状态与数据块用条件 Schema 绑定。
+- `derived` 只能由已声明的输入实时计算，`report-only` 只服务本次报告；两者不得冒充状态/档案 Schema 字段、写入持久状态或被下游当作已存事实。独立 output/report Schema 可以校验它们，但必须标为只读/非持久化并写清输入、规则或失效边界。
 - 删除旧 interface、发布、上传或覆盖归属不明内容前必须确认；本仓库已由 ADR-0001 授权本次 63→4 迁移。
 - 未通过官方 `quick_validate.py`、仓库质量门和行为回归时，不声称 module 可发布。
 
