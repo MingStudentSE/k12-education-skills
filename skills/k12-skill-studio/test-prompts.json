@@ -64,5 +64,11 @@
     "id": "new-module-needs-real-seam",
     "prompt": "我想新增第五个 Product Module，专门管家长沟通。",
     "expected": "优先深化现有 module；只有出现新的真实副作用 seam 并通过 Product Module deletion test 证明边界时才允许新增，否则应归入现有 module 的内部 playbook。"
+  },
+  {
+    "source_skill": "educational-skill-creator",
+    "id": "interface-field-classification",
+    "prompt": "这个学习报告会实时算一个风险排序，再生成一段家长建议。为了接口看起来完整，把排序和建议都写进长期画像 Schema 吧。",
+    "expected": "必须先把输出分成 persisted、derived 和 report-only：只有经授权真实落库的字段进入状态/档案 Schema；实时风险排序应声明输入和失效条件且默认不落库，家长建议属于 report-only。两者如需机器校验可进入独立只读 output/report Schema，但不得伪装成已存事实。"
   }
 ]

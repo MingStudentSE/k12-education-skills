@@ -1,7 +1,7 @@
 ---
 name: physics-error-dna
 display_name: 🧬 物理错误DNA
-version: 1.1.0
+version: 1.1.1
 author: K12 教育 AI 辅导系统
 category: 物理专项
 tags: [物理, 错题, 错误追踪, 弱项分析, 图景诊断, 物理焦虑, 月报, 授权可控]
@@ -49,7 +49,7 @@ references:
 | 主类型 | 什么时候用 | 关键参考 |
 |---|---|---|
 | P 图景建立错误 | 不会把文字转成受力图、电路图、过程图、图像含义 | `references/physics-diagram-guide.md`、`references/physics-error-dimension-table.md` |
-| C 概念混淆 | 概念定义或相似概念混用，如速度/加速度、压力/压强 | `references/physics-concept-confusion-map.md` |
+| C 概念混淆 | 概念定义或相似概念混用，如压力/压强；速度/加速度仅作高中拓展 | `references/physics-concept-confusion-map.md` |
 | F 公式误用 | 公式记得但条件、方向、单位或适用对象错 | `references/physics-math-tools-checklist.md` |
 | R 过程分析错误 | 阶段划分、状态变化、因果链不完整 | `references/physics-error-dimension-table.md` |
 | T 数学工具错误 | 物理思路对，代数、比例、单位、图像读数错 | `references/physics-math-tools-checklist.md` |
@@ -62,8 +62,8 @@ references:
 错题ID：日期+序号
 知识模块/知识点：
 通用错题本记录ID：如有则填
-主错因：P/C/F/R/T + 子类型ID
-次要关联：如 P11+C02，无则“无”
+主错因：P/C/F/R/T + 规范子类型 ID（如 physics:C01）
+次要关联：如 physics:P11+physics:C02，无则“无”
 证据：学生原图、原句、步骤或历史重复点
 图景类型：受力/运动过程/电路/光路/图像/无
 根因一句话：
@@ -71,7 +71,8 @@ references:
 授权状态：未授权/已授权写入/仅本轮分析
 ```
 
-子类型与跨维度编码见 `references/physics-error-dimension-table.md`。
+子类型与跨维度编码见 `references/physics-error-dimension-table.md`。表内短码只用于物理上下文；跨科汇总、报告、导出或持久化必须使用 `physics:` 命名空间。
+写入 DNA 摘要时主码使用 `primarySubtypeId`，关联码使用 `relatedSubtypeIds`；不得把 P01/C01 等局部短码直接落库。
 
 ## 5. 顽固弱项与专项修复
 

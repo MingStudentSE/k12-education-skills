@@ -19,7 +19,7 @@
 
 ### 概念混淆 C
 
-- 速度与加速度、压力与压强、功率与功等关系混淆。
+- 初中范围可判断速度大小/方向、压力与压强、功率与功等关系；“速度与加速度”只在学生明确学习高中内容时使用。
 - 看见“静止/匀速”等条件，却不知道它约束了什么物理量。
 - 判断线索必须包含被混淆的两个概念和可区分它们的条件。
 
@@ -47,6 +47,7 @@ subject: physics
 evidence_ref: 当前题面与学生步骤的会话内引用
 general_dimension: 概念 | 计算 | 审题 | 策略
 physics_dimension: P | C | F | R | T
+physics_subtype: physics:P01 | physics:C01 | physics:F01 | physics:R01 | physics:T01
 judgment_clue: 为什么从通用维度映射到该物理维度
 repair_task: 一个针对同一根因的修复动作
 retest: 一道同结构变式及验收标准

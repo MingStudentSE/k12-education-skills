@@ -127,9 +127,83 @@ def intake_example() -> None:
     validator(schema).validate(json.loads(blocks[0]))
 
 
+def validate_dna_concept_graph_semantics(profile: dict) -> None:
+    """Enforce graph invariants JSON Schema cannot express portably."""
+    graph = profile.get("growthMap", {}).get("conceptGraph")
+    if not graph:
+        return
+    node_ids = [node["nodeId"] for node in graph["nodes"]]
+    if len(node_ids) != len(set(node_ids)):
+        raise AssertionError("Learning DNA conceptGraph nodeId 必须唯一")
+    known_nodes = set(node_ids)
+    for edge in graph["edges"]:
+        if edge["sourceNodeId"] not in known_nodes or edge["targetNodeId"] not in known_nodes:
+            raise AssertionError("Learning DNA conceptGraph edge 必须引用图内节点")
+
+
+def expect_graph_semantic_failure(profile: dict, message: str) -> None:
+    try:
+        validate_dna_concept_graph_semantics(profile)
+    except AssertionError:
+        return
+    raise AssertionError(message)
+
+
 def dna_example() -> None:
     base = LEARNING / "references/playbooks/general/learning-dna/schemas"
-    validator(load(base / "dna-profile.schema.json")).validate(load(base / "examples/full-profile.example.json"))
+    check = validator(load(base / "dna-profile.schema.json"))
+    example = load(base / "examples/full-profile.example.json")
+    check.validate(example)
+
+    graph = example.get("growthMap", {}).get("conceptGraph")
+    if not graph:
+        raise AssertionError("Learning DNA 完整示例必须覆盖 conceptGraph")
+    validate_dna_concept_graph_semantics(example)
+    mastery_levels = {node["masteryLevel"] for node in graph["nodes"]}
+    if mastery_levels != {"会复述", "会解释", "真正掌握"}:
+        raise AssertionError("Learning DNA 完整示例必须覆盖三档掌握层级")
+    relation_types = {edge["relationType"] for edge in graph["edges"]}
+    if relation_types != {"requires", "isParentOf", "appliesTo", "correlatesWith"}:
+        raise AssertionError("Learning DNA 完整示例必须覆盖四类 conceptGraph 关系")
+
+    legacy = load(base / "examples/legacy-profile-v1.2.example.json")
+    if "knowledgeAccumulationTree" not in legacy.get("growthMap", {}):
+        raise AssertionError("Learning DNA v1.2 兼容示例必须覆盖 knowledgeAccumulationTree")
+    if "conceptGraph" in legacy.get("growthMap", {}):
+        raise AssertionError("Learning DNA v1.2 兼容示例不得双写 conceptGraph")
+    check.validate(legacy)
+
+    legacy_long_value = json.loads(json.dumps(legacy, ensure_ascii=False))
+    legacy_long_value["growthMap"]["knowledgeAccumulationTree"][0]["pointA"]["knowledge"] = "旧" * 121
+    check.validate(legacy_long_value)
+
+    legacy_with_graph = json.loads(json.dumps(legacy, ensure_ascii=False))
+    legacy_with_graph["growthMap"]["conceptGraph"] = graph
+    if check.is_valid(legacy_with_graph):
+        raise AssertionError("Learning DNA v1.2 档案不得携带 conceptGraph")
+
+    current_with_legacy_tree = json.loads(json.dumps(example, ensure_ascii=False))
+    current_with_legacy_tree["growthMap"]["knowledgeAccumulationTree"] = legacy["growthMap"]["knowledgeAccumulationTree"]
+    if check.is_valid(current_with_legacy_tree):
+        raise AssertionError("Learning DNA v1.3 档案不得双写 knowledgeAccumulationTree")
+
+    duplicate_node = json.loads(json.dumps(example, ensure_ascii=False))
+    duplicate_node["growthMap"]["conceptGraph"]["nodes"][1]["nodeId"] = duplicate_node["growthMap"]["conceptGraph"]["nodes"][0]["nodeId"]
+    expect_graph_semantic_failure(duplicate_node, "Learning DNA 保存前校验必须拒绝重复 nodeId")
+
+    dangling_edge = json.loads(json.dumps(example, ensure_ascii=False))
+    dangling_edge["growthMap"]["conceptGraph"]["edges"][0]["targetNodeId"] = "MissingNode"
+    expect_graph_semantic_failure(dangling_edge, "Learning DNA 保存前校验必须拒绝悬空 edge")
+
+    graph_without_consent = json.loads(json.dumps(example, ensure_ascii=False))
+    graph_without_consent["meta"]["consentStatus"]["profileEnabled"] = False
+    if check.is_valid(graph_without_consent):
+        raise AssertionError("Learning DNA conceptGraph 持久化必须要求 profileEnabled=true")
+
+    unnamespaced_error_code = json.loads(json.dumps(example, ensure_ascii=False))
+    unnamespaced_error_code["errorPatterns"]["fixedErrorTypes"][0]["primarySubtypeId"] = "B03"
+    if check.is_valid(unnamespaced_error_code):
+        raise AssertionError("Learning DNA 持久化错因 ID 必须带学科命名空间")
 
 
 def curriculum_evidence_examples() -> int:

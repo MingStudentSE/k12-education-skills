@@ -11,6 +11,7 @@ description: >
   “删除档案”等请求。普通日常答疑不重复建档；画像必须可查看、更正、删除并遵守最小化记录边界。
 compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
+  - ../../../crisis-referral-protocol.md
   - references/cross-subject-connections.md
   - references/dna-template.md
   - references/growth-milestones.md
@@ -18,6 +19,7 @@ references:
   - schemas/README.md
   - schemas/dna-profile.schema.json
   - schemas/examples/full-profile.example.json
+  - schemas/examples/legacy-profile-v1.2.example.json
   - schemas/validate.js
 ---
 
@@ -44,6 +46,8 @@ references:
 
 ## 核心流程
 
+**安全抢占（先于下列步骤）**：当前材料出现自伤、轻生、严重伤害或无法保证安全等信号时，停止画像分析和低敏改写，立即按 `../../../crisis-referral-protocol.md` 处理；只做必要的即时安全确认，不诊断、不审问。
+
 1. **区分初版与持久化**：首次启动可先生成 `session_only` 初版；跨会话读取、建立或更新必须通过授权门。完整判定见 `references/learning-dna-full-playbook.md` 的“二、触发时机”“三、使用前置条件与用户控制”。
 2. **用真实材料快速取证**：优先使用一份近期课本、作业、试卷、错题、作文或实验记录，只做 1–3 个短测评动作；初版模板见 `references/dna-template.md`。
 3. **先建立最小画像**：首次只写当前阶段与目标、证据、一个优势、一个首要卡点、已观察到的学习方式、待验证项和下一步；不得为了填满完整 schema 延长启动。
@@ -59,6 +63,7 @@ references:
 - 不把“我懂了”直接写成掌握；必须验证或标注置信度。
 - 不建立“核心素养总分”或用一次作业判定素养高低；至少有独立复现和迁移证据，且用户授权后，才保存低敏观察摘要。
 - 不只记录失败，也记录攻克时刻；薄弱点写成“待解锁成就”，不写成缺陷标签。
+- 不把危机信号改写成学习情绪基线、动力标签或家庭端温情话术。当前 DNA Schema 没有危机处置字段，因此即使已有普通建档授权也不持久化；未来专用契约也只能保存最小处置事实，不得保存原话、方式、计划或创伤细节。
 - 不默认进行内部组合读取/写入；只同步当前任务需要的最小摘要。实际提醒需单独同意，并只向 `k12-automation` 提交最小请求。
 - 不向未知方法、第三方或未声明用途的模块传完整档案。
 - 用户要求查看、更正、删除、暂停共享时，优先执行数据权利流程，暂停其他写入。
@@ -67,10 +72,12 @@ references:
 ## 参考资源
 
 - `references/learning-dna-full-playbook.md`：原版完整流程外移；查触发、授权、DNA结构、情绪维度、行为规范、数据权利、内部组合读取规则与禁止行为。
+- `../../../crisis-referral-protocol.md`：危机信号识别、即时危险响应、现实支持转介和最小记录边界；优先于低敏转化与画像更新。
 - `references/dna-template.md`：材料驱动的会话内初版、保存授权话术与后续更新规则。
 - `references/growth-milestones.md`：时间/能力/习惯里程碑标准、触发话术和存储格式。
 - `references/cross-subject-connections.md`：20个跨学科概念连接模板，供概念图谱和跨学科任务调用。
 - `schemas/README.md`：学习DNA schema 目录说明与校验入口。
-- `schemas/dna-profile.schema.json`：正式 JSON Schema，覆盖六大维度与 v1.1/v1.2 扩展。
+- `schemas/dna-profile.schema.json`：正式 JSON Schema，覆盖六大维度与 v1.1–v1.3 扩展。
 - `schemas/examples/full-profile.example.json`：完整学习DNA档案例，用于核对输出字段。
+- `schemas/examples/legacy-profile-v1.2.example.json`：仅用于验证旧版 `knowledgeAccumulationTree` 的兼容读取；不得作为新写入模板。
 - `schemas/validate.js`：schema 校验脚本；需要校验档案结构时运行。

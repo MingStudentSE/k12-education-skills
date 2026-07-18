@@ -188,7 +188,7 @@ python3 pipeline/validate_schemas.py
 bash pipeline/review.sh all
 ```
 
-当前基线：4 个 Product Module、61 个内部 playbook、58 个学习能力、63 条迁移映射、242 条四模块自然语言行为 fixture；其中 80 条同时属于 Learning 路由白盒子集，6 条同时属于课标证据子集。静态门只验证 fixture 契约；只有单独运行 [live 行为回归](docs/behavior-regression.md) 才形成行为通过证据。
+当前基线：4 个 Product Module、61 个内部 playbook、58 个学习能力、63 条迁移映射、259 条四模块自然语言行为 fixture；其中 85 条同时属于 Learning 路由白盒子集，6 条同时属于课标证据子集。静态门只验证 fixture 契约；只有单独运行 [live 行为回归](docs/behavior-regression.md) 才形成行为通过证据。
 
 发布前 live 验证需同时执行四模块行为、内部路由、课标证据与官方来源四条命令，不能用其中一条代替整套发布证据；命令和调用成本见 [Product Module 行为回归](docs/behavior-regression.md#发布前-live-命令)。
 

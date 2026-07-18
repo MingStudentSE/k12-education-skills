@@ -1,6 +1,6 @@
 # Product Module 行为回归
 
-本仓库把“提示语料”“静态契约”和“真实行为结果”分开计数。`skills/*/test-prompts.json` 当前共有 242 条 Product Module 自然语言行为 fixture（`k12-learning` 202 条、`llm-wiki` 16 条、`k12-automation` 14 条、`k12-skill-studio` 10 条）。其中 80 条 Learning 用例同时进入内部路由白盒子集，6 条同时进入课标证据子集；这些集合重叠，不能相加冒充更多用例。静态检查通过只证明 fixture 可加载且期望可判定，不代表模型行为已经通过。
+本仓库把“提示语料”“静态契约”和“真实行为结果”分开计数。`skills/*/test-prompts.json` 当前共有 259 条 Product Module 自然语言行为 fixture（`k12-learning` 217 条、`llm-wiki` 16 条、`k12-automation` 15 条、`k12-skill-studio` 11 条）。其中 85 条 Learning 用例同时进入内部路由白盒子集，6 条同时进入课标证据子集；这些集合重叠，不能相加冒充更多用例。静态检查通过只证明 fixture 可加载且期望可判定，不代表模型行为已经通过。
 
 ## 两阶段黑盒执行
 
@@ -40,9 +40,9 @@ node pipeline/run_module_behavior_regression.mjs \
 node pipeline/run_module_behavior_regression.mjs --release --batch-size 20 --model gpt-5.6-terra --report /tmp/k12-module-behavior.json
 ```
 
-`--release` 会在全部 Product Module 行为通过后，继续编排完整的 80 条路由白盒、6 条课标证据以及官方来源 live 校验；任一步失败都会令 release 失败。需要单独诊断时，仍可分别运行对应 runner。
+`--release` 会在全部 Product Module 行为通过后，继续编排完整的 85 条路由白盒、6 条课标证据以及官方来源 live 校验；任一步失败都会令 release 失败。需要单独诊断时，仍可分别运行对应 runner。
 
-按当前 242 条 module behavior fixture 和 `batch-size 20` 计算，行为阶段会形成 14 个 batch，即 28 次 Codex 调用；80 条路由白盒按 40 条一批使用 2 次，6 条课标证据同批使用 1 次。完整 live release 共 31 次 Codex 调用，另有一次教育部通知页和 9 份官方 PDF 的下载指纹、指定页章节及正式名称 OCR 校验。报告分别记录 planned、started、completed；启动失败不得计为 started。只有保存下来的 live report 与命令结果才能证明对应版本的行为通过。
+按当前 259 条 module behavior fixture 和 `batch-size 20` 计算，行为阶段会形成 14 个 batch，即 28 次 Codex 调用；85 条路由白盒按 40 条一批使用 3 次，6 条课标证据同批使用 1 次。完整 live release 共 32 次 Codex 调用，另有一次教育部通知页和 9 份官方 PDF 的下载指纹、指定页章节及正式名称 OCR 校验。报告分别记录 planned、started、completed；启动失败不得计为 started。只有保存下来的 live report 与命令结果才能证明对应版本的行为通过。
 
 教育部当前 PDF 为扫描页：macOS 使用系统 Vision OCR，其他平台需要 Poppler 的 `pdftoppm` 与带 `chi_sim` 语言包的 Tesseract；可用 `PDFTOPPM_BIN`、`TESSERACT_BIN` 覆盖路径。缺少可用提取器时来源校验失败关闭，不会退回到“只验整份 PDF hash”。
 

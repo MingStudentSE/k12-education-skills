@@ -12,6 +12,7 @@ description: >
   必须采用本方法。核心工作流：五步生成流程 + 学习区校准 + 执行监控 + 家庭学习看板。
 compatibility: Claude Code / Codex / OpenClaw / ClawHub
 references:
+  - ../../../crisis-referral-protocol.md
   - references/learning-zone-principles.md
   - references/plan-templates.md
   - references/learning-plan-full-playbook.md
@@ -43,6 +44,8 @@ references:
 
 ## 流程骨架
 
+**安全抢占（先于下列步骤）**：输入或历史摘要出现自伤、轻生、严重伤害或无法保证安全等危机信号时，停止排计划、减载调参和家庭看板温情转化，立即按 `../../../crisis-referral-protocol.md` 连接现实支持。
+
 1. **判断任务边界**：确认是 30 天计划、考前计划、阶段计划还是任务重排；不匹配时说明切换目标。
 2. **收集最小输入**：只追问目标、截止时间、每日/每周可用时间、学习画像摘要、当前弱项、不可用时段；信息不足时给补充模板。
 3. **读取授权摘要**：只有用户同意时，使用 `learning-dna`、错题本或历史节奏摘要；只拿本计划需要的最小字段。
@@ -71,9 +74,11 @@ references:
 - 不默认更新档案、向 `k12-automation` 提交提醒请求、在内部组合中共享或读取长期数据；所有长期动作都要先获授权。
 - 不用“建议灵活调整”收尾；每条调整规则要能被完成率、正确率、解释率、情绪信号或复测结果触发。
 - 不把考前冲刺做成高压加量；考前 1-3 天优先熟悉题型、错题回看和状态保持。
+- 不把危机信号当成计划执行问题、普通疲劳或动力不足；不得用任务减量、看板话术或继续陪聊替代安全成年人、专业支持和当地紧急服务。
 
 ## references 索引
 
 - `references/learning-zone-principles.md`：需要校准熟悉区/学习区/挫败区、85%规则、间隔学习、变式调参或复测节奏时读取。
 - `references/plan-templates.md`：需要选择备考冲刺、学期初常规、假期提升、弱项单点突破四类计划模板时读取。
 - `references/learning-plan-full-playbook.md`：需要完整五步生成流程、计划结构规范、执行监控、家庭看板、考前专项示例和原版细则时读取。
+- `../../../crisis-referral-protocol.md`：计划与家庭看板的危机安全抢占、即时危险响应和最小记录边界。

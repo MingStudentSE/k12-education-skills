@@ -1,7 +1,7 @@
 {
   "meta": {
     "profileId": "stu-20260511-demo01",
-    "schemaVersion": "1.2.0",
+    "schemaVersion": "1.3.0",
     "createdAt": "2026-03-15T09:30:00+08:00",
     "lastUpdatedAt": "2026-05-11T20:15:00+08:00",
     "consentStatus": {
@@ -93,6 +93,8 @@
         "knowledgePoint": "一次函数解析式推导",
         "occurrenceCount": 5,
         "rootCause": "待定系数法只记步骤不理解为什么这样代入",
+        "primarySubtypeId": "math:B03",
+        "relatedSubtypeIds": ["math:C02"],
         "confidenceLevel": "data_sufficient",
         "identifiedDate": "2026-04-20"
       }
@@ -235,21 +237,70 @@
         "conqueredVerification": "连续3次复测通过"
       }
     ],
-    "knowledgeAccumulationTree": [
-      {
-        "pointA": {
-          "knowledge": "一次函数图像",
-          "subject": "数学"
+    "conceptGraph": {
+      "nodes": [
+        {
+          "nodeId": "Node01",
+          "conceptName": "函数",
+          "subject": "数学",
+          "masteryLevel": "真正掌握"
         },
-        "pointB": {
-          "knowledge": "匀速直线运动图像",
-          "subject": "物理"
+        {
+          "nodeId": "Node02",
+          "conceptName": "一次函数",
+          "subject": "数学",
+          "masteryLevel": "会解释"
         },
-        "linkType": "逻辑相似",
-        "discoverySource": "学习中自然发现",
-        "discoveryDate": "2026-05-06"
-      }
-    ]
+        {
+          "nodeId": "Node03",
+          "conceptName": "匀速直线运动图像",
+          "subject": "物理",
+          "masteryLevel": "会复述"
+        },
+        {
+          "nodeId": "Node04",
+          "conceptName": "自变量与因变量",
+          "subject": "数学",
+          "masteryLevel": "会解释"
+        },
+        {
+          "nodeId": "Node05",
+          "conceptName": "实验变量控制",
+          "subject": "物理",
+          "masteryLevel": "会复述"
+        }
+      ],
+      "edges": [
+        {
+          "sourceNodeId": "Node02",
+          "targetNodeId": "Node01",
+          "relationType": "requires",
+          "discoverySource": "当前会话材料",
+          "discoveryDate": "2026-05-05"
+        },
+        {
+          "sourceNodeId": "Node01",
+          "targetNodeId": "Node02",
+          "relationType": "isParentOf",
+          "discoverySource": "学习中自然发现",
+          "discoveryDate": "2026-05-05"
+        },
+        {
+          "sourceNodeId": "Node02",
+          "targetNodeId": "Node03",
+          "relationType": "appliesTo",
+          "discoverySource": "跨学科侦探周",
+          "discoveryDate": "2026-05-06"
+        },
+        {
+          "sourceNodeId": "Node04",
+          "targetNodeId": "Node05",
+          "relationType": "correlatesWith",
+          "discoverySource": "跨学科侦探周",
+          "discoveryDate": "2026-05-06"
+        }
+      ]
+    }
   },
   "interestDNA": {
     "currentExploringFields": [
